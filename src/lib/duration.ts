@@ -87,7 +87,11 @@ export const longestChairTime = Math.max(
  * behind a single therapy's marker.
  */
 export const chairTimeDistribution = therapies
-  .map((t) => ({ slug: t.slug, brand: t.brand, typical: chairTimeOf(t).typical }))
+  .map((t) => ({
+    slug: t.slug,
+    brand: t.brand,
+    typical: chairTimeOf(t).typical,
+  }))
   .sort((a, b) => a.typical - b.typical);
 
 /** How many therapies on the formulary are shorter than this one. */

@@ -111,7 +111,9 @@ export function SearchButton({
       aria-keyshortcuts="Meta+K Control+K"
       className={cn(
         "group flex items-center rounded-full border border-white/10 bg-white/[0.03] text-ink-400 transition-colors duration-300 hover:border-teal-400/35 hover:text-ink-100",
-        iconOnly ? "h-11 w-11 justify-center" : "gap-2.5 py-2 pl-3.5 pr-2.5 text-[13px]",
+        iconOnly
+          ? "h-11 w-11 justify-center"
+          : "gap-2.5 py-2 pl-3.5 pr-2.5 text-[13px]",
         className,
       )}
     >

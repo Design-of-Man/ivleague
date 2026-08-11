@@ -52,10 +52,15 @@ const noIntroOnServer = () => false;
  * frames — and the held last frame is the poster, byte for byte, so the film
  * comes to rest on exactly the image that was there before it started.
  *
- * Three sources, widest first: a browser takes the first one whose `media`
- * query matches and whose codec it can decode, so a large display pulls the
- * 1440p plate and a phone never downloads it. The 720p file is not a downgrade
- * on a phone — it is already more pixels than the viewport has.
+ * Sources are ordered widest first: a browser takes the first one whose
+ * `media` query matches and whose codec it can decode.
+ *
+ * There is no 1440p tier. There was, and it was a mistake — 2560x1440 upscaled
+ * 2.5x from a 1024px-wide crop carries no detail the 1080p file does not, and a
+ * stream that size with a deep reference buffer is exactly what drops out of a
+ * hardware decoder's fast path and into software. Both tiers are encoded with
+ * ref=3/bframes=3 for the same reason. Encoder effort stays high; that is free
+ * at playback.
  *
  * The film stays off the critical path. The poster is a plain `<img>` that
  * paints on the first frame, and the `<video>` is not mounted until the page
@@ -199,6 +204,10 @@ export function ScrollHero() {
 
     let onScreen = true;
     const settle = () => {
+      // `play()` on a finished video seeks back to zero and starts again. That
+      // is what made the film restart every time the hero scrolled back into
+      // view — it read as the video jumping. Once it has played, it is done.
+      if (v.ended) return;
       if (onScreen && !document.hidden) v.play().catch(() => {});
       else v.pause();
     };
@@ -269,11 +278,6 @@ export function ScrollHero() {
               e.currentTarget.setAttribute("data-ready", "true")
             }
           >
-            <source
-              src="/media/hero-infusion-1440.mp4"
-              type="video/mp4"
-              media="(min-width: 1600px)"
-            />
             <source
               src="/media/hero-infusion-1080.mp4"
               type="video/mp4"
@@ -384,7 +388,7 @@ export function ScrollHero() {
             {[
               "Physician referral required",
               "Most major plans accepted",
-              "Open 7 days a week",
+              "Weekend appointments available",
             ].map((t) => (
               <li
                 key={t}

@@ -59,7 +59,8 @@ export async function fetchInstagramPosts(
 
     const json = (await res.json()) as { data?: GraphMedia[] };
     const data = json.data ?? [];
-    if (data.length === 0) return { posts: placeholderPosts(limit), live: false };
+    if (data.length === 0)
+      return { posts: placeholderPosts(limit), live: false };
 
     return {
       posts: data.map((m) => ({
@@ -90,7 +91,7 @@ const PLACEHOLDER_CAPTIONS = [
   "Suite 3 is open and the recliner has heat. Weekend mornings are for catching up on treatment, not falling behind. 🩵",
   "Prior authorization approved in 36 hours. That's the part of this job nobody posts about, and the part that gets you infusing.",
   "New on the formulary: quarterly CGRP infusions for chronic migraine. Thirty minutes, four times a year, lights low.",
-  "Iron deficiency is not just \"being tired.\" Two visits and most patients feel the difference within weeks.",
+  'Iron deficiency is not just "being tired." Two visits and most patients feel the difference within weeks.',
   "Same nurse. Same chair. Same time. Continuity is clinical care, not a perk.",
   "Behind the scenes: every biologic we hang comes from a U.S. pharmacy held to FDA and USP standards. Every single one.",
   "Hydration season is here. Bring a friend. Every suite has a seat for someone who came with you.",
@@ -98,7 +99,7 @@ const PLACEHOLDER_CAPTIONS = [
   "The Myers' Cocktail has been around since the 1960s and it's still the most requested bag in the building.",
   "Free parking at the door. No garage, no ticket, no long walk in the rain.",
   "Reminder: eat before your infusion and hydrate the day before. It makes IV access faster and the whole visit easier.",
-  "Twelve thousand infusions and counting. Thank you, Midlothian. 🩵",
+  "Twelve thousand infusions and counting. Thank you, Delray Beach. 🩵",
 ];
 
 /**

@@ -71,8 +71,8 @@ export function CtaBand({
               </div>
 
               <p className="mt-8 text-[12.5px] text-ink-500">
-                Physician referral required · Most major insurance accepted · HSA, FSA
-                and Cherry financing available
+                Physician referral required · Most major insurance accepted ·
+                HSA, FSA and Cherry financing available
               </p>
             </div>
           </div>

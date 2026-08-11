@@ -58,7 +58,8 @@ export function ChairTimeScale({ therapy }: { therapy: Therapy }) {
           : shorter >= total - 1
             ? "One of the longest visits we schedule, so plan the day around it."
             : `Shorter than ${total - shorter - 1} of our ${total} therapies, longer than ${shorter}.`}{" "}
-        This is infusion time; add check-in and any observation your physician orders.
+        This is infusion time; add check-in and any observation your physician
+        orders.
       </p>
 
       {/* Distribution */}

@@ -27,7 +27,11 @@ export function Section({
         className,
       )}
     >
-      {bleed ? children : <div className={wide ? "shell-wide" : "shell"}>{children}</div>}
+      {bleed ? (
+        children
+      ) : (
+        <div className={wide ? "shell-wide" : "shell"}>{children}</div>
+      )}
     </section>
   );
 }
@@ -104,7 +108,9 @@ export function SectionHeading({
             <Eyebrow align={align}>{eyebrow}</Eyebrow>
           </Reveal>
         )}
-        <h2 className={cn(titleSize, "font-semibold leading-[1.03]")}>{title}</h2>
+        <h2 className={cn(titleSize, "font-semibold leading-[1.03]")}>
+          {title}
+        </h2>
         {lead && (
           <Reveal delay={0.12}>
             <p
@@ -129,5 +135,7 @@ export function SectionHeading({
 
 /** Thin animated divider used between major sections. */
 export function Hairline({ className }: { className?: string }) {
-  return <div className={cn("hairline w-full", className)} aria-hidden="true" />;
+  return (
+    <div className={cn("hairline w-full", className)} aria-hidden="true" />
+  );
 }

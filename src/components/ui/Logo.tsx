@@ -97,7 +97,10 @@ export function Logo({
 }) {
   return (
     <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <LogoMark animated={animated} className={compact ? "h-8 w-8" : "h-9 w-9"} />
+      <LogoMark
+        animated={animated}
+        className={compact ? "h-8 w-8" : "h-9 w-9"}
+      />
       <span className="flex flex-col leading-none">
         <span
           className={cn(

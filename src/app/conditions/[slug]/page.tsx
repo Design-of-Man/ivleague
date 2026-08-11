@@ -5,7 +5,12 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
-import { JsonLd, MedicalDisclaimer, TickList, Badge } from "@/components/ui/Bits";
+import {
+  JsonLd,
+  MedicalDisclaimer,
+  TickList,
+  Badge,
+} from "@/components/ui/Bits";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { ReviewedOn } from "@/components/ui/ReviewedOn";
 import {
@@ -38,15 +43,19 @@ export async function generateMetadata({
   const { slug } = await params;
   const c = conditionBySlug(slug);
   if (!c)
-    return buildMetadata({ title: "Condition not found", description: "", noIndex: true });
+    return buildMetadata({
+      title: "Condition not found",
+      description: "",
+      noIndex: true,
+    });
 
   return buildMetadata({
     title: `${c.name} Infusion Treatment`,
-    description: `${c.summary} Infusion therapy for ${c.name.toLowerCase()} at IV League Infusions in Midlothian, Virginia.`,
+    description: `${c.summary} Infusion therapy for ${c.name.toLowerCase()} at IV League Infusions in Delray Beach, Florida.`,
     path: `/conditions/${c.slug}`,
     keywords: [
-      `${c.name} infusion Midlothian VA`,
-      `${c.name} treatment Richmond Virginia`,
+      `${c.name} infusion Delray Beach FL`,
+      `${c.name} treatment Palm Beach County`,
       `${c.shortName ?? c.name} infusion center`,
     ],
   });
@@ -138,7 +147,11 @@ export default async function ConditionPage({
                   +{therapyOptions.length - 6} more
                 </p>
               )}
-              <ButtonLink href="/contact#inquiry" size="sm" className="mt-5 w-full">
+              <ButtonLink
+                href="/contact#inquiry"
+                size="sm"
+                className="mt-5 w-full"
+              >
                 Start intake
                 <ArrowGlyph />
               </ButtonLink>
@@ -171,8 +184,8 @@ export default async function ConditionPage({
                 What are the symptoms of {c.shortName ?? c.name}?
               </h2>
               <p className="mt-3 text-[14.5px] leading-relaxed text-ink-400">
-                Presentation varies widely between patients. Only your physician can
-                diagnose {c.shortName ?? c.name}.
+                Presentation varies widely between patients. Only your physician
+                can diagnose {c.shortName ?? c.name}.
               </p>
               <TickList items={c.symptoms} className="mt-6" />
             </Reveal>
@@ -199,7 +212,9 @@ export default async function ConditionPage({
                     <span className="font-mono text-[11px] text-teal-400">
                       {String(i + 1).padStart(2, "0")}
                     </span>
-                    <p className="text-[14.5px] leading-relaxed text-ink-200">{tip}</p>
+                    <p className="text-[14.5px] leading-relaxed text-ink-200">
+                      {tip}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -222,13 +237,24 @@ export default async function ConditionPage({
               </h3>
               <ul className="mt-5 grid gap-4">
                 {[
-                  ["Your physician stays in charge", "We administer; they prescribe. Documentation goes back to them after every visit."],
-                  ["We chase the authorization", "Benefits investigation and prior auth are our job, not yours."],
-                  ["Continuity of care", "Same nurses, same suite, same appointment slot when you want it."],
+                  [
+                    "Your physician stays in charge",
+                    "We administer; they prescribe. Documentation goes back to them after every visit.",
+                  ],
+                  [
+                    "We chase the authorization",
+                    "Benefits investigation and prior auth are our job, not yours.",
+                  ],
+                  [
+                    "Continuity of care",
+                    "Same nurses, same suite, same appointment slot when you want it.",
+                  ],
                 ].map(([h, b]) => (
                   <li key={h}>
                     <p className="text-[13.5px] font-medium text-ink-50">{h}</p>
-                    <p className="mt-1 text-[13px] leading-relaxed text-ink-400">{b}</p>
+                    <p className="mt-1 text-[13px] leading-relaxed text-ink-400">
+                      {b}
+                    </p>
                   </li>
                 ))}
               </ul>

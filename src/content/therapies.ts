@@ -130,7 +130,8 @@ export const therapies: Therapy[] = [
     ],
     howItWorks:
       "Entyvio blocks the α4β7 integrin, a docking protein that inflammatory white blood cells use to enter the lining of the gut. Because that receptor is concentrated in gastrointestinal tissue, the effect is largely gut-selective rather than body-wide immunosuppression.",
-    duration: "About 30 minutes of infusion time, plus check-in and observation",
+    duration:
+      "About 30 minutes of infusion time, plus check-in and observation",
     frequency:
       "Loading doses at weeks 0, 2 and 6, then maintenance every 8 weeks",
     route: "Intravenous infusion",
@@ -625,8 +626,7 @@ export const therapies: Therapy[] = [
     howItWorks:
       "Ublituximab is a glycoengineered anti-CD20 antibody designed for efficient B-cell depletion, which allows a shorter maintenance infusion than earlier agents in its class.",
     duration: "About 4 hours for the first dose, then roughly 1 hour",
-    frequency:
-      "Day 1 and day 15 to start, then every 24 weeks",
+    frequency: "Day 1 and day 15 to start, then every 24 weeks",
     route: "Intravenous infusion",
     prep: [
       "Hepatitis B screening before initiation",
@@ -700,11 +700,7 @@ export const therapies: Therapy[] = [
       "Frequent vitals throughout",
       "Rate adjustments any time you feel a headache or flushing starting",
     ],
-    conditions: [
-      "primary-immunodeficiency",
-      "cidp",
-      "immune-thrombocytopenia",
-    ],
+    conditions: ["primary-immunodeficiency", "cidp", "immune-thrombocytopenia"],
   },
 
   /* -------------------------- ALLERGY & ASTHMA -------------------------- */
@@ -1006,8 +1002,7 @@ export const therapies: Therapy[] = [
     generic: "teprotumumab-trbw",
     specialty: "endocrinology",
     drugClass: "IGF-1R inhibitor",
-    summary:
-      "The first therapy approved specifically for thyroid eye disease.",
+    summary: "The first therapy approved specifically for thyroid eye disease.",
     treats: ["Thyroid eye disease (Graves' orbitopathy)"],
     howItWorks:
       "Teprotumumab blocks the insulin-like growth factor-1 receptor on orbital fibroblasts, reducing the tissue expansion behind the eye that causes proptosis and double vision.",

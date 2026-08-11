@@ -11,7 +11,7 @@ import { intakeSteps } from "@/content/practice";
 export const metadata = buildMetadata({
   title: "Contact & New Patient Inquiry",
   description:
-    "Start treatment at IV League Infusions in Midlothian, VA. Submit a new patient inquiry, call (804) 397-6286, or email info@IVLinfusions.com.",
+    "Start treatment at IV League Infusions in Delray Beach, FL. Submit a new patient inquiry, call (561) 489-7100, or email info@IVLinfusions.com.",
   path: "/contact",
 });
 
@@ -91,7 +91,9 @@ export default function ContactPage() {
                       {s.n}
                     </span>
                     <div>
-                      <p className="text-[13.5px] font-medium text-ink-50">{s.title}</p>
+                      <p className="text-[13.5px] font-medium text-ink-50">
+                        {s.title}
+                      </p>
                       <p className="mt-1 font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-500">
                         {s.duration}
                       </p>
@@ -107,16 +109,20 @@ export default function ContactPage() {
               </a>
             </Reveal>
 
-            <Reveal delay={0.08} className="rounded-[0.625rem] border border-amber-400/20 bg-amber-400/[0.05] p-6">
+            <Reveal
+              delay={0.08}
+              className="rounded-[0.625rem] border border-amber-400/20 bg-amber-400/[0.05] p-6"
+            >
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-amber-300">
                 Medical emergency
               </h3>
               <p className="mt-3 text-[13.5px] leading-relaxed text-ink-300">
-                This form is not monitored around the clock and is not a secure channel
-                for medical information. If you are experiencing a medical emergency,
-                call <strong className="font-semibold text-ink-50">911</strong>. For
-                urgent clinical questions about an active infusion course, call us
-                directly at{" "}
+                This form is not monitored around the clock and is not a secure
+                channel for medical information. If you are experiencing a
+                medical emergency, call{" "}
+                <strong className="font-semibold text-ink-50">911</strong>. For
+                urgent clinical questions about an active infusion course, call
+                us directly at{" "}
                 <a
                   href={site.contact.phoneHref}
                   className="font-semibold text-amber-200 underline underline-offset-4"
@@ -133,8 +139,11 @@ export default function ContactPage() {
               </h3>
               <p className="mt-3 text-[13.5px] leading-relaxed text-ink-400">
                 Fax orders to{" "}
-                <span className="font-medium text-ink-100">{site.contact.fax}</span> or
-                call our intake line directly. We&apos;ll confirm receipt the same day.
+                <span className="font-medium text-ink-100">
+                  {site.contact.fax}
+                </span>{" "}
+                or call our intake line directly. We&apos;ll confirm receipt the
+                same day.
               </p>
               <a
                 href="/providers#refer"

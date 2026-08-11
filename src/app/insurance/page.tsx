@@ -87,8 +87,8 @@ export default function InsurancePage() {
             </h3>
             <TickList items={YOU_DO} className="mt-6" tone="muted" />
             <p className="mt-8 border-t border-white/6 pt-6 text-[13px] leading-relaxed text-ink-500">
-              That&apos;s the whole list. If we need something else, we&apos;ll call. We
-              won&apos;t leave a voicemail and wait.
+              That&apos;s the whole list. If we need something else, we&apos;ll
+              call. We won&apos;t leave a voicemail and wait.
             </p>
           </Reveal>
         </div>
@@ -131,11 +131,15 @@ export default function InsurancePage() {
           ].map((c) => (
             <StaggerItem key={c.n}>
               <div className="card h-full p-8">
-                <span className="font-mono text-[11px] text-teal-400">{c.n}</span>
+                <span className="font-mono text-[11px] text-teal-400">
+                  {c.n}
+                </span>
                 <h3 className="mt-4 text-[19px] font-semibold tracking-tight text-ink-50">
                   {c.title}
                 </h3>
-                <p className="mt-3 text-[14.5px] leading-relaxed text-ink-300">{c.body}</p>
+                <p className="mt-3 text-[14.5px] leading-relaxed text-ink-300">
+                  {c.body}
+                </p>
                 <p className="mt-5 border-t border-white/6 pt-4 text-[12px] leading-relaxed text-ink-500">
                   {c.note}
                 </p>
@@ -166,10 +170,11 @@ export default function InsurancePage() {
             <strong className="font-semibold text-ink-200">
               Coverage varies by plan.
             </strong>{" "}
-            Network participation, benefits and prior authorization requirements differ
-            by carrier, product line and employer group. Nothing on this page is a
-            guarantee of coverage or of a specific out-of-pocket amount. We will give you
-            a benefits estimate in writing before your first infusion.
+            Network participation, benefits and prior authorization requirements
+            differ by carrier, product line and employer group. Nothing on this
+            page is a guarantee of coverage or of a specific out-of-pocket
+            amount. We will give you a benefits estimate in writing before your
+            first infusion.
           </p>
         </Reveal>
       </Section>

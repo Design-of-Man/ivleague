@@ -18,7 +18,12 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const doc = legalBySlug(slug);
-  if (!doc) return buildMetadata({ title: "Not found", description: "", noIndex: true });
+  if (!doc)
+    return buildMetadata({
+      title: "Not found",
+      description: "",
+      noIndex: true,
+    });
 
   return buildMetadata({
     title: doc.title,
@@ -104,7 +109,9 @@ export default async function LegalPage({
           {/* Body */}
           <article>
             <Reveal>
-              <p className="text-[16px] leading-relaxed text-ink-200">{doc.intro}</p>
+              <p className="text-[16px] leading-relaxed text-ink-200">
+                {doc.intro}
+              </p>
             </Reveal>
 
             <div className="mt-12 grid gap-12">
@@ -116,12 +123,17 @@ export default async function LegalPage({
                     </h2>
                     <div className="mt-4 grid gap-4">
                       {s.body.map((p) => (
-                        <p key={p} className="text-[15px] leading-relaxed text-ink-300">
+                        <p
+                          key={p}
+                          className="text-[15px] leading-relaxed text-ink-300"
+                        >
                           {p}
                         </p>
                       ))}
                     </div>
-                    {s.list && <TickList items={s.list} className="mt-6" tone="muted" />}
+                    {s.list && (
+                      <TickList items={s.list} className="mt-6" tone="muted" />
+                    )}
                   </section>
                 </Reveal>
               ))}
@@ -129,8 +141,9 @@ export default async function LegalPage({
 
             <Reveal className="mt-14">
               <p className="rounded-[0.5rem] border border-white/8 bg-white/[0.02] px-5 py-4 text-[12.5px] leading-relaxed text-ink-500">
-                Questions about this document? Contact us and ask for the Privacy
-                Officer. We&apos;ll get you a real answer, not a form letter.
+                Questions about this document? Contact us and ask for the
+                Privacy Officer. We&apos;ll get you a real answer, not a form
+                letter.
               </p>
             </Reveal>
           </article>

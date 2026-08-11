@@ -17,7 +17,7 @@ export function WhyIVL() {
             <span className="text-gradient">A completely different day.</span>
           </>
         }
-        lead="There are bigger infusion networks. There is not a more accountable one within an hour of Midlothian."
+        lead="There are bigger infusion networks. There is not a more accountable one within an hour of Delray Beach."
       />
 
       <Stagger className="mt-14 grid gap-px overflow-hidden rounded-[0.625rem] border border-white/8 bg-white/6 sm:grid-cols-2 lg:grid-cols-3">
@@ -35,7 +35,9 @@ export function WhyIVL() {
                 <h3 className="mt-4 text-[18px] font-semibold leading-snug tracking-tight text-ink-50">
                   {d.title}
                 </h3>
-                <p className="mt-3 text-[14px] leading-relaxed text-ink-400">{d.body}</p>
+                <p className="mt-3 text-[14px] leading-relaxed text-ink-400">
+                  {d.body}
+                </p>
               </div>
             </div>
           </StaggerItem>
@@ -49,10 +51,10 @@ export function WhyIVL() {
             className="mx-auto mb-6 h-px w-24 rule-teal"
           />
           <p className="font-display text-[clamp(1.25rem,1rem+1.2vw,1.75rem)] font-medium leading-snug tracking-tight text-ink-100">
-            &ldquo;We administer all intravenous therapies and injections safely, in
-            accordance with the highest standards of care and protocols, using only
-            high-quality pharmaceuticals from U.S. pharmacies that adhere to strict FDA
-            and USP guidelines.&rdquo;
+            &ldquo;We administer all intravenous therapies and injections
+            safely, in accordance with the highest standards of care and
+            protocols, using only high-quality pharmaceuticals from U.S.
+            pharmacies that adhere to strict FDA and USP guidelines.&rdquo;
           </p>
           <footer className="mt-5 text-[12px] font-medium uppercase tracking-[0.2em] text-ink-500">
             IV League Infusion Services

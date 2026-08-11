@@ -175,7 +175,8 @@ export const wellnessDrips: WellnessDrip[] = [
       "Supports hair and nail strength",
       "Supports hydration",
     ],
-    bestFor: "Before an event, a shoot, or a season you want to look rested for.",
+    bestFor:
+      "Before an event, a shoot, or a season you want to look rested for.",
     accent: "rose",
   },
   {

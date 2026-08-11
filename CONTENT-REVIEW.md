@@ -17,42 +17,54 @@ so nothing unverified reaches a patient.
 
 ## 🔴 Must be replaced before launch
 
-### 0. THE PRACTICE IS IN THE WRONG STATE — `src/content/site.ts`
+### 0. ~~The practice was in the wrong state~~ — FIXED, with gaps
 
-**Nothing else on this list matters until this is fixed.** The site is built
-throughout on Midlothian, Virginia. The client says the practice is in Delray
-(Delray Beach, FL). Every one of these is therefore wrong and is currently being
-emitted in `LocalBusiness` / `MedicalBusiness` JSON-LD, page titles, meta
-descriptions, the OG image and 53 clinical pages:
+The whole site was built on Midlothian, Virginia. The practice is in Delray
+Beach, Florida. That is corrected: address, phone, fax, socials, directions,
+metadata, `areaServed`, the `/locations` page and all 53 clinical pages now
+carry the real details, verified against the practice's own copy.
 
-| Field | Currently says | Status |
+| Field | Now | Source |
 |---|---|---|
-| `address.street` | 2949 Fox Chase Lane | 🔴 wrong |
-| `address.city` / `region` | Midlothian, VA | 🔴 wrong |
-| `address.postalCode` | 23112 | 🔴 wrong |
-| `address.neighborhood` | Brandermill | 🔴 wrong |
-| `address.geo` | 37.4407, -77.6588 | 🔴 wrong — plots in Chesterfield County, VA |
-| `address.mapsUrl` / `directionsUrl` / `embedUrl` | all three hardcode the VA address | 🔴 wrong |
-| `contact.phone` | (804) 397-6286 | 🔴 almost certainly wrong — 804 is Richmond, VA. Delray Beach is 561. |
-| `contact.fax` | (804) 566-9020 | 🔴 same |
-| `hours` | Mon–Fri 9–6, Sat–Sun 9–1 | 🟡 unverified |
-| `metadata.keywords` in `src/app/layout.tsx` | ten VA/Richmond phrases | 🔴 wrong |
-| `src/app/locations/page.tsx` | Brandermill, Woodlake, Chesterfield, Bon Air, Richmond, Powhatan, Short Pump, plus driving directions off Route 288 / Hull Street Road / Midlothian Turnpike | 🔴 wrong, all of it |
+| Address | 500 Gulfstream Blvd, Suite 105, Delray Beach, FL 33483 | ✅ client, confirmed by the FL facility register |
+| Building | Gulfstream Professional Building | ✅ property record |
+| Phone | (561) 489-7100 | ✅ public listings |
+| Fax | (561) 680-3630 | ✅ public listings |
+| Email | info@IVLinfusions.com | ✅ their site |
+| Legal name | IV League Infusion Services LLC | ✅ Sunbiz |
+| Instagram | @ivleagueinfusionservices | ✅ — the old handle was wrong |
+| Facebook | /IVLeagueInfusionServices | ✅ |
+| LinkedIn | *removed* | 🔴 was invented; no verified page found |
+| Directions | "Southeast of the Woolbright Road exit off I-95" | ✅ their copy |
+| Parking | "Free, convenient parking" | ✅ their copy |
+| Medical director | Dr. James Frank, MD | ✅ their Our Team page |
 
-Almost everything resolves from `site.ts`, so the NAP is a single edit. The
-exceptions that need editing by hand are the two files named in the table.
+**Still needed from IV League:**
 
-**Do not guess any of it.** These are the details a patient uses to physically
-find a medical facility, and they are also what Google matches against the
-Google Business Profile — a wrong address in `LocalBusiness` schema does active
-harm to the local ranking it is there to help. Needed from IV League:
-
-1. Street address and suite, city, state, ZIP
-2. Phone, and fax if they publish one
-3. Opening hours
-4. The towns they actually draw patients from, for `/locations` — real ones only
-5. Whether the Google Business Profile says "IV League Infusions" or
-   "IV League Infusion Services" (see item 4 below)
+1. **Opening hours.** Genuinely unknown. `site.hoursConfirmed` is `false`, which
+   suppresses the Open/Closed pill, the hours table and
+   `openingHoursSpecification` in the schema — a patient cannot turn up on a
+   schedule this site never states. All the site claims is what their own copy
+   claims: weekend appointments are available. Set the hours and flip the flag.
+2. **Latitude and longitude.** `site.address.geo` is `null` and the schema omits
+   `geo` entirely rather than carry an approximate pin for a medical facility.
+   Take it from the Google Business Profile listing.
+3. **Service area.** `/locations` and `areaServed` name only Delray Beach and
+   Palm Beach County, because those are the two things that are true by virtue
+   of where the suite is. The previous list of twelve towns was invented. Which
+   communities do they actually draw from?
+4. **One location or several?** Their site has a `/locations` page and their copy
+   says "Local centers offer flexible scheduling" and "Find an Infusion Center",
+   both plural. Only the Delray Beach suite is in this build.
+5. **The specialty list does not match.** Their site lists Hematology, Neurology,
+   Immunology, Rheumatology, Endocrinology and Orthopedics. This build's nav and
+   filters use Gastroenterology, Rheumatology, Neurology, Immunology, Allergy &
+   Asthma, and Bone & Blood Health. Some of that is a naming difference and some
+   is a real gap — there is no Endocrinology or Orthopedics grouping here, and GI
+   is prominent here but absent from their list. Needs a line-by-line pass.
+6. **In-home infusion.** A public directory describes them as providing in-home
+   infusion by certified RNs. Nothing on this site mentions it. If it is a real
+   service line it deserves a page.
 
 ---
 
@@ -62,7 +74,7 @@ Five quotes, each labelled `"Placeholder — <condition> patient"`. They are
 verbatim public reviews (Google/Yelp) with attribution. Using a patient's words — even
 anonymized — requires written authorization.
 
-### 2. A named clinical reviewer — `src/lib/seo.ts` → `medicalWebPageSchema`
+### 2. ~~A named clinical reviewer~~ — DONE (Dr. James Frank, MD)
 
 The 53 therapy and condition pages carry `MedicalWebPage` schema with a
 `lastReviewed` date, but no `reviewedBy`. That field is the strongest trust

@@ -9,7 +9,7 @@ import { faqs } from "@/content/practice";
 export const metadata = buildMetadata({
   title: "Patient FAQ",
   description:
-    "Answers about referrals, insurance, prior authorization, appointment length, what to bring, driving home and more. IV League Infusions, Midlothian VA.",
+    "Answers about referrals, insurance, prior authorization, appointment length, what to bring, driving home and more. IV League Infusions, Delray Beach FL.",
   path: "/patients/faq",
 });
 

@@ -18,9 +18,9 @@ import { faqs } from "@/content/practice";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Outpatient Infusion Center in Midlothian, VA",
+  title: "Outpatient Infusion Center in Delray Beach, FL",
   description:
-    "IV League Infusions is a locally owned outpatient infusion center in Midlothian, Virginia. Biologics, IVIG, IV antibiotics, iron and wellness infusions in private suites, with insurance and prior authorization handled for you.",
+    "IV League Infusions is a locally owned outpatient infusion center in Delray Beach, Florida. Biologics, IVIG, IV antibiotics, iron and wellness infusions in private suites, with insurance and prior authorization handled for you.",
   path: "/",
 });
 

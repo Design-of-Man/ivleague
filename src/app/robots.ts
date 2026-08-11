@@ -6,7 +6,7 @@ import { site } from "@/content/site";
  *
  * A blocked crawler cannot cite you. For a single-location practice whose
  * patients increasingly ask an assistant "where can I get an Ocrevus infusion
- * near Richmond" before they ask a search engine, being absent from those
+ * near Palm Beach County" before they ask a search engine, being absent from those
  * answers is the expensive outcome, and there is nothing on this site worth
  * withholding: it is all public patient-education copy.
  *

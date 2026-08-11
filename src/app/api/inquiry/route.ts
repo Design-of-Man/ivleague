@@ -32,7 +32,9 @@ const schema = z.object({
   insurance: z.string().trim().max(160).optional().default(""),
   referralSource: z.string().trim().max(120).optional().default(""),
   notes: z.string().trim().max(2000).optional().default(""),
-  consent: z.literal("on", { message: "Please confirm consent to be contacted" }),
+  consent: z.literal("on", {
+    message: "Please confirm consent to be contacted",
+  }),
   company: z.string().max(0).optional().default(""), // honeypot
 });
 
@@ -71,7 +73,10 @@ export async function POST(request: Request) {
   try {
     body = await request.json();
   } catch {
-    return NextResponse.json({ message: "Malformed request." }, { status: 400 });
+    return NextResponse.json(
+      { message: "Malformed request." },
+      { status: 400 },
+    );
   }
 
   const parsed = schema.safeParse(body);
@@ -92,7 +97,10 @@ export async function POST(request: Request) {
 
   // Honeypot tripped — accept silently so bots don't learn anything.
   if (data.company) {
-    return NextResponse.json({ ok: true, message: "Thanks, we'll be in touch." });
+    return NextResponse.json({
+      ok: true,
+      message: "Thanks, we'll be in touch.",
+    });
   }
 
   const submittedAt = new Date().toISOString();
@@ -113,7 +121,9 @@ export async function POST(request: Request) {
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.INQUIRY_TO_EMAIL;
-  const from = process.env.INQUIRY_FROM_EMAIL ?? "IV League Website <onboarding@resend.dev>";
+  const from =
+    process.env.INQUIRY_FROM_EMAIL ??
+    "IV League Website <onboarding@resend.dev>";
 
   if (apiKey && to) {
     try {
@@ -134,7 +144,11 @@ export async function POST(request: Request) {
 
       if (!res.ok) {
         const detail = await res.text();
-        console.error("[inquiry] Resend rejected the send:", res.status, detail);
+        console.error(
+          "[inquiry] Resend rejected the send:",
+          res.status,
+          detail,
+        );
         return NextResponse.json(
           {
             message: `We couldn't send that. Please call us at ${site.contact.phone}.`,

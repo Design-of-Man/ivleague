@@ -12,7 +12,7 @@ import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Inside the Infusion Suite",
   description:
-    "Private and semi-private infusion suites in Midlothian, VA: heated massaging recliners, high-speed Wi-Fi, flat-screen TVs, room for a guest and free parking at the door.",
+    "Private and semi-private infusion suites in Delray Beach, FL: heated massaging recliners, high-speed Wi-Fi, flat-screen TVs, room for a guest and free parking at the door.",
   path: "/suite",
 });
 
@@ -21,11 +21,19 @@ export const metadata = buildMetadata({
  * interior photography is supplied — see CONTENT-REVIEW.md for the shot list.
  */
 const SHOTS = [
-  { label: "Private suite 03", note: "Electric lift recliner, heat + massage", span: "wide" },
+  {
+    label: "Private suite 03",
+    note: "Electric lift recliner, heat + massage",
+    span: "wide",
+  },
   { label: "Semi-private bay", note: "Four chairs, individual TVs" },
   { label: "The drip station", note: "Pharmacy-grade prep, U.S.-sourced" },
   { label: "Guest seating", note: "Every suite has a seat for someone" },
-  { label: "Nurses' station", note: "Line of sight to every chair", span: "wide" },
+  {
+    label: "Nurses' station",
+    note: "Line of sight to every chair",
+    span: "wide",
+  },
   { label: "Entry and parking", note: "Free, at the door, no garage" },
 ];
 
@@ -71,7 +79,9 @@ export default function SuitePage() {
                   className="absolute inset-0 bg-gradient-to-t from-ink-950/90 via-ink-950/10 to-transparent"
                 />
                 <figcaption className="absolute inset-x-0 bottom-0 p-5">
-                  <p className="text-[14px] font-medium text-ink-50">{shot.label}</p>
+                  <p className="text-[14px] font-medium text-ink-50">
+                    {shot.label}
+                  </p>
                   <p className="mt-0.5 text-[12px] text-ink-400">{shot.note}</p>
                 </figcaption>
                 <span className="absolute right-4 top-4 rounded-full border border-white/12 bg-ink-950/82 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-400">
@@ -84,8 +94,9 @@ export default function SuitePage() {
 
         <Reveal delay={0.1}>
           <p className="mt-6 text-[12.5px] leading-relaxed text-ink-500">
-            Interior photography is scheduled. These panels are placeholders and will be
-            replaced with real images of the center. The layout and captions are final.
+            Interior photography is scheduled. These panels are placeholders and
+            will be replaced with real images of the center. The layout and
+            captions are final.
           </p>
         </Reveal>
       </Section>
@@ -139,7 +150,9 @@ export default function SuitePage() {
               <Reveal key={h}>
                 <div className="border-l-2 border-teal-400/35 pl-5">
                   <h3 className="text-[16px] font-semibold text-ink-50">{h}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-ink-400">{b}</p>
+                  <p className="mt-2 text-[14px] leading-relaxed text-ink-400">
+                    {b}
+                  </p>
                 </div>
               </Reveal>
             ))}
@@ -182,8 +195,16 @@ function ShotArt({ seed }: { seed: number }) {
           cy={`${20 + ((seed * 19) % 45)}%`}
           r="80%"
         >
-          <stop offset="0%" stopColor={`hsl(${hue} 70% 34%)`} stopOpacity="0.9" />
-          <stop offset="55%" stopColor={`hsl(${hue + 12} 60% 16%)`} stopOpacity="0.85" />
+          <stop
+            offset="0%"
+            stopColor={`hsl(${hue} 70% 34%)`}
+            stopOpacity="0.9"
+          />
+          <stop
+            offset="55%"
+            stopColor={`hsl(${hue + 12} 60% 16%)`}
+            stopOpacity="0.85"
+          />
           <stop offset="100%" stopColor="#05080b" />
         </radialGradient>
         <filter id={`blur-${seed}`}>

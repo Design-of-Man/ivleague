@@ -19,7 +19,10 @@ export function LogoWall({
 }) {
   return (
     <Section
-      className={cn("relative border-y border-white/8 bg-ink-900/30", className)}
+      className={cn(
+        "relative border-y border-white/8 bg-ink-900/30",
+        className,
+      )}
       tight={compact}
     >
       <div
@@ -64,9 +67,10 @@ export function LogoWall({
 
       <Reveal delay={0.1}>
         <p className="mt-8 text-[12.5px] leading-relaxed text-ink-500">
-          Network participation varies by plan, product line and employer group. Contact
-          us to confirm your specific plan before scheduling. Carrier names and marks
-          belong to their respective owners and are shown to indicate accepted coverage.
+          Network participation varies by plan, product line and employer group.
+          Contact us to confirm your specific plan before scheduling. Carrier
+          names and marks belong to their respective owners and are shown to
+          indicate accepted coverage.
         </p>
       </Reveal>
     </Section>

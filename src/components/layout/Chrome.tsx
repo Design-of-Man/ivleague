@@ -39,7 +39,9 @@ export function StickyCta() {
     <div
       className={cn(
         "no-print fixed inset-x-0 bottom-0 z-45 transition-[transform,opacity] duration-500 ease-[var(--ease-out-expo)] lg:hidden",
-        show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-24 opacity-0",
+        show
+          ? "translate-y-0 opacity-100"
+          : "pointer-events-none translate-y-24 opacity-0",
       )}
     >
       <div className="mx-3 mb-3 grid grid-cols-2 gap-2 rounded-[0.625rem] border border-white/10 bg-ink-900/97 p-2 shadow-[0_-10px_40px_-16px_rgba(0,0,0,0.9)]">
@@ -76,10 +78,17 @@ export function BackToTop() {
       aria-label="Back to top"
       className={cn(
         "no-print fixed bottom-24 right-4 z-45 hidden h-11 w-11 place-items-center rounded-full border border-white/10 bg-ink-900/96 text-ink-300 transition-[opacity,transform,color,border-color] duration-400 ease-[var(--ease-out-expo)] hover:border-teal-400/40 hover:text-teal-300 lg:grid lg:bottom-8",
-        show ? "scale-100 opacity-100" : "pointer-events-none scale-90 opacity-0",
+        show
+          ? "scale-100 opacity-100"
+          : "pointer-events-none scale-90 opacity-0",
       )}
     >
-      <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" aria-hidden="true">
+      <svg
+        viewBox="0 0 16 16"
+        fill="none"
+        className="h-4 w-4"
+        aria-hidden="true"
+      >
         <path
           d="M8 13V3m0 0L3.5 7.5M8 3l4.5 4.5"
           stroke="currentColor"

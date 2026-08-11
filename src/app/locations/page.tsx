@@ -8,37 +8,36 @@ import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 import { site } from "@/content/site";
 
 export const metadata = buildMetadata({
-  title: "Visit Us in Midlothian, Virginia",
+  title: `Visit Us in ${site.address.city}, ${site.address.regionName}`,
   description:
-    "IV League Infusions at 2949 Fox Chase Lane, Midlothian, VA 23112. Free parking, open seven days, serving Brandermill, Woodlake, Chesterfield and greater Richmond.",
+    "IV League Infusion Services at 500 Gulfstream Blvd, Suite 105, Delray Beach, FL 33483, southeast of the Woolbright Road exit off I-95. Free, convenient parking at the door.",
   path: "/locations",
   keywords: [
-    "infusion center near me Midlothian",
-    "IV therapy Brandermill VA",
-    "infusion center Chesterfield County",
+    "infusion center near me Delray Beach",
+    "IV therapy Delray Beach FL",
+    "infusion center Palm Beach County",
   ],
 });
 
-const AREAS = [
-  "Midlothian",
-  "Brandermill",
-  "Woodlake",
-  "Chesterfield",
-  "Bon Air",
-  "Richmond",
-  "Powhatan",
-  "Moseley",
-  "Chester",
-  "Colonial Heights",
-  "Short Pump",
-  "Amelia",
-];
+/**
+ * The previous build listed twelve towns. Every one of them was invented, and
+ * for the wrong state. Naming a town is a claim to serve it, so this list is
+ * now only what is verifiable: the municipality the suite is physically in and
+ * the county it sits in. Ask the practice which communities they actually draw
+ * from before adding any more — see CONTENT-REVIEW.md.
+ */
+const AREAS = ["Delray Beach", "Palm Beach County"];
 
+/**
+ * Directions are the practice's own words, from ivlinfusions.com: "Located
+ * southeast from Woolbright Road exit off I-95". The parking line is also
+ * theirs ("Free, Convenient Parking"). Nothing else is claimed, because
+ * nothing else is known.
+ */
 const DIRECTIONS = [
-  "From Route 288: exit at Hull Street Road (Route 360) east, then follow signs toward Brandermill.",
-  "From Route 360 (Hull Street): turn onto Old Hundred Road, then Fox Chase Lane.",
-  "From Midlothian Turnpike (Route 60): take Old Hundred Road south toward Brandermill.",
-  "Free surface parking is directly at the entrance, with no garage, no ticket and no long walk.",
+  "Southeast of the Woolbright Road exit off I-95.",
+  "Suite 105 is in the Gulfstream Professional Building.",
+  "Free, convenient parking at the door.",
 ];
 
 export default function LocationsPage() {
@@ -57,7 +56,9 @@ export default function LocationsPage() {
           <>
             One center.
             <br />
-            <span className="text-gradient">Midlothian, Virginia.</span>
+            <span className="text-gradient">
+              {site.address.city}, {site.address.regionName}.
+            </span>
           </>
         }
         lead="We are deliberately a single location. It's the reason your nurse knows your name, your veins and your schedule, and the reason we can hold a standing appointment slot for you."
@@ -73,16 +74,24 @@ export default function LocationsPage() {
       <Section className="border-y border-white/8 bg-ink-900/40" tight>
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
-            <SectionHeading eyebrow="Getting here" title="Directions & parking" size="sm" />
+            <SectionHeading
+              eyebrow="Getting here"
+              title="Directions & parking"
+              size="sm"
+            />
             <TickList items={DIRECTIONS} className="mt-8" />
             <p className="mt-8 rounded-[0.5rem] border border-white/8 bg-white/[0.02] px-5 py-4 text-[13px] leading-relaxed text-ink-400">
-              Arriving for a long infusion? Bring a companion. Every suite has a seat for
-              a guest, and there&apos;s no time limit on parking.
+              Arriving for a long infusion? Bring a companion. Every suite has a
+              seat for a guest, and there&apos;s no time limit on parking.
             </p>
           </div>
 
           <div>
-            <SectionHeading eyebrow="Who we serve" title="Areas we cover" size="sm" />
+            <SectionHeading
+              eyebrow="Who we serve"
+              title="Areas we cover"
+              size="sm"
+            />
             <Stagger className="mt-8 flex flex-wrap gap-2">
               {AREAS.map((a) => (
                 <StaggerItem key={a}>
@@ -93,9 +102,9 @@ export default function LocationsPage() {
               ))}
             </Stagger>
             <p className="mt-8 text-[13.5px] leading-relaxed text-ink-400">
-              Patients regularly drive from across greater Richmond and central Virginia,
-              usually because the total cost of care here beats the hospital outpatient
-              department by enough to make the drive worth it several times over.
+              A freestanding outpatient infusion suite rather than a hospital
+              outpatient department, which is usually what makes the difference
+              on the total cost of a course of treatment.
             </p>
           </div>
         </div>
@@ -105,38 +114,44 @@ export default function LocationsPage() {
       <Section tight>
         <SectionHeading
           eyebrow="Hours"
-          title="Open seven days"
-          lead="Including weekend mornings, so treatment stops competing with work and school."
+          title={site.hoursConfirmed ? "Opening hours" : "Call for hours"}
+          lead={
+            site.hoursConfirmed
+              ? "Weekend appointments are available."
+              : `Weekend appointments are available. For today's hours, call ${site.contact.phone}.`
+          }
         />
 
-        <Reveal className="mt-12 overflow-hidden rounded-[0.625rem] border border-white/8">
-          <table className="w-full">
-            <caption className="sr-only">Hours of operation</caption>
-            <tbody>
-              {site.hours.map((h) => (
-                <tr
-                  key={h.day}
-                  className="border-b border-white/6 last:border-0 odd:bg-white/[0.015]"
-                >
-                  <th
-                    scope="row"
-                    className="px-6 py-4 text-left text-[14px] font-medium text-ink-100"
+        {site.hoursConfirmed && (
+          <Reveal className="mt-12 overflow-hidden rounded-[0.625rem] border border-white/8">
+            <table className="w-full">
+              <caption className="sr-only">Hours of operation</caption>
+              <tbody>
+                {site.hours.map((h) => (
+                  <tr
+                    key={h.day}
+                    className="border-b border-white/6 last:border-0 odd:bg-white/[0.015]"
                   >
-                    {h.day}
-                  </th>
-                  <td className="px-6 py-4 text-right font-mono text-[13px] text-ink-300">
-                    {formatRange(h.open, h.close)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Reveal>
+                    <th
+                      scope="row"
+                      className="px-6 py-4 text-left text-[14px] font-medium text-ink-100"
+                    >
+                      {h.day}
+                    </th>
+                    <td className="px-6 py-4 text-right font-mono text-[13px] text-ink-300">
+                      {formatRange(h.open, h.close)}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </Reveal>
+        )}
 
         <Reveal delay={0.08}>
           <p className="mt-6 text-[12.5px] text-ink-500">
-            Holiday hours may vary. Call {site.contact.phone} to confirm before travelling
-            for a same-day visit.
+            Holiday hours may vary. Call {site.contact.phone} to confirm before
+            travelling for a same-day visit.
           </p>
         </Reveal>
       </Section>
@@ -151,7 +166,10 @@ export default function LocationsPage() {
           </>
         }
         body={`${site.address.street}, ${site.address.city}, ${site.address.region} ${site.address.postalCode}. Call ahead and we'll have your suite ready.`}
-        secondary={{ label: "Get directions", href: site.address.directionsUrl }}
+        secondary={{
+          label: "Get directions",
+          href: site.address.directionsUrl,
+        }}
       />
     </>
   );

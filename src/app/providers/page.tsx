@@ -12,7 +12,7 @@ import { specialties, therapiesBySpecialty } from "@/content/therapies";
 export const metadata = buildMetadata({
   title: "For Referring Providers",
   description:
-    "Refer patients to IV League Infusions in Midlothian, VA. Broad specialty formulary, prior authorization handled end to end, documentation returned after every visit, seven-day availability.",
+    "Refer patients to IV League Infusions in Delray Beach, FL. Broad specialty formulary, prior authorization handled end to end, documentation returned after every visit, seven-day availability.",
   path: "/providers",
 });
 
@@ -53,7 +53,11 @@ export default function ProvidersPage() {
             Referral requirements
             <ArrowGlyph />
           </ButtonLink>
-          <ButtonLink href={site.contact.phoneHref} variant="secondary" size="lg">
+          <ButtonLink
+            href={site.contact.phoneHref}
+            variant="secondary"
+            size="lg"
+          >
             Call intake: {site.contact.phone}
           </ButtonLink>
         </div>
@@ -76,7 +80,9 @@ export default function ProvidersPage() {
                 <h3 className="mt-4 text-[17.5px] font-semibold leading-snug tracking-tight text-ink-50">
                   {v.title}
                 </h3>
-                <p className="mt-3 text-[14px] leading-relaxed text-ink-400">{v.body}</p>
+                <p className="mt-3 text-[14px] leading-relaxed text-ink-400">
+                  {v.body}
+                </p>
               </div>
             </StaggerItem>
           ))}
@@ -84,7 +90,11 @@ export default function ProvidersPage() {
       </Section>
 
       {/* ----------------------------- Referral ----------------------------- */}
-      <Section id="refer" className="border-y border-white/8 bg-ink-900/40" tight>
+      <Section
+        id="refer"
+        className="border-y border-white/8 bg-ink-900/40"
+        tight
+      >
         <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
           <div>
             <SectionHeading
@@ -114,7 +124,9 @@ export default function ProvidersPage() {
               ].map((m) => (
                 <Reveal key={m.n}>
                   <div className="flex gap-6 rounded-[0.625rem] border border-white/8 bg-white/[0.02] p-6">
-                    <span className="font-mono text-[11px] text-teal-400">{m.n}</span>
+                    <span className="font-mono text-[11px] text-teal-400">
+                      {m.n}
+                    </span>
                     <div>
                       <h3 className="text-[16.5px] font-semibold tracking-tight text-ink-50">
                         {m.title}
@@ -136,8 +148,8 @@ export default function ProvidersPage() {
               </h3>
               <TickList items={referralRequirements} className="mt-6" />
               <p className="mt-8 border-t border-white/6 pt-6 text-[13px] leading-relaxed text-ink-500">
-                Missing a piece? Send what you have. We&apos;ll call your office for the
-                rest rather than sitting on an incomplete referral.
+                Missing a piece? Send what you have. We&apos;ll call your office
+                for the rest rather than sitting on an incomplete referral.
               </p>
               <ButtonLink
                 href={site.contact.emailHref}

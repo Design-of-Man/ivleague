@@ -42,15 +42,17 @@
   --color-accent: var(--color-teal-400);
 
   /* --- Type ------------------------------------------------------------ */
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
-    "Segoe UI", sans-serif;
-  --font-display: var(--font-display), var(--font-inter), ui-sans-serif,
-    system-ui, sans-serif;
+  --font-sans:
+    var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --font-display:
+    var(--font-display), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   /* Utility face: platform mono. Not downloaded — at 9–11px uppercase
      with wide tracking, the system face is indistinguishable from a webfont
      and costs 0 bytes on the critical path. */
-  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Mono",
-    "Roboto Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  --font-mono:
+    ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Mono", "Roboto Mono",
+    Menlo, Consolas, "Liberation Mono", monospace;
 
   /* Fluid display sizes */
   --text-hero: clamp(2.6rem, 1.5rem + 4.6vw, 5.5rem);

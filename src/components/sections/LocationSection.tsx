@@ -10,12 +10,12 @@ export function LocationSection() {
         eyebrow="Visit us"
         title={
           <>
-            2949 Fox Chase Lane,
+            500 Gulfstream Blvd, Suite 105,
             <br />
-            <span className="text-ink-400">Midlothian, Virginia.</span>
+            <span className="text-ink-400">Delray Beach, Florida.</span>
           </>
         }
-        lead="Minutes from Brandermill, Woodlake and Route 288, with free parking at the door and no garage to circle."
+        lead="Southeast of the Woolbright Road exit off I-95, in the Gulfstream Professional Building, with free parking at the door."
       />
 
       <div className="mt-14 grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">
@@ -45,8 +45,8 @@ export function LocationSection() {
                 {site.address.street}
               </p>
               <p className="text-[13px] text-ink-400">
-                {site.address.city}, {site.address.region} {site.address.postalCode} ·
-                Free parking
+                {site.address.city}, {site.address.region}{" "}
+                {site.address.postalCode} · Free parking
               </p>
             </div>
             <ButtonLink
@@ -68,20 +68,34 @@ export function LocationSection() {
             <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
               Hours
             </h3>
-            <dl className="mt-5 grid gap-3">
+            {!site.hoursConfirmed && (
+              <p className="mt-5 text-[14px] leading-relaxed text-ink-300">
+                Weekend appointments are available. Call{" "}
+                <a
+                  href={site.contact.phoneHref}
+                  className="text-teal-300 underline-offset-4 hover:underline"
+                >
+                  {site.contact.phone}
+                </a>{" "}
+                for today&rsquo;s hours.
+              </p>
+            )}
+            <dl className={site.hoursConfirmed ? "mt-5 grid gap-3" : "hidden"}>
               {site.hoursSummary.map((h) => (
                 <div
                   key={h.label}
                   className="flex items-baseline justify-between gap-4 border-b border-white/6 pb-3 last:border-0 last:pb-0"
                 >
                   <dt className="text-[14px] text-ink-300">{h.label}</dt>
-                  <dd className="text-[14px] font-medium text-ink-50">{h.value}</dd>
+                  <dd className="text-[14px] font-medium text-ink-50">
+                    {h.value}
+                  </dd>
                 </div>
               ))}
             </dl>
             <p className="mt-5 text-[12.5px] leading-relaxed text-ink-500">
-              Weekend mornings and late-afternoon slots exist specifically so treatment
-              doesn&apos;t cost you a workday.
+              Weekend mornings and late-afternoon slots exist specifically so
+              treatment doesn&apos;t cost you a workday.
             </p>
           </Reveal>
 
@@ -109,7 +123,11 @@ export function LocationSection() {
                 </span>
               </a>
             </div>
-            <ButtonLink href="/contact#inquiry" size="sm" className="mt-6 w-full">
+            <ButtonLink
+              href="/contact#inquiry"
+              size="sm"
+              className="mt-6 w-full"
+            >
               New patient inquiry
               <ArrowGlyph />
             </ButtonLink>
@@ -123,7 +141,10 @@ export function LocationSection() {
 /** Abstract street grid + pin, drawn in brand colors. */
 function MapFallback() {
   return (
-    <div aria-hidden="true" className="absolute inset-0 overflow-hidden bg-ink-900">
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 overflow-hidden bg-ink-900"
+    >
       <svg
         viewBox="0 0 800 520"
         preserveAspectRatio="xMidYMid slice"

@@ -13,7 +13,7 @@ import { site } from "@/content/site";
 export const metadata = buildMetadata({
   title: "About IV League Infusions",
   description:
-    "A locally owned outpatient infusion center in Midlothian, Virginia, caring for adult patients with complex chronic conditions, plus wellness and regenerative infusions.",
+    "A locally owned outpatient infusion center in Delray Beach, Florida, caring for adult patients with complex chronic conditions, plus wellness and regenerative infusions.",
   path: "/about",
 });
 
@@ -55,7 +55,9 @@ export default function AboutPage() {
               <>
                 Nobody skips a biologic
                 <br />
-                <span className="text-gradient">because they don&apos;t want it.</span>
+                <span className="text-gradient">
+                  because they don&apos;t want it.
+                </span>
               </>
             }
             size="sm"
@@ -63,23 +65,26 @@ export default function AboutPage() {
 
           <div className="prose-iv max-w-none">
             <p>
-              They skip it because the hospital appointment costs a full day of work.
-              Because the coinsurance on a facility-fee bill is four figures. Because the
-              prior authorization expired and nobody noticed until they showed up.
-              Because the person who called them last month is gone and the new one
-              doesn&apos;t know their history.
+              They skip it because the hospital appointment costs a full day of
+              work. Because the coinsurance on a facility-fee bill is four
+              figures. Because the prior authorization expired and nobody
+              noticed until they showed up. Because the person who called them
+              last month is gone and the new one doesn&apos;t know their
+              history.
             </p>
             <p>
-              Every one of those is a logistics problem wearing a clinical costume. IV
-              League was built to solve the logistics, so that the clinical part, the
-              part that actually works, gets to happen on schedule.
+              Every one of those is a logistics problem wearing a clinical
+              costume. IV League was built to solve the logistics, so that the
+              clinical part, the part that actually works, gets to happen on
+              schedule.
             </p>
             <p>
-              That&apos;s the whole thesis. A small center, run locally, with a formulary
-              broad enough that most patients never need a second site of care, and a
-              team small enough that you get the same nurses every visit. We answer our
-              own phone. We chase our own authorizations. And we tell you what
-              you&apos;ll owe before you sit down.
+              That&apos;s the whole thesis. A small center, run locally, with a
+              formulary broad enough that most patients never need a second site
+              of care, and a team small enough that you get the same nurses
+              every visit. We answer our own phone. We chase our own
+              authorizations. And we tell you what you&apos;ll owe before you
+              sit down.
             </p>
           </div>
         </div>
@@ -91,7 +96,9 @@ export default function AboutPage() {
                 <h3 className="font-display text-xl font-semibold tracking-tight text-ink-50">
                   {p.title}
                 </h3>
-                <p className="mt-4 text-[14.5px] leading-relaxed text-ink-400">{p.body}</p>
+                <p className="mt-4 text-[14.5px] leading-relaxed text-ink-400">
+                  {p.body}
+                </p>
               </div>
             </StaggerItem>
           ))}
@@ -146,10 +153,11 @@ export default function AboutPage() {
         <Reveal className="mt-12">
           <div className="rounded-[0.625rem] border border-white/8 bg-white/[0.02] p-8 sm:p-10">
             <p className="max-w-3xl text-[15px] leading-relaxed text-ink-300">
-              Our infusions are administered by licensed registered nurses experienced in
-              infusion therapy, working under orders written by your prescribing
-              physician, with emergency protocols and equipment on site. Staff bios and
-              photographs are being finalized and will appear here.
+              Our infusions are administered by licensed registered nurses
+              experienced in infusion therapy, working under orders written by
+              your prescribing physician, with emergency protocols and equipment
+              on site. Staff bios and photographs are being finalized and will
+              appear here.
             </p>
             <p className="mt-5 font-mono text-[10.5px] uppercase tracking-[0.16em] text-ink-500">
               Team profiles pending

@@ -40,8 +40,8 @@ export function GET() {
 > ${site.description}
 
 ${site.name} is an outpatient (freestanding, non-hospital) infusion center in
-${site.address.city}, ${site.address.regionName}, serving the greater Richmond and
-Chesterfield County area. It administers physician-ordered biologic infusions,
+${site.address.city}, ${site.address.regionName}, serving the Palm Beach County and
+Palm Beach County area. It administers physician-ordered biologic infusions,
 immune globulin, IV antibiotics, iron and bone-health therapy to adults, plus a
 separate self-pay wellness infusion menu. Every specialty therapy requires a
 referral and a written order from the patient's prescribing physician.
@@ -129,7 +129,8 @@ should not be described as one.
   return new Response(body, {
     headers: {
       "Content-Type": "text/plain; charset=utf-8",
-      "Cache-Control": "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800",
+      "Cache-Control":
+        "public, max-age=0, s-maxage=86400, stale-while-revalidate=604800",
     },
   });
 }

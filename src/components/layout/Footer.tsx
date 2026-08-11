@@ -27,12 +27,14 @@ export function Footer() {
             <h2 className="text-[clamp(1.75rem,1.2rem+2.4vw,3rem)] font-semibold leading-[1.05]">
               Start treatment without
               <br />
-              <span className="text-gradient">starting a fight with your insurer.</span>
+              <span className="text-gradient">
+                starting a fight with your insurer.
+              </span>
             </h2>
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-ink-400">
-              Send us your name and diagnosis. We handle orders, benefits and prior
-              authorization from there, and tell you what you&apos;ll owe before you
-              schedule.
+              Send us your name and diagnosis. We handle orders, benefits and
+              prior authorization from there, and tell you what you&apos;ll owe
+              before you schedule.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row md:shrink-0">
@@ -40,7 +42,11 @@ export function Footer() {
               New patient inquiry
               <ArrowGlyph />
             </ButtonLink>
-            <ButtonLink href={site.contact.phoneHref} variant="secondary" size="lg">
+            <ButtonLink
+              href={site.contact.phoneHref}
+              variant="secondary"
+              size="lg"
+            >
               {site.contact.phone}
             </ButtonLink>
           </div>
@@ -69,7 +75,8 @@ export function Footer() {
               >
                 {site.address.street}
                 <br />
-                {site.address.city}, {site.address.region} {site.address.postalCode}
+                {site.address.city}, {site.address.region}{" "}
+                {site.address.postalCode}
               </a>
               <a
                 href={site.contact.phoneHref}
@@ -91,9 +98,6 @@ export function Footer() {
               </SocialLink>
               <SocialLink href={site.social.facebook} label="Facebook">
                 <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.9h2.54V9.85c0-2.52 1.5-3.91 3.77-3.91 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.78-1.63 1.57v1.89h2.78l-.45 2.9h-2.33V22C18.34 21.24 22 17.08 22 12.06Z" />
-              </SocialLink>
-              <SocialLink href={site.social.linkedin} label="LinkedIn">
-                <path d="M6.94 5.5a2.06 2.06 0 1 1-4.12 0 2.06 2.06 0 0 1 4.12 0ZM3.1 8.98h3.66V21H3.1V8.98Zm5.98 0h3.5v1.64h.05c.49-.92 1.68-1.9 3.45-1.9 3.69 0 4.37 2.42 4.37 5.57V21h-3.65v-5.98c0-1.43-.03-3.26-1.99-3.26-1.99 0-2.29 1.55-2.29 3.16V21H9.08V8.98Z" />
               </SocialLink>
             </div>
           </div>
@@ -129,9 +133,10 @@ export function Footer() {
             © {year} {site.legalName}. All rights reserved.
           </p>
           <p className="max-w-2xl leading-relaxed md:text-right">
-            Information on this site is educational and is not medical advice. A physician
-            referral is required for all therapies. Wellness infusions are not evaluated
-            by the FDA to diagnose, treat, cure or prevent any disease.
+            Information on this site is educational and is not medical advice. A
+            physician referral is required for all therapies. Wellness infusions
+            are not evaluated by the FDA to diagnose, treat, cure or prevent any
+            disease.
           </p>
         </div>
       </div>
@@ -166,7 +171,12 @@ function SocialLink({
       aria-label={label}
       className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-ink-300 transition-all duration-400 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-teal-400/40 hover:bg-teal-400/10 hover:text-teal-300"
     >
-      <svg viewBox="0 0 24 24" fill="currentColor" className="h-4 w-4" aria-hidden="true">
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        className="h-4 w-4"
+        aria-hidden="true"
+      >
         {children}
       </svg>
     </a>

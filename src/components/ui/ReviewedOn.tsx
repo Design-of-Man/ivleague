@@ -1,4 +1,5 @@
 import { CONTENT_REVIEWED, CONTENT_REVIEWED_ISO } from "@/content/reviewed";
+import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
 
 /**
@@ -18,7 +19,8 @@ export function ReviewedOn({ className }: { className?: string }) {
       )}
     >
       Content last reviewed{" "}
-      <time dateTime={CONTENT_REVIEWED_ISO}>{CONTENT_REVIEWED}</time>
+      <time dateTime={CONTENT_REVIEWED_ISO}>{CONTENT_REVIEWED}</time> ·{" "}
+      {site.medicalDirector.full}, {site.medicalDirector.role}
     </p>
   );
 }

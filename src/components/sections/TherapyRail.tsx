@@ -71,7 +71,10 @@ export function TherapyRail() {
                     <div className="flex items-baseline justify-between gap-3">
                       <dt className="text-ink-500">Chair time</dt>
                       <dd className="text-right text-ink-200">
-                        {t.duration.replace(/^(About|Approximately|At least|Usually around)\s/i, "~")}
+                        {t.duration.replace(
+                          /^(About|Approximately|At least|Usually around)\s/i,
+                          "~",
+                        )}
                       </dd>
                     </div>
                     <div className="flex items-baseline justify-between gap-3">

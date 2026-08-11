@@ -34,8 +34,8 @@ export default function NotFound() {
             <span className="text-gradient">infiltrated.</span>
           </h1>
           <p className="mx-auto mt-6 max-w-md text-lead leading-relaxed text-ink-300">
-            The page you were looking for isn&apos;t here. Let&apos;s get you back into a
-            good vein.
+            The page you were looking for isn&apos;t here. Let&apos;s get you
+            back into a good vein.
           </p>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
@@ -43,7 +43,11 @@ export default function NotFound() {
               Back to home
               <ArrowGlyph />
             </ButtonLink>
-            <ButtonLink href={site.contact.phoneHref} variant="secondary" size="lg">
+            <ButtonLink
+              href={site.contact.phoneHref}
+              variant="secondary"
+              size="lg"
+            >
               {site.contact.phone}
             </ButtonLink>
           </div>

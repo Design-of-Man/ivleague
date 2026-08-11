@@ -80,10 +80,7 @@ export const payers: Payer[] = [
     mark: (
       <>
         {/* cross */}
-        <path
-          d="M4 14h6V8h8v6h6v8h-6v6h-8v-6H4v-8Z"
-          fill="currentColor"
-        />
+        <path d="M4 14h6V8h8v6h6v8h-6v6h-8v-6H4v-8Z" fill="currentColor" />
         {/* shield */}
         <path
           d="M28 6c3.5 1.6 6.5 2.2 9 2.2v11.4c0 6-4 10.4-9 12.4-5-2-9-6.4-9-12.4V8.2c2.5 0 5.5-.6 9-2.2Z"
@@ -106,7 +103,10 @@ export const payers: Payer[] = [
           strokeWidth="2.8"
           strokeLinecap="round"
         />
-        <path d="M20.5 17c-.5-7 3-12 10-13.5C31 11 27.5 15.5 20.5 17Z" fill="currentColor" />
+        <path
+          d="M20.5 17c-.5-7 3-12 10-13.5C31 11 27.5 15.5 20.5 17Z"
+          fill="currentColor"
+        />
         <path
           d="M19.5 22c.4-6-2.8-10.2-9-11.5-.4 6.2 2.6 10 9 11.5Z"
           fill="currentColor"
@@ -230,7 +230,15 @@ export const payers: Payer[] = [
     color: "#1D4F91",
     mark: (
       <>
-        <rect x="3" y="10" width="34" height="21" rx="3" fill="currentColor" opacity="0.18" />
+        <rect
+          x="3"
+          y="10"
+          width="34"
+          height="21"
+          rx="3"
+          fill="currentColor"
+          opacity="0.18"
+        />
         <rect
           x="3"
           y="10"
@@ -242,7 +250,13 @@ export const payers: Payer[] = [
           fill="none"
         />
         <path d="M3 17h34" stroke="currentColor" strokeWidth="2.2" />
-        <path d="M8 24h9M22 24h10" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" opacity="0.7" />
+        <path
+          d="M8 24h9M22 24h10"
+          stroke="currentColor"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          opacity="0.7"
+        />
       </>
     ),
   },

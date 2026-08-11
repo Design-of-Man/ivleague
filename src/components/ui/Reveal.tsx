@@ -119,6 +119,7 @@ export function StaggerItem({
   as?: "div" | "li" | "article";
 }) {
   if (as === "li") return <li className={className}>{children}</li>;
-  if (as === "article") return <article className={className}>{children}</article>;
+  if (as === "article")
+    return <article className={className}>{children}</article>;
   return <div className={className}>{children}</div>;
 }

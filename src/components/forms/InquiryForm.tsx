@@ -171,7 +171,7 @@ export function InquiryForm() {
                 type="tel"
                 required
                 autoComplete="tel"
-                placeholder="(804) 555-0134"
+                placeholder="(561) 555-0134"
                 error={errors.phone}
               />
             </div>
@@ -194,7 +194,7 @@ export function InquiryForm() {
               <Field
                 label="Prescribing physician"
                 name="physician"
-                placeholder="Dr. Smith, Richmond GI"
+                placeholder="Dr. Smith, Palm Beach County GI"
                 hint="We'll contact their office for orders."
                 error={errors.physician}
               />

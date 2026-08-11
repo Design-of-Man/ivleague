@@ -4,7 +4,12 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { Badge, JsonLd, MedicalDisclaimer, StatTile } from "@/components/ui/Bits";
+import {
+  Badge,
+  JsonLd,
+  MedicalDisclaimer,
+  StatTile,
+} from "@/components/ui/Bits";
 import { buildMetadata, breadcrumbSchema, itemListSchema } from "@/lib/seo";
 import { conditions, therapiesForCondition } from "@/content/conditions";
 import { specialties } from "@/content/therapies";
@@ -12,7 +17,7 @@ import { specialties } from "@/content/therapies";
 export const metadata = buildMetadata({
   title: "Conditions We Treat",
   description:
-    "Crohn's disease, ulcerative colitis, rheumatoid arthritis, multiple sclerosis, severe asthma, immune deficiency and more. Chronic and complex conditions managed at IV League Infusions in Midlothian, VA.",
+    "Crohn's disease, ulcerative colitis, rheumatoid arthritis, multiple sclerosis, severe asthma, immune deficiency and more. Chronic and complex conditions managed at IV League Infusions in Delray Beach, FL.",
   path: "/conditions",
 });
 
@@ -132,9 +137,9 @@ export default function ConditionsPage() {
             Your diagnosis isn&apos;t on this list?
           </p>
           <p className="mx-auto mt-3 max-w-xl text-[14.5px] leading-relaxed text-ink-400">
-            This page reflects what our referring physicians order most. It is not the
-            limit of what we can administer. If your doctor has written for an infusion,
-            call us. The answer is usually yes.
+            This page reflects what our referring physicians order most. It is
+            not the limit of what we can administer. If your doctor has written
+            for an infusion, call us. The answer is usually yes.
           </p>
           <Link
             href="/contact"

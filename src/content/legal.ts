@@ -72,7 +72,7 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "Data retention",
         body: [
-          "Inquiry submissions are retained for as long as needed to respond and, where you become a patient, for the period required by Virginia medical records law and applicable federal requirements. Server logs are retained for a limited period for security purposes.",
+          "Inquiry submissions are retained for as long as needed to respond and, where you become a patient, for the period required by Florida medical records law and applicable federal requirements. Server logs are retained for a limited period for security purposes.",
         ],
       },
       {
@@ -134,7 +134,9 @@ export const legalDocs: LegalDoc[] = [
       },
       {
         heading: "Your rights",
-        body: ["You have the following rights regarding your health information:"],
+        body: [
+          "You have the following rights regarding your health information:",
+        ],
         list: [
           "Right to inspect and copy: you may request access to your records, including an electronic copy where we maintain them electronically.",
           "Right to amend: you may request a correction to information you believe is incorrect or incomplete.",
@@ -213,13 +215,13 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "Limitation of liability",
         body: [
-          "This site is provided on an \"as is\" basis without warranties of any kind. To the fullest extent permitted by law, we disclaim liability for any damages arising from your use of, or inability to use, this site or its content.",
+          'This site is provided on an "as is" basis without warranties of any kind. To the fullest extent permitted by law, we disclaim liability for any damages arising from your use of, or inability to use, this site or its content.',
         ],
       },
       {
         heading: "Governing law",
         body: [
-          "These terms are governed by the laws of the Commonwealth of Virginia, without regard to conflict of law principles.",
+          "These terms are governed by the laws of the Commonwealth of Florida, without regard to conflict of law principles.",
         ],
       },
     ],

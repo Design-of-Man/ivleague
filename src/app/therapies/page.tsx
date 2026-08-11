@@ -13,9 +13,9 @@ export const metadata = buildMetadata({
     "Browse the full IV League Infusions formulary: biologics, IVIG, IV iron, bone health, anti-infectives and more. Filter by specialty or search by brand or generic name.",
   path: "/therapies",
   keywords: [
-    "infusion therapy list Midlothian VA",
-    "biologic infusion formulary Virginia",
-    "Entyvio Remicade Ocrevus infusion Richmond",
+    "infusion therapy list Delray Beach FL",
+    "biologic infusion formulary Florida",
+    "Entyvio Remicade Ocrevus infusion Palm Beach County",
   ],
 });
 

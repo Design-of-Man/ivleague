@@ -58,23 +58,67 @@ export function DripChamber({
       >
         <defs>
           <linearGradient id="dc-glass" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="var(--color-teal-300)" stopOpacity="0.30" />
-            <stop offset="18%" stopColor="var(--color-teal-50)" stopOpacity="0.10" />
-            <stop offset="50%" stopColor="var(--color-teal-500)" stopOpacity="0.05" />
-            <stop offset="86%" stopColor="var(--color-teal-200)" stopOpacity="0.16" />
-            <stop offset="100%" stopColor="var(--color-teal-600)" stopOpacity="0.30" />
+            <stop
+              offset="0%"
+              stopColor="var(--color-teal-300)"
+              stopOpacity="0.30"
+            />
+            <stop
+              offset="18%"
+              stopColor="var(--color-teal-50)"
+              stopOpacity="0.10"
+            />
+            <stop
+              offset="50%"
+              stopColor="var(--color-teal-500)"
+              stopOpacity="0.05"
+            />
+            <stop
+              offset="86%"
+              stopColor="var(--color-teal-200)"
+              stopOpacity="0.16"
+            />
+            <stop
+              offset="100%"
+              stopColor="var(--color-teal-600)"
+              stopOpacity="0.30"
+            />
           </linearGradient>
           <linearGradient id="dc-wall" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="var(--color-teal-200)" stopOpacity="0.62" />
-            <stop offset="42%" stopColor="var(--color-teal-400)" stopOpacity="0.16" />
-            <stop offset="100%" stopColor="var(--color-teal-300)" stopOpacity="0.55" />
+            <stop
+              offset="0%"
+              stopColor="var(--color-teal-200)"
+              stopOpacity="0.62"
+            />
+            <stop
+              offset="42%"
+              stopColor="var(--color-teal-400)"
+              stopOpacity="0.16"
+            />
+            <stop
+              offset="100%"
+              stopColor="var(--color-teal-300)"
+              stopOpacity="0.55"
+            />
           </linearGradient>
           <linearGradient id="dc-fluid" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="var(--color-teal-300)" stopOpacity="0.55" />
-            <stop offset="100%" stopColor="var(--color-teal-600)" stopOpacity="0.30" />
+            <stop
+              offset="0%"
+              stopColor="var(--color-teal-300)"
+              stopOpacity="0.55"
+            />
+            <stop
+              offset="100%"
+              stopColor="var(--color-teal-600)"
+              stopOpacity="0.30"
+            />
           </linearGradient>
           <radialGradient id="dc-drop" cx="0.36" cy="0.3" r="0.78">
-            <stop offset="0%" stopColor="var(--color-ink-50)" stopOpacity="0.95" />
+            <stop
+              offset="0%"
+              stopColor="var(--color-ink-50)"
+              stopOpacity="0.95"
+            />
             <stop offset="34%" stopColor="var(--color-teal-200)" />
             <stop offset="100%" stopColor="var(--color-teal-500)" />
           </radialGradient>
@@ -99,7 +143,12 @@ export function DripChamber({
           stroke="url(#dc-wall)"
           strokeWidth="1.2"
         />
-        <path d="M92 34h16v14h-16z" fill="var(--color-ink-850)" stroke="var(--color-ink-600)" strokeWidth="1" />
+        <path
+          d="M92 34h16v14h-16z"
+          fill="var(--color-ink-850)"
+          stroke="var(--color-ink-600)"
+          strokeWidth="1"
+        />
         {/* nozzle tip — where the drop is born */}
         <path
           d="M94 48h12l-6 9-6-9Z"
@@ -120,8 +169,24 @@ export function DripChamber({
           strokeWidth="1.4"
         />
         {/* specular highlights on the glass */}
-        <rect x="62" y="60" width="4" height="222" rx="2" fill="var(--color-teal-50)" opacity="0.13" />
-        <rect x="134" y="76" width="2.5" height="190" rx="1.25" fill="var(--color-teal-50)" opacity="0.09" />
+        <rect
+          x="62"
+          y="60"
+          width="4"
+          height="222"
+          rx="2"
+          fill="var(--color-teal-50)"
+          opacity="0.13"
+        />
+        <rect
+          x="134"
+          y="76"
+          width="2.5"
+          height="190"
+          rx="1.25"
+          fill="var(--color-teal-50)"
+          opacity="0.09"
+        />
 
         <g clipPath="url(#dc-inside)">
           {/* fluid pool */}
@@ -136,8 +201,24 @@ export function DripChamber({
                   }
             }
           >
-            <ellipse cx="100" cy="262" rx="48" ry="5" fill="var(--color-teal-200)" opacity="0.5" />
-            <ellipse cx="100" cy="262" rx="48" ry="5" fill="none" stroke="var(--color-teal-50)" strokeWidth="0.8" opacity="0.4" />
+            <ellipse
+              cx="100"
+              cy="262"
+              rx="48"
+              ry="5"
+              fill="var(--color-teal-200)"
+              opacity="0.5"
+            />
+            <ellipse
+              cx="100"
+              cy="262"
+              rx="48"
+              ry="5"
+              fill="none"
+              stroke="var(--color-teal-50)"
+              strokeWidth="0.8"
+              opacity="0.4"
+            />
           </g>
 
           {/* ripples — two sets, offset like the droplets they belong to */}
@@ -188,15 +269,37 @@ export function DripChamber({
                 d="M100 55c0 0 11 12.4 11 19.3 0 6.1-4.9 11-11 11s-11-4.9-11-11C89 67.4 100 55 100 55Z"
                 fill="url(#dc-drop)"
               />
-              <ellipse cx="96" cy="71" rx="3" ry="4" fill="var(--color-ink-50)" opacity="0.5" />
+              <ellipse
+                cx="96"
+                cy="71"
+                rx="3"
+                ry="4"
+                fill="var(--color-ink-50)"
+                opacity="0.5"
+              />
             </g>
           ))}
         </g>
 
         {/* ---- outlet ------------------------------------------------------ */}
-        <path d="M88 298h24v10a6 6 0 0 1-6 6H94a6 6 0 0 1-6-6v-10Z" fill="var(--color-ink-800)" stroke="url(#dc-wall)" strokeWidth="1.2" />
-        <path d="M100 314v26" stroke="var(--color-ink-600)" strokeWidth="6" strokeLinecap="round" />
-        <path d="M100 314v26" stroke="url(#dc-wall)" strokeWidth="1.1" strokeLinecap="round" />
+        <path
+          d="M88 298h24v10a6 6 0 0 1-6 6H94a6 6 0 0 1-6-6v-10Z"
+          fill="var(--color-ink-800)"
+          stroke="url(#dc-wall)"
+          strokeWidth="1.2"
+        />
+        <path
+          d="M100 314v26"
+          stroke="var(--color-ink-600)"
+          strokeWidth="6"
+          strokeLinecap="round"
+        />
+        <path
+          d="M100 314v26"
+          stroke="url(#dc-wall)"
+          strokeWidth="1.1"
+          strokeLinecap="round"
+        />
 
         {/* ---- ambient glow behind the pool -------------------------------- */}
         <ellipse

@@ -119,7 +119,7 @@ export const differentiators = [
   {
     stat: "Locally owned",
     title: "Not a national chain",
-    body: "IV League is owned and run by clinicians who live here. Decisions about your care are made in Midlothian, not at a corporate headquarters in another state.",
+    body: "IV League is owned and run by clinicians who live here. Decisions about your care are made in Delray Beach, not at a corporate headquarters in another state.",
   },
   {
     stat: "One team",
@@ -220,7 +220,7 @@ export const faqs: Faq[] = [
   {
     category: "Getting started",
     q: "How do I become a patient?",
-    a: "Start by filling out the New Patient Inquiry form on this site, or call (804) 397-6286. A member of our team will be in touch. We then contact your physician for medication orders, insurance details, and clinical information (demographics, vitals, labs) needed to authorize treatment. Once we have everything, we obtain prior authorization, order your medication, and schedule your infusion at a time convenient for you.",
+    a: "Start by filling out the New Patient Inquiry form on this site, or call (561) 489-7100. A member of our team will be in touch. We then contact your physician for medication orders, insurance details, and clinical information (demographics, vitals, labs) needed to authorize treatment. Once we have everything, we obtain prior authorization, order your medication, and schedule your infusion at a time convenient for you.",
   },
   {
     category: "Getting started",
@@ -425,7 +425,7 @@ export const aboutPillars = [
 export const milestones = [
   {
     year: "2021",
-    title: "IV League opens in Midlothian",
+    title: "IV League opens in Delray Beach",
     body: "Founded by clinicians who had watched too many patients skip doses because a hospital infusion appointment meant a lost day of work and a four-figure bill.",
   },
   {

@@ -107,7 +107,9 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
 
   // Keep the active row in view without smooth-scroll jitter
   useEffect(() => {
-    const el = listRef.current?.querySelector<HTMLElement>('[data-active="true"]');
+    const el = listRef.current?.querySelector<HTMLElement>(
+      '[data-active="true"]',
+    );
     el?.scrollIntoView({ block: "nearest" });
   }, [active]);
 
@@ -156,7 +158,13 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
             className="h-4 w-4 shrink-0 text-teal-400"
             aria-hidden="true"
           >
-            <circle cx="7" cy="7" r="4.6" stroke="currentColor" strokeWidth="1.5" />
+            <circle
+              cx="7"
+              cy="7"
+              r="4.6"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
             <path
               d="m10.5 10.5 3 3"
               stroke="currentColor"
@@ -172,7 +180,9 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
             placeholder="Search therapies, conditions, questions…"
             aria-label="Search therapies, conditions and pages"
             aria-controls="palette-results"
-            aria-activedescendant={flat[active] ? `row-${flat[active].id}` : undefined}
+            aria-activedescendant={
+              flat[active] ? `row-${flat[active].id}` : undefined
+            }
             autoComplete="off"
             spellCheck={false}
             className="h-14 w-full bg-transparent text-[15.5px] text-ink-50 placeholder:text-ink-500 focus:outline-none"
@@ -196,8 +206,9 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
                 Nothing matches &ldquo;{query}&rdquo;
               </p>
               <p className="mx-auto mt-2 max-w-sm text-[13px] leading-relaxed text-ink-500">
-                Try a brand name like Entyvio, a condition like Crohn&apos;s, or just
-                call us and we&apos;ll tell you straight whether we can help.
+                Try a brand name like Entyvio, a condition like Crohn&apos;s, or
+                just call us and we&apos;ll tell you straight whether we can
+                help.
               </p>
               <a
                 href={site.contact.phoneHref}

@@ -11,13 +11,13 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Wellness & Regenerative IV Infusions",
   description:
-    "Myers' Cocktail, NAD+, immunity, hydration, recovery and glutathione infusions in Midlothian, VA, administered by registered nurses in private suites under clinical protocols.",
+    "Myers' Cocktail, NAD+, immunity, hydration, recovery and glutathione infusions in Delray Beach, FL, administered by registered nurses in private suites under clinical protocols.",
   path: "/wellness",
   keywords: [
-    "IV vitamin therapy Midlothian VA",
-    "Myers cocktail Richmond VA",
-    "NAD IV therapy Midlothian",
-    "IV hydration Chesterfield VA",
+    "IV vitamin therapy Delray Beach FL",
+    "Myers cocktail Palm Beach County",
+    "NAD IV therapy Delray Beach",
+    "IV hydration Palm Beach County",
   ],
 });
 
@@ -99,7 +99,9 @@ export default function WellnessPage() {
                           {d.duration}
                         </span>
                         <span className="rounded-full border border-white/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-ink-400">
-                          {d.price === null ? "Pricing on request" : `$${d.price}`}
+                          {d.price === null
+                            ? "Pricing on request"
+                            : `$${d.price}`}
                         </span>
                       </div>
 
@@ -137,7 +139,11 @@ export default function WellnessPage() {
                         <h4 className="font-mono text-[10px] uppercase tracking-[0.18em] text-ink-500">
                           Supports
                         </h4>
-                        <TickList items={d.benefits} className="mt-3.5" tone="muted" />
+                        <TickList
+                          items={d.benefits}
+                          className="mt-3.5"
+                          tone="muted"
+                        />
                       </div>
                     </div>
                   </div>
@@ -149,7 +155,11 @@ export default function WellnessPage() {
       </Section>
 
       {/* ---------------------------- Injections ----------------------------- */}
-      <Section id="injections" className="border-y border-white/8 bg-ink-900/40" tight>
+      <Section
+        id="injections"
+        className="border-y border-white/8 bg-ink-900/40"
+        tight
+      >
         <SectionHeading
           eyebrow="Quick visits"
           title="Injections & pushes"
@@ -209,8 +219,12 @@ export default function WellnessPage() {
                 ],
               ].map(([h, b]) => (
                 <div key={h} className="border-l-2 border-teal-400/35 pl-5">
-                  <h3 className="text-[15.5px] font-semibold text-ink-50">{h}</h3>
-                  <p className="mt-2 text-[14px] leading-relaxed text-ink-400">{b}</p>
+                  <h3 className="text-[15.5px] font-semibold text-ink-50">
+                    {h}
+                  </h3>
+                  <p className="mt-2 text-[14px] leading-relaxed text-ink-400">
+                    {b}
+                  </p>
                 </div>
               ))}
             </div>
@@ -240,9 +254,16 @@ export default function WellnessPage() {
                     "Sometimes. Anything added to a therapy day has to be cleared against your prescribed regimen first, so ask your nurse.",
                   ],
                 ].map(([q, a]) => (
-                  <div key={q} className="border-b border-white/6 pb-5 last:border-0 last:pb-0">
-                    <dt className="text-[14.5px] font-medium text-ink-50">{q}</dt>
-                    <dd className="mt-2 text-[13.5px] leading-relaxed text-ink-400">{a}</dd>
+                  <div
+                    key={q}
+                    className="border-b border-white/6 pb-5 last:border-0 last:pb-0"
+                  >
+                    <dt className="text-[14.5px] font-medium text-ink-50">
+                      {q}
+                    </dt>
+                    <dd className="mt-2 text-[13.5px] leading-relaxed text-ink-400">
+                      {a}
+                    </dd>
                   </div>
                 ))}
               </dl>
@@ -254,10 +275,10 @@ export default function WellnessPage() {
                   These statements have not been evaluated by the Food and Drug
                   Administration.
                 </strong>{" "}
-                Wellness infusions are not intended to diagnose, treat, cure or prevent
-                any disease. They are not a substitute for medical care, and are not
-                appropriate for everyone. Our clinical team will tell you if a drip
-                isn&apos;t right for you.
+                Wellness infusions are not intended to diagnose, treat, cure or
+                prevent any disease. They are not a substitute for medical care,
+                and are not appropriate for everyone. Our clinical team will
+                tell you if a drip isn&apos;t right for you.
               </p>
             </Reveal>
           </div>

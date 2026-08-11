@@ -112,8 +112,8 @@ export function AmenitiesBento() {
               className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[radial-gradient(circle,rgba(31,205,192,0.28),transparent_65%)] blur-2xl"
             />
             <p className="relative text-[15px] font-medium leading-relaxed text-teal-50">
-              Ask for a blanket, a private suite, the lights down, or the game on. The
-              answer is almost always yes.
+              Ask for a blanket, a private suite, the lights down, or the game
+              on. The answer is almost always yes.
             </p>
             <ButtonLink
               href="/contact"

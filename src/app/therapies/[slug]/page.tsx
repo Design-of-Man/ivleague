@@ -44,16 +44,21 @@ export async function generateMetadata({
 }) {
   const { slug } = await params;
   const t = therapyBySlug(slug);
-  if (!t) return buildMetadata({ title: "Therapy not found", description: "", noIndex: true });
+  if (!t)
+    return buildMetadata({
+      title: "Therapy not found",
+      description: "",
+      noIndex: true,
+    });
 
   return buildMetadata({
     title: `${t.brand} (${t.generic}) Infusion Therapy`,
-    description: `${t.summary} Administered at IV League Infusions in Midlothian, VA. Typical chair time: ${t.duration}.`,
+    description: `${t.summary} Administered at IV League Infusions in Delray Beach, FL. Typical chair time: ${t.duration}.`,
     path: `/therapies/${t.slug}`,
     keywords: [
-      `${t.brand} infusion Midlothian VA`,
-      `${t.generic} infusion Richmond`,
-      `${t.brand} infusion center Virginia`,
+      `${t.brand} infusion Delray Beach FL`,
+      `${t.generic} infusion Palm Beach County`,
+      `${t.brand} infusion center Florida`,
     ],
   });
 }
@@ -116,15 +121,24 @@ export default async function TherapyPage({
                 ["Route", t.route],
                 ["Chair time", t.duration],
               ].map(([k, v]) => (
-                <div key={k} className="flex flex-col gap-0.5 border-b border-white/6 pb-3 last:border-0 last:pb-0">
+                <div
+                  key={k}
+                  className="flex flex-col gap-0.5 border-b border-white/6 pb-3 last:border-0 last:pb-0"
+                >
                   <dt className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-ink-500">
                     {k}
                   </dt>
-                  <dd className="text-[13.5px] leading-snug text-ink-100">{v}</dd>
+                  <dd className="text-[13.5px] leading-snug text-ink-100">
+                    {v}
+                  </dd>
                 </div>
               ))}
             </dl>
-            <ButtonLink href="/contact#inquiry" size="sm" className="mt-6 w-full">
+            <ButtonLink
+              href="/contact#inquiry"
+              size="sm"
+              className="mt-6 w-full"
+            >
               Start intake
               <ArrowGlyph />
             </ButtonLink>
@@ -158,8 +172,9 @@ export default async function TherapyPage({
                 What is {t.brand} used for?
               </h2>
               <p className="mt-3 text-[14.5px] leading-relaxed text-ink-400">
-                {t.brand} is used in the management of the following. Whether it is right
-                for you is a decision for you and your prescribing physician.
+                {t.brand} is used in the management of the following. Whether it
+                is right for you is a decision for you and your prescribing
+                physician.
               </p>
               <TickList items={t.treats} className="mt-6" />
             </Reveal>
@@ -271,9 +286,10 @@ export default async function TherapyPage({
                   Getting started
                 </h3>
                 <p className="mt-3 text-[13.5px] leading-relaxed text-ink-400">
-                  Send us your prescriber&apos;s name and your insurance. We collect the
-                  order, verify benefits and pursue prior authorization. Most patients
-                  are infusing in two to three weeks.
+                  Send us your prescriber&apos;s name and your insurance. We
+                  collect the order, verify benefits and pursue prior
+                  authorization. Most patients are infusing in two to three
+                  weeks.
                 </p>
               </div>
               <div className="grid divide-y divide-white/6">

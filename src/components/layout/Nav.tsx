@@ -114,15 +114,21 @@ export function Nav() {
                 <li
                   key={item.label}
                   className="relative"
-                  onMouseEnter={() => (hasMenu ? hoverOpen(item.label) : hoverClose())}
+                  onMouseEnter={() =>
+                    hasMenu ? hoverOpen(item.label) : hoverClose()
+                  }
                 >
                   <Link
                     href={item.href}
                     className={cn(
                       "relative flex items-center gap-1.5 rounded-full px-3.5 py-3 text-[14px] font-medium transition-colors duration-300",
-                      active ? "text-teal-300" : "text-ink-200 hover:text-ink-50",
+                      active
+                        ? "text-teal-300"
+                        : "text-ink-200 hover:text-ink-50",
                     )}
-                    aria-expanded={hasMenu ? openMenu === item.label : undefined}
+                    aria-expanded={
+                      hasMenu ? openMenu === item.label : undefined
+                    }
                   >
                     {item.label}
                     {hasMenu && (
@@ -175,26 +181,26 @@ export function Nav() {
           <div className="flex items-center gap-2 lg:hidden">
             <SearchButton iconOnly />
             <button
-            type="button"
-            onClick={() => setMobileOpen((v) => !v)}
-            className="relative grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.04]"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            <span className="relative block h-3 w-5">
-              <span
-                className={cn(
-                  "absolute left-0 h-[1.5px] w-5 rounded-full bg-ink-50 transition-all duration-400 ease-[var(--ease-out-expo)]",
-                  mobileOpen ? "top-1.5 rotate-45" : "top-0",
-                )}
-              />
-              <span
-                className={cn(
-                  "absolute left-0 h-[1.5px] w-5 rounded-full bg-ink-50 transition-all duration-400 ease-[var(--ease-out-expo)]",
-                  mobileOpen ? "top-1.5 -rotate-45" : "top-3",
-                )}
-              />
-            </span>
+              type="button"
+              onClick={() => setMobileOpen((v) => !v)}
+              className="relative grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.04]"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+            >
+              <span className="relative block h-3 w-5">
+                <span
+                  className={cn(
+                    "absolute left-0 h-[1.5px] w-5 rounded-full bg-ink-50 transition-all duration-400 ease-[var(--ease-out-expo)]",
+                    mobileOpen ? "top-1.5 rotate-45" : "top-0",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "absolute left-0 h-[1.5px] w-5 rounded-full bg-ink-50 transition-all duration-400 ease-[var(--ease-out-expo)]",
+                    mobileOpen ? "top-1.5 -rotate-45" : "top-3",
+                  )}
+                />
+              </span>
             </button>
           </div>
         </nav>
@@ -290,7 +296,8 @@ export function Nav() {
           <div className="mt-auto px-6 pt-10 text-[13px] leading-relaxed text-ink-400">
             <p className="font-medium text-ink-200">{site.address.street}</p>
             <p>
-              {site.address.city}, {site.address.region} {site.address.postalCode}
+              {site.address.city}, {site.address.region}{" "}
+              {site.address.postalCode}
             </p>
             <p className="mt-3">Mon–Fri 9–6 · Sat–Sun 9–1</p>
           </div>
@@ -431,7 +438,9 @@ function TopBar() {
             <span className={state?.open ? "text-teal-300" : "text-ink-400"}>
               {state ? state.label : "Hours"}
             </span>
-            {state?.detail && <span className="text-ink-500">· {state.detail}</span>}
+            {state?.detail && (
+              <span className="text-ink-500">· {state.detail}</span>
+            )}
           </span>
           <span className="hidden xl:inline">
             {site.address.street}, {site.address.city}, {site.address.region}
@@ -453,7 +462,12 @@ function TopBar() {
 
 function PhoneGlyph() {
   return (
-    <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      className="h-3.5 w-3.5"
+      aria-hidden="true"
+    >
       <path
         d="M5.2 2.5 6.6 5 5.4 6.4a8.4 8.4 0 0 0 4.2 4.2L11 9.4l2.5 1.4v2.3c0 .5-.4.9-.9.8A11.6 11.6 0 0 1 2.1 3.4c0-.5.3-.9.8-.9h2.3Z"
         stroke="currentColor"

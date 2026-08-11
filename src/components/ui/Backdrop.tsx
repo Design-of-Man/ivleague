@@ -16,9 +16,11 @@ export function Aurora({
   className?: string;
   intensity?: "subtle" | "medium" | "strong";
 }) {
-  const opacity = { subtle: "opacity-40", medium: "opacity-70", strong: "opacity-100" }[
-    intensity
-  ];
+  const opacity = {
+    subtle: "opacity-40",
+    medium: "opacity-70",
+    strong: "opacity-100",
+  }[intensity];
 
   return (
     <div
@@ -61,7 +63,10 @@ export function GridBackdrop({
   return (
     <div
       aria-hidden="true"
-      className={cn("pointer-events-none absolute inset-0 grid-lines", className)}
+      className={cn(
+        "pointer-events-none absolute inset-0 grid-lines",
+        className,
+      )}
       style={{ maskImage: maskStyle, WebkitMaskImage: maskStyle }}
     />
   );
@@ -81,7 +86,10 @@ export function DripLine({
   return (
     <div
       aria-hidden="true"
-      className={cn("pointer-events-none absolute inset-0 overflow-hidden", className)}
+      className={cn(
+        "pointer-events-none absolute inset-0 overflow-hidden",
+        className,
+      )}
     >
       {Array.from({ length: count }, (_, i) => (
         <div
@@ -129,7 +137,14 @@ export function ParticleField({ className }: { className?: string }) {
     let h = 0;
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
 
-    type P = { x: number; y: number; r: number; v: number; a: number; drift: number };
+    type P = {
+      x: number;
+      y: number;
+      r: number;
+      v: number;
+      a: number;
+      drift: number;
+    };
     let parts: P[] = [];
 
     const seed = () => {
@@ -205,7 +220,10 @@ export function ParticleField({ className }: { className?: string }) {
     <canvas
       ref={ref}
       aria-hidden="true"
-      className={cn("pointer-events-none absolute inset-0 h-full w-full", className)}
+      className={cn(
+        "pointer-events-none absolute inset-0 h-full w-full",
+        className,
+      )}
     />
   );
 }

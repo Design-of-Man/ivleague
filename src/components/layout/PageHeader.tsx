@@ -46,9 +46,7 @@ export function PageHeader({
       <EdgeGlow className="top-auto bottom-0 opacity-60" />
 
       <div className="shell relative">
-        {trail && (
-          <Breadcrumbs trail={trail} className="mb-8" />
-        )}
+        {trail && <Breadcrumbs trail={trail} className="mb-8" />}
 
         <div
           className={cn(
@@ -57,9 +55,7 @@ export function PageHeader({
           )}
         >
           <div className={cn("flex flex-col gap-6", aside && "lg:max-w-3xl")}>
-            {eyebrow && (
-              <Eyebrow>{eyebrow}</Eyebrow>
-            )}
+            {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
             {/*
               Not wrapped in a Reveal. On every interior template this h1 is the
               LCP element, and a reveal starts at opacity 0 — which means LCP
@@ -67,7 +63,9 @@ export function PageHeader({
               Measured cost of getting this wrong: +1.2s LCP. The heading paints
               from the server HTML; everything around it can arrive late.
             */}
-            <h1 className={cn(titleSize, "font-semibold leading-[1.02]")}>{title}</h1>
+            <h1 className={cn(titleSize, "font-semibold leading-[1.02]")}>
+              {title}
+            </h1>
             {lead && (
               <p className="max-w-[46rem] text-lead leading-relaxed text-ink-300">
                 {lead}
@@ -76,9 +74,7 @@ export function PageHeader({
             {children}
           </div>
 
-          {aside && (
-            <div className="lg:shrink-0">{aside}</div>
-          )}
+          {aside && <div className="lg:shrink-0">{aside}</div>}
         </div>
       </div>
     </header>

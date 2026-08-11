@@ -13,7 +13,7 @@ import { site } from "@/content/site";
 export const metadata = buildMetadata({
   title: "What to Expect as a Patient",
   description:
-    "Your first infusion at IV League Infusions in Midlothian, VA: from referral and prior authorization through what to bring, what the day looks like, and how long it takes.",
+    "Your first infusion at IV League Infusions in Delray Beach, FL: from referral and prior authorization through what to bring, what the day looks like, and how long it takes.",
   path: "/patients",
 });
 
@@ -135,11 +135,19 @@ export default function PatientsPage() {
       <Section className="border-y border-white/8 bg-ink-900/40" tight>
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
           <div>
-            <SectionHeading eyebrow="Come prepared" title="What to bring" size="sm" />
+            <SectionHeading
+              eyebrow="Come prepared"
+              title="What to bring"
+              size="sm"
+            />
             <TickList items={BRING} className="mt-8" />
           </div>
           <div>
-            <SectionHeading eyebrow="Common mistakes" title="What to avoid" size="sm" />
+            <SectionHeading
+              eyebrow="Common mistakes"
+              title="What to avoid"
+              size="sm"
+            />
             <ul className="mt-8 grid gap-3">
               {AVOID.map((a) => (
                 <li
@@ -152,10 +160,24 @@ export default function PatientsPage() {
                     className="mt-0.5 h-4 w-4 shrink-0 text-amber-400"
                     aria-hidden="true"
                   >
-                    <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.1" opacity="0.45" />
-                    <path d="M10 5.5v5.2M10 13.6v.6" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+                    <circle
+                      cx="10"
+                      cy="10"
+                      r="9"
+                      stroke="currentColor"
+                      strokeWidth="1.1"
+                      opacity="0.45"
+                    />
+                    <path
+                      d="M10 5.5v5.2M10 13.6v.6"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                    />
                   </svg>
-                  <span className="text-[14.5px] leading-relaxed text-ink-300">{a}</span>
+                  <span className="text-[14.5px] leading-relaxed text-ink-300">
+                    {a}
+                  </span>
                 </li>
               ))}
             </ul>

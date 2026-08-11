@@ -20,7 +20,12 @@ export function Marquee({
   pauseOnHover?: boolean;
 }) {
   return (
-    <div className={cn("group relative flex overflow-hidden mask-fade-x", className)}>
+    <div
+      className={cn(
+        "group relative flex overflow-hidden mask-fade-x",
+        className,
+      )}
+    >
       {[0, 1].map((i) => (
         <div
           key={i}

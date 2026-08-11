@@ -10,8 +10,7 @@ const variants = {
     "bg-teal-400 text-ink-950 shadow-[0_0_0_1px_rgba(31,205,192,0.55),0_10px_36px_-12px_rgba(31,205,192,0.75)] hover:bg-teal-300 hover:shadow-[0_0_0_1px_rgba(79,227,215,0.8),0_16px_50px_-14px_rgba(31,205,192,0.95)] hover:-translate-y-0.5 font-semibold",
   secondary:
     "bg-white/[0.07] text-ink-50 ring-1 ring-inset ring-white/12 hover:bg-white/[0.11] hover:ring-teal-400/40 hover:-translate-y-0.5",
-  ghost:
-    "text-ink-200 hover:text-teal-300 hover:bg-white/[0.04]",
+  ghost: "text-ink-200 hover:text-teal-300 hover:bg-white/[0.04]",
   outline:
     "text-teal-300 ring-1 ring-inset ring-teal-400/35 hover:bg-teal-400/10 hover:ring-teal-400/70 hover:-translate-y-0.5",
   dark: "bg-ink-950 text-ink-50 ring-1 ring-inset ring-white/10 hover:ring-white/25 hover:-translate-y-0.5",
@@ -65,7 +64,12 @@ export function ButtonLink({
   >) {
   const cls = cn(base, variants[variant], sizes[size], className);
 
-  if (external || href.startsWith("http") || href.startsWith("tel:") || href.startsWith("mailto:")) {
+  if (
+    external ||
+    href.startsWith("http") ||
+    href.startsWith("tel:") ||
+    href.startsWith("mailto:")
+  ) {
     return (
       <a
         href={href}

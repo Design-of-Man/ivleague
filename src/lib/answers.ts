@@ -139,8 +139,8 @@ export function therapyFaqs(t: Therapy): { q: string; a: string }[] {
       a: `${site.name} accepts most major commercial plans, Medicare and Medicaid. Coverage for a specific drug depends on your plan and its prior authorization criteria, so we verify benefits and submit the authorization before anything is scheduled, then tell you your expected out-of-pocket cost. Network participation varies by product line.`,
     },
     {
-      q: `Where can I get ${an} ${t.brand} infusion near Richmond, Virginia?`,
-      a: `${site.name} administers ${t.brand} at ${site.address.street}, ${site.address.city}, ${site.address.regionName} ${site.address.postalCode}, southwest of Richmond and minutes from Brandermill and Route 288. It is a freestanding outpatient infusion center rather than a hospital outpatient department, with free parking at the entrance. Call ${site.contact.phone}.`,
+      q: `Where can I get ${an} ${t.brand} infusion near Palm Beach County?`,
+      a: `${site.name} administers ${t.brand} at ${site.address.street}, ${site.address.city}, ${site.address.regionName} ${site.address.postalCode}, southeast of the Woolbright Road exit off I-95. It is a freestanding outpatient infusion center rather than a hospital outpatient department, with free parking at the entrance. Call ${site.contact.phone}.`,
     },
   ];
 }
@@ -152,7 +152,11 @@ export function therapyFaqs(t: Therapy): { q: string; a: string }[] {
 export function conditionAnswer(c: Condition): string {
   const list = therapiesForCondition(c.slug);
   const named = list.length
-    ? ` ${PLACE} administers ${list.length} infusion ${list.length === 1 ? "therapy" : "therapies"} for it, including ${joinProse(list.map((t) => t.brand), 3, true)}.`
+    ? ` ${PLACE} administers ${list.length} infusion ${list.length === 1 ? "therapy" : "therapies"} for it, including ${joinProse(
+        list.map((t) => t.brand),
+        3,
+        true,
+      )}.`
     : "";
   return `${c.name} is ${softLower(bare(c.summary))}.${named} All treatment is ordered by your prescribing physician; we handle benefits, prior authorization and administration.`;
 }
@@ -176,13 +180,17 @@ export function conditionFaqs(c: Condition): { q: string; a: string }[] {
   if (list.length) {
     out.push({
       q: `Which infusion therapies are used for ${short}?`,
-      a: `${PLACE} administers ${joinProse(list.map((t) => `${t.brand} (${t.generic})`), 6, true)}${list.length > 6 ? `, and ${list.length - 6} more` : ""}. Which one is right for you depends on disease activity, prior treatment and your physician's judgement, not on what we happen to stock.`,
+      a: `${PLACE} administers ${joinProse(
+        list.map((t) => `${t.brand} (${t.generic})`),
+        6,
+        true,
+      )}${list.length > 6 ? `, and ${list.length - 6} more` : ""}. Which one is right for you depends on disease activity, prior treatment and your physician's judgement, not on what we happen to stock.`,
     });
   }
 
   out.push({
-    q: `Where can I get infusion treatment for ${short} near Richmond, Virginia?`,
-    a: `${site.name} is an outpatient infusion center at ${site.address.street}, ${site.address.city}, ${site.address.regionName} ${site.address.postalCode}, serving greater Richmond and Chesterfield County. Appointments run ${site.hoursSummary[0].value} on weekdays and ${site.hoursSummary[1].value} on weekends. A physician referral is required. Call ${site.contact.phone}.`,
+    q: `Where can I get infusion treatment for ${short} near Palm Beach County?`,
+    a: `${site.name} is an outpatient infusion center at ${site.address.street}, ${site.address.city}, ${site.address.regionName} ${site.address.postalCode}, serving Palm Beach County. Appointments run ${site.hoursSummary[0].value} on weekdays and ${site.hoursSummary[1].value} on weekends. A physician referral is required. Call ${site.contact.phone}.`,
   });
 
   return out;

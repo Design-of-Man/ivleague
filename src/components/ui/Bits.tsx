@@ -164,7 +164,14 @@ export function TickList({
             )}
             aria-hidden="true"
           >
-            <circle cx="10" cy="10" r="9" stroke="currentColor" strokeWidth="1.1" opacity="0.45" />
+            <circle
+              cx="10"
+              cy="10"
+              r="9"
+              stroke="currentColor"
+              strokeWidth="1.1"
+              opacity="0.45"
+            />
             <path
               d="m6 10.2 2.6 2.6L14 7.4"
               stroke="currentColor"
@@ -173,7 +180,9 @@ export function TickList({
               strokeLinejoin="round"
             />
           </svg>
-          <span className="text-[15px] leading-relaxed text-ink-200">{item}</span>
+          <span className="text-[15px] leading-relaxed text-ink-200">
+            {item}
+          </span>
         </li>
       ))}
     </ul>

@@ -23,8 +23,7 @@ export function buildMetadata({
   keywords,
 }: MetaInput): Metadata {
   const url = `${BASE}${path === "/" ? "" : path}`;
-  const ogImage =
-    image ?? `/api/og?title=${encodeURIComponent(title)}`;
+  const ogImage = image ?? `/api/og?title=${encodeURIComponent(title)}`;
 
   return {
     title,
@@ -101,30 +100,36 @@ export function medicalBusinessSchema() {
       postalCode: site.address.postalCode,
       addressCountry: site.address.country,
     },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: site.address.geo.lat,
-      longitude: site.address.geo.lng,
-    },
+    // Both of these are omitted rather than guessed. A wrong pin or a wrong
+    // schedule in LocalBusiness schema does active harm — it is what Google
+    // matches against the Business Profile, and what a patient turns up on.
+    ...(site.address.geo
+      ? {
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: site.address.geo.lat,
+            longitude: site.address.geo.lng,
+          },
+        }
+      : {}),
     hasMap: site.address.mapsUrl,
-    openingHoursSpecification: site.hours.map((h) => ({
-      "@type": "OpeningHoursSpecification",
-      dayOfWeek: `https://schema.org/${dayMap[h.day]}`,
-      opens: h.open,
-      closes: h.close,
-    })),
-    sameAs: [
-      site.social.instagram,
-      site.social.facebook,
-      site.social.linkedin,
-    ],
+    ...(site.hoursConfirmed
+      ? {
+          openingHoursSpecification: site.hours.map((h) => ({
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: `https://schema.org/${dayMap[h.day]}`,
+            opens: h.open,
+            closes: h.close,
+          })),
+        }
+      : {}),
+    sameAs: [site.social.instagram, site.social.facebook],
+    // Only what is verifiable. The previous list named twelve towns, all of
+    // them invented and all in the wrong state.
     areaServed: [
-      { "@type": "City", name: "Midlothian" },
-      { "@type": "City", name: "Richmond" },
-      { "@type": "City", name: "Chesterfield" },
-      { "@type": "City", name: "Brandermill" },
-      { "@type": "City", name: "Woodlake" },
-      { "@type": "State", name: "Virginia" },
+      { "@type": "City", name: "Delray Beach" },
+      { "@type": "AdministrativeArea", name: "Palm Beach County" },
+      { "@type": "State", name: "Florida" },
     ],
     medicalSpecialty: [
       "Gastroenterology",
@@ -165,10 +170,10 @@ export function webSiteSchema() {
  * `speakable` marks the standalone answer paragraph as the passage to read
  * aloud for a voice query.
  *
- * `reviewedBy` is deliberately absent. It is the single strongest E-E-A-T field
- * available here and it needs a named clinician with credentials. Inventing one
- * for a real medical practice is not a trade worth making for a ranking signal,
- * so it stays out until the client supplies a name (see CONTENT-REVIEW.md).
+ * `reviewedBy` names the practice's medical director, taken from their own
+ * "Our Team" page. It is the single strongest E-E-A-T field available here, and
+ * it sat empty through the whole build rather than be filled with a
+ * plausible-sounding invented clinician.
  */
 export function medicalWebPageSchema(opts: {
   name: string;
@@ -185,6 +190,12 @@ export function medicalWebPageSchema(opts: {
     inLanguage: "en-US",
     lastReviewed: CONTENT_REVIEWED_ISO,
     dateModified: CONTENT_REVIEWED_ISO,
+    reviewedBy: {
+      "@type": "Person",
+      name: site.medicalDirector.full,
+      jobTitle: site.medicalDirector.role,
+      worksFor: { "@id": `${BASE}/#organization` },
+    },
     ...(opts.specialty ? { specialty: opts.specialty } : {}),
     isPartOf: { "@id": `${BASE}/#website` },
     publisher: { "@id": `${BASE}/#organization` },

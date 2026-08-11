@@ -67,7 +67,11 @@ export function InsuranceStrip() {
             <StaggerItem key={o.title}>
               <div className="group card card-hover flex h-full gap-4 p-6">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-teal-400/20 bg-teal-400/[0.07] text-teal-300 transition-colors duration-500 group-hover:border-teal-400/45">
-                  <Icon className="h-4.5 w-4.5" strokeWidth={1.5} aria-hidden="true" />
+                  <Icon
+                    className="h-4.5 w-4.5"
+                    strokeWidth={1.5}
+                    aria-hidden="true"
+                  />
                 </span>
                 <div>
                   <h3 className="text-[15.5px] font-semibold tracking-tight text-ink-50">
@@ -85,8 +89,8 @@ export function InsuranceStrip() {
 
       <Reveal delay={0.12}>
         <p className="mt-8 text-[12.5px] leading-relaxed text-ink-500">
-          Network participation varies by plan and product line. Contact us to confirm
-          whether we accept your specific plan before scheduling.
+          Network participation varies by plan and product line. Contact us to
+          confirm whether we accept your specific plan before scheduling.
         </p>
       </Reveal>
     </Section>

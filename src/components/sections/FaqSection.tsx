@@ -66,10 +66,15 @@ export function FaqSection({
                   Still not sure if we can help?
                 </p>
                 <p className="mt-2 text-[13.5px] leading-relaxed text-ink-400">
-                  Call and describe your situation. If we&apos;re not the right site of
-                  care, we&apos;ll tell you who is.
+                  Call and describe your situation. If we&apos;re not the right
+                  site of care, we&apos;ll tell you who is.
                 </p>
-                <ButtonLink href="/contact" variant="outline" size="sm" className="mt-5">
+                <ButtonLink
+                  href="/contact"
+                  variant="outline"
+                  size="sm"
+                  className="mt-5"
+                >
                   Talk to us
                   <ArrowGlyph />
                 </ButtonLink>
@@ -89,8 +94,19 @@ export function FaqSection({
                     className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-500"
                     aria-hidden="true"
                   >
-                    <circle cx="7" cy="7" r="4.6" stroke="currentColor" strokeWidth="1.4" />
-                    <path d="m10.5 10.5 3 3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+                    <circle
+                      cx="7"
+                      cy="7"
+                      r="4.6"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                    />
+                    <path
+                      d="m10.5 10.5 3 3"
+                      stroke="currentColor"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                    />
                   </svg>
                   <input
                     type="search"
@@ -130,7 +146,8 @@ export function FaqSection({
               items={filtered.map((f, i) => ({
                 id: `${f.category}-${i}`,
                 title: f.q,
-                meta: showFilters && category === "All" ? f.category : undefined,
+                meta:
+                  showFilters && category === "All" ? f.category : undefined,
                 content: <p>{f.a}</p>,
               }))}
               defaultOpen={`${filtered[0].category}-0`}
@@ -138,7 +155,10 @@ export function FaqSection({
           ) : (
             <p className="rounded-[0.625rem] border border-white/8 bg-white/[0.02] px-6 py-10 text-center text-[14px] text-ink-400">
               No questions match that search. Try a different term, or just{" "}
-              <a href="/contact" className="text-teal-300 underline underline-offset-4">
+              <a
+                href="/contact"
+                className="text-teal-300 underline underline-offset-4"
+              >
                 ask us directly
               </a>
               .

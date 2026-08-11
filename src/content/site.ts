@@ -22,39 +22,86 @@ export const site = {
   legalName: "IV League Infusion Services",
   tagline: "Infusion care without the hospital.",
   description:
-    "A locally owned outpatient infusion center in Midlothian, Virginia. Biologic infusions, IVIG, IV antibiotics and wellness therapies delivered in private suites by nurses who know your name.",
+    "An outpatient infusion center in Delray Beach, Florida. Biologic infusions, IVIG, IV antibiotics, injections and wellness therapies delivered in private and semi-private suites by nurses with decades of experience.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ivlinfusions.com",
   locale: "en-US",
   founded: "2021",
 
+  /**
+   * From the practice's own "Our Team" page. Used for `reviewedBy` on the 53
+   * clinical pages, which is the strongest E-E-A-T field available on YMYL
+   * health content — and the one field that was deliberately left empty until
+   * there was a real name to put in it.
+   */
+  medicalDirector: {
+    name: "Dr. James Frank",
+    credential: "MD",
+    role: "Medical Director",
+    get full() {
+      return `${this.name}, ${this.credential}`;
+    },
+  },
+
   contact: {
-    phone: "(804) 397-6286",
-    phoneHref: "tel:+18043976286",
-    fax: "(804) 566-9020",
+    phone: "(561) 489-7100",
+    phoneHref: "tel:+15614897100",
+    fax: "(561) 680-3630",
     email: "info@IVLinfusions.com",
     emailHref: "mailto:info@IVLinfusions.com",
   },
 
   address: {
-    street: "2949 Fox Chase Lane",
-    suite: "",
-    city: "Midlothian",
-    region: "VA",
-    regionName: "Virginia",
-    postalCode: "23112",
+    street: "500 Gulfstream Blvd",
+    suite: "Suite 105",
+    city: "Delray Beach",
+    region: "FL",
+    regionName: "Florida",
+    postalCode: "33483",
     country: "US",
-    neighborhood: "Brandermill",
+    /** The building the suite is in, per the property record. */
+    building: "Gulfstream Professional Building",
     get full() {
-      return `${this.street}, ${this.city}, ${this.region} ${this.postalCode}`;
+      return `${this.street}, ${this.suite}, ${this.city}, ${this.region} ${this.postalCode}`;
     },
-    geo: { lat: 37.4407, lng: -77.6588 },
-    mapsUrl:
-      "https://www.google.com/maps/search/?api=1&query=2949+Fox+Chase+Lane+Midlothian+VA+23112",
-    directionsUrl:
-      "https://www.google.com/maps/dir/?api=1&destination=2949+Fox+Chase+Lane+Midlothian+VA+23112",
-    embedUrl:
-      "https://www.google.com/maps?q=2949+Fox+Chase+Lane,+Midlothian,+VA+23112&output=embed",
+    /**
+     * Deliberately null. A lat/lng was invented once already and pinned this
+     * practice in the wrong state; a map pin for a medical facility is not
+     * something to approximate. `medicalBusinessSchema` omits `geo` while this
+     * is null, which costs nothing — Google geocodes the postal address. Fill
+     * it in from the real Google Business Profile listing.
+     */
+    geo: null as { lat: number; lng: number } | null,
+    get mapsUrl() {
+      return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(this.full)}`;
+    },
+    get directionsUrl() {
+      return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(this.full)}`;
+    },
+    get embedUrl() {
+      return `https://www.google.com/maps?q=${encodeURIComponent(this.full)}&output=embed`;
+    },
   },
+
+  /**
+   * From the practice's own site: "Located southeast from Woolbright Road exit
+   * off I-95". Everything else about getting here is unverified, so there is
+   * nothing else here.
+   */
+  directions: "Southeast of the Woolbright Road exit off I-95.",
+
+  /**
+   * NOT CONFIRMED. These are the placeholder hours the build was scaffolded
+   * with and they have never been checked against the practice. While
+   * `hoursConfirmed` is false nothing renders them as fact: `getOpenState`
+   * returns a "call for hours" state instead of an Open/Closed pill, and
+   * `medicalBusinessSchema` omits `openingHoursSpecification` rather than
+   * publish a schedule a patient could turn up on. Set the real hours, then
+   * flip the flag.
+   *
+   * What *is* sourced, from the practice's own copy: "flexible scheduling
+   * including weekend appointments".
+   */
+  hoursConfirmed: false,
 
   hours: [
     { day: "Monday", short: "Mon", open: "09:00", close: "18:00" },
@@ -66,16 +113,16 @@ export const site = {
     { day: "Sunday", short: "Sun", open: "09:00", close: "13:00" },
   ],
 
+  /** Also unconfirmed — gated on `hoursConfirmed` everywhere it is read. */
   hoursSummary: [
     { label: "Monday – Friday", value: "9:00 AM – 6:00 PM" },
     { label: "Saturday – Sunday", value: "9:00 AM – 1:00 PM" },
   ],
 
   social: {
-    instagram: "https://www.instagram.com/ivleagueinfusions/",
-    instagramHandle: "@ivleagueinfusions",
-    facebook: "https://www.facebook.com/ivleagueinfusions",
-    linkedin: "https://www.linkedin.com/company/iv-league-infusions",
+    instagram: "https://www.instagram.com/ivleagueinfusionservices/",
+    instagramHandle: "@ivleagueinfusionservices",
+    facebook: "https://www.facebook.com/IVLeagueInfusionServices/",
   },
 
   /** Marketing proof points. Numbers are rendered with a "+" and animate up. */
@@ -288,6 +335,8 @@ export function getOpenState(now: Date = new Date()): {
   open: boolean;
   label: string;
   detail: string;
+  /** False while the real hours are unknown — see `site.hoursConfirmed`. */
+  known?: boolean;
 } {
   const fmt = new Intl.DateTimeFormat("en-US", {
     timeZone: "America/New_York",
@@ -301,6 +350,10 @@ export function getOpenState(now: Date = new Date()): {
   const hour = Number(parts.find((p) => p.type === "hour")?.value ?? "0");
   const minute = Number(parts.find((p) => p.type === "minute")?.value ?? "0");
   const mins = hour * 60 + minute;
+
+  if (!site.hoursConfirmed) {
+    return { open: false, label: "Call for hours", detail: "", known: false };
+  }
 
   const today = site.hours.find((h) => h.day === weekday);
   if (!today) return { open: false, label: "Closed", detail: "" };
