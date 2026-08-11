@@ -241,6 +241,15 @@
   }
 }
 
+@keyframes console-fill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 @keyframes scan {
   0% {
     transform: translateY(-100%);
@@ -518,6 +527,106 @@
    COMPONENT-ISH PRIMITIVES
    ========================================================================== */
 
+/* ==========================================================================
+   SCROLL REVEAL (CSS-only — see components/ui/Reveal.tsx)
+   ========================================================================== */
+
+.reveal,
+.stagger > * {
+  opacity: 0;
+  filter: blur(5px);
+  transform: translate3d(var(--reveal-x, 0), var(--reveal-y, 18px), 0);
+  transition:
+    opacity var(--reveal-duration, 0.8s) var(--ease-out-expo)
+      var(--reveal-delay, 0s),
+    transform var(--reveal-duration, 0.8s) var(--ease-out-expo)
+      var(--reveal-delay, 0s),
+    filter var(--reveal-duration, 0.8s) var(--ease-out-expo)
+      var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+.reveal-up {
+  --reveal-y: 26px;
+}
+.reveal-down {
+  --reveal-y: -26px;
+}
+.reveal-left {
+  --reveal-x: 26px;
+  --reveal-y: 0;
+}
+.reveal-right {
+  --reveal-x: -26px;
+  --reveal-y: 0;
+}
+.reveal-none {
+  --reveal-x: 0;
+  --reveal-y: 0;
+}
+
+.reveal.is-visible,
+.stagger.is-visible > * {
+  opacity: 1;
+  filter: blur(0);
+  transform: none;
+  will-change: auto;
+}
+
+/* Per-child delay without per-child JS. */
+.stagger.is-visible > *:nth-child(1) {
+  transition-delay: 0ms;
+}
+.stagger.is-visible > *:nth-child(2) {
+  transition-delay: 80ms;
+}
+.stagger.is-visible > *:nth-child(3) {
+  transition-delay: 160ms;
+}
+.stagger.is-visible > *:nth-child(4) {
+  transition-delay: 240ms;
+}
+.stagger.is-visible > *:nth-child(5) {
+  transition-delay: 320ms;
+}
+.stagger.is-visible > *:nth-child(6) {
+  transition-delay: 400ms;
+}
+.stagger.is-visible > *:nth-child(7) {
+  transition-delay: 460ms;
+}
+.stagger.is-visible > *:nth-child(8) {
+  transition-delay: 520ms;
+}
+.stagger.is-visible > *:nth-child(n + 9) {
+  transition-delay: 580ms;
+}
+
+/* ==========================================================================
+   SCROLL PROGRESS BAR (scroll-driven animation, no JS)
+   ========================================================================== */
+
+.scroll-progress {
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+
+@supports (animation-timeline: scroll()) {
+  .scroll-progress {
+    animation: scroll-progress linear both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@keyframes scroll-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 /* Film grain overlay */
 .grain::after {
   content: "";
@@ -644,6 +753,14 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Reveals must be visible, not instantly-transitioned-from-hidden. */
+  .reveal,
+  .stagger > * {
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
   }
 }
 

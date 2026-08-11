@@ -1,18 +1,25 @@
 "use client";
 
-import { motion, useReducedMotion, type Variants } from "motion/react";
-import type { ReactNode } from "react";
+import { useRef, type ReactNode, type CSSProperties } from "react";
+import { useRevealOnce } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
-type Direction = "up" | "down" | "left" | "right" | "none";
+/**
+ * Scroll reveal, CSS-only.
+ *
+ * This used to be a motion/react component. It is used on nearly every page,
+ * which meant the animation runtime shipped with almost every route. The same
+ * effect is a class, a transition and one shared IntersectionObserver — so the
+ * therapy and condition detail pages (53 of 76 routes) now load no animation
+ * library at all.
+ *
+ * Progressive enhancement: `.reveal` is hidden until `is-visible` is added, so
+ * a `<noscript>` rule in the document head unhides everything when JS is off,
+ * and the global prefers-reduced-motion rule shows it instantly.
+ */
 
-const offsets: Record<Direction, { x: number; y: number }> = {
-  up: { x: 0, y: 26 },
-  down: { x: 0, y: -26 },
-  left: { x: 26, y: 0 },
-  right: { x: -26, y: 0 },
-  none: { x: 0, y: 0 },
-};
+type Direction = "up" | "down" | "left" | "right" | "none";
+type Tag = "div" | "section" | "li" | "article" | "span";
 
 export function Reveal({
   children,
@@ -20,7 +27,6 @@ export function Reveal({
   delay = 0,
   direction = "up",
   duration = 0.8,
-  once = true,
   as = "div",
   id,
 }: {
@@ -29,67 +35,77 @@ export function Reveal({
   delay?: number;
   direction?: Direction;
   duration?: number;
+  /** Retained for API compatibility; reveals never replay. */
   once?: boolean;
-  as?: "div" | "section" | "li" | "article" | "span";
+  as?: Tag;
   id?: string;
 }) {
-  const reduce = useReducedMotion();
-  const { x, y } = reduce ? offsets.none : offsets[direction];
-  const MotionTag = motion[as] as typeof motion.div;
+  const ref = useRef<HTMLElement>(null);
+  useRevealOnce(ref);
 
-  return (
-    <MotionTag
-      id={id}
-      className={className}
-      initial={{ opacity: 0, x, y, filter: "blur(6px)" }}
-      whileInView={{ opacity: 1, x: 0, y: 0, filter: "blur(0px)" }}
-      viewport={{ once, margin: "-80px 0px -80px 0px" }}
-      transition={{
-        duration: reduce ? 0.001 : duration,
-        delay: reduce ? 0 : delay,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-    >
-      {children}
-    </MotionTag>
-  );
+  const props = {
+    id,
+    className: cn("reveal", `reveal-${direction}`, className),
+    style: {
+      "--reveal-delay": `${delay}s`,
+      "--reveal-duration": `${duration}s`,
+    } as CSSProperties,
+  };
+
+  switch (as) {
+    case "section":
+      return (
+        <section ref={ref as React.RefObject<HTMLElement>} {...props}>
+          {children}
+        </section>
+      );
+    case "li":
+      return (
+        <li ref={ref as React.RefObject<HTMLLIElement>} {...props}>
+          {children}
+        </li>
+      );
+    case "article":
+      return (
+        <article ref={ref as React.RefObject<HTMLElement>} {...props}>
+          {children}
+        </article>
+      );
+    case "span":
+      return (
+        <span ref={ref as React.RefObject<HTMLSpanElement>} {...props}>
+          {children}
+        </span>
+      );
+    default:
+      return (
+        <div ref={ref as React.RefObject<HTMLDivElement>} {...props}>
+          {children}
+        </div>
+      );
+  }
 }
 
-/** Container that staggers its Reveal-less children via variants. */
-const containerVariants: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
-};
-
-const itemVariants: Variants = {
-  hidden: { opacity: 0, y: 22, filter: "blur(5px)" },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] },
-  },
-};
-
+/**
+ * Staggered container. Child delays come from `:nth-child` in CSS rather than
+ * from per-item JS, so a 30-card grid costs one observer and zero React state.
+ */
 export function Stagger({
   children,
   className,
-  amount = 0.15,
 }: {
   children: ReactNode;
   className?: string;
+  /** Retained for API compatibility. */
   amount?: number;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useRevealOnce(ref);
+
   return (
-    <motion.div
-      className={className}
-      variants={containerVariants}
-      initial="hidden"
-      whileInView="show"
-      viewport={{ once: true, amount }}
-    >
+    <div ref={ref} className={cn("stagger", className)}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
@@ -102,53 +118,7 @@ export function StaggerItem({
   className?: string;
   as?: "div" | "li" | "article";
 }) {
-  const MotionTag = motion[as] as typeof motion.div;
-  return (
-    <MotionTag className={className} variants={itemVariants}>
-      {children}
-    </MotionTag>
-  );
-}
-
-/** Word-by-word headline reveal for hero type. */
-export function SplitWords({
-  text,
-  className,
-  wordClassName,
-  delay = 0,
-  stagger = 0.055,
-}: {
-  text: string;
-  className?: string;
-  wordClassName?: string;
-  delay?: number;
-  stagger?: number;
-}) {
-  const reduce = useReducedMotion();
-  const words = text.split(" ");
-
-  return (
-    <span className={cn("inline", className)}>
-      {words.map((w, i) => (
-        <span
-          key={`${w}-${i}`}
-          className="inline-block overflow-hidden align-bottom pb-[0.08em]"
-        >
-          <motion.span
-            className={cn("inline-block", wordClassName)}
-            initial={{ y: reduce ? 0 : "108%", opacity: reduce ? 1 : 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{
-              duration: reduce ? 0.001 : 0.95,
-              delay: reduce ? 0 : delay + i * stagger,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-          >
-            {w}
-            {i < words.length - 1 ? " " : ""}
-          </motion.span>
-        </span>
-      ))}
-    </span>
-  );
+  if (as === "li") return <li className={className}>{children}</li>;
+  if (as === "article") return <article className={className}>{children}</article>;
+  return <div className={className}>{children}</div>;
 }

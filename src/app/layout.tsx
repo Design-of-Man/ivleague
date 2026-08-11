@@ -91,6 +91,15 @@ export default function RootLayout({
       className={`${inter.variable} ${sora.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/*
+          Scroll reveals start hidden and are unhidden by an IntersectionObserver.
+          With JS disabled that observer never runs, so unhide everything.
+        */}
+        <noscript>
+          <style>{`.reveal,.stagger>*{opacity:1!important;filter:none!important;transform:none!important}`}</style>
+        </noscript>
+      </head>
       <body className="grain min-h-dvh bg-ink-950 antialiased">
         <JsonLd data={[medicalBusinessSchema(), webSiteSchema()]} />
         <ScrollProgress />

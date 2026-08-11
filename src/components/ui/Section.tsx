@@ -104,11 +104,7 @@ export function SectionHeading({
             <Eyebrow align={align}>{eyebrow}</Eyebrow>
           </Reveal>
         )}
-        <Reveal delay={0.06}>
-          <h2 className={cn(titleSize, "font-semibold leading-[1.03]")}>
-            {title}
-          </h2>
-        </Reveal>
+        <h2 className={cn(titleSize, "font-semibold leading-[1.03]")}>{title}</h2>
         {lead && (
           <Reveal delay={0.12}>
             <p

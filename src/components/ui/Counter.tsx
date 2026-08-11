@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "motion/react";
+import { useReducedMotion } from "@/lib/hooks";
 
 export function Counter({
   value,
@@ -17,9 +17,27 @@ export function Counter({
   className?: string;
 }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const [inView, setInView] = useState(false);
   const reduce = useReducedMotion();
   const [display, setDisplay] = useState(0);
+
+  // Local observer rather than motion's useInView, so a stat band doesn't pull
+  // the animation runtime into a route that needs nothing else from it.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setInView(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "-60px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!inView || reduce) return;

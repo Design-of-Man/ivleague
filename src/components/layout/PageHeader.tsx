@@ -2,7 +2,6 @@ import type { ReactNode } from "react";
 import { Aurora, GridBackdrop, EdgeGlow } from "@/components/ui/Backdrop";
 import { Breadcrumbs } from "@/components/ui/Bits";
 import { Eyebrow } from "@/components/ui/Section";
-import { Reveal } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
 
 export function PageHeader({
@@ -48,9 +47,7 @@ export function PageHeader({
 
       <div className="shell relative">
         {trail && (
-          <Reveal direction="none" duration={0.5}>
-            <Breadcrumbs trail={trail} className="mb-8" />
-          </Reveal>
+          <Breadcrumbs trail={trail} className="mb-8" />
         )}
 
         <div
@@ -61,25 +58,26 @@ export function PageHeader({
         >
           <div className={cn("flex flex-col gap-6", aside && "lg:max-w-3xl")}>
             {eyebrow && (
-              <Reveal direction="none" duration={0.55}>
-                <Eyebrow>{eyebrow}</Eyebrow>
-              </Reveal>
+              <Eyebrow>{eyebrow}</Eyebrow>
             )}
-            <Reveal delay={0.05}>
-              <h1 className={cn(titleSize, "font-semibold leading-[1.02]")}>{title}</h1>
-            </Reveal>
+            {/*
+              Not wrapped in a Reveal. On every interior template this h1 is the
+              LCP element, and a reveal starts at opacity 0 — which means LCP
+              can't fire until the IntersectionObserver runs after hydration.
+              Measured cost of getting this wrong: +1.2s LCP. The heading paints
+              from the server HTML; everything around it can arrive late.
+            */}
+            <h1 className={cn(titleSize, "font-semibold leading-[1.02]")}>{title}</h1>
             {lead && (
-              <Reveal delay={0.12}>
-                <p className="max-w-[46rem] text-lead leading-relaxed text-ink-300">{lead}</p>
-              </Reveal>
+              <p className="max-w-[46rem] text-lead leading-relaxed text-ink-300">
+                {lead}
+              </p>
             )}
-            {children && <Reveal delay={0.18}>{children}</Reveal>}
+            {children}
           </div>
 
           {aside && (
-            <Reveal delay={0.22} direction="left" className="lg:shrink-0">
-              {aside}
-            </Reveal>
+            <div className="lg:shrink-0">{aside}</div>
           )}
         </div>
       </div>

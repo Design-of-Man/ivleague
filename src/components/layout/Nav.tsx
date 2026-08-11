@@ -2,22 +2,25 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { AnimatePresence, motion, useScroll, useMotionValueEvent } from "motion/react";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Logo } from "@/components/ui/Logo";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import { navigation, site, getOpenState } from "@/content/site";
+import { useScrolledPast } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
+/**
+ * The header renders on every route, so it imports no animation library.
+ * The mega menu and the mobile drawer stay mounted and are shown or hidden
+ * with CSS transitions plus `inert`, which is cheaper than mount/unmount
+ * animation and keeps hidden panels out of the tab order and the a11y tree.
+ */
 export function Nav() {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
+  const scrolled = useScrolledPast(24);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const { scrollY } = useScroll();
-
-  useMotionValueEvent(scrollY, "change", (y) => setScrolled(y > 24));
 
   // Close everything on navigation. Adjusting state during render (rather than
   // in an effect) avoids a frame where the drawer is still open on the new page.
@@ -73,14 +76,17 @@ export function Nav() {
 
       <header
         className={cn(
-          "fixed inset-x-0 z-50 transition-[background-color,backdrop-filter,border-color,box-shadow,top] duration-500 ease-[var(--ease-out-expo)]",
+          "fixed inset-x-0 z-60 transition-[background-color,backdrop-filter,border-color,box-shadow,top] duration-500 ease-[var(--ease-out-expo)]",
           scrolled
             ? "top-0 border-b border-white/8 bg-ink-950/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.9)]"
             : "top-0 border-b border-transparent lg:top-9",
         )}
         onMouseLeave={hoverClose}
       >
-        <nav className="shell-wide flex h-18 items-center justify-between gap-6" aria-label="Primary">
+        <nav
+          className="shell-wide flex h-18 items-center justify-between gap-6"
+          aria-label="Primary"
+        >
           <Link
             href="/"
             className="relative z-10 shrink-0 transition-opacity hover:opacity-85"
@@ -92,6 +98,7 @@ export function Nav() {
           <ul className="hidden items-center gap-1 lg:flex">
             {navigation.map((item) => {
               const hasMenu = Boolean(item.children?.length);
+              const active = isActive(item.href);
               return (
                 <li
                   key={item.label}
@@ -101,10 +108,8 @@ export function Nav() {
                   <Link
                     href={item.href}
                     className={cn(
-                      "relative flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[14px] font-medium transition-colors duration-300",
-                      isActive(item.href)
-                        ? "text-teal-300"
-                        : "text-ink-200 hover:text-ink-50",
+                      "relative flex items-center gap-1.5 rounded-full px-3.5 py-3 text-[14px] font-medium transition-colors duration-300",
+                      active ? "text-teal-300" : "text-ink-200 hover:text-ink-50",
                     )}
                     aria-expanded={hasMenu ? openMenu === item.label : undefined}
                   >
@@ -128,13 +133,15 @@ export function Nav() {
                         />
                       </svg>
                     )}
-                    {isActive(item.href) && (
-                      <motion.span
-                        layoutId="nav-active"
-                        className="absolute inset-0 -z-10 rounded-full bg-teal-400/10 ring-1 ring-inset ring-teal-400/20"
-                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                      />
-                    )}
+                    <span
+                      aria-hidden="true"
+                      className={cn(
+                        "absolute inset-0 -z-10 rounded-full ring-1 ring-inset transition-all duration-400 ease-[var(--ease-out-expo)]",
+                        active
+                          ? "bg-teal-400/10 opacity-100 ring-teal-400/20"
+                          : "bg-transparent opacity-0 ring-transparent",
+                      )}
+                    />
                   </Link>
                 </li>
               );
@@ -156,7 +163,7 @@ export function Nav() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="relative z-60 grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.04] lg:hidden"
+            className="relative grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.04] lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -178,110 +185,102 @@ export function Nav() {
         </nav>
 
         {/* -------------------------- Mega menu ---------------------------- */}
-        <AnimatePresence>
-          {openMenu && (
-            <motion.div
-              initial={{ opacity: 0, y: -8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-x-0 top-full hidden lg:block"
-              onMouseEnter={() => hoverOpen(openMenu)}
-            >
-              <div className="shell-wide pt-2">
-                <MegaPanel label={openMenu} />
+        {navigation
+          .filter((item) => item.children?.length)
+          .map((item) => {
+            const open = openMenu === item.label;
+            return (
+              <div
+                key={item.label}
+                inert={!open}
+                className={cn(
+                  "absolute inset-x-0 top-full hidden transition-[opacity,transform] duration-300 ease-[var(--ease-out-expo)] lg:block",
+                  open
+                    ? "translate-y-0 opacity-100"
+                    : "pointer-events-none -translate-y-2 opacity-0",
+                )}
+                onMouseEnter={() => hoverOpen(item.label)}
+              >
+                <div className="shell-wide pt-2">
+                  <MegaPanel label={item.label} />
+                </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            );
+          })}
       </header>
 
       {/* --------------------------- Mobile drawer ------------------------- */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-55 lg:hidden"
-          >
-            <div
-              className="absolute inset-0 bg-ink-950/92 backdrop-blur-xl"
-              onClick={() => setMobileOpen(false)}
-            />
-            <motion.div
-              initial={{ x: "100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "100%" }}
-              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="absolute inset-y-0 right-0 flex w-full max-w-[26rem] flex-col overflow-y-auto border-l border-white/8 bg-ink-900 pb-8 pt-24"
-            >
-              <div className="flex flex-col gap-1 px-6">
-                {navigation.map((item, i) => (
-                  <motion.div
-                    key={item.label}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: 0.1 + i * 0.045,
-                      duration: 0.5,
-                      ease: [0.16, 1, 0.3, 1],
-                    }}
-                  >
-                    <Link
-                      href={item.href}
-                      className={cn(
-                        "block border-b border-white/6 py-3.5 font-display text-[22px] font-medium tracking-tight transition-colors",
-                        isActive(item.href) ? "text-teal-300" : "text-ink-50",
-                      )}
-                    >
-                      {item.label}
-                    </Link>
-                    {item.children && (
-                      <div className="grid gap-0.5 pb-2 pt-2">
-                        {item.children.slice(0, 6).map((c) => (
-                          <Link
-                            key={c.href}
-                            href={c.href}
-                            className="py-1.5 text-[14px] text-ink-400 transition-colors hover:text-teal-300"
-                          >
-                            {c.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="mt-8 flex flex-col gap-3 px-6">
-                <ButtonLink href="/contact#inquiry" size="lg" className="w-full">
-                  Become a patient
-                  <ArrowGlyph />
-                </ButtonLink>
-                <ButtonLink
-                  href={site.contact.phoneHref}
-                  variant="secondary"
-                  size="lg"
-                  className="w-full"
-                >
-                  <PhoneGlyph />
-                  {site.contact.phone}
-                </ButtonLink>
-              </div>
-
-              <div className="mt-auto px-6 pt-10 text-[13px] leading-relaxed text-ink-400">
-                <p className="font-medium text-ink-200">{site.address.street}</p>
-                <p>
-                  {site.address.city}, {site.address.region} {site.address.postalCode}
-                </p>
-                <p className="mt-3">Mon–Fri 9–6 · Sat–Sun 9–1</p>
-              </div>
-            </motion.div>
-          </motion.div>
+      <div
+        inert={!mobileOpen}
+        className={cn(
+          "fixed inset-0 z-55 transition-opacity duration-300 lg:hidden",
+          mobileOpen ? "opacity-100" : "pointer-events-none opacity-0",
         )}
-      </AnimatePresence>
+      >
+        <div
+          className="absolute inset-0 bg-ink-950/92 backdrop-blur-xl"
+          onClick={() => setMobileOpen(false)}
+        />
+        <div
+          className={cn(
+            "absolute inset-y-0 right-0 flex w-full max-w-[26rem] flex-col overflow-y-auto border-l border-white/8 bg-ink-900 pb-8 pt-24 transition-transform duration-500 ease-[var(--ease-out-expo)]",
+            mobileOpen ? "translate-x-0" : "translate-x-full",
+          )}
+        >
+          <div className="flex flex-col gap-1 px-6">
+            {navigation.map((item) => (
+              <div key={item.label}>
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "block border-b border-white/6 py-3.5 font-display text-[22px] font-medium tracking-tight transition-colors",
+                    isActive(item.href) ? "text-teal-300" : "text-ink-50",
+                  )}
+                >
+                  {item.label}
+                </Link>
+                {item.children && (
+                  <div className="grid gap-0.5 pb-2 pt-2">
+                    {item.children.slice(0, 6).map((c) => (
+                      <Link
+                        key={c.href}
+                        href={c.href}
+                        className="py-1.5 text-[14px] text-ink-400 transition-colors hover:text-teal-300"
+                      >
+                        {c.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3 px-6">
+            <ButtonLink href="/contact#inquiry" size="lg" className="w-full">
+              Become a patient
+              <ArrowGlyph />
+            </ButtonLink>
+            <ButtonLink
+              href={site.contact.phoneHref}
+              variant="secondary"
+              size="lg"
+              className="w-full"
+            >
+              <PhoneGlyph />
+              {site.contact.phone}
+            </ButtonLink>
+          </div>
+
+          <div className="mt-auto px-6 pt-10 text-[13px] leading-relaxed text-ink-400">
+            <p className="font-medium text-ink-200">{site.address.street}</p>
+            <p>
+              {site.address.city}, {site.address.region} {site.address.postalCode}
+            </p>
+            <p className="mt-3">Mon–Fri 9–6 · Sat–Sun 9–1</p>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

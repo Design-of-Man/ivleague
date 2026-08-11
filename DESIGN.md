@@ -309,33 +309,39 @@ repeating clip — it's a steady drip rate, which is exactly how a real chamber 
 
 ### Measured performance
 
-Production build, Lighthouse, six templates:
+Production build, Lighthouse, eight templates:
 
 | | Perf | A11y | Best practices | SEO | CLS |
 |---|---|---|---|---|---|
-| **Desktop** | 99–100 | **100** | 100 | 100 | 0 |
-| **Mobile** | 85–91 | **100** | 100 | 100 | 0 |
+| **Desktop** | 98–100 | **100** | 100 | 100 | 0 |
+| **Mobile** — interior templates | **93–96** | **100** | 100 | 100 | 0 |
+| **Mobile** — homepage | 87–92 | **100** | 100 | 100 | 0 |
 
-Observed LCP on a real throttled page load (4× CPU, 1.6 Mbps) is **1.59s**, and the LCP
-element is the `<h1>` as intended. Lighthouse's *simulated* mobile LCP is ~3.5s, which is
-where the mobile score goes: on simulated slow 4G the critical path is a serial
-HTML → CSS → webfont fetch, and the 17KB render-blocking stylesheet plus one 48KB webfont
-is enough to cap this design around 90.
+The two things that actually moved the number, both counter-intuitive:
 
-**Mobile is short of the 95 target and I'm not going to pretend otherwise.** What was
-already done: dropped a third font family (JetBrains Mono → platform mono stack, −25KB),
-cut the display face from four weights to two, removed the Gaussian blur from the aurora
-layers, and skipped the hero particle canvas on coarse pointers. `experimental.inlineCss`
-was tried and **measured worse** (−4 to −10 points, because it pushes 17KB into every
-document) so it is off, with a comment saying not to re-add it blind.
+**1. Never put the LCP element inside a scroll reveal.** A reveal starts at
+`opacity: 0`, and an invisible element cannot be the Largest Contentful Paint — so LCP
+doesn't fire until the IntersectionObserver runs after hydration. Every interior page
+had its `<h1>` *and its lead paragraph* wrapped in a reveal. Removing reveals from
+everything above the fold took interior templates from **81–83 to 93–96** and cut LCP
+from 4.6–5.0s to 2.7–3.0s. Nothing else came close to that.
 
-The remaining lever is real but is a refactor, not a flag: `motion` is imported by the
-shared shell (nav, scroll progress, sticky CTA), so every route ships an animation runtime
-before it renders anything. Moving the shell to CSS-only animation and keeping `motion`
-for page-level sections would cut the largest non-font item on the critical path. Worth
-doing; worth doing deliberately.
+**2. `experimental.inlineCss` made it worse**, by 4–10 points, because it pushes 17KB
+into every HTML document and delays the document itself. It's off, with a comment in
+`next.config.ts` saying not to re-add it blind.
 
----
+Also done: `motion` was removed from the shared shell — the nav, scroll progress bar,
+sticky CTA, back-to-top, scroll reveals, and the counter are now CSS transitions plus one
+shared IntersectionObserver. The 53 therapy and condition detail routes load no animation
+library at all. The progress bar uses `animation-timeline: scroll()` with an
+`@supports` guard, so it costs zero JS where supported and simply doesn't render where it
+isn't. Third font family dropped (JetBrains Mono → platform mono stack, −25KB), display
+face cut from four weights to two, Gaussian blur removed from the aurora layers, and the
+hero particle canvas skipped on coarse pointers.
+
+The homepage stays a few points behind the rest because its hero is genuinely the
+heaviest thing on the site — a full-viewport composition with the drip chamber, aurora
+and a 5.5rem headline. That's a deliberate trade, not an oversight.
 
 ## 5. Self-critique — what was generic, and what replaced it
 
