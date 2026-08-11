@@ -44,22 +44,37 @@ Renders designed placeholder cards until credentials exist. Set `INSTAGRAM_ACCES
 change. **Confirm the handle** — `@ivleagueinfusions` in `src/content/site.ts` is
 inferred, not verified.
 
-### 6. Fax number — `src/content/site.ts` → `contact.fax`
+### 6. Payer logos — `src/components/ui/PayerLogos.tsx`
+The twelve carrier marks on the insurance wall and in the footer marquee are
+**original SVG interpretations drawn for this build** — recognisable silhouettes in
+each brand's colour, not the carriers' official trademark files. Two things before
+launch:
+
+1. Replace them with the real logo assets (every carrier publishes a brand kit).
+2. Confirm IV League is permitted to display each mark. Most payer contracts allow
+   "we accept" usage, but several — UnitedHealthcare and Aetna in particular — require
+   a signed brand-usage request first. Cherry is a vendor, not a payer, and has its own
+   partner-marketing terms.
+
+The `payers` array is the only place to edit; the wall, the footer marquee and the
+grayscale-to-colour hover all read from it.
+
+### 7. Fax number — `src/content/site.ts` → `contact.fax`
 `(804) 566-9020` is a **placeholder**. It appears on the providers page and the contact
 page as a referral destination. Replace or remove.
 
-### 7. Legal documents — `src/content/legal.ts`
+### 8. Legal documents — `src/content/legal.ts`
 Privacy Policy, HIPAA Notice of Privacy Practices, Terms of Use, Accessibility
 Statement. These are **templates, not legal advice.** The HIPAA notice in particular has
 content requirements set by 45 CFR § 164.520 and must be reviewed by counsel and the
 practice's Privacy Officer, and must match the notice posted in the office.
 Effective dates are set to August 1, 2026 — change them.
 
-### 8. Founding year and milestones — `src/content/practice.ts` → `milestones`
+### 9. Founding year and milestones — `src/content/practice.ts` → `milestones`
 The 2021 founding date and the year-by-year narrative are 🟡 **invented scaffolding**.
 Confirm or replace. Delete the section rather than publish an inaccurate history.
 
-### 9. Homepage stats — `src/content/site.ts` → `stats`
+### 10. Homepage stats — `src/content/site.ts` → `stats`
 `12,000+ infusions`, `30+ therapies`, `48hr benefits check`, `5.0 rating`. Only the
 therapy count is derived from real data. **The other three are illustrative.** Any
 number stated publicly should be one the practice can defend.

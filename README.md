@@ -3,7 +3,7 @@
 Website for [IV League Infusions](https://ivlinfusions.com) — an outpatient infusion
 center in Midlothian, Virginia.
 
-Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Motion · Vercel.
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Vercel.
 
 **Read [`CONTENT-REVIEW.md`](./CONTENT-REVIEW.md) before launch.** It lists everything
 that is a placeholder and must be replaced, and everything that is proposed and needs the
@@ -54,6 +54,11 @@ typed, so a bad edit fails the build rather than the page.
 | `practice.ts` | Intake steps, amenities, differentiators, insurance, FAQs, testimonials, provider copy |
 | `legal.ts` | Privacy, HIPAA notice, terms, accessibility |
 
+Payer logos live in `src/components/ui/PayerLogos.tsx` as a single `payers` array —
+the insurance wall, the footer marquee and the hover behaviour all read from it.
+**They are original interpretations, not official trademark files**; see
+`CONTENT-REVIEW.md` before launch.
+
 Adding a therapy is one object in `therapies.ts`: the detail page, the directory entry,
 the specialty count, the sitemap entry and the cross-links from related conditions all
 follow automatically.
@@ -84,7 +89,7 @@ locations table, the footer and the `openingHoursSpecification` in JSON-LD.
 /sitemap.xml  /robots.txt  /manifest.webmanifest
 ```
 
-75 pages, 71 of them prerendered as static HTML.
+76 pages, 72 of them prerendered as static HTML.
 
 ## Notable implementation details
 

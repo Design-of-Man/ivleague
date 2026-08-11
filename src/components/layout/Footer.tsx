@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
-import { Marquee } from "@/components/ui/Marquee";
+import { LogoMarquee } from "@/components/sections/LogoWall";
 import { site, footerNav } from "@/content/site";
-import { insurancePlans } from "@/content/practice";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -16,19 +15,9 @@ export function Footer() {
         className="pointer-events-none absolute inset-x-0 -bottom-64 h-[36rem] bg-[radial-gradient(ellipse_60%_50%_at_50%_100%,rgba(31,205,192,0.13),transparent_70%)]"
       />
 
-      {/* Insurance marquee */}
-      <div className="relative border-b border-white/6 py-6">
-        <Marquee speed={58} className="[--gap:1rem]">
-          {insurancePlans.map((p) => (
-            <span
-              key={p}
-              className="shrink-0 px-6 font-display text-[15px] font-medium tracking-tight text-ink-500 transition-colors duration-300 hover:text-teal-300"
-            >
-              {p}
-            </span>
-          ))}
-          <span className="shrink-0 px-6 text-[15px] font-medium text-ink-600">·</span>
-        </Marquee>
+      {/* Payer logo marquee */}
+      <div className="relative border-b border-white/6 py-7">
+        <LogoMarquee speed={64} />
       </div>
 
       {/* CTA */}
