@@ -9,6 +9,8 @@ plays once and holds. Driven by `src/components/sections/ScrollHero.tsx`.
 | `hero-infusion-1080.mp4` | 3.0 MB | `min-width: 1024px` |
 | `hero-infusion.mp4` | 1.8 MB | everything else, and the h264 default |
 | `hero-infusion.webm` | 820 KB | VP9 fallback. See the codec note below. |
+| `hero-intro-portrait.mp4` | 980 KB | The phone intro. Portrait, 5.6s. |
+| `hero-intro-portrait.webm` | 316 KB | VP9 fallback for the same. |
 | `hero-infusion-{640,960,1280,1920,2560}.jpg` | 23–133 KB | Poster ladder, via `srcset`. |
 | `hero-infusion.jpg` | 54 KB | Copy of the 1280 rung, for a bare `src`. |
 
@@ -84,6 +86,42 @@ quantisation, so the biggest file does not need the lowest CRF.
 - **Do not pass `-level`.** Pinning it below what the stream needs still
   encodes, but stamps a level the stream exceeds, and the result plays in
   software and fails on a hardware decoder. Let x264 write the truth.
+
+## The phone intro
+
+On a phone's first visit of a session the film plays full-screen over the hero
+and the copy phases in when it ends. That is a separate portrait cut, not the
+16:9 file scaled up, because `object-cover` fits a 16:9 plate to a 9:19.5
+viewport by height and shows only the middle quarter of its width — the bag,
+with the whole splash ring cropped away.
+
+```bash
+ffmpeg -i slow_master.mp4 -an -t 5.6 \
+  -vf "crop=406:720:438:0,scale=812:1440:${SWS},cas=strength=0.42,format=yuv420p" \
+  -c:v libx264 -crf 23 -preset veryslow -profile:v high \
+  -x264-params "$X264" -pix_fmt yuv420p -movflags +faststart \
+  hero-intro-portrait.mp4
+```
+
+9:16 of the source, centred on the mark, full source height so the bag falls in
+from the top. The ring runs off the sides, which is unavoidable in portrait and
+reads as being close to the action.
+
+**5.6s, not the full 11s.** The cut ends as the bag settles flat with the ring
+closed around it. Everything after that is slow ripple, and it is time a visitor
+spends looking at no words.
+
+This file *replaces* the 16:9 one on a phone rather than adding to it — the band
+under the copy is a still, and only a viewport at `lg` and up mounts the
+full-bleed loop. Net effect is that a phone downloads 980 KB instead of 1.8 MB,
+and the homepage measured 91 -> 94 on mobile after the intro was added.
+
+The sequencing lives in three places that have to stay in step: the inline
+script in `src/app/layout.tsx` (decides, pre-paint, whether the intro runs),
+`.hero-copy` in `globals.css` (hides and then reveals the copy), and the `intro`
+state in `ScrollHero.tsx`. Every failure path resolves to the copy being
+visible — no JS, a refused autoplay, a decode error, a stalled start, or a
+hydration failure.
 
 ## Why there is also a webm
 

@@ -1095,3 +1095,46 @@ main > div > section:nth-of-type(n + 3) {
     margin: 16mm;
   }
 }
+
+/* ---------------------------------------------------------------------------
+ * Phone hero intro
+ *
+ * On a phone's first visit of a session the film plays over the hero and the
+ * copy phases in when it ends. The decision has to be made before the hero
+ * paints — hydration is far too late, and hiding the copy after it has already
+ * shown is worse than not hiding it at all — so an inline script in the
+ * document sets `data-hero-intro="run"` on <html> and this rule keys off it.
+ *
+ * Everything degrades toward the copy being visible: no JS means the attribute
+ * is never set, the script removes it again on a timer if React never gets
+ * there, and reduced motion opts out below.
+ * ------------------------------------------------------------------------- */
+@keyframes hero-copy-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+:root[data-hero-intro="run"] .hero-copy {
+  opacity: 0;
+}
+
+/* An animation's values beat normal declarations for the properties it
+ * animates, so this releases the copy whatever the attribute above is doing. */
+:root .hero-copy[data-revealed="true"] {
+  animation: hero-copy-in 800ms var(--ease-out-expo) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root[data-hero-intro="run"] .hero-copy {
+    opacity: 1;
+  }
+  :root .hero-copy[data-revealed="true"] {
+    animation: none;
+  }
+}

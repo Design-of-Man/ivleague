@@ -1,6 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
 import ReactDOM from "react-dom";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import { useReducedMotion } from "@/lib/hooks";
@@ -10,6 +16,27 @@ const POSTER = "/media/hero-infusion.jpg"; // = the 1280 rung, for the `poster` 
 const POSTER_SET = [640, 960, 1280, 1920, 2560]
   .map((w) => `/media/hero-infusion-${w}.jpg ${w}w`)
   .join(", ");
+
+/** How long to wait for the intro to start before giving up on it. */
+const INTRO_START_BUDGET = 2500;
+/** Backstop in case `ended` never fires (paused off-screen, decoder stall). */
+const INTRO_MAX = 9000;
+const INTRO_SEEN = "ivl-hero-intro";
+
+/**
+ * Whether the document asked for the intro. Read through
+ * `useSyncExternalStore` rather than an effect: the value lives outside React
+ * (an attribute the inline script set before hydration), and this is the hook
+ * that models exactly that — server snapshot false, client snapshot the real
+ * attribute, no cascading render and no hydration mismatch.
+ *
+ * It never changes while the intro is running, so there is nothing to
+ * subscribe to.
+ */
+const noSubscribe = () => () => {};
+const readIntroFlag = () =>
+  document.documentElement.dataset.heroIntro === "run";
+const noIntroOnServer = () => false;
 
 /**
  * Hero: an IV bag meeting still water, in slow motion. Full-bleed behind the
@@ -52,7 +79,86 @@ export function ScrollHero() {
   const reduce = useReducedMotion();
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const introRef = useRef<HTMLVideoElement>(null);
   const [armed, setArmed] = useState(false);
+
+  // The decision is made by the inline script in the document, not here: it
+  // has to be taken before the hero paints, and hydration is far too late.
+  // `null` means there is no intro on this load — the desktop case, a repeat
+  // visit in the same session, reduced motion, or a slow connection.
+  const introWanted = useSyncExternalStore(
+    noSubscribe,
+    readIntroFlag,
+    noIntroOnServer,
+  );
+  const [introEnded, setIntroEnded] = useState(false);
+  const intro: "run" | "done" | null = !introWanted
+    ? null
+    : introEnded
+      ? "done"
+      : "run";
+
+  // The phone gets the intro film and nothing else; the band underneath is a
+  // still. Only a wide viewport mounts the full-bleed loop, which is how a
+  // phone avoids downloading both.
+  const [wide, setWide] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const sync = () => setWide(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+
+  // Deliberately leaves `data-hero-intro` on <html>. Removing it here would
+  // reveal the copy through the CSS a frame before React marks it revealed,
+  // which is a visible pop; the reveal animation overrides that rule anyway,
+  // because an animation's values beat normal declarations. The inline
+  // script's own timer clears the attribute later as a backstop.
+  const endIntro = useCallback(() => {
+    setIntroEnded(true);
+    introRef.current?.pause();
+    try {
+      sessionStorage.setItem(INTRO_SEEN, "seen");
+    } catch {
+      /* private mode; the intro simply runs again next load */
+    }
+  }, []);
+
+  // The intro is the one piece of film that is allowed on the critical path,
+  // because it *is* the content until it finishes. Everything else about it is
+  // bounded: if it has not started within the budget it is abandoned, and if
+  // `ended` never arrives the backstop releases the copy anyway. There is no
+  // path where the headline stays hidden because a video misbehaved.
+  useEffect(() => {
+    if (intro !== "run") return;
+    const v = introRef.current;
+    if (!v) return;
+
+    let started = false;
+    const startBy = window.setTimeout(() => {
+      if (!started) endIntro();
+    }, INTRO_START_BUDGET);
+    const hardStop = window.setTimeout(endIntro, INTRO_MAX);
+    const onPlaying = () => {
+      started = true;
+      v.setAttribute("data-ready", "true");
+    };
+
+    v.addEventListener("playing", onPlaying);
+    v.addEventListener("ended", endIntro);
+    v.addEventListener("error", endIntro);
+    v.play().catch(endIntro);
+
+    return () => {
+      window.clearTimeout(startBy);
+      window.clearTimeout(hardStop);
+      v.removeEventListener("playing", onPlaying);
+      v.removeEventListener("ended", endIntro);
+      v.removeEventListener("error", endIntro);
+    };
+  }, [intro, endIntro]);
+
   const show = !reduce && armed;
 
   useEffect(() => {
@@ -146,7 +252,7 @@ export function ScrollHero() {
           className="absolute inset-0 h-full w-full object-cover"
         />
 
-        {show && (
+        {show && wide && (
           <video
             ref={videoRef}
             muted
@@ -227,7 +333,10 @@ export function ScrollHero() {
       {/* Tighter vertically on a phone than on a desktop, because here the copy
           shares the screen with the band rather than floating in the middle of
           a full-height plate. */}
-      <div className="shell-wide relative w-full pb-6 pt-[5.5rem] sm:pb-14 sm:pt-28 lg:py-32">
+      <div
+        className="hero-copy shell-wide relative w-full pb-6 pt-[5.5rem] sm:pb-14 sm:pt-28 lg:py-32"
+        data-revealed={intro === "done" ? "true" : undefined}
+      >
         <div className="max-w-[46rem]">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/85 py-1.5 pl-2 pr-4 ring-1 ring-inset ring-ink-950/10">
             <span className="relative flex h-4 w-4 items-center justify-center">
@@ -301,6 +410,36 @@ export function ScrollHero() {
           </ul>
         </div>
       </div>
+
+      {/* ------------------------------ Phone intro ---------------------------- */}
+      {/*
+        Plays over the hero on a phone's first visit of the session, then
+        dissolves as the copy phases in. A separate portrait cut, because a
+        16:9 plate scaled to fill a 9:19.5 screen shows only the middle quarter
+        of its width — the bag with the whole splash ring cropped away.
+
+        It sits under the nav rather than over it, and only covers the hero, so
+        scrolling past it works normally at any point.
+      */}
+      {intro && (
+        <div
+          aria-hidden="true"
+          data-state={intro}
+          className="absolute inset-0 z-30 bg-white transition-opacity duration-700 ease-[var(--ease-out-expo)] data-[state=done]:pointer-events-none data-[state=done]:opacity-0 lg:hidden"
+        >
+          <video
+            ref={introRef}
+            muted
+            playsInline
+            preload="auto"
+            tabIndex={-1}
+            className="h-full w-full object-cover opacity-0 transition-opacity duration-500 [&[data-ready='true']]:opacity-100"
+          >
+            <source src="/media/hero-intro-portrait.mp4" type="video/mp4" />
+            <source src="/media/hero-intro-portrait.webm" type="video/webm" />
+          </video>
+        </div>
+      )}
     </section>
   );
 }

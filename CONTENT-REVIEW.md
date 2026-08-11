@@ -17,6 +17,45 @@ so nothing unverified reaches a patient.
 
 ## 🔴 Must be replaced before launch
 
+### 0. THE PRACTICE IS IN THE WRONG STATE — `src/content/site.ts`
+
+**Nothing else on this list matters until this is fixed.** The site is built
+throughout on Midlothian, Virginia. The client says the practice is in Delray
+(Delray Beach, FL). Every one of these is therefore wrong and is currently being
+emitted in `LocalBusiness` / `MedicalBusiness` JSON-LD, page titles, meta
+descriptions, the OG image and 53 clinical pages:
+
+| Field | Currently says | Status |
+|---|---|---|
+| `address.street` | 2949 Fox Chase Lane | 🔴 wrong |
+| `address.city` / `region` | Midlothian, VA | 🔴 wrong |
+| `address.postalCode` | 23112 | 🔴 wrong |
+| `address.neighborhood` | Brandermill | 🔴 wrong |
+| `address.geo` | 37.4407, -77.6588 | 🔴 wrong — plots in Chesterfield County, VA |
+| `address.mapsUrl` / `directionsUrl` / `embedUrl` | all three hardcode the VA address | 🔴 wrong |
+| `contact.phone` | (804) 397-6286 | 🔴 almost certainly wrong — 804 is Richmond, VA. Delray Beach is 561. |
+| `contact.fax` | (804) 566-9020 | 🔴 same |
+| `hours` | Mon–Fri 9–6, Sat–Sun 9–1 | 🟡 unverified |
+| `metadata.keywords` in `src/app/layout.tsx` | ten VA/Richmond phrases | 🔴 wrong |
+| `src/app/locations/page.tsx` | Brandermill, Woodlake, Chesterfield, Bon Air, Richmond, Powhatan, Short Pump, plus driving directions off Route 288 / Hull Street Road / Midlothian Turnpike | 🔴 wrong, all of it |
+
+Almost everything resolves from `site.ts`, so the NAP is a single edit. The
+exceptions that need editing by hand are the two files named in the table.
+
+**Do not guess any of it.** These are the details a patient uses to physically
+find a medical facility, and they are also what Google matches against the
+Google Business Profile — a wrong address in `LocalBusiness` schema does active
+harm to the local ranking it is there to help. Needed from IV League:
+
+1. Street address and suite, city, state, ZIP
+2. Phone, and fax if they publish one
+3. Opening hours
+4. The towns they actually draw patients from, for `/locations` — real ones only
+5. Whether the Google Business Profile says "IV League Infusions" or
+   "IV League Infusion Services" (see item 4 below)
+
+---
+
 ### 1. Testimonials — `src/content/practice.ts` → `testimonials`
 Five quotes, each labelled `"Placeholder — <condition> patient"`. They are
 **representative, not real**. Replace with signed, HIPAA-compliant patient statements or

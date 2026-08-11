@@ -4,7 +4,11 @@ import "./globals.css";
 
 import { Nav } from "@/components/layout/Nav";
 import { Footer } from "@/components/layout/Footer";
-import { ScrollProgress, StickyCta, BackToTop } from "@/components/layout/Chrome";
+import {
+  ScrollProgress,
+  StickyCta,
+  BackToTop,
+} from "@/components/layout/Chrome";
 import { JsonLd } from "@/components/ui/Bits";
 import { medicalBusinessSchema, webSiteSchema } from "@/lib/seo";
 import { site } from "@/content/site";
@@ -103,6 +107,37 @@ export default function RootLayout({
         </noscript>
       </head>
       <body className="grain min-h-dvh bg-ink-950 antialiased">
+        {/*
+          Decides, before the hero paints, whether the phone intro runs. It has
+          to happen here and not in the component: React hydrates long after
+          first paint, and briefly showing the headline and then hiding it is
+          worse than never hiding it.
+
+          Everything about it fails toward the copy being visible. No JS and the
+          attribute is never set. A throw anywhere — sessionStorage is
+          unavailable in some privacy modes — leaves it unset. And it removes
+          itself on a timer, so a hydration failure cannot strand the headline
+          at opacity 0.
+
+          Kept in sync with `.hero-copy` in globals.css and the `intro` state in
+          ScrollHero. The 1023px cutoff is Tailwind's `lg` breakpoint minus one.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{" +
+              'if(location.pathname!=="/")return;' +
+              "var r=document.documentElement,m=window.matchMedia;" +
+              'if(!m("(max-width:1023px)").matches)return;' +
+              'if(m("(prefers-reduced-motion: reduce)").matches)return;' +
+              "var c=navigator.connection;" +
+              'if(c&&(c.saveData||/^(slow-)?2g$|^3g$/.test(c.effectiveType||"")))return;' +
+              'if(sessionStorage.getItem("ivl-hero-intro")==="seen")return;' +
+              'r.setAttribute("data-hero-intro","run");' +
+              'setTimeout(function(){r.removeAttribute("data-hero-intro")},9000);' +
+              "}catch(e){}})()",
+          }}
+        />
         <JsonLd data={[medicalBusinessSchema(), webSiteSchema()]} />
         <ScrollProgress />
         <Nav />
