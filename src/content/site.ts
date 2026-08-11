@@ -6,7 +6,18 @@
  */
 
 export const site = {
-  name: "IV League Infusions",
+  /**
+   * "Infusion Services", not "Infusions". The practice's own logo lockup and
+   * its hero copy both use the full form, so that is what the site says and
+   * what goes into schema.org.
+   *
+   * The short form survives in the domain (ivlinfusions.com) and the Instagram
+   * handle (@ivleagueinfusions), which is where the ambiguity comes from.
+   * Worth confirming against the Google Business Profile listing before
+   * launch: the schema `name` should match GBP exactly, and a mismatch there
+   * costs local-pack visibility. See CONTENT-REVIEW.md.
+   */
+  name: "IV League Infusion Services",
   shortName: "IV League",
   legalName: "IV League Infusion Services",
   tagline: "Infusion care without the hospital.",

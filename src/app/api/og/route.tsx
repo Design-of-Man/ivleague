@@ -58,38 +58,50 @@ export async function GET(request: Request) {
           }}
         />
 
-        {/* Header */}
+        {/* Header — the practice's droplet mark and two-tier wordmark.
+            Satori has no SVG-gradient support worth relying on, so the body is
+            a flat teal; at 52px the gradient would not be visible anyway. */}
         <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-          <div
-            style={{
-              width: 52,
-              height: 52,
-              borderRadius: 9999,
-              background: `linear-gradient(140deg, #8ff1e8, ${TEAL} 45%, #068e86)`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              fontSize: 21,
-              fontWeight: 700,
-              color: INK,
-            }}
-          >
-            IV
-          </div>
+          <svg width="54" height="54" viewBox="0 0 48 48" style={{ display: "flex" }}>
+            <path
+              d="M24 2.6c0 0 15.4 16.2 15.4 26A15.4 15.4 0 0 1 8.6 28.6c0-9.8 15.4-26 15.4-26Z"
+              fill="none"
+              stroke="rgba(79,227,215,0.34)"
+              strokeWidth="1.4"
+            />
+            <path
+              d="M24 7.4c0 0 11.7 12.6 11.7 20.3A11.7 11.7 0 0 1 12.3 27.7C12.3 20 24 7.4 24 7.4Z"
+              fill={TEAL}
+            />
+            <path
+              d="M24 15.4c0 0 6.1 6.6 6.1 10.6a6.1 6.1 0 0 1-12.2 0c0-4 6.1-10.6 6.1-10.6Z"
+              fill="none"
+              stroke="#ffffff"
+              strokeWidth="1.7"
+              strokeLinejoin="round"
+            />
+          </svg>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontSize: 25, fontWeight: 600, color: "#f1f6f7" }}>
+            <span
+              style={{
+                fontSize: 25,
+                fontWeight: 700,
+                textTransform: "uppercase",
+                color: "#f1f6f7",
+              }}
+            >
               IV League
             </span>
             <span
               style={{
-                fontSize: 12,
-                letterSpacing: 5,
+                fontSize: 11,
+                letterSpacing: 4.6,
                 textTransform: "uppercase",
                 color: TEAL,
-                marginTop: 3,
+                marginTop: 4,
               }}
             >
-              Infusions
+              Infusion Services
             </span>
           </div>
         </div>

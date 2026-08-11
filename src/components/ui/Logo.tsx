@@ -1,16 +1,29 @@
 import { cn } from "@/lib/utils";
 
 /**
- * IV League mark: a droplet whose negative space forms a serif "IV",
- * set on a teal gradient. Drawn as pure SVG so it scales to a favicon
- * and to a 400px footer lockup without a raster asset.
+ * IV League Infusion Services' actual mark: a droplet with a navy outer shell,
+ * a teal body, and a white droplet outlined inside it.
+ *
+ * ⚠️ Traced from a screenshot of ivlinfusions.com, not from the client's
+ * artwork. The practice's domain is blocked by this environment's egress
+ * policy, so the real vector could not be downloaded. The proportions and
+ * colours here are read off a ~250px-wide screenshot and will be close but not
+ * exact. Drop in the original SVG or EPS before launch and delete this note —
+ * it is listed in CONTENT-REVIEW.md.
+ *
+ * Drawn as SVG rather than a raster so it scales from a 16px favicon to a
+ * 400px footer lockup, and so the shell colour can adapt: the navy that reads
+ * as authoritative on their white site disappears entirely on this one.
  */
 export function LogoMark({
   className,
   animated = false,
+  /** `onLight` renders the navy shell from the original. Default is the dark-theme treatment. */
+  onLight = false,
 }: {
   className?: string;
   animated?: boolean;
+  onLight?: boolean;
 }) {
   return (
     <svg
@@ -20,62 +33,59 @@ export function LogoMark({
       aria-hidden="true"
     >
       <defs>
-        <linearGradient id="ivl-drop" x1="8" y1="2" x2="40" y2="46">
-          <stop offset="0%" stopColor="#8ff1e8" />
-          <stop offset="42%" stopColor="#1fcdc0" />
-          <stop offset="100%" stopColor="#068e86" />
+        <linearGradient id="ivl-body" x1="12" y1="6" x2="38" y2="44">
+          <stop offset="0%" stopColor="#5fdcd2" />
+          <stop offset="45%" stopColor="#1fcdc0" />
+          <stop offset="100%" stopColor="#0b8fa8" />
         </linearGradient>
-        <linearGradient id="ivl-ring" x1="0" y1="0" x2="48" y2="48">
-          <stop offset="0%" stopColor="#4fe3d7" stopOpacity="0.85" />
-          <stop offset="60%" stopColor="#0bb2a6" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#4fe3d7" stopOpacity="0.6" />
-        </linearGradient>
-        <filter id="ivl-glow" x="-60%" y="-60%" width="220%" height="220%">
-          <feGaussianBlur stdDeviation="2.4" result="b" />
-          <feMerge>
-            <feMergeNode in="b" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
       </defs>
 
-      {/* Outer ring */}
-      <circle
-        cx="24"
-        cy="24"
-        r="22"
-        stroke="url(#ivl-ring)"
-        strokeWidth="1.5"
-        fill="none"
-      />
-
-      {/* Droplet body */}
+      {/* Outer shell. Navy on a light ground, as drawn; a teal hairline on dark,
+          where navy-on-black would simply vanish. */}
       <path
-        d="M24 7.5c0 0 12 12.4 12 20.1C36 34.9 30.6 40.5 24 40.5S12 34.9 12 27.6C12 19.9 24 7.5 24 7.5Z"
-        fill="url(#ivl-drop)"
-        filter="url(#ivl-glow)"
+        d="M24 2.6c0 0 15.4 16.2 15.4 26A15.4 15.4 0 0 1 8.6 28.6c0-9.8 15.4-26 15.4-26Z"
+        fill={onLight ? "#14293b" : "none"}
+        stroke={onLight ? "none" : "rgba(79,227,215,0.32)"}
+        strokeWidth={onLight ? 0 : 1.4}
       />
 
-      {/* Negative-space "IV" */}
-      <g fill="#04070a">
-        {/* I */}
-        <rect x="17.1" y="23.2" width="2.1" height="9.4" rx="0.7" />
-        <rect x="15.5" y="22.2" width="5.3" height="1.5" rx="0.7" />
-        <rect x="15.5" y="32.1" width="5.3" height="1.5" rx="0.7" />
-        {/* V */}
-        <path d="M23.2 22.2h2.4l3.1 7.7 3.1-7.7h2.4l-4.4 11.4h-2.2L23.2 22.2Z" />
-      </g>
+      {/* Teal body */}
+      <path
+        d="M24 7.4c0 0 11.7 12.6 11.7 20.3A11.7 11.7 0 0 1 12.3 27.7C12.3 20 24 7.4 24 7.4Z"
+        fill="url(#ivl-body)"
+      />
 
-      {/* Drip highlight */}
-      <ellipse cx="20" cy="20.5" rx="2.6" ry="3.6" fill="#e8fdfa" opacity="0.28" transform="rotate(-18 20 20.5)" />
+      {/* Inner droplet, outlined in white */}
+      <path
+        d="M24 15.4c0 0 6.1 6.6 6.1 10.6a6.1 6.1 0 0 1-12.2 0c0-4 6.1-10.6 6.1-10.6Z"
+        fill="none"
+        stroke="#ffffff"
+        strokeWidth="1.7"
+        strokeLinejoin="round"
+      />
 
       {animated && (
-        <circle cx="24" cy="24" r="22" stroke="#1fcdc0" strokeWidth="1" fill="none" className="origin-center animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]" opacity="0.5" />
+        <circle
+          cx="24"
+          cy="28"
+          r="15.4"
+          stroke="#1fcdc0"
+          strokeWidth="1"
+          fill="none"
+          opacity="0.45"
+          className="origin-center animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]"
+        />
       )}
     </svg>
   );
 }
 
+/**
+ * The full lockup. Their wordmark is two tiers: "IV LEAGUE" set large and
+ * bold over "INFUSION SERVICES" tracked out to match its width. On their white
+ * site both tiers are navy; here the second tier carries the teal so the lockup
+ * still reads as two parts on a black ground.
+ */
 export function Logo({
   className,
   compact = false,
@@ -91,7 +101,7 @@ export function Logo({
       <span className="flex flex-col leading-none">
         <span
           className={cn(
-            "font-display font-semibold tracking-[-0.04em] text-ink-50",
+            "font-display font-bold uppercase tracking-[0.02em] text-ink-50",
             compact ? "text-[15px]" : "text-[17px]",
           )}
         >
@@ -99,11 +109,13 @@ export function Logo({
         </span>
         <span
           className={cn(
-            "font-medium uppercase tracking-[0.28em] text-teal-400/80",
-            compact ? "text-[7.5px] mt-0.5" : "text-[8.5px] mt-1",
+            "font-medium uppercase text-teal-400/85",
+            compact
+              ? "mt-1 text-[6.5px] tracking-[0.2em]"
+              : "mt-1.5 text-[7.5px] tracking-[0.223em]",
           )}
         >
-          Infusions
+          Infusion Services
         </span>
       </span>
     </span>

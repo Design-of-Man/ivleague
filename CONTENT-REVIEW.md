@@ -40,28 +40,49 @@ Related: `src/content/reviewed.ts` holds the review date as a hand-edited
 constant, deliberately not a build timestamp. Bump it when someone has actually
 re-read the content, not on every deploy.
 
-### 3. Wellness and injection pricing — `src/content/wellness.ts`
+### 3. The logo, and the business name — `src/components/ui/Logo.tsx`, `src/content/site.ts`
+
+**The mark is traced from a screenshot, not from your artwork.** This build
+environment's egress policy blocks ivlinfusions.com, so the real vector could
+not be downloaded. The droplet in `LogoMark` was drawn by hand from a ~250px
+screenshot of the site header: navy outer shell, teal body, white droplet
+outlined inside. Proportions will be close but not exact. **Send the original
+SVG or EPS and it drops straight into that one component** — the header, the
+footer, the favicon set, the PWA icons and the Open Graph card all render from
+it.
+
+Also regenerate `public/favicon.ico`, `apple-icon.png`, `icon-192.png`,
+`icon-512.png` and `icon-maskable-512.png` from the real file when it arrives.
+
+**Separately: which name is correct?** Your logo lockup and your homepage copy
+both say "IV League Infusion Services". The domain and the Instagram handle say
+"IV League Infusions". The site now uses the full form everywhere, including in
+schema.org. **Check it against the Google Business Profile listing** — the
+schema `name` should match GBP exactly, and a mismatch costs local-pack
+visibility.
+
+### 4. Wellness and injection pricing — `src/content/wellness.ts`
 Every `price` is `null` and renders as "Pricing on request". Set the numbers in that one
 file and they propagate to the menu cards, the injection grid and future schema markup.
 **Do not let anyone guess these.**
 
-### 4. Interior photography — `src/app/suite/page.tsx`
+### 5. Interior photography — `src/app/suite/page.tsx`
 Six tiles render generated art with a "Photo pending" chip. Shot list, in order:
 private suite with recliner; semi-private bay; drug prep station; guest seating;
 nurses' station with sightlines; entry and parking. Landscape, 3:2, shot dark to match
 the palette. Replace `ShotArt` with `next/image`.
 
-### 5. Team bios — `src/app/about/page.tsx`
+### 6. Team bios — `src/app/about/page.tsx`
 The team section currently states that profiles are pending. Supply names, credentials,
 roles and headshots, or delete the section.
 
-### 6. Instagram feed — `src/lib/instagram.ts`
+### 7. Instagram feed — `src/lib/instagram.ts`
 Renders designed placeholder cards until credentials exist. Set `INSTAGRAM_ACCESS_TOKEN`
 (and `INSTAGRAM_USER_ID` if not `me`) and the grid switches to live posts with no code
 change. **Confirm the handle** — `@ivleagueinfusions` in `src/content/site.ts` is
 inferred, not verified.
 
-### 7. Payer logos — `src/components/ui/PayerLogos.tsx`
+### 8. Payer logos — `src/components/ui/PayerLogos.tsx`
 The twelve carrier marks on the insurance wall and in the footer marquee are
 **original SVG interpretations drawn for this build** — recognisable silhouettes in
 each brand's colour, not the carriers' official trademark files. Two things before
@@ -76,22 +97,22 @@ launch:
 The `payers` array is the only place to edit; the wall, the footer marquee and the
 grayscale-to-colour hover all read from it.
 
-### 8. Fax number — `src/content/site.ts` → `contact.fax`
+### 9. Fax number — `src/content/site.ts` → `contact.fax`
 `(804) 566-9020` is a **placeholder**. It appears on the providers page and the contact
 page as a referral destination. Replace or remove.
 
-### 9. Legal documents — `src/content/legal.ts`
+### 10. Legal documents — `src/content/legal.ts`
 Privacy Policy, HIPAA Notice of Privacy Practices, Terms of Use, Accessibility
 Statement. These are **templates, not legal advice.** The HIPAA notice in particular has
 content requirements set by 45 CFR § 164.520 and must be reviewed by counsel and the
 practice's Privacy Officer, and must match the notice posted in the office.
 Effective dates are set to August 1, 2026 — change them.
 
-### 10. Founding year and milestones — `src/content/practice.ts` → `milestones`
+### 11. Founding year and milestones — `src/content/practice.ts` → `milestones`
 The 2021 founding date and the year-by-year narrative are 🟡 **invented scaffolding**.
 Confirm or replace. Delete the section rather than publish an inaccurate history.
 
-### 11. Homepage stats — `src/content/site.ts` → `stats`
+### 12. Homepage stats — `src/content/site.ts` → `stats`
 `12,000+ infusions`, `30+ therapies`, `48hr benefits check`, `5.0 rating`. Only the
 therapy count is derived from real data. **The other three are illustrative.** Any
 number stated publicly should be one the practice can defend.
