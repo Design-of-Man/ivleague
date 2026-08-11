@@ -50,6 +50,7 @@ export function ScrollHero() {
   });
 
   const reduce = useReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [armed, setArmed] = useState(false);
   const show = !reduce && armed;
@@ -63,11 +64,13 @@ export function ScrollHero() {
       }
     ).connection;
     if (conn?.saveData) return;
-    if (conn?.effectiveType && /^(slow-)?2g$|^3g$/.test(conn.effectiveType)) return;
+    if (conn?.effectiveType && /^(slow-)?2g$|^3g$/.test(conn.effectiveType))
+      return;
 
     const arm = () => {
       const idle =
-        window.requestIdleCallback ?? ((fn: () => void) => window.setTimeout(fn, 400));
+        window.requestIdleCallback ??
+        ((fn: () => void) => window.setTimeout(fn, 400));
       idle(() => setArmed(true));
     };
     if (document.readyState === "complete") {
@@ -78,13 +81,44 @@ export function ScrollHero() {
     return () => window.removeEventListener("load", arm);
   }, [reduce]);
 
+  // Play only while the hero is actually on screen and the tab is in front.
+  // The film runs for eleven seconds, which is long enough that a visitor can
+  // scroll well past it and still be paying for the decode. Worth roughly four
+  // frames a second on a throttled CPU, and rather more of someone's battery.
   useEffect(() => {
     if (!show) return;
-    videoRef.current?.play().catch(() => {});
+    const v = videoRef.current;
+    const section = sectionRef.current;
+    if (!v || !section) return;
+
+    let onScreen = true;
+    const settle = () => {
+      if (onScreen && !document.hidden) v.play().catch(() => {});
+      else v.pause();
+    };
+
+    const io = new IntersectionObserver(
+      ([e]) => {
+        onScreen = e.isIntersecting;
+        settle();
+      },
+      { threshold: 0 },
+    );
+    io.observe(section);
+    document.addEventListener("visibilitychange", settle);
+    settle();
+
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", settle);
+    };
   }, [show]);
 
   return (
-    <section className="relative flex min-h-svh flex-col overflow-hidden bg-white lg:justify-center lg:bg-transparent">
+    <section
+      ref={sectionRef}
+      className="relative flex min-h-svh flex-col overflow-hidden bg-white lg:justify-center lg:bg-transparent"
+    >
       {/* -------------------------------- Footage ------------------------------ */}
       {/*
         Two arrangements, because a 16:9 plate and a 9:19.5 viewport cannot be
@@ -125,7 +159,9 @@ export function ScrollHero() {
                element mounts after load, it registered as the Largest
                Contentful Paint at 4.1s and cost the homepage ten points. */
             className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-700 [&[data-ready='true']]:opacity-100"
-            onPlaying={(e) => e.currentTarget.setAttribute("data-ready", "true")}
+            onPlaying={(e) =>
+              e.currentTarget.setAttribute("data-ready", "true")
+            }
           >
             <source
               src="/media/hero-infusion-1440.mp4"
@@ -193,7 +229,7 @@ export function ScrollHero() {
           a full-height plate. */}
       <div className="shell-wide relative w-full pb-6 pt-[5.5rem] sm:pb-14 sm:pt-28 lg:py-32">
         <div className="max-w-[46rem]">
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/70 py-1.5 pl-2 pr-4 ring-1 ring-inset ring-ink-950/10 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/85 py-1.5 pl-2 pr-4 ring-1 ring-inset ring-ink-950/10">
             <span className="relative flex h-4 w-4 items-center justify-center">
               <span className="absolute inline-flex h-2 w-2 rounded-full bg-teal-500 opacity-70 animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-teal-700" />

@@ -39,7 +39,7 @@ export function LocationSection() {
             />
           </div>
 
-          <div className="absolute inset-x-4 bottom-4 flex flex-col gap-3 rounded-[0.5rem] border border-white/10 bg-ink-950/85 p-4 backdrop-blur-xl sm:flex-row sm:items-center sm:justify-between">
+          <div className="absolute inset-x-4 bottom-4 flex flex-col gap-3 rounded-[0.5rem] border border-white/10 bg-ink-950/94 p-4 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <p className="text-[14px] font-medium text-ink-50">
                 {site.address.street}

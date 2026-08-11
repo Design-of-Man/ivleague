@@ -42,7 +42,7 @@ export function StickyCta() {
         show ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-24 opacity-0",
       )}
     >
-      <div className="mx-3 mb-3 grid grid-cols-2 gap-2 rounded-[0.625rem] border border-white/10 bg-ink-900/92 p-2 shadow-[0_-10px_40px_-16px_rgba(0,0,0,0.9)] backdrop-blur-xl">
+      <div className="mx-3 mb-3 grid grid-cols-2 gap-2 rounded-[0.625rem] border border-white/10 bg-ink-900/97 p-2 shadow-[0_-10px_40px_-16px_rgba(0,0,0,0.9)]">
         <a
           href={site.contact.phoneHref}
           tabIndex={show ? 0 : -1}
@@ -75,7 +75,7 @@ export function BackToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
       className={cn(
-        "no-print fixed bottom-24 right-4 z-45 hidden h-11 w-11 place-items-center rounded-full border border-white/10 bg-ink-900/90 text-ink-300 backdrop-blur-xl transition-[opacity,transform,color,border-color] duration-400 ease-[var(--ease-out-expo)] hover:border-teal-400/40 hover:text-teal-300 lg:grid lg:bottom-8",
+        "no-print fixed bottom-24 right-4 z-45 hidden h-11 w-11 place-items-center rounded-full border border-white/10 bg-ink-900/96 text-ink-300 transition-[opacity,transform,color,border-color] duration-400 ease-[var(--ease-out-expo)] hover:border-teal-400/40 hover:text-teal-300 lg:grid lg:bottom-8",
         show ? "scale-100 opacity-100" : "pointer-events-none scale-90 opacity-0",
       )}
     >

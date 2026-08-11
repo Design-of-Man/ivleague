@@ -429,11 +429,21 @@
   }
 }
 
-/* Glass panel */
+/* Panel surface for the nav dropdowns.
+ *
+ * This used to be 0.68 alpha over a 22px backdrop-filter, and it is applied to
+ * a panel that opens over the homepage hero while the film is playing. A
+ * backdrop-filter is recomputed whenever anything behind it changes, so over
+ * video that is a full re-blur of the panel's area every frame. Measured on a
+ * 4x-throttled CPU, backdrop-filter was the difference between 32fps and 59fps
+ * on this site — nothing else came close, not even the video decode. So the
+ * panel is near-opaque now and the blur is gone.
+ *
+ * The remaining backdrop-filters are all modal scrims (command palette, image
+ * lightbox, mobile drawer): transient, and what is behind them is frozen.
+ */
 @utility glass {
-  background: rgb(7 11 15 / 0.68);
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  background: rgb(7 11 15 / 0.96);
   border: 1px solid var(--color-hairline);
 }
 

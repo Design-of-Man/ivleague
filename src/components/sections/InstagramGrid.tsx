@@ -88,7 +88,7 @@ export function InstagramGrid({
 
               {/* Media-type chip */}
               {post.mediaType !== "IMAGE" && (
-                <span className="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-ink-950/60 text-ink-100 backdrop-blur-sm">
+                <span className="absolute right-3 top-3 grid h-7 w-7 place-items-center rounded-full bg-ink-950/82 text-ink-100">
                   {post.mediaType === "VIDEO" ? <PlayGlyph /> : <StackGlyph />}
                 </span>
               )}
@@ -184,7 +184,7 @@ export function InstagramGrid({
               type="button"
               onClick={close}
               aria-label="Close"
-              className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-ink-950/70 text-ink-200 backdrop-blur-sm transition-colors hover:text-teal-300"
+              className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-ink-950/88 text-ink-200 transition-colors hover:text-teal-300"
             >
               <svg
                 viewBox="0 0 16 16"
@@ -209,7 +209,7 @@ export function InstagramGrid({
               onClick={() => step(dir as 1 | -1)}
               aria-label={dir === 1 ? "Next post" : "Previous post"}
               className={cn(
-                "absolute top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-ink-950/70 text-ink-200 backdrop-blur-sm transition-colors hover:text-teal-300 lg:grid",
+                "absolute top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-ink-950/88 text-ink-200 transition-colors hover:text-teal-300 lg:grid",
                 dir === 1 ? "right-6" : "left-6",
               )}
             >

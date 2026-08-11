@@ -78,7 +78,7 @@ export function Nav() {
 
       <header
         className={cn(
-          "fixed inset-x-0 z-60 transition-[background-color,backdrop-filter,border-color,box-shadow,top] duration-500 ease-[var(--ease-out-expo)]",
+          "fixed inset-x-0 z-60 transition-[background-color,border-color,box-shadow,top] duration-500 ease-[var(--ease-out-expo)]",
           // The bar keeps its dark chrome even at the top of the page. It used
           // to be transparent until you scrolled, which was fine over a black
           // hero and invisible over a light one — the homepage hero is now a
@@ -89,7 +89,7 @@ export function Nav() {
           // is nothing behind the bar worth blurring anyway.
           "top-0 border-b",
           scrolled
-            ? "border-white/8 bg-ink-950/80 backdrop-blur-xl backdrop-saturate-150 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.9)]"
+            ? "border-white/8 bg-ink-950/95 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.9)]"
             : "border-white/[0.04] bg-ink-950 lg:top-9",
         )}
         onMouseLeave={hoverClose}

@@ -43,7 +43,7 @@ export function Marquee({
 
 export function MarqueePill({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/8 bg-white/[0.03] px-5 py-2.5 text-sm font-medium text-ink-200 backdrop-blur-sm transition-colors duration-300 hover:border-teal-400/35 hover:text-teal-200">
+    <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/8 bg-white/[0.045] px-5 py-2.5 text-sm font-medium text-ink-200 transition-colors duration-300 hover:border-teal-400/35 hover:text-teal-200">
       {children}
     </span>
   );

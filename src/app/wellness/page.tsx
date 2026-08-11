@@ -126,7 +126,7 @@ export default function WellnessPage() {
                           {d.ingredients.map((ing) => (
                             <li
                               key={ing}
-                              className="rounded-full border border-white/10 bg-ink-950/40 px-3 py-1.5 text-[12px] text-ink-200 backdrop-blur-sm"
+                              className="rounded-full border border-white/10 bg-ink-950/70 px-3 py-1.5 text-[12px] text-ink-200"
                             >
                               {ing}
                             </li>

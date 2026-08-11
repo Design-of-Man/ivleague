@@ -104,7 +104,7 @@ export function TherapyExplorer() {
   return (
     <div>
       {/* --------------------------- Filter bar --------------------------- */}
-      <div className="sticky top-[4.4rem] z-30 -mx-5 mb-10 border-y border-white/8 bg-ink-950/88 px-5 py-4 backdrop-blur-xl sm:-mx-8 sm:px-8">
+      <div className="sticky top-[4.4rem] z-30 -mx-5 mb-10 border-y border-white/8 bg-ink-950/96 px-5 py-4 sm:-mx-8 sm:px-8">
         <div className="flex flex-col gap-4">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <div className="relative flex-1">

@@ -74,7 +74,7 @@ export default function SuitePage() {
                   <p className="text-[14px] font-medium text-ink-50">{shot.label}</p>
                   <p className="mt-0.5 text-[12px] text-ink-400">{shot.note}</p>
                 </figcaption>
-                <span className="absolute right-4 top-4 rounded-full border border-white/12 bg-ink-950/60 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-400 backdrop-blur-sm">
+                <span className="absolute right-4 top-4 rounded-full border border-white/12 bg-ink-950/82 px-2.5 py-1 font-mono text-[9px] uppercase tracking-[0.14em] text-ink-400">
                   Photo pending
                 </span>
               </figure>

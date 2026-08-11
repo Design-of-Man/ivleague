@@ -76,7 +76,7 @@ export function WellnessRail() {
                   {d.ingredients.slice(0, 4).map((ing) => (
                     <span
                       key={ing}
-                      className="rounded-full border border-white/10 bg-ink-950/40 px-2.5 py-1 text-[11px] text-ink-300 backdrop-blur-sm"
+                      className="rounded-full border border-white/10 bg-ink-950/70 px-2.5 py-1 text-[11px] text-ink-300"
                     >
                       {ing.split("(")[0].trim()}
                     </span>
