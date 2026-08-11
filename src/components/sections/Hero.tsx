@@ -5,7 +5,7 @@ import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { useReducedMotion } from "@/lib/hooks";
 import { Aurora, GridBackdrop, ParticleField, DripLine } from "@/components/ui/Backdrop";
-import { DripChamber } from "@/components/ui/DripChamber";
+import { HeroVideo } from "@/components/ui/HeroVideo";
 import { site } from "@/content/site";
 import { specialties } from "@/content/therapies";
 
@@ -141,11 +141,15 @@ export function Hero() {
 /* -------------------------------------------------------------------------- */
 
 /**
- * Frame for the signature element. The drip chamber sits inside an instrument
- * panel rather than bleeding across the page — contained, so it reads as an
- * object under observation rather than decorative wallpaper. The readouts are
- * the argument the hero is making (short chair time, no wait, same nurse,
- * authorization already handled) stated as data instead of adjectives.
+ * Frame for the hero film. The plate sits inside an instrument panel rather than
+ * bleeding across the page: contained, so it reads as an object under
+ * observation rather than decorative wallpaper. The readouts are the argument
+ * the hero is making (short chair time, no wait, same nurse, authorization
+ * already handled) stated as data instead of adjectives.
+ *
+ * The drip chamber this replaced now lives on /suite, which is the page about
+ * the room. It was worth keeping: 6.8KB of SVG that runs instantly on every
+ * connection, before a byte of video has moved.
  */
 function HeroConsole({ reduce }: { reduce: boolean }) {
   return (
@@ -171,14 +175,16 @@ function HeroConsole({ reduce }: { reduce: boolean }) {
             </span>
           </div>
 
-          <div className="grid gap-6 p-6 sm:grid-cols-[auto_1fr] sm:gap-8 sm:p-7">
-            {/* Signature: macro drip chamber */}
-            <div className="mx-auto sm:mx-0">
-              <DripChamber className="h-60 sm:h-72" label="Live rate · 20 gtt/mL" />
-            </div>
+          <div className="grid gap-6 p-3 sm:gap-7 sm:p-4">
+            <HeroVideo
+              src="/media/hero-infusion.mp4"
+              poster="/media/hero-infusion.jpg"
+              className="aspect-[16/10] w-full sm:aspect-[16/9]"
+              zoom={1.28}
+            />
 
             {/* Readouts */}
-            <div className="flex flex-col justify-between gap-5">
+            <div className="flex flex-col justify-between gap-5 px-3 pb-3 sm:px-4 sm:pb-4">
               <div className="grid gap-3">
                 {[
                   { k: "Therapy", v: "Vedolizumab 300 mg" },

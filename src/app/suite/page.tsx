@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/layout/PageHeader";
 import { Section, SectionHeading } from "@/components/ui/Section";
+import { DripChamber } from "@/components/ui/DripChamber";
 import { Reveal } from "@/components/ui/Reveal";
 import { AmenitiesBento } from "@/components/sections/AmenitiesBento";
 import { InstagramFeed } from "@/components/sections/InstagramFeed";
@@ -94,18 +95,27 @@ export default function SuitePage() {
       {/* ---------------------------- The standard --------------------------- */}
       <Section className="border-y border-white/8 bg-ink-900/40" tight>
         <div className="grid gap-12 lg:grid-cols-2 lg:gap-20">
-          <SectionHeading
-            eyebrow="Behind the door"
-            title={
-              <>
-                The parts you don&apos;t see
-                <br />
-                <span className="text-gradient">matter more.</span>
-              </>
-            }
-            lead="Comfort is the easy half. The other half is protocol."
-            size="sm"
-          />
+          <div>
+            <SectionHeading
+              eyebrow="Behind the door"
+              title={
+                <>
+                  The parts you don&apos;t see
+                  <br />
+                  <span className="text-gradient">matter more.</span>
+                </>
+              }
+              lead="Comfort is the easy half. The other half is protocol."
+              size="sm"
+            />
+            {/* The drip chamber the homepage hero used to carry. It belongs
+                here at least as much: this is the page about the room, and the
+                chamber is the one thing a patient looks at for four hours. */}
+            <DripChamber
+              className="mt-12 h-56 sm:h-64"
+              label="Live rate · 20 gtt/mL"
+            />
+          </div>
 
           <div className="grid gap-5">
             {[
