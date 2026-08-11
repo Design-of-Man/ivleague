@@ -42,25 +42,25 @@ const noIntroOnServer = () => false;
  * Hero: an IV bag meeting still water, in slow motion. Full-bleed behind the
  * headline on a wide screen, a band beneath it on a phone.
  *
- * The slow motion is baked into the file, not done with `playbackRate`. Halving
- * the rate of 24fps footage leaves twelve real frames a second and it judders;
- * the encode synthesises intermediate frames from motion vectors instead, so a
- * 2.5x slowdown still lands on 24 genuine frames per second.
+ * The plate is the client's own render, with their real shield lockup printed
+ * on the bag. There is no drop and no impact in it — the bag floats and the
+ * camera drifts — so nothing here is slowed down or interpolated. It is the
+ * source at native speed, trimmed to eight seconds.
  *
- * It plays once and holds, rather than looping. The clip opens on still water
- * and ends on the settled bag, so a loop would cut between two very different
- * frames — and the held last frame is the poster, byte for byte, so the film
- * comes to rest on exactly the image that was there before it started.
+ * It plays once and holds rather than looping, and the held last frame is the
+ * poster, byte for byte, so the film comes to rest on exactly the image that
+ * was there before it started and a loop can never cut on a seam.
  *
  * Sources are ordered widest first: a browser takes the first one whose
  * `media` query matches and whose codec it can decode.
  *
- * There is no 1440p tier. There was, and it was a mistake — 2560x1440 upscaled
- * 2.5x from a 1024px-wide crop carries no detail the 1080p file does not, and a
- * stream that size with a deep reference buffer is exactly what drops out of a
- * hardware decoder's fast path and into software. Both tiers are encoded with
- * ref=3/bframes=3 for the same reason. Encoder effort stays high; that is free
- * at playback.
+ * Two encoding notes worth keeping. There is no tier above 1600x900: the crop
+ * is 1024px wide, so anything larger is spending bits on interpolated pixels,
+ * and a 1440p stream with a deep reference buffer is exactly what drops out of
+ * a hardware decoder's fast path and into software. And CRF is high (28) with
+ * no sharpening, because this plate is wall-to-wall moving caustics — at the
+ * settings the previous, mostly-flat plate wanted, it encoded to 12MB and was
+ * indistinguishable at 1:1 from the 3.5MB version.
  *
  * The film stays off the critical path. The poster is a plain `<img>` that
  * paints on the first frame, and the `<video>` is not mounted until the page
@@ -279,7 +279,7 @@ export function ScrollHero() {
             }
           >
             <source
-              src="/media/hero-infusion-1080.mp4"
+              src="/media/hero-infusion-desktop.mp4"
               type="video/mp4"
               media="(min-width: 1024px)"
             />

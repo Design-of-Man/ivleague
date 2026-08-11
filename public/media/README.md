@@ -1,120 +1,107 @@
 # Hero media
 
-The homepage hero is a slow-motion film of the bag meeting still water. It
-plays once and holds. Driven by `src/components/sections/ScrollHero.tsx`.
+The homepage hero is a film of the IV bag floating on rippling water, shot from
+above. It plays once and holds. Driven by `src/components/sections/ScrollHero.tsx`.
 
 | File | Size | Serves |
 |---|---|---|
-| `hero-infusion-1440.mp4` | 3.6 MB | `min-width: 1600px` |
-| `hero-infusion-1080.mp4` | 3.0 MB | `min-width: 1024px` |
-| `hero-infusion.mp4` | 1.8 MB | everything else, and the h264 default |
-| `hero-infusion.webm` | 820 KB | VP9 fallback. See the codec note below. |
-| `hero-intro-portrait.mp4` | 980 KB | The phone intro. Portrait, 5.6s. |
-| `hero-intro-portrait.webm` | 316 KB | VP9 fallback for the same. |
-| `hero-infusion-{640,960,1280,1920,2560}.jpg` | 23–133 KB | Poster ladder, via `srcset`. |
-| `hero-infusion.jpg` | 54 KB | Copy of the 1280 rung, for a bare `src`. |
+| `hero-infusion-desktop.mp4` | 3.5 MB | 1600x900, `min-width: 1024px` |
+| `hero-infusion.mp4` | 2.8 MB | 1280x720, everything else and the h264 default |
+| `hero-infusion.webm` | 2.3 MB | VP9 fallback. See the codec note below. |
+| `hero-intro-portrait.mp4` | 1.7 MB | 720x1280, the phone intro. 5.6s. |
+| `hero-intro-portrait.webm` | 1.2 MB | VP9 fallback for the same. |
+| `hero-infusion-{640,960,1280,1920,2560}.jpg` | 20–132 KB | Poster ladder, via `srcset`. |
+| `hero-infusion.jpg` | 52 KB | Copy of the 1280 rung, for a bare `src`. |
 
-Source is a 1280x720 24fps Higgsfield clip, 5.04s. Everything below is about
-getting the most out of that, because **no amount of local processing invents
-detail that was never captured** — 1440p here is a very good upscale, not real
-1440p, and 4K would be a bigger file showing the same information.
+**Source:** the client's own render — 1280x720, 24fps, 10.04s, with an audio
+track and an attached cover image. It carries their real shield lockup on the
+bag, which is why it replaced the previous Higgsfield plate and the traced
+droplet that was on it.
+
+Two things about it shape the whole pipeline:
+
+- **There is no drop and no impact.** The bag floats and the camera drifts for
+  all ten seconds. Nothing is slowed down or motion-interpolated — the previous
+  plate was 5s of fast action stretched 2.5x, this one is already calm. Simpler,
+  and none of `minterpolate`'s artifacts.
+- **It has three streams.** Every read needs an explicit `-map 0:0` or ffmpeg
+  muxes the mjpeg cover image in as a video stream.
 
 ## The pipeline
 
-Two stages. `tools/hero-render/README.md` has the prompt that produced the
-source; these are the scripts that turn it into what ships.
-
-### Stage A — denoise, then synthesise slow motion
+### Master — denoise only
 
 ```bash
-ffmpeg -i overhead.mp4 -an \
-  -vf "nlmeans=s=2.0:p=5:r=11,\
-minterpolate=fps=60:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:me=epzs:vsbmc=1,\
-setpts=2.5*PTS" \
-  -r 24 -c:v libx264 -crf 10 -preset medium -pix_fmt yuv420p slow_master.mp4
+ffmpeg -i source.mp4 -map 0:0 -an -vf "nlmeans=s=1.5:p=5:r=11" \
+  -c:v libx264 -crf 10 -preset medium -pix_fmt yuv420p master.mp4
 ```
 
-Three things worth keeping in that order:
+Gentle on purpose. The source is 11.4 Mbps so it is already clean; this is about
+bitrate efficiency, not rescuing grain. Push `s` much higher and the caustics —
+which are the entire texture of this shot — turn to plastic.
 
-- **Slow motion is baked in, not `playbackRate`.** Halving the rate of 24fps
-  footage leaves twelve real frames a second and it judders. `minterpolate`
-  synthesises intermediate frames from motion vectors, so a 2.5x slowdown still
-  lands on 24 genuine frames per second. 60 ÷ 2.5 = 24 exactly.
-- **Denoise before interpolating.** Motion estimation is confused by grain, so
-  a clean input gives better vectors and fewer artifacts. Grain magnified 2.5x
-  in time and 2x in space was the single ugliest thing about the first encode.
-- **`nlmeans`, not `hqdn3d`.** The camera orbits, so anything with a temporal
-  component smears. `s=2.0` is gentle enough to leave the bubbles and the film
-  texture on the bag intact — check that before raising it.
-
-Stage A is the expensive part (~4 min on 4 cores) and its output is reusable.
-Keep `slow_master.mp4` if you are iterating on the delivery encodes.
-
-### Stage B — reframe, upscale, encode
+### Delivery
 
 ```bash
-CROP="crop=1024:576:78:0"
+CROP="crop=1024:576:78:0"          # desktop / base
+CROP_P="crop=406:720:427:0"        # portrait intro
 SWS="flags=lanczos+accurate_rnd+full_chroma_int+full_chroma_inp"
 X264="aq-mode=3:aq-strength=1.0:psy-rd=1.00,0.15:deblock=-1,-1:\
-ref=5:bframes=6:me=umh:subme=9:trellis=2"
+ref=3:bframes=3:me=umh:subme=9:trellis=2"
 
-ffmpeg -i slow_master.mp4 -an -t 11.0 \
-  -vf "${CROP},scale=2560:1440:${SWS},cas=strength=0.42,format=yuv420p" \
-  -c:v libx264 -crf 25 -preset veryslow -profile:v high \
+ffmpeg -i master.mp4 -an -t 8.0 \
+  -vf "${CROP},scale=1600:900:${SWS},format=yuv420p" \
+  -c:v libx264 -crf 28 -preset slow -profile:v high \
   -x264-params "$X264" -pix_fmt yuv420p -movflags +faststart \
-  hero-infusion-1440.mp4
+  hero-infusion-desktop.mp4
 ```
 
-CRF per tier: 25 at 1440p, 23 at 1080p, 22 at 720p. More pixels hide more
-quantisation, so the biggest file does not need the lowest CRF.
+**This plate is far more expensive to encode than the last one.** Every pixel is
+moving caustic detail where the previous one was mostly flat white. At the old
+settings the desktop tier came out at 12 MB. Three changes brought it to 3.5 MB
+with no visible difference at 1:1 — checked frame by frame against the 12 MB
+version:
 
-- **The reframe is in the encode, not in CSS.** A `transform: scale()` magnifies
-  pixels the decoder has already produced; cropping the source and scaling once
-  magnifies the original. Same framing, more detail.
-- **The crop position is not arbitrary.** The mark measures at (0.501, 0.469)
-  of the source; this crop puts it at (0.55, 0.59). Desktop needs it clear of
-  the headline, where the white lift is down to ~0.15. A phone needs it inside
-  x 0.45–0.63, because `object-cover` fits a 16:9 film to a tall viewport by
-  height and only the middle quarter of the width survives. Move it outside
-  that band and the logo is simply not on screen on a phone.
-- **`cas`, not `unsharp`.** Contrast Adaptive Sharpen backs off where local
-  contrast is already high — the hard black logo edge, which `unsharp` rings —
-  and works hardest on the low-contrast water detail the upscale softened.
-- **`aq-mode=3` with a high strength.** Nearly the whole frame is flat bright
-  water, which is exactly where 8-bit banding shows. That is where the
-  perceived quality is, so that is where the bits should go.
+- **CRF 23 → 28.** Low-contrast content hides quantisation extremely well.
+- **1920x1080 → 1600x900.** The crop is 1024px wide, so 1080p was a 1.875x
+  upscale spending bits on interpolated pixels. 1600 is 1.56x.
+- **`cas` sharpening dropped.** On busy water it adds high-frequency energy the
+  encoder then pays for, and there is nothing soft here to rescue.
+
+Other things that are load-bearing:
+
+- **The crop position is measured, not guessed.** The crest sits at (0.492,
+  0.484) of the source; this crop puts it at (0.54, 0.61), which clears the
+  headline on desktop and stays inside the narrow strip `object-cover` leaves on
+  a phone.
+- **No tier above 1600x900, and `ref=3/bframes=3`.** A 2560x1440 stream with a
+  five-frame reference buffer is what falls out of a hardware decoder's fast
+  path and into software. That was a real, reported lag bug.
 - **Do not pass `-level`.** Pinning it below what the stream needs still
   encodes, but stamps a level the stream exceeds, and the result plays in
-  software and fails on a hardware decoder. Let x264 write the truth.
+  software and fails on a hardware decoder.
 
 ## The phone intro
 
 On a phone's first visit of a session the film plays full-screen over the hero
-and the copy phases in when it ends. That is a separate portrait cut, not the
-16:9 file scaled up, because `object-cover` fits a 16:9 plate to a 9:19.5
-viewport by height and shows only the middle quarter of its width — the bag,
-with the whole splash ring cropped away.
+and the copy phases in when it ends. A separate portrait cut, because
+`object-cover` fits a 16:9 plate to a 9:19.5 viewport by height and shows only
+the middle quarter of its width.
 
 ```bash
-ffmpeg -i slow_master.mp4 -an -t 5.6 \
-  -vf "crop=406:720:438:0,scale=812:1440:${SWS},cas=strength=0.42,format=yuv420p" \
-  -c:v libx264 -crf 23 -preset veryslow -profile:v high \
+ffmpeg -ss 2.4 -i master.mp4 -an -t 5.6 \
+  -vf "${CROP_P},scale=720:1280:${SWS},format=yuv420p" \
+  -c:v libx264 -crf 28 -preset slow -profile:v high \
   -x264-params "$X264" -pix_fmt yuv420p -movflags +faststart \
   hero-intro-portrait.mp4
 ```
 
-9:16 of the source, centred on the mark, full source height so the bag falls in
-from the top. The ring runs off the sides, which is unavoidable in portrait and
-reads as being close to the action.
-
-**5.6s, not the full 11s.** The cut ends as the bag settles flat with the ring
-closed around it. Everything after that is slow ripple, and it is time a visitor
-spends looking at no words.
+It is the **last** 5.6s of the eight-second window, so its final frame is the
+poster frame. The dissolve into the resting band is then the same moment in the
+film at a different crop, rather than a jump backwards in time.
 
 This file *replaces* the 16:9 one on a phone rather than adding to it — the band
-under the copy is a still, and only a viewport at `lg` and up mounts the
-full-bleed loop. Net effect is that a phone downloads 980 KB instead of 1.8 MB,
-and the homepage measured 91 -> 94 on mobile after the intro was added.
+under the copy is a still, and only `lg` and up mounts the full-bleed film.
 
 The sequencing lives in three places that have to stay in step: the inline
 script in `src/app/layout.tsx` (decides, pre-paint, whether the intro runs),
@@ -122,6 +109,16 @@ script in `src/app/layout.tsx` (decides, pre-paint, whether the intro runs),
 state in `ScrollHero.tsx`. Every failure path resolves to the copy being
 visible — no JS, a refused autoplay, a decode error, a stalled start, or a
 hydration failure.
+
+## A note on the lockup
+
+The bag carries the practice's real crest. "IV LEAGUE" reads correctly at every
+size. The "INFUSION SERVICES" sub-line under it is legible on the settled frame
+but warps into an illegible blur on frames where the bag is deformed — generative
+video mangles small type, and it is why the render should never be asked to
+produce a wordmark. It is small enough that it reads as out-of-focus fine print
+rather than as a misspelling. If that is ever not good enough, the fix is to
+composite the real vector lockup over the label, not to re-prompt.
 
 ## Why there is also a webm
 
@@ -136,9 +133,9 @@ production — which cost an hour of debugging once already. Keep it, and keep i
 last in the `<source>` list.
 
 ```bash
-ffmpeg -i slow_master.mp4 -an -t 11.0 \
-  -vf "${CROP},scale=1280:720:${SWS},cas=strength=0.42,format=yuv420p" \
-  -c:v libvpx-vp9 -crf 34 -b:v 0 -row-mt 1 -deadline good -cpu-used 3 -g 240 \
+ffmpeg -i master.mp4 -an -t 8.0 \
+  -vf "${CROP},scale=1280:720:${SWS},format=yuv420p" \
+  -c:v libvpx-vp9 -crf 38 -b:v 0 -row-mt 1 -deadline good -cpu-used 3 -g 240 \
   hero-infusion.webm
 ```
 
@@ -148,7 +145,7 @@ The film's **final** frame, not a frame from the middle, at five widths:
 
 ```bash
 for w in 640 960 1280 1920 2560; do
-  ffmpeg -sseof -0.1 -i hero-infusion-1440.mp4 -frames:v 1 -update 1 \
+  ffmpeg -sseof -0.1 -i hero-infusion-desktop.mp4 -frames:v 1 -update 1 \
     -vf "scale=$w:-2:${SWS}" -q:v 4 hero-infusion-$w.jpg
 done
 cp hero-infusion-1280.jpg hero-infusion.jpg
@@ -164,8 +161,8 @@ Three things about how it is served, each of which was measured:
 - **A plain `<img>`, not next/image.** The optimizer runs per request and the
   browser ended up fetching both the optimized and the raw file, costing 10
   Lighthouse points and taking TBT from 108ms to 457ms.
-- **A `srcset` ladder, not one big file.** A single 1920 poster is 91 KB for a
-  412 px viewport. The ladder drops that to 37 KB and took the homepage from
+- **A `srcset` ladder, not one big file.** A single 1920 poster is 90 KB for a
+  412 px viewport. The ladder drops that to 20 KB and took the homepage from
   83 to 86.
 - **The `<video>` has no `poster` attribute.** The `<img>` behind it is already
   that frame, so a poster on the video is a second download of the same
