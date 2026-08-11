@@ -6,6 +6,7 @@ import {
   shorterThanCount,
 } from "@/lib/duration";
 import type { Therapy } from "@/content/therapies";
+import { therapyArticle } from "@/lib/answers";
 
 /**
  * Where this therapy sits against the whole formulary by chair time.
@@ -37,7 +38,7 @@ export function ChairTimeScale({ therapy }: { therapy: Therapy }) {
           id="chair-time-heading"
           className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400"
         >
-          Chair time, in context
+          How long does {therapyArticle(therapy)} {therapy.brand} infusion take?
         </h2>
         <p className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-500">
           {total} therapies on formulary
@@ -55,7 +56,7 @@ export function ChairTimeScale({ therapy }: { therapy: Therapy }) {
         {shorter === 0
           ? "The shortest visit on our formulary."
           : shorter >= total - 1
-            ? "One of the longest visits we schedule — plan the day around it."
+            ? "One of the longest visits we schedule, so plan the day around it."
             : `Shorter than ${total - shorter - 1} of our ${total} therapies, longer than ${shorter}.`}{" "}
         This is infusion time; add check-in and any observation your physician orders.
       </p>

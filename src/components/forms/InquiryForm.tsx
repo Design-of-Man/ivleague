@@ -99,7 +99,7 @@ export function InquiryForm() {
             </h3>
             <p className="mx-auto mt-4 max-w-md text-[15px] leading-relaxed text-ink-300">
               {message ||
-                "A member of our team will reach out — usually the same business day. If it's urgent, call us and we'll pick up."}
+                "A member of our team will reach out, usually the same business day. If it's urgent, call us and we'll pick up."}
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a

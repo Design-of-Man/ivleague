@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 export const metadata = buildMetadata({
   title: "Wellness & Regenerative IV Infusions",
   description:
-    "Myers' Cocktail, NAD+, immunity, hydration, recovery and glutathione infusions in Midlothian, VA — administered by registered nurses in private suites under clinical protocols.",
+    "Myers' Cocktail, NAD+, immunity, hydration, recovery and glutathione infusions in Midlothian, VA, administered by registered nurses in private suites under clinical protocols.",
   path: "/wellness",
   keywords: [
     "IV vitamin therapy Midlothian VA",
@@ -40,7 +40,7 @@ export default function WellnessPage() {
             <span className="text-gradient">also hang your vitamin drip.</span>
           </>
         }
-        lead="Most IV bars are staffed by people who have never run a four-hour immune globulin infusion. Ours have — thousands of times. Same clinicians, same suites, same protocols, applied to hydration and nutrient therapy."
+        lead="Most IV bars are staffed by people who have never run a four-hour immune globulin infusion. Ours have, thousands of times. Same clinicians, same suites, same protocols, applied to hydration and nutrient therapy."
         trail={[
           { name: "Home", href: "/" },
           { name: "Wellness", href: "/wellness" },
@@ -62,7 +62,7 @@ export default function WellnessPage() {
         <SectionHeading
           eyebrow="The menu"
           title="Eight formulations"
-          lead="Every infusion is reviewed by a clinician before it's mixed. If a drip isn't right for you — or if what you're describing needs a physician instead of a vitamin — we'll say so."
+          lead="Every infusion is reviewed by a clinician before it's mixed. If a drip isn't right for you, or if what you're describing needs a physician instead of a vitamin, we'll say so."
         />
 
         <div className="mt-14 grid gap-4">
@@ -193,7 +193,7 @@ export default function WellnessPage() {
               {[
                 [
                   "Clinical screening, every time",
-                  "You are assessed by a licensed clinician before anything is mixed. Cardiac history, kidney function, pregnancy, medication interactions — these matter, and a questionnaire on a tablet doesn't catch them.",
+                  "You are assessed by a licensed clinician before anything is mixed. Cardiac history, kidney function, pregnancy, medication interactions: these matter, and a questionnaire on a tablet doesn't catch them.",
                 ],
                 [
                   "Nurses who run four-hour infusions",
@@ -225,11 +225,11 @@ export default function WellnessPage() {
                 {[
                   [
                     "Do I need a referral for wellness drips?",
-                    "No. Wellness and regenerative infusions do not require a physician referral — only our clinical screening. Specialty and biologic therapies do require a referral.",
+                    "No. Wellness and regenerative infusions do not require a physician referral, only our clinical screening. Specialty and biologic therapies do require a referral.",
                   ],
                   [
                     "Is this covered by insurance?",
-                    "Generally no. Wellness infusions are typically self-pay. HSA and FSA eligibility varies by plan and by service — check with your administrator.",
+                    "Generally no. Wellness infusions are typically self-pay. HSA and FSA eligibility varies by plan and by service, so check with your administrator.",
                   ],
                   [
                     "How often can I come?",
@@ -237,7 +237,7 @@ export default function WellnessPage() {
                   ],
                   [
                     "Can I add to my specialty infusion?",
-                    "Sometimes. Anything added to a therapy day has to be cleared against your prescribed regimen first — ask your nurse.",
+                    "Sometimes. Anything added to a therapy day has to be cleared against your prescribed regimen first, so ask your nurse.",
                   ],
                 ].map(([q, a]) => (
                   <div key={q} className="border-b border-white/6 pb-5 last:border-0 last:pb-0">
@@ -273,7 +273,7 @@ export default function WellnessPage() {
             <span className="text-gradient">Walk out level.</span>
           </>
         }
-        body="Call or send a note and we'll find you a chair — often the same week. No referral needed for wellness infusions."
+        body="Call or send a note and we'll find you a chair, often the same week. No referral needed for wellness infusions."
         primary={{ label: "Request a drip", href: "/contact" }}
       />
     </>

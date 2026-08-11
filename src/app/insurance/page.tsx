@@ -27,7 +27,7 @@ const WE_DO = [
 const YOU_DO = [
   "Give us your insurance card and your prescriber's name",
   "Tell us if your coverage changes mid-year",
-  "Let us know if a bill arrives that doesn't look right — we'll investigate it",
+  "Let us know if a bill arrives that doesn't look right and we'll investigate it",
 ];
 
 export default function InsurancePage() {
@@ -51,7 +51,7 @@ export default function InsurancePage() {
             <span className="text-gradient">is usually the building.</span>
           </>
         }
-        lead="Hospital outpatient departments bill a facility fee on top of the drug and its administration. Freestanding infusion centers don't. Same medication, same class of clinician, a fraction of the total cost of care — and it shows up directly in your coinsurance."
+        lead="Hospital outpatient departments bill a facility fee on top of the drug and its administration. Freestanding infusion centers don't. Same medication, same class of clinician, a fraction of the total cost of care, and it shows up directly in your coinsurance."
         trail={[
           { name: "Home", href: "/" },
           { name: "Insurance", href: "/insurance" },
@@ -71,7 +71,7 @@ export default function InsurancePage() {
         <SectionHeading
           eyebrow="Who does what"
           title="You give us two things. We do the rest."
-          lead="Prior authorization is the single most common reason infusion therapy gets delayed. We treat it as our job — because when it's the patient's job, it doesn't get done."
+          lead="Prior authorization is the single most common reason infusion therapy gets delayed. We treat it as our job, because when it's the patient's job, it doesn't get done."
         />
 
         <div className="mt-14 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
@@ -87,7 +87,7 @@ export default function InsurancePage() {
             </h3>
             <TickList items={YOU_DO} className="mt-6" tone="muted" />
             <p className="mt-8 border-t border-white/6 pt-6 text-[13px] leading-relaxed text-ink-500">
-              That&apos;s the whole list. If we need something else, we&apos;ll call — we
+              That&apos;s the whole list. If we need something else, we&apos;ll call. We
               won&apos;t leave a voicemail and wait.
             </p>
           </Reveal>
@@ -99,7 +99,7 @@ export default function InsurancePage() {
         <SectionHeading
           eyebrow="Paying for care"
           title="Four ways this gets affordable"
-          lead="Cost should never be the reason a therapy stops working. If your responsibility is a barrier, tell us — there is almost always a lever we can pull."
+          lead="Cost should never be the reason a therapy stops working. If your responsibility is a barrier, tell us. There is almost always a lever we can pull."
         />
 
         <Stagger className="mt-14 grid gap-4 md:grid-cols-2">
@@ -107,7 +107,7 @@ export default function InsurancePage() {
             {
               n: "01",
               title: "Manufacturer copay assistance",
-              body: "Most specialty biologics have a copay card that can reduce a commercially insured patient's responsibility to a nominal amount per infusion. We screen every patient and handle enrollment — you do not need to find these programs yourself.",
+              body: "Most specialty biologics have a copay card that can reduce a commercially insured patient's responsibility to a nominal amount per infusion. We screen every patient and handle enrollment, so you do not need to find these programs yourself.",
               note: "Commercial insurance only; federal program rules prohibit use with Medicare or Medicaid.",
             },
             {
@@ -125,7 +125,7 @@ export default function InsurancePage() {
             {
               n: "04",
               title: "HSA, FSA and self-pay",
-              body: "We accept HSA cards at the time of infusion for eligible services. For patients without coverage — or for wellness infusions — we quote transparent self-pay pricing in writing before you commit.",
+              body: "We accept HSA cards at the time of infusion for eligible services. For patients without coverage, or for wellness infusions, we quote transparent self-pay pricing in writing before you commit.",
               note: "HSA/FSA eligibility varies by plan administrator and service.",
             },
           ].map((c) => (
@@ -156,7 +156,7 @@ export default function InsurancePage() {
             <span className="text-gradient">about paying for this.</span>
           </>
         }
-        lead="If your question isn't here, ask before you schedule — not after you're billed."
+        lead="If your question isn't here, ask before you schedule, not after you're billed."
         cta={false}
       />
 
@@ -183,7 +183,7 @@ export default function InsurancePage() {
             <span className="text-gradient">before you commit.</span>
           </>
         }
-        body="Send us your insurance and your prescriber. We'll come back with your expected out-of-pocket cost — usually within two business days."
+        body="Send us your insurance and your prescriber. We'll come back with your expected out-of-pocket cost, usually within two business days."
       />
     </>
   );

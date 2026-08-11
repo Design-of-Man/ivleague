@@ -409,3 +409,77 @@ No newsletter modal. No before/after imagery. No claims about outcomes.
 
 No cookie banner either — the site sets no tracking cookies, so it doesn't need to
 apologize for any.
+
+## 7. AI search, and the writing
+
+Two passes after the first build, both aimed at how the site reads rather than
+how it looks.
+
+### Answer engine optimization
+
+People increasingly ask an assistant "where can I get an Ocrevus infusion near
+Richmond" before they ask a search engine, and the practice was invisible to
+that question. Five changes, all built from the existing content model so
+nothing is invented:
+
+**A standalone answer paragraph on all 53 clinical pages.** Answer engines quote
+passages, not pages. Every detail page opened with a fragment written to sit
+under a display headline ("A gut-selective biologic for ulcerative colitis"),
+which carries nothing once it is lifted out of the layout. Each page now leads
+with a self-contained 39-66 word paragraph naming the drug, its class, its
+route, what it treats, appointment length, dosing schedule and the fact that an
+order is required. Marked `speakable` for voice queries.
+
+**Headings phrased the way patients type.** "Schedule & logistics" became "How
+often is Entyvio given?"; "Understanding Crohn's Disease" became "What is
+Crohn's Disease?". Same content, retrievable.
+
+**Per-page FAQ, 5-7 questions each**, generated from the same fields the page
+renders so the answers cannot contradict the page above them. This added ~4,400
+words of crawlable content at no measurable performance cost, because the
+accordion keeps closed answers in the HTML behind `inert` rather than
+unmounting them.
+
+**Schema.** `MedicalWebPage` with `lastReviewed` on every clinical page (the
+strongest freshness signal for health content), `FAQPage` on 55 pages,
+`ItemList` on the two directories, and stable `@id`s so the therapy and
+condition entities resolve as the subject of their page.
+
+**`/llms.txt` and an explicit crawler policy.** The llms.txt is generated from
+the content model, so it cannot drift: practice facts, the full formulary with
+chair times, every condition, the wellness menu, and a "Limits" section telling
+a model not to present the clinical copy as individualized advice or to estimate
+pricing. `robots.ts` names all thirteen AI crawlers and allows them, with the
+reasoning in a comment. A blocked crawler cannot cite you.
+
+One field is deliberately missing. `reviewedBy` is the single strongest E-E-A-T
+signal available and it needs a named clinician with credentials. Inventing one
+for a real medical practice is not a trade worth making for a ranking signal, so
+it is a launch blocker in CONTENT-REVIEW.md instead.
+
+### Removing the AI tells
+
+Measured over 17,679 words of rendered prose across 17 routes.
+
+The vocabulary was already clean: five hits total, no "delve", no "robust", no
+"seamless". The tell was punctuation. **7.9 em dashes per 1,000 words against a
+ceiling of 1** is the most recognizable machine-writing signature there is, and
+211 of them were spliced through the patient copy. Roughly a quarter were a
+single repeated shape: `imperative — justification`, over and over down every
+"Living with it" list. The uniform rhythm was as much the tell as the dash.
+
+Fixed per instance rather than by regex, and deliberately varied: parentheses
+for appositives, colons where the gloss is a list, and a spread of periods,
+semicolons and connectors for the rest. Swapping every dash for a semicolon
+would have traded one tic for another. Now **zero**.
+
+Three other edits. `genuinely` twice, cut. The 30 "X, Y and Z" triads turned out
+to be genuine clinical lists (anatomy, complications, carriers) and were left
+alone; only one was rhetorical. And the H1 was "Infusion care, elevated." —
+`elevate` is a flagged word, "X, elevated" is the shape of every wellness
+tagline written this decade, and it carried no keyword for a local practice. It
+is now "Infusion care without the hospital", which is differentiating, true, and
+the thing the insurance page spends 800 words explaining.
+
+What was deliberately *not* edited: code comments, and the medical enumerations
+above. Over-editing to satisfy a checker produces its own uniformity.

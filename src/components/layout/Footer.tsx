@@ -31,7 +31,7 @@ export function Footer() {
             </h2>
             <p className="mt-5 max-w-lg text-[15px] leading-relaxed text-ink-400">
               Send us your name and diagnosis. We handle orders, benefits and prior
-              authorization from there — and tell you what you&apos;ll owe before you
+              authorization from there, and tell you what you&apos;ll owe before you
               schedule.
             </p>
           </div>
@@ -56,7 +56,7 @@ export function Footer() {
             </Link>
             <p className="max-w-xs text-[13.5px] leading-relaxed text-ink-400">
               A locally owned outpatient infusion center in {site.address.city},{" "}
-              {site.address.regionName} — biologics, IVIG, IV anti-infectives and
+              {site.address.regionName}. Biologics, IVIG, IV anti-infectives and
               wellness therapy, delivered by nurses who know your name.
             </p>
 

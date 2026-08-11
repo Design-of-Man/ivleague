@@ -98,7 +98,7 @@ export type Therapy = {
   /** Indications this product is FDA-approved for, in plain language */
   treats: string[];
   howItWorks: string;
-  /** Typical chair time — always framed as an estimate */
+  /** Typical chair time, always framed as an estimate */
   duration: string;
   frequency: string;
   route: string;
@@ -169,7 +169,7 @@ export const therapies: Therapy[] = [
     prep: [
       "Plan for roughly two hours door-to-door on induction day",
       "Confirm your weight-based dose has been received from your prescriber",
-      "Bring a sweater — infusions run cool",
+      "Bring a sweater, because infusions run cool",
     ],
     expect: [
       "Weight recorded at check-in, since the induction dose is weight-based",
@@ -201,7 +201,7 @@ export const therapies: Therapy[] = [
     prep: [
       "Complete TB screening and any labs your physician ordered",
       "Let us know about any infusion reaction you've had previously",
-      "Arrive hydrated — it makes IV access faster and more comfortable",
+      "Arrive hydrated; it makes IV access faster and more comfortable",
     ],
     expect: [
       "Pre-medication if your physician has ordered it",
@@ -235,7 +235,7 @@ export const therapies: Therapy[] = [
       "Chronic severe plaque psoriasis",
     ],
     howItWorks:
-      "Avsola is a biosimilar to infliximab — highly similar in structure, safety and effectiveness — and works the same way, by binding and neutralizing TNF-α.",
+      "Avsola is a biosimilar to infliximab, highly similar in structure, safety and effectiveness, and works the same way, by binding and neutralizing TNF-α.",
     duration: "Approximately 2 hours, plus observation",
     frequency: "Weeks 0, 2 and 6, then every 8 weeks (schedules vary)",
     route: "Intravenous infusion",
@@ -282,7 +282,7 @@ export const therapies: Therapy[] = [
     route: "Intravenous infusion",
     prep: [
       "Hydrate the day before and the morning of your infusion",
-      "Bring headphones or a laptop — the Wi-Fi is fast",
+      "Bring headphones or a laptop. The Wi-Fi is fast",
       "Notify us of any change in your health since your last visit",
     ],
     expect: [
@@ -319,7 +319,7 @@ export const therapies: Therapy[] = [
     frequency: "Weeks 0, 2 and 6, then every 8 weeks (schedules vary)",
     route: "Intravenous infusion",
     prep: [
-      "Confirm which infliximab product your plan prefers — we'll help",
+      "Confirm which infliximab product your plan prefers; we'll help",
       "Complete required screening labs",
       "Plan for a longer first visit",
     ],
@@ -382,12 +382,12 @@ export const therapies: Therapy[] = [
       "Polyarticular juvenile idiopathic arthritis",
     ],
     howItWorks:
-      "Rather than blocking a single cytokine, abatacept interrupts the costimulatory signal that activates T-cells in the first place — a step further upstream in the inflammatory cascade.",
+      "Rather than blocking a single cytokine, abatacept interrupts the costimulatory signal that activates T-cells in the first place, a step further upstream in the inflammatory cascade.",
     duration: "About 30 minutes",
     frequency: "Weeks 0, 2 and 4, then every 4 weeks",
     route: "Intravenous infusion",
     prep: [
-      "Weight is recorded each visit — dosing is weight-tiered",
+      "Weight is recorded each visit, because dosing is weight-tiered",
       "Report any signs of infection before your infusion",
       "Hydrate well",
     ],
@@ -412,7 +412,7 @@ export const therapies: Therapy[] = [
       "Systemic and polyarticular juvenile idiopathic arthritis",
     ],
     howItWorks:
-      "Tocilizumab binds the interleukin-6 receptor. IL-6 is a driver of both joint inflammation and the systemic symptoms — fatigue, fever, anemia — that often accompany it.",
+      "Tocilizumab binds the interleukin-6 receptor. IL-6 is a driver of both joint inflammation and the systemic symptoms (fatigue, fever, anemia) that often accompany it.",
     duration: "About 1 hour",
     frequency: "Every 4 weeks",
     route: "Intravenous infusion",
@@ -453,7 +453,7 @@ export const therapies: Therapy[] = [
     ],
     expect: [
       "Quick check-in and vitals",
-      "A 30-minute infusion — one of our shortest",
+      "A 30-minute infusion, one of our shortest",
       "Out the door in well under two hours",
     ],
     conditions: [
@@ -481,7 +481,7 @@ export const therapies: Therapy[] = [
     frequency: "Two infusions two weeks apart, repeated every 6 months",
     route: "Intravenous infusion",
     prep: [
-      "Plan for a long first visit — bring lunch, a book and a charger",
+      "Plan for a long first visit. Bring lunch, a book and a charger",
       "Pre-medication is standard and will be given before the infusion starts",
       "Arrange a ride if you're sensitive to antihistamines",
     ],
@@ -511,7 +511,7 @@ export const therapies: Therapy[] = [
     route: "Intravenous infusion",
     prep: [
       "Report any new depression or mood change to your physician",
-      "Bring a light layer — lupus patients often run cold",
+      "Bring a light layer; lupus patients often run cold",
       "Hydrate",
     ],
     expect: [
@@ -657,7 +657,7 @@ export const therapies: Therapy[] = [
     prep: [
       "Bring your headache diary if you keep one",
       "No fasting or special preparation required",
-      "Let us know if bright light is a trigger — we'll dim your suite",
+      "Let us know if bright light is a trigger and we'll dim your suite",
     ],
     expect: [
       "A quiet, low-light suite on request",
@@ -691,7 +691,7 @@ export const therapies: Therapy[] = [
     frequency: "Typically every 3 to 4 weeks",
     route: "Intravenous infusion",
     prep: [
-      "Hydrate aggressively for 24 hours before and after — it is the single best defense against post-infusion headache",
+      "Hydrate aggressively for 24 hours before and after. It is the single best defense against post-infusion headache",
       "Take any pre-medication your physician has prescribed",
       "Plan for a long visit and bring lunch",
     ],
@@ -724,13 +724,13 @@ export const therapies: Therapy[] = [
       "IgE-mediated food allergy",
     ],
     howItWorks:
-      "Omalizumab binds free IgE — the antibody responsible for allergic reactions — before it can attach to mast cells and basophils, interrupting the allergic cascade at its source.",
+      "Omalizumab binds free IgE, the antibody responsible for allergic reactions, before it can attach to mast cells and basophils, interrupting the allergic cascade at its source.",
     duration: "Injection plus a monitored observation period",
     frequency: "Every 2 or 4 weeks based on weight and serum IgE",
     route: "Subcutaneous injection administered in-center",
     prep: [
       "Bring your rescue inhaler",
-      "Do not schedule around a same-day flight — observation is required",
+      "Do not schedule around a same-day flight, since observation is required",
       "Report any recent asthma exacerbation",
     ],
     expect: [
@@ -807,7 +807,7 @@ export const therapies: Therapy[] = [
       "A severe asthma biologic that works regardless of eosinophil count or allergic phenotype.",
     treats: ["Severe asthma as add-on maintenance treatment"],
     howItWorks:
-      "Tezepelumab blocks thymic stromal lymphopoietin (TSLP), an epithelial cytokine released at the very top of the inflammatory cascade — which is why it works across asthma phenotypes.",
+      "Tezepelumab blocks thymic stromal lymphopoietin (TSLP), an epithelial cytokine released at the very top of the inflammatory cascade, which is why it works across asthma phenotypes.",
     duration: "Injection plus brief observation",
     frequency: "Every 4 weeks",
     route: "Subcutaneous injection administered in-center",
@@ -840,17 +840,17 @@ export const therapies: Therapy[] = [
       "Paget's disease of bone",
     ],
     howItWorks:
-      "Zoledronic acid binds to bone and inhibits osteoclasts — the cells that break bone down — shifting the remodeling balance toward density.",
+      "Zoledronic acid binds to bone and inhibits osteoclasts, the cells that break bone down, shifting the remodeling balance toward density.",
     duration: "At least 15 minutes of infusion time",
     frequency: "Once yearly (every 2 years for prevention)",
     route: "Intravenous infusion",
     prep: [
       "Drink at least two glasses of water before your appointment",
-      "Take acetaminophen beforehand if your physician approves — it blunts the flu-like feeling some patients get after the first dose",
+      "Take acetaminophen beforehand if your physician approves; it blunts the flu-like feeling some patients get after the first dose",
       "Confirm your calcium and vitamin D levels are adequate",
     ],
     expect: [
-      "A 15-minute infusion — the fastest on our formulary",
+      "A 15-minute infusion, the fastest on our formulary",
       "Extra hydration encouraged before and after",
       "A reminder call when next year's dose is due",
     ],
@@ -880,7 +880,7 @@ export const therapies: Therapy[] = [
       "Do not skip or delay doses without speaking to your physician",
     ],
     expect: [
-      "A brief visit — often under 20 minutes door to door",
+      "A brief visit, often under 20 minutes door to door",
       "Injection administered by an RN",
       "Automatic six-month recall scheduling",
     ],
@@ -896,7 +896,7 @@ export const therapies: Therapy[] = [
       "A bone-building monthly injection for postmenopausal women at very high fracture risk.",
     treats: ["Postmenopausal osteoporosis at very high risk of fracture"],
     howItWorks:
-      "Romosozumab inhibits sclerostin, which both increases bone formation and decreases bone resorption — a dual effect unique among osteoporosis therapies.",
+      "Romosozumab inhibits sclerostin, which both increases bone formation and decreases bone resorption, a dual effect unique among osteoporosis therapies.",
     duration: "Two injections, plus check-in",
     frequency: "Monthly for 12 doses",
     route: "Subcutaneous injection administered in-center",
@@ -962,7 +962,7 @@ export const therapies: Therapy[] = [
     route: "Intravenous infusion",
     prep: [
       "Report any prior reaction to IV iron",
-      "Tell imaging providers you've had ferumoxytol — it can affect MRI",
+      "Tell imaging providers you've had ferumoxytol, because it can affect MRI",
       "Hydrate",
     ],
     expect: [
@@ -1037,7 +1037,7 @@ export const therapies: Therapy[] = [
     onCurrentSite: true,
     featured: true,
     summary:
-      "Short-course IV antibiotics, antifungals and antivirals — an alternative to a hospital stay.",
+      "Short-course IV antibiotics, antifungals and antivirals, an alternative to a hospital stay.",
     treats: [
       "Osteomyelitis and bone or joint infection",
       "Cellulitis and complicated skin and soft tissue infection",
@@ -1046,7 +1046,7 @@ export const therapies: Therapy[] = [
       "Lyme disease requiring IV therapy",
     ],
     howItWorks:
-      "Outpatient parenteral antimicrobial therapy delivers full-strength IV antibiotics on a fixed schedule while you sleep in your own bed — with the same drug, dose and monitoring you would receive as an inpatient.",
+      "Outpatient parenteral antimicrobial therapy delivers full-strength IV antibiotics on a fixed schedule while you sleep in your own bed, with the same drug, dose and monitoring you would receive as an inpatient.",
     duration: "30 minutes to 2 hours depending on the agent",
     frequency: "Daily to several times weekly for the ordered course",
     route: "Intravenous infusion",

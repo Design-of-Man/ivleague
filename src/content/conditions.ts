@@ -43,9 +43,9 @@ export const conditions: Condition[] = [
       "Mouth sores, joint pain or skin lesions outside the gut",
     ],
     howInfusionHelps:
-      "Infused biologics deliver a full, verified dose directly into the bloodstream on a fixed schedule — no missed injections, no absorption questions. Your gastroenterologist writes the order; we handle prior authorization, drug procurement and administration, then report back after every visit.",
+      "Infused biologics deliver a full, verified dose directly into the bloodstream on a fixed schedule: no missed injections, no absorption questions. Your gastroenterologist writes the order; we handle prior authorization, drug procurement and administration, then report back after every visit.",
     livingWith: [
-      "Flares and remission are both normal — a change in symptoms is worth a call to your GI, not a wait-and-see",
+      "Flares and remission are both normal, but a change in symptoms is worth a call to your GI rather than a wait-and-see",
       "Staying on schedule matters more than almost anything else with biologics; gaps in dosing can lead to antibodies against the drug",
       "Keep vaccinations current and talk to your physician before any live vaccine",
     ],
@@ -59,16 +59,16 @@ export const conditions: Condition[] = [
     summary:
       "Continuous inflammation and ulceration of the colon's inner lining, beginning at the rectum.",
     overview:
-      "Unlike Crohn's disease, ulcerative colitis is confined to the colon and affects only the innermost lining, spreading continuously rather than in patches. Disease extent — proctitis, left-sided colitis or pancolitis — shapes both symptoms and treatment. Biologic therapy is now first-line for many patients with moderate to severe disease.",
+      "Unlike Crohn's disease, ulcerative colitis is confined to the colon and affects only the innermost lining, spreading continuously rather than in patches. Disease extent (proctitis, left-sided colitis or pancolitis) shapes both symptoms and treatment. Biologic therapy is now first-line for many patients with moderate to severe disease.",
     symptoms: [
       "Bloody diarrhea and mucus in the stool",
-      "Urgency and tenesmus — the feeling of incomplete evacuation",
+      "Urgency and tenesmus, the feeling of incomplete evacuation",
       "Lower abdominal cramping relieved by a bowel movement",
       "Fatigue and anemia from ongoing blood loss",
       "Weight loss during flares",
     ],
     howInfusionHelps:
-      "Infusion therapy targets the specific inflammatory pathways behind UC — TNF-α, integrin trafficking, IL-12/23 or IL-23 — and can induce and maintain remission when oral therapy has stopped working. Consistent scheduling in a dedicated center means fewer missed doses and faster escalation when disease activity changes.",
+      "Infusion therapy targets the specific inflammatory pathways behind UC (TNF-α, integrin trafficking, IL-12/23 or IL-23) and can induce and maintain remission when oral therapy has stopped working. Consistent scheduling in a dedicated center means fewer missed doses and faster escalation when disease activity changes.",
     livingWith: [
       "Track your symptoms between visits; trend data helps your GI adjust therapy earlier",
       "Iron deficiency is common with ongoing blood loss and is often treatable with IV iron in the same chair",
@@ -94,10 +94,10 @@ export const conditions: Condition[] = [
       "Reduced grip strength and difficulty with fine motor tasks",
     ],
     howInfusionHelps:
-      "Infused biologics — TNF inhibitors, IL-6 blockade, T-cell modulation or B-cell depletion — interrupt different points in the inflammatory cascade, giving your rheumatologist options when one mechanism stops working. Infusion also removes adherence from the equation: every dose is documented and delivered.",
+      "Infused biologics (TNF inhibitors, IL-6 blockade, T-cell modulation, B-cell depletion) interrupt different points in the inflammatory cascade, giving your rheumatologist options when one mechanism stops working. Infusion also removes adherence from the equation: every dose is documented and delivered.",
     livingWith: [
       "Gentle, consistent movement protects joints better than rest during low disease activity",
-      "Report new infections promptly — biologic therapy raises infection risk",
+      "Report new infections promptly, because biologic therapy raises infection risk",
       "Keep your rheumatologist and infusion team aligned on labs; we send reports after every visit",
     ],
   },
@@ -121,7 +121,7 @@ export const conditions: Condition[] = [
     howInfusionHelps:
       "Infused TNF inhibitors and T-cell modulators treat joint, entheseal and skin disease at once, which is why they are often chosen for patients with multi-domain involvement. Scheduled infusions also make it easier to measure response objectively over time.",
     livingWith: [
-      "Skin and joint disease do not always flare together — treat the whole picture",
+      "Skin and joint disease do not always flare together, so treat the whole picture",
       "Cardiovascular and metabolic screening is part of good PsA care",
       "Physical therapy for enthesitis pays real dividends",
     ],
@@ -135,7 +135,7 @@ export const conditions: Condition[] = [
     summary:
       "An inflammatory arthritis of the spine and sacroiliac joints that can progressively fuse vertebrae.",
     overview:
-      "Ankylosing spondylitis — part of the axial spondyloarthritis spectrum — usually begins before age 45 with inflammatory back pain that improves with movement and worsens with rest. Chronic inflammation can lead to new bone formation and, over years, spinal fusion. Anti-TNF therapy remains a cornerstone of treatment for patients who fail NSAIDs.",
+      "Ankylosing spondylitis, part of the axial spondyloarthritis spectrum, usually begins before age 45 with inflammatory back pain that improves with movement and worsens with rest. Chronic inflammation can lead to new bone formation and, over years, spinal fusion. Anti-TNF therapy remains a cornerstone of treatment for patients who fail NSAIDs.",
     symptoms: [
       "Low back and buttock pain that improves with exercise, not rest",
       "Morning stiffness lasting over 30 minutes",
@@ -146,7 +146,7 @@ export const conditions: Condition[] = [
     howInfusionHelps:
       "TNF inhibition reduces spinal inflammation, improves mobility and can slow radiographic progression. Delivered by infusion, dosing is precise and verified, which matters for a disease measured over decades rather than weeks.",
     livingWith: [
-      "Posture and extension exercises are genuinely disease-modifying — do them daily",
+      "Posture and extension exercises are disease-modifying; do them daily",
       "Sudden eye pain or light sensitivity needs same-day ophthalmology attention",
       "Smoking accelerates spinal progression more in AS than in most conditions",
     ],
@@ -159,7 +159,7 @@ export const conditions: Condition[] = [
     summary:
       "A chronic immune-mediated skin disease producing thick, scaly, well-demarcated plaques.",
     overview:
-      "Plaque psoriasis results from accelerated keratinocyte turnover driven by an overactive IL-23/Th17 axis. It is a systemic inflammatory condition, not simply a skin problem — which is why it associates with arthritis, cardiovascular disease and metabolic syndrome.",
+      "Plaque psoriasis results from accelerated keratinocyte turnover driven by an overactive IL-23/Th17 axis. It is a systemic inflammatory condition, not simply a skin problem, which is why it associates with arthritis, cardiovascular disease and metabolic syndrome.",
     symptoms: [
       "Raised, red plaques with silvery scale, commonly on elbows, knees and scalp",
       "Itching, burning or soreness",
@@ -170,7 +170,7 @@ export const conditions: Condition[] = [
     howInfusionHelps:
       "For chronic severe plaque psoriasis, infused systemic therapy can clear skin substantially and treat coexisting joint disease at the same time. Infusion sidesteps the injection-site reactions some patients experience with self-administered biologics.",
     livingWith: [
-      "Moisturize aggressively — barrier care improves the effect of systemic therapy",
+      "Moisturize aggressively. Barrier care improves the effect of systemic therapy",
       "Screen for joint symptoms at every visit; PsA can be silent early",
       "Ask your physician about cardiovascular risk screening",
     ],
@@ -194,9 +194,9 @@ export const conditions: Condition[] = [
       "Heat sensitivity that temporarily worsens symptoms",
     ],
     howInfusionHelps:
-      "High-efficacy infused disease-modifying therapies — anti-CD20 antibodies and integrin blockers — meaningfully reduce relapse rate and new MRI lesion activity. Receiving them in an outpatient suite rather than a hospital infusion floor makes a twice-yearly or monthly commitment far easier to keep.",
+      "High-efficacy infused disease-modifying therapies (anti-CD20 antibodies and integrin blockers) meaningfully reduce relapse rate and new MRI lesion activity. Receiving them in an outpatient suite rather than a hospital infusion floor makes a twice-yearly or monthly commitment far easier to keep.",
     livingWith: [
-      "Cooling strategies genuinely help heat-related symptom flares",
+      "Cooling strategies help heat-related symptom flares",
       "Stay current on MRI surveillance even when you feel stable",
       "Tell your neurologist about new symptoms lasting more than 24 hours",
     ],
@@ -210,7 +210,7 @@ export const conditions: Condition[] = [
     summary:
       "Asthma that stays uncontrolled despite high-dose inhaled therapy, often driven by allergic or eosinophilic inflammation.",
     overview:
-      "Severe asthma is defined by what it takes to control it. When high-dose inhaled corticosteroids plus a second controller aren't enough — or when control requires repeated oral steroid courses — biologic therapy targeted to your inflammatory phenotype can dramatically reduce exacerbations and steroid exposure.",
+      "Severe asthma is defined by what it takes to control it. When high-dose inhaled corticosteroids plus a second controller aren't enough, or when control requires repeated oral steroid courses, biologic therapy targeted to your inflammatory phenotype can dramatically reduce exacerbations and steroid exposure.",
     symptoms: [
       "Frequent exacerbations requiring oral steroids",
       "Daily or nighttime symptoms despite controller therapy",
@@ -219,10 +219,10 @@ export const conditions: Condition[] = [
       "Missed work or school from breathing symptoms",
     ],
     howInfusionHelps:
-      "Phenotype-matched biologics — anti-IgE, anti-IL-5, anti-IL-5R and anti-TSLP — are administered here on a fixed schedule with the observation period anaphylaxis precautions require. That's safer than home administration for many patients and removes the burden of remembering.",
+      "Phenotype-matched biologics (anti-IgE, anti-IL-5, anti-IL-5R, anti-TSLP) are administered here on a fixed schedule with the observation period anaphylaxis precautions require. That's safer than home administration for many patients and removes the burden of remembering.",
     livingWith: [
       "Keep an up-to-date asthma action plan and bring it to every visit",
-      "Biologics reduce exacerbations — they do not replace your controller inhaler",
+      "Biologics reduce exacerbations; they do not replace your controller inhaler",
       "Track peak flow or symptom scores so response can be measured objectively",
     ],
   },
@@ -236,7 +236,7 @@ export const conditions: Condition[] = [
     summary:
       "Inherited or acquired conditions in which the body cannot produce enough functional antibodies.",
     overview:
-      "Primary immunodeficiencies are genetic disorders of immune function; secondary immunodeficiencies develop from another cause — chronic lymphocytic leukemia, multiple myeloma, certain medications or B-cell depleting therapy. Both can leave patients vulnerable to repeated sinopulmonary infections. Immune globulin replacement restores the missing antibody pool.",
+      "Primary immunodeficiencies are genetic disorders of immune function; secondary immunodeficiencies develop from another cause: chronic lymphocytic leukemia, multiple myeloma, certain medications or B-cell depleting therapy. Both can leave patients vulnerable to repeated sinopulmonary infections. Immune globulin replacement restores the missing antibody pool.",
     symptoms: [
       "Recurrent sinus, ear or lung infections",
       "Infections that need IV antibiotics or take unusually long to clear",
@@ -248,7 +248,7 @@ export const conditions: Condition[] = [
       "IVIG supplies pooled immunoglobulin G from thousands of screened donors, giving you a working antibody repertoire until the next dose. Trough levels and infection frequency guide dosing, and infusing in-center lets nurses titrate rate carefully to prevent headache and other rate-related effects.",
     livingWith: [
       "Hydration before and after IVIG is the single most effective way to prevent post-infusion headache",
-      "Report every infection — the pattern drives dose adjustment",
+      "Report every infection, since the pattern drives dose adjustment",
       "Keep a record of your trough IgG levels over time",
     ],
   },
@@ -271,7 +271,7 @@ export const conditions: Condition[] = [
     howInfusionHelps:
       "IVIG is a first-line therapy for CIDP and can produce measurable improvement in strength and function. Because response often depends on maintaining a consistent interval, a dedicated infusion schedule matters.",
     livingWith: [
-      "Track functional milestones — stairs, grip, walking distance — not just how you feel",
+      "Track functional milestones (stairs, grip, walking distance), not just how you feel",
       "Discuss interval adjustments with your neurologist if symptoms return before the next dose",
       "Physical therapy amplifies the benefit of immunotherapy",
     ],
@@ -293,7 +293,7 @@ export const conditions: Condition[] = [
       "Fatigue",
     ],
     howInfusionHelps:
-      "IVIG temporarily blocks the receptors the spleen uses to clear antibody-coated platelets, producing a rapid rise in platelet count — useful before procedures or during active bleeding.",
+      "IVIG temporarily blocks the receptors the spleen uses to clear antibody-coated platelets, producing a rapid rise in platelet count, which is useful before procedures or during active bleeding.",
     livingWith: [
       "Avoid NSAIDs and aspirin unless your hematologist approves",
       "Know your most recent platelet count before any dental or surgical procedure",
@@ -308,7 +308,7 @@ export const conditions: Condition[] = [
     summary:
       "A multi-system autoimmune disease that can affect skin, joints, kidneys, blood and the nervous system.",
     overview:
-      "Lupus is defined by its variability. Autoantibodies form immune complexes that deposit in tissue and drive inflammation almost anywhere in the body. Management aims to control disease activity while minimizing lifetime steroid exposure — a goal targeted biologics have made more achievable.",
+      "Lupus is defined by its variability. Autoantibodies form immune complexes that deposit in tissue and drive inflammation almost anywhere in the body. Management aims to control disease activity while minimizing lifetime steroid exposure, a goal targeted biologics have made more achievable.",
     symptoms: [
       "Joint pain and swelling",
       "Malar (butterfly) rash and photosensitivity",
@@ -320,7 +320,7 @@ export const conditions: Condition[] = [
       "Belimumab reduces the survival signal for autoreactive B-cells, lowering disease activity and, for many patients, allowing steroid tapering. Monthly infusion also creates a regular clinical touchpoint where changes get caught early.",
     livingWith: [
       "Sun protection is treatment, not cosmetics",
-      "Steroid-sparing is a legitimate treatment goal — ask about it",
+      "Steroid-sparing is a legitimate treatment goal, so ask about it",
       "Routine urine protein checks catch kidney involvement before symptoms",
     ],
   },
@@ -341,9 +341,9 @@ export const conditions: Condition[] = [
       "Shoulder and hip girdle stiffness (polymyalgia rheumatica)",
     ],
     howInfusionHelps:
-      "Tocilizumab blocks IL-6 signalling, a central driver of GCA, and allows faster steroid tapering than steroids alone — meaningfully reducing the cumulative toxicity of long-term prednisone.",
+      "Tocilizumab blocks IL-6 signalling, a central driver of GCA, and allows faster steroid tapering than steroids alone, which meaningfully reduces the cumulative toxicity of long-term prednisone.",
     livingWith: [
-      "Any new vision change is an emergency — do not wait for your next appointment",
+      "Any new vision change is an emergency. Do not wait for your next appointment",
       "Bone protection matters while you're on steroids",
       "Keep a steroid taper card with you",
     ],
@@ -356,7 +356,7 @@ export const conditions: Condition[] = [
     summary:
       "Inflammation of small blood vessels that can affect the sinuses, lungs, kidneys and nerves.",
     overview:
-      "Granulomatosis with polyangiitis and microscopic polyangiitis are ANCA-associated vasculitides — autoimmune diseases in which antibodies against neutrophil components drive small-vessel inflammation. Rituximab has become a mainstay for both remission induction and maintenance.",
+      "Granulomatosis with polyangiitis and microscopic polyangiitis are ANCA-associated vasculitides: autoimmune diseases in which antibodies against neutrophil components drive small-vessel inflammation. Rituximab has become a mainstay for both remission induction and maintenance.",
     symptoms: [
       "Chronic sinus symptoms, crusting or nosebleeds",
       "Cough, shortness of breath or coughing blood",
@@ -368,7 +368,7 @@ export const conditions: Condition[] = [
       "B-cell depletion with rituximab induces and maintains remission in ANCA-associated vasculitis with less cumulative cyclophosphamide exposure. Scheduled maintenance infusions keep patients in remission over years.",
     livingWith: [
       "Monitor urine and kidney function on the schedule your nephrologist sets",
-      "Report new sinus or pulmonary symptoms early — relapse is treatable when caught",
+      "Report new sinus or pulmonary symptoms early, because relapse is treatable when caught",
       "Infection prophylaxis is often part of the plan; take it as prescribed",
     ],
   },
@@ -380,7 +380,7 @@ export const conditions: Condition[] = [
     summary:
       "Gout that continues to flare and deposit tophi despite maximal oral urate-lowering therapy.",
     overview:
-      "Most gout responds to allopurinol or febuxostat. A minority does not — uric acid stays elevated, flares continue, and tophi accumulate in joints and soft tissue, causing erosion and disability. For those patients, enzymatic uric acid degradation is a different order of treatment.",
+      "Most gout responds to allopurinol or febuxostat. A minority does not. Uric acid stays elevated, flares continue, and tophi accumulate in joints and soft tissue, causing erosion and disability. For those patients, enzymatic uric acid degradation is a different order of treatment.",
     symptoms: [
       "Recurrent, severe joint flares despite oral therapy",
       "Visible tophi on hands, elbows, ears or feet",
@@ -391,7 +391,7 @@ export const conditions: Condition[] = [
     howInfusionHelps:
       "Pegloticase converts uric acid into allantoin, dramatically lowering serum urate and dissolving tophi that oral therapy cannot reach. It requires structured monitoring, which is exactly what a dedicated infusion suite provides.",
     livingWith: [
-      "Flares often increase early in therapy as tophi mobilize — this is expected, not failure",
+      "Flares often increase early in therapy as tophi mobilize; this is expected, not failure",
       "Prophylactic anti-inflammatory therapy is usually prescribed alongside",
       "Uric acid is checked before every dose",
     ],
@@ -412,10 +412,10 @@ export const conditions: Condition[] = [
       "Escalating use of acute medication",
     ],
     howInfusionHelps:
-      "Quarterly CGRP infusion is one of the lowest-burden preventive options available — four visits a year, thirty minutes each. We keep the lights low and the room quiet for migraine patients.",
+      "Quarterly CGRP infusion is one of the lowest-burden preventive options available: four visits a year, thirty minutes each. We keep the lights low and the room quiet for migraine patients.",
     livingWith: [
       "Limit acute medication to avoid medication-overuse headache",
-      "Keep a simple headache diary — it's the clearest evidence of response",
+      "Keep a simple headache diary; it's the clearest evidence of response",
       "Sleep regularity is one of the strongest modifiable triggers",
     ],
   },
@@ -426,7 +426,7 @@ export const conditions: Condition[] = [
     summary:
       "Loss of bone density and quality that raises the risk of fracture from minor trauma.",
     overview:
-      "Osteoporosis is silent until a fracture occurs, and the first fracture sharply raises the risk of the next. Treatment selection depends on fracture risk, kidney function and prior therapy — with IV and injectable options available for patients who cannot tolerate oral bisphosphonates.",
+      "Osteoporosis is silent until a fracture occurs, and the first fracture sharply raises the risk of the next. Treatment selection depends on fracture risk, kidney function and prior therapy, with IV and injectable options available for patients who cannot tolerate oral bisphosphonates.",
     symptoms: [
       "Fracture from a fall at standing height or less",
       "Loss of height over time",
@@ -438,7 +438,7 @@ export const conditions: Condition[] = [
       "A once-yearly infusion or twice-yearly injection eliminates the daily-pill adherence problem entirely, and avoids the esophageal irritation that makes oral bisphosphonates hard to tolerate for many patients.",
     livingWith: [
       "Calcium and vitamin D are prerequisites, not optional add-ons",
-      "Do not stop denosumab without a transition plan — rebound bone loss is real",
+      "Do not stop denosumab without a transition plan. Rebound bone loss is real",
       "Weight-bearing exercise and fall prevention are part of treatment",
     ],
   },
@@ -447,7 +447,7 @@ export const conditions: Condition[] = [
     name: "Iron Deficiency Anemia",
     specialty: "bone-health",
     summary:
-      "Low hemoglobin from inadequate iron stores — the most common nutritional deficiency worldwide.",
+      "Low hemoglobin from inadequate iron stores, the most common nutritional deficiency worldwide.",
     overview:
       "Iron deficiency causes fatigue long before hemoglobin drops enough to be called anemia. Oral iron is poorly absorbed and often poorly tolerated, and in patients with inflammatory bowel disease, chronic kidney disease, heavy menstrual bleeding or heart failure, IV repletion is both faster and more reliable.",
     symptoms: [
@@ -458,7 +458,7 @@ export const conditions: Condition[] = [
       "Craving ice or non-food substances",
     ],
     howInfusionHelps:
-      "IV iron bypasses the gut entirely. Most patients complete repletion in one or two short visits and feel the difference within weeks — without the constipation and nausea that make oral iron so hard to stay on.",
+      "IV iron bypasses the gut entirely. Most patients complete repletion in one or two short visits and feel the difference within weeks, without the constipation and nausea that make oral iron so hard to stay on.",
     livingWith: [
       "Find and treat the source of the loss; repletion alone isn't a plan",
       "Recheck iron studies a few weeks after your last dose",
@@ -473,7 +473,7 @@ export const conditions: Condition[] = [
     summary:
       "An autoimmune inflammation of the tissues behind the eye, most often associated with Graves' disease.",
     overview:
-      "Thyroid eye disease causes the muscles and fat behind the eye to expand, pushing the eye forward. There is an active inflammatory phase — typically 6 to 24 months — during which treatment can meaningfully change the outcome, followed by a stable phase in which only surgery helps.",
+      "Thyroid eye disease causes the muscles and fat behind the eye to expand, pushing the eye forward. There is an active inflammatory phase, typically 6 to 24 months, during which treatment can meaningfully change the outcome, followed by a stable phase in which only surgery helps.",
     symptoms: [
       "Bulging eyes (proptosis)",
       "Double vision",
@@ -509,7 +509,7 @@ export const conditions: Condition[] = [
       "Omalizumab reduces free IgE and, over weeks, downregulates mast cell reactivity. Administering it in-center provides the observation window anaphylaxis precautions call for.",
     livingWith: [
       "Keep taking your antihistamine as prescribed even after biologic therapy starts",
-      "Photograph flares — the pattern helps your allergist",
+      "Photograph flares. The pattern helps your allergist",
       "Most patients eventually remit; this is usually not permanent",
     ],
   },
@@ -522,7 +522,7 @@ export const conditions: Condition[] = [
     summary:
       "Bone, joint, skin, bloodstream and other infections needing a course of intravenous anti-infectives.",
     overview:
-      "Some infections need weeks of IV antibiotics but not weeks in a hospital bed. Outpatient parenteral antimicrobial therapy delivers the same drug, dose and monitoring in a comfortable outpatient suite — with the infection specialist directing therapy and labs tracked throughout.",
+      "Some infections need weeks of IV antibiotics but not weeks in a hospital bed. Outpatient parenteral antimicrobial therapy delivers the same drug, dose and monitoring in a comfortable outpatient suite, with the infection specialist directing therapy and labs tracked throughout.",
     symptoms: [
       "An infection diagnosed as requiring intravenous rather than oral therapy",
       "Bone or joint infection following surgery or injury",
@@ -534,7 +534,7 @@ export const conditions: Condition[] = [
       "You sleep at home and keep working where you can, while receiving full-strength therapy on schedule. Line care, weekly labs and direct reporting to your infectious disease physician are built into every visit.",
     livingWith: [
       "Protect your line: keep the dressing dry and call immediately about redness or fever",
-      "Do not skip doses at the end of a course — relapse risk is real",
+      "Do not skip doses at the end of a course. Relapse risk is real",
       "Weekly labs catch drug toxicity before it becomes a problem",
     ],
   },
@@ -545,7 +545,7 @@ export const conditions: Condition[] = [
     summary:
       "Physician-ordered IV fluid replacement for illness, malabsorption or chronic fluid needs.",
     overview:
-      "When oral intake cannot keep up — from hyperemesis, gastroenteritis, malabsorption, dysautonomia or post-operative losses — scheduled IV fluid support restores volume and electrolytes reliably and quickly.",
+      "When oral intake cannot keep up (hyperemesis, gastroenteritis, malabsorption, dysautonomia, post-operative losses), scheduled IV fluid support restores volume and electrolytes reliably and quickly.",
     symptoms: [
       "Persistent nausea and vomiting",
       "Lightheadedness on standing",
@@ -556,7 +556,7 @@ export const conditions: Condition[] = [
     howInfusionHelps:
       "Balanced crystalloid, dosed and paced to your physician's orders, restores intravascular volume immediately. Chronic conditions requiring recurring fluid support can be scheduled into a standing weekly slot.",
     livingWith: [
-      "Track your weight — it is the most sensitive daily marker of fluid status",
+      "Track your weight; it is the most sensitive daily marker of fluid status",
       "Oral rehydration between visits still matters",
       "Report worsening orthostatic symptoms to your physician",
     ],

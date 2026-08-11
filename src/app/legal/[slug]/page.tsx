@@ -130,7 +130,7 @@ export default async function LegalPage({
             <Reveal className="mt-14">
               <p className="rounded-[0.5rem] border border-white/8 bg-white/[0.02] px-5 py-4 text-[12.5px] leading-relaxed text-ink-500">
                 Questions about this document? Contact us and ask for the Privacy
-                Officer — we&apos;ll get you a real answer, not a form letter.
+                Officer. We&apos;ll get you a real answer, not a form letter.
               </p>
             </Reveal>
           </article>

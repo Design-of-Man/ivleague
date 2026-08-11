@@ -34,7 +34,7 @@ export function InsuranceStrip() {
             <span className="text-gradient">so you don&apos;t have to.</span>
           </>
         }
-        lead="Most major commercial plans, Medicare and Medicaid accepted — plus HSA cards at the time of infusion and Cherry payment plans when you need to spread the cost."
+        lead="Most major commercial plans, Medicare and Medicaid accepted, plus HSA cards at the time of infusion and Cherry payment plans when you need to spread the cost."
         action={
           <ButtonLink href="/insurance" variant="secondary">
             Insurance details

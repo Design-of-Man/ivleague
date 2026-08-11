@@ -35,7 +35,7 @@ export default function ProvidersPage() {
             <span className="text-gradient">We&apos;ll close the loop.</span>
           </>
         }
-        lead="Your staff should not be spending their week on benefit investigations and specialty pharmacy calls. Refer to IV League and that work leaves your office — with documentation back in your chart after every administration."
+        lead="Your staff should not be spending their week on benefit investigations and specialty pharmacy calls. Refer to IV League and that work leaves your office, with documentation back in your chart after every administration."
         trail={[
           { name: "Home", href: "/" },
           { name: "Providers", href: "/providers" },
@@ -109,7 +109,7 @@ export default function ProvidersPage() {
                 {
                   n: "03",
                   title: "Send the patient to us",
-                  body: "Give them our number or point them at the inquiry form. We'll contact your office for orders — your staff doesn't need to initiate anything.",
+                  body: "Give them our number or point them at the inquiry form. We'll contact your office for orders. Your staff doesn't need to initiate anything.",
                 },
               ].map((m) => (
                 <Reveal key={m.n}>
@@ -158,7 +158,7 @@ export default function ProvidersPage() {
         <SectionHeading
           eyebrow="Formulary at a glance"
           title="What we can administer"
-          lead="If a therapy isn't listed, ask. Our formulary follows what our referring physicians order — we routinely bring a product on for a single patient."
+          lead="If a therapy isn't listed, ask. Our formulary follows what our referring physicians order, and we routinely bring a product on for a single patient."
         />
 
         <div className="mt-14 grid gap-3 md:grid-cols-2">

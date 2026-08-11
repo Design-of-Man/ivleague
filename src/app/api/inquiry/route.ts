@@ -92,7 +92,7 @@ export async function POST(request: Request) {
 
   // Honeypot tripped — accept silently so bots don't learn anything.
   if (data.company) {
-    return NextResponse.json({ ok: true, message: "Thanks — we'll be in touch." });
+    return NextResponse.json({ ok: true, message: "Thanks, we'll be in touch." });
   }
 
   const submittedAt = new Date().toISOString();
@@ -127,7 +127,7 @@ export async function POST(request: Request) {
           from,
           to: to.split(",").map((s) => s.trim()),
           reply_to: data.email,
-          subject: `New patient inquiry — ${data.firstName} ${data.lastName}`,
+          subject: `New patient inquiry: ${data.firstName} ${data.lastName}`,
           text: lines,
         }),
       });
@@ -161,6 +161,6 @@ export async function POST(request: Request) {
   return NextResponse.json({
     ok: true,
     message:
-      "A member of our team will reach out — usually the same business day. If it's urgent, call us and we'll pick up.",
+      "A member of our team will reach out, usually the same business day. If it's urgent, call us and we'll pick up.",
   });
 }

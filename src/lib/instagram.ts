@@ -88,12 +88,12 @@ export async function fetchInstagramPosts(
 
 const PLACEHOLDER_CAPTIONS = [
   "Suite 3 is open and the recliner has heat. Weekend mornings are for catching up on treatment, not falling behind. 🩵",
-  "Prior authorization approved in 36 hours. That's the part of this job nobody posts about — and the part that gets you infusing.",
+  "Prior authorization approved in 36 hours. That's the part of this job nobody posts about, and the part that gets you infusing.",
   "New on the formulary: quarterly CGRP infusions for chronic migraine. Thirty minutes, four times a year, lights low.",
   "Iron deficiency is not just \"being tired.\" Two visits and most patients feel the difference within weeks.",
-  "Same nurse. Same chair. Same time. Continuity isn't a perk — it's clinical care.",
+  "Same nurse. Same chair. Same time. Continuity is clinical care, not a perk.",
   "Behind the scenes: every biologic we hang comes from a U.S. pharmacy held to FDA and USP standards. Every single one.",
-  "Hydration season is here. Bring a friend — every suite has a seat for someone who came with you.",
+  "Hydration season is here. Bring a friend. Every suite has a seat for someone who came with you.",
   "Referral to first infusion in under three weeks. Providers: send the order, we'll take it from there.",
   "The Myers' Cocktail has been around since the 1960s and it's still the most requested bag in the building.",
   "Free parking at the door. No garage, no ticket, no long walk in the rain.",

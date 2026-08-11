@@ -35,7 +35,7 @@ export const wellnessDrips: WellnessDrip[] = [
     name: "The Myers' Cocktail",
     tagline: "The original. Still the benchmark.",
     description:
-      "Named for Dr. John Myers, this is the formulation that started modern IV nutrient therapy — a balanced blend of B and C vitamins with magnesium and calcium. It remains the most requested infusion in the country for good reason: it addresses energy, immune function and general depletion in a single bag.",
+      "Named for Dr. John Myers, this is the formulation that started modern IV nutrient therapy: a balanced blend of B and C vitamins with magnesium and calcium. It remains the most requested infusion in the country for good reason: it addresses energy, immune function and general depletion in a single bag.",
     duration: "45–60 min",
     price: null,
     ingredients: [
@@ -52,7 +52,7 @@ export const wellnessDrips: WellnessDrip[] = [
       "Replenishes depleted micronutrients",
       "Supports overall wellness",
     ],
-    bestFor: "Anyone running on empty — the all-purpose starting point.",
+    bestFor: "Anyone running on empty. This is the all-purpose starting point.",
     accent: "teal",
     featured: true,
   },
@@ -61,7 +61,7 @@ export const wellnessDrips: WellnessDrip[] = [
     name: "NAD+ Restore",
     tagline: "Cellular energy at the source.",
     description:
-      "NAD+ is a coenzyme present in every living cell, central to how mitochondria convert fuel into usable energy — and levels decline measurably with age. Infused NAD+ is delivered slowly, over a longer session, because the rate of administration is what determines comfort.",
+      "NAD+ is a coenzyme present in every living cell, central to how mitochondria convert fuel into usable energy, and levels decline measurably with age. Infused NAD+ is delivered slowly, over a longer session, because the rate of administration is what determines comfort.",
     duration: "2–4 hrs",
     price: null,
     ingredients: [
@@ -85,7 +85,7 @@ export const wellnessDrips: WellnessDrip[] = [
     name: "Immunity Shield",
     tagline: "Get ahead of it.",
     description:
-      "A high-dose vitamin C and zinc infusion built for the moment you feel something coming on — or the week before you travel, present, compete or host. Nutrients arrive at 100% bioavailability rather than whatever your gut absorbs.",
+      "A high-dose vitamin C and zinc infusion built for the moment you feel something coming on, or the week before you travel, present, compete or host. Nutrients arrive at 100% bioavailability rather than whatever your gut absorbs.",
     duration: "45–60 min",
     price: null,
     ingredients: [
@@ -157,7 +157,7 @@ export const wellnessDrips: WellnessDrip[] = [
   {
     slug: "glow",
     name: "Glow",
-    tagline: "Skin, hair, nails — from the inside.",
+    tagline: "Skin, hair and nails, from the inside.",
     description:
       "A glutathione-forward infusion with biotin and vitamin C. Glutathione is the body's master antioxidant, binding free radicals and supporting the detoxification pathways that show up first in your skin.",
     duration: "45–60 min",
@@ -183,7 +183,7 @@ export const wellnessDrips: WellnessDrip[] = [
     name: "The Executive",
     tagline: "Focus, without the crash.",
     description:
-      "A B-complex and amino acid infusion designed for cognitive stamina rather than stimulation. No caffeine, no jitter — just the substrates your brain uses to make neurotransmitters, delivered at full strength.",
+      "A B-complex and amino acid infusion designed for cognitive stamina rather than stimulation. No caffeine and no jitter, just the substrates your brain uses to make neurotransmitters, delivered at full strength.",
     duration: "45–60 min",
     price: null,
     ingredients: [
@@ -251,7 +251,7 @@ export const injections: Injection[] = [
     slug: "lipo-c",
     name: "Lipo-C (MIC-B12)",
     description:
-      "Methionine, inositol and choline with B12 — lipotropic compounds that support fat metabolism alongside diet and exercise.",
+      "Methionine, inositol and choline with B12: lipotropic compounds that support fat metabolism alongside diet and exercise.",
     price: null,
     duration: "5 min",
   },

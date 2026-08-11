@@ -52,14 +52,14 @@ export function Hero() {
               the first frame. Everything below it can afford to arrive late.
             */}
             <h1 className="mt-8 text-hero font-semibold leading-[0.92] tracking-[-0.045em]">
-              Infusion care,
+              Infusion care
               <br />
-              <span className="text-gradient text-glow">elevated.</span>
+              <span className="text-gradient text-glow">without the hospital.</span>
             </h1>
 
             <div className="mt-8 max-w-xl">
               <p className="text-lead leading-relaxed text-ink-300">
-                Biologics, IVIG and IV therapy in private suites — administered by
+                Biologics, IVIG and IV therapy in private suites, administered by
                 nurses who know your name, with the insurance work finished before
                 you ever sit down.
               </p>

@@ -197,7 +197,7 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
               </p>
               <p className="mx-auto mt-2 max-w-sm text-[13px] leading-relaxed text-ink-500">
                 Try a brand name like Entyvio, a condition like Crohn&apos;s, or just
-                call us — we&apos;ll tell you straight whether we can help.
+                call us and we&apos;ll tell you straight whether we can help.
               </p>
               <a
                 href={site.contact.phoneHref}

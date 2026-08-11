@@ -47,7 +47,7 @@ export function SpecialtyGrid() {
             <span className="text-ink-400">One chair.</span>
           </>
         }
-        lead="Complex, chronic and autoimmune diagnoses managed alongside your prescribing physician — with a formulary broad enough that most patients never need a second site of care."
+        lead="Chronic and autoimmune diagnoses managed alongside your prescribing physician, with a formulary broad enough that most patients never need a second site of care."
         action={
           <ButtonLink href="/therapies" variant="secondary">
             Full formulary

@@ -7,17 +7,24 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import { JsonLd, MedicalDisclaimer, TickList, Badge } from "@/components/ui/Bits";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { ReviewedOn } from "@/components/ui/ReviewedOn";
 import {
   conditions,
   conditionBySlug,
   therapiesForCondition,
 } from "@/content/conditions";
 import { specialtyById } from "@/content/therapies";
+import { site } from "@/content/site";
 import {
   buildMetadata,
   breadcrumbSchema,
   medicalConditionSchema,
+  faqSchema,
+  medicalWebPageSchema,
 } from "@/lib/seo";
+import { conditionAnswer, conditionFaqs } from "@/lib/answers";
+import { AnswerBlock } from "@/components/ui/AnswerBlock";
+import { AnswerFaqs } from "@/components/sections/AnswerFaqs";
 
 export function generateStaticParams() {
   return conditions.map((c) => ({ slug: c.slug }));
@@ -66,9 +73,23 @@ export default async function ConditionPage({
     { name: c.shortName ?? c.name, href: `/conditions/${c.slug}` },
   ];
 
+  const faqs = conditionFaqs(c);
+
   return (
     <>
-      <JsonLd data={[breadcrumbSchema(trail), medicalConditionSchema(c)]} />
+      <JsonLd
+        data={[
+          medicalWebPageSchema({
+            name: `${c.name}: Infusion Therapy in ${site.address.city}, ${site.address.region}`,
+            description: c.summary,
+            path: `/conditions/${c.slug}`,
+            specialty: specialtyById(c.specialty).label,
+          }),
+          breadcrumbSchema(trail),
+          medicalConditionSchema(c),
+          faqSchema(faqs),
+        ]}
+      />
 
       <PageHeader
         eyebrow={specialty.label}
@@ -134,15 +155,21 @@ export default async function ConditionPage({
       <Section tight>
         <div className="grid gap-14 lg:grid-cols-[1.5fr_0.9fr] lg:gap-20">
           <div>
-            <Reveal>
+            <AnswerBlock>{conditionAnswer(c)}</AnswerBlock>
+
+            <Reveal className="mt-12">
               <div className="prose-iv max-w-none">
-                <h2 className="!mt-0 text-2xl font-semibold">Understanding {c.shortName ?? c.name}</h2>
+                <h2 className="!mt-0 text-2xl font-semibold">
+                  What is {c.name}?
+                </h2>
                 <p>{c.overview}</p>
               </div>
             </Reveal>
 
             <Reveal className="mt-12">
-              <h2 className="text-2xl font-semibold">Common signs and symptoms</h2>
+              <h2 className="text-2xl font-semibold">
+                What are the symptoms of {c.shortName ?? c.name}?
+              </h2>
               <p className="mt-3 text-[14.5px] leading-relaxed text-ink-400">
                 Presentation varies widely between patients. Only your physician can
                 diagnose {c.shortName ?? c.name}.
@@ -151,14 +178,18 @@ export default async function ConditionPage({
             </Reveal>
 
             <Reveal className="mt-12">
-              <h2 className="text-2xl font-semibold">How infusion therapy helps</h2>
+              <h2 className="text-2xl font-semibold">
+                How does infusion therapy treat {c.shortName ?? c.name}?
+              </h2>
               <p className="mt-4 text-[15px] leading-relaxed text-ink-200">
                 {c.howInfusionHelps}
               </p>
             </Reveal>
 
             <Reveal className="mt-12">
-              <h2 className="text-2xl font-semibold">Living with it</h2>
+              <h2 className="text-2xl font-semibold">
+                Living with {c.shortName ?? c.name}
+              </h2>
               <div className="mt-6 grid gap-3">
                 {c.livingWith.map((tip, i) => (
                   <div
@@ -174,7 +205,14 @@ export default async function ConditionPage({
               </div>
             </Reveal>
 
+            <AnswerFaqs
+              className="mt-12"
+              heading={`Common questions about ${c.shortName ?? c.name}`}
+              items={faqs}
+            />
+
             <MedicalDisclaimer className="mt-12" />
+            <ReviewedOn className="mt-6" />
           </div>
 
           <aside className="flex flex-col gap-4 lg:sticky lg:top-32 lg:self-start">
@@ -224,7 +262,7 @@ export default async function ConditionPage({
           <SectionHeading
             eyebrow="Treatment options"
             title={`Therapies for ${c.shortName ?? c.name}`}
-            lead="Which therapy is right for you depends on disease activity, prior treatment and your physician's judgement — not on what we happen to stock."
+            lead="Which therapy is right for you depends on disease activity, prior treatment and your physician's judgement, not on what we happen to stock."
             size="sm"
           />
           <Stagger className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

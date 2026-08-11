@@ -33,7 +33,7 @@ const sora = Sora({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} — Outpatient Infusion Center in ${site.address.city}, ${site.address.region}`,
+    default: `${site.name} | Outpatient Infusion Center in ${site.address.city}, ${site.address.region}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -60,7 +60,7 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: site.url,
     siteName: site.name,
-    title: `${site.name} — ${site.tagline}`,
+    title: `${site.name} | ${site.tagline}`,
     description: site.description,
   },
   twitter: { card: "summary_large_image" },

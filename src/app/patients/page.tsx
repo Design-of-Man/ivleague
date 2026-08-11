@@ -13,7 +13,7 @@ import { site } from "@/content/site";
 export const metadata = buildMetadata({
   title: "What to Expect as a Patient",
   description:
-    "Your first infusion at IV League Infusions in Midlothian, VA — from referral and prior authorization through what to bring, what the day looks like, and how long it takes.",
+    "Your first infusion at IV League Infusions in Midlothian, VA: from referral and prior authorization through what to bring, what the day looks like, and how long it takes.",
   path: "/patients",
 });
 
@@ -22,12 +22,12 @@ const BRING = [
   "A current list of medications, including over-the-counter supplements",
   "Any labs or paperwork your physician gave you",
   "A short-sleeved or loose-sleeved top for easy IV access",
-  "Headphones, a laptop or a book — Wi-Fi is fast and outlets are at every chair",
+  "Headphones, a laptop or a book. Wi-Fi is fast and outlets are at every chair",
   "A snack, especially for infusions over two hours",
 ];
 
 const AVOID = [
-  "Don't skip breakfast — eat a normal meal unless your physician said otherwise",
+  "Don't skip breakfast; eat a normal meal unless your physician said otherwise",
   "Don't arrive dehydrated; it makes IV access slower and more uncomfortable",
   "Don't schedule a flight the same day as a first-dose infusion",
   "Don't stop your other medications without talking to your prescriber",
@@ -42,12 +42,12 @@ const DAY = [
   {
     time: "First 10 minutes",
     title: "IV access",
-    body: "We place the smallest catheter your therapy allows. Tell us which arm works and which veins have failed before — we write it down and use it next time.",
+    body: "We place the smallest catheter your therapy allows. Tell us which arm works and which veins have failed before. We write it down and use it next time.",
   },
   {
     time: "During",
     title: "The infusion",
-    body: "Rate is set by your physician's orders and titrated by your nurse. Vitals are checked at set intervals. Say something the moment anything feels off — a rate change usually fixes it.",
+    body: "Rate is set by your physician's orders and titrated by your nurse. Vitals are checked at set intervals. Say something the moment anything feels off. A rate change usually fixes it.",
   },
   {
     time: "After",
@@ -80,7 +80,7 @@ export default function PatientsPage() {
             <span className="text-gradient">before you sit down.</span>
           </>
         }
-        lead="Infusion therapy is intimidating the first time and routine by the third. Here is exactly what to expect — from the referral your physician writes to the moment you walk back out to your car."
+        lead="Infusion therapy is intimidating the first time and routine by the third. Here is exactly what to expect, from the referral your physician writes to the moment you walk back out to your car."
         trail={[
           { name: "Home", href: "/" },
           { name: "Patients", href: "/patients" },
@@ -213,7 +213,7 @@ export default function PatientsPage() {
             <span className="text-gradient">Just call. Someone picks up.</span>
           </>
         }
-        body={`Reach the center directly at ${site.contact.phone} — Monday through Friday until 6:00 PM, and weekend mornings.`}
+        body={`Reach the center directly at ${site.contact.phone}, Monday through Friday until 6:00 PM, and weekend mornings.`}
         primary={{ label: "Start intake", href: "/contact#inquiry" }}
       />
     </>

@@ -13,6 +13,7 @@ import {
   TickList,
 } from "@/components/ui/Bits";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { ReviewedOn } from "@/components/ui/ReviewedOn";
 import { ChairTimeScale } from "@/components/sections/ChairTimeScale";
 import {
   therapies,
@@ -25,7 +26,12 @@ import {
   buildMetadata,
   breadcrumbSchema,
   medicalTherapySchema,
+  faqSchema,
+  medicalWebPageSchema,
 } from "@/lib/seo";
+import { therapyAnswer, therapyFaqs, therapyArticle } from "@/lib/answers";
+import { AnswerBlock } from "@/components/ui/AnswerBlock";
+import { AnswerFaqs } from "@/components/sections/AnswerFaqs";
 
 export function generateStaticParams() {
   return therapies.map((t) => ({ slug: t.slug }));
@@ -73,9 +79,24 @@ export default async function TherapyPage({
     { name: t.brand, href: `/therapies/${t.slug}` },
   ];
 
+  const faqs = therapyFaqs(t);
+  const an = therapyArticle(t);
+
   return (
     <>
-      <JsonLd data={[breadcrumbSchema(trail), medicalTherapySchema(t)]} />
+      <JsonLd
+        data={[
+          medicalWebPageSchema({
+            name: `${t.brand} (${t.generic}) Infusion Therapy`,
+            description: t.summary,
+            path: `/therapies/${t.slug}`,
+            specialty: specialty.label,
+          }),
+          breadcrumbSchema(trail),
+          medicalTherapySchema(t),
+          faqSchema(faqs),
+        ]}
+      />
 
       <PageHeader
         eyebrow={specialty.label}
@@ -121,15 +142,21 @@ export default async function TherapyPage({
       <Section tight>
         <div className="grid gap-14 lg:grid-cols-[1.5fr_0.9fr] lg:gap-20">
           <div>
-            <Reveal>
+            <AnswerBlock>{therapyAnswer(t)}</AnswerBlock>
+
+            <Reveal className="mt-12">
               <div className="prose-iv max-w-none">
-                <h2 className="!mt-0 text-2xl font-semibold">How it works</h2>
+                <h2 className="!mt-0 text-2xl font-semibold">
+                  How does {t.brand} work?
+                </h2>
                 <p>{t.howItWorks}</p>
               </div>
             </Reveal>
 
             <Reveal className="mt-12">
-              <h2 className="text-2xl font-semibold">What it treats</h2>
+              <h2 className="text-2xl font-semibold">
+                What is {t.brand} used for?
+              </h2>
               <p className="mt-3 text-[14.5px] leading-relaxed text-ink-400">
                 {t.brand} is used in the management of the following. Whether it is right
                 for you is a decision for you and your prescribing physician.
@@ -138,7 +165,9 @@ export default async function TherapyPage({
             </Reveal>
 
             <Reveal className="mt-12">
-              <h2 className="text-2xl font-semibold">Your visit</h2>
+              <h2 className="text-2xl font-semibold">
+                What happens during {an} {t.brand} infusion?
+              </h2>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div className="card p-6">
                   <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
@@ -160,7 +189,9 @@ export default async function TherapyPage({
             </Reveal>
 
             <Reveal className="mt-12">
-              <h2 className="text-2xl font-semibold">Schedule & logistics</h2>
+              <h2 className="text-2xl font-semibold">
+                How often is {t.brand} given?
+              </h2>
               <dl className="mt-6">
                 <SpecRow label="Route" value={t.route} />
                 <SpecRow label="Typical chair time" value={t.duration} />
@@ -188,7 +219,14 @@ export default async function TherapyPage({
               </dl>
             </Reveal>
 
+            <AnswerFaqs
+              className="mt-12"
+              heading={`Common questions about ${t.brand}`}
+              items={faqs}
+            />
+
             <MedicalDisclaimer className="mt-12" />
+            <ReviewedOn className="mt-6" />
           </div>
 
           {/* ------------------------------ Sidebar ---------------------------- */}
@@ -234,7 +272,7 @@ export default async function TherapyPage({
                 </h3>
                 <p className="mt-3 text-[13.5px] leading-relaxed text-ink-400">
                   Send us your prescriber&apos;s name and your insurance. We collect the
-                  order, verify benefits and pursue prior authorization — most patients
+                  order, verify benefits and pursue prior authorization. Most patients
                   are infusing in two to three weeks.
                 </p>
               </div>

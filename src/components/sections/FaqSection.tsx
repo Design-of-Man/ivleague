@@ -55,7 +55,7 @@ export function FaqSection({
             }
             lead={
               lead ??
-              "Everything patients ask us in the first phone call — referrals, insurance, timing, and what the day actually looks like."
+              "Everything patients ask us in the first phone call: referrals, insurance, timing, and what the day actually looks like."
             }
           />
 
@@ -137,7 +137,7 @@ export function FaqSection({
             />
           ) : (
             <p className="rounded-[0.625rem] border border-white/8 bg-white/[0.02] px-6 py-10 text-center text-[14px] text-ink-400">
-              No questions match that search. Try a different term — or just{" "}
+              No questions match that search. Try a different term, or just{" "}
               <a href="/contact" className="text-teal-300 underline underline-offset-4">
                 ask us directly
               </a>

@@ -38,7 +38,7 @@ const DIRECTIONS = [
   "From Route 288: exit at Hull Street Road (Route 360) east, then follow signs toward Brandermill.",
   "From Route 360 (Hull Street): turn onto Old Hundred Road, then Fox Chase Lane.",
   "From Midlothian Turnpike (Route 60): take Old Hundred Road south toward Brandermill.",
-  "Free surface parking is directly at the entrance — no garage, no ticket, no long walk.",
+  "Free surface parking is directly at the entrance, with no garage, no ticket and no long walk.",
 ];
 
 export default function LocationsPage() {
@@ -60,7 +60,7 @@ export default function LocationsPage() {
             <span className="text-gradient">Midlothian, Virginia.</span>
           </>
         }
-        lead="We are deliberately a single location. It's the reason your nurse knows your name, your veins and your schedule — and the reason we can hold a standing appointment slot for you."
+        lead="We are deliberately a single location. It's the reason your nurse knows your name, your veins and your schedule, and the reason we can hold a standing appointment slot for you."
         trail={[
           { name: "Home", href: "/" },
           { name: "Locations", href: "/locations" },
@@ -76,7 +76,7 @@ export default function LocationsPage() {
             <SectionHeading eyebrow="Getting here" title="Directions & parking" size="sm" />
             <TickList items={DIRECTIONS} className="mt-8" />
             <p className="mt-8 rounded-[0.5rem] border border-white/8 bg-white/[0.02] px-5 py-4 text-[13px] leading-relaxed text-ink-400">
-              Arriving for a long infusion? Bring a companion — every suite has a seat for
+              Arriving for a long infusion? Bring a companion. Every suite has a seat for
               a guest, and there&apos;s no time limit on parking.
             </p>
           </div>
@@ -93,7 +93,7 @@ export default function LocationsPage() {
               ))}
             </Stagger>
             <p className="mt-8 text-[13.5px] leading-relaxed text-ink-400">
-              Patients regularly drive from across greater Richmond and central Virginia —
+              Patients regularly drive from across greater Richmond and central Virginia,
               usually because the total cost of care here beats the hospital outpatient
               department by enough to make the drive worth it several times over.
             </p>
@@ -106,7 +106,7 @@ export default function LocationsPage() {
         <SectionHeading
           eyebrow="Hours"
           title="Open seven days"
-          lead="Including weekend mornings — so treatment stops competing with work and school."
+          lead="Including weekend mornings, so treatment stops competing with work and school."
         />
 
         <Reveal className="mt-12 overflow-hidden rounded-[0.625rem] border border-white/8">

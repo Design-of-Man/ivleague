@@ -9,7 +9,7 @@ export const site = {
   name: "IV League Infusions",
   shortName: "IV League",
   legalName: "IV League Infusion Services",
-  tagline: "Infusion care, elevated.",
+  tagline: "Infusion care without the hospital.",
   description:
     "A locally owned outpatient infusion center in Midlothian, Virginia. Biologic infusions, IVIG, IV antibiotics and wellness therapies delivered in private suites by nurses who know your name.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://ivlinfusions.com",
@@ -102,7 +102,7 @@ export const navigation: NavItem[] = [
       label: "Browse the full formulary",
       href: "/therapies",
       blurb:
-        "Biologics, IVIG, iron, bone health and IV anti-infectives — filter by specialty or search by brand.",
+        "Biologics, IVIG, iron, bone health and IV anti-infectives. Filter by specialty or search by brand.",
     },
     children: [
       {

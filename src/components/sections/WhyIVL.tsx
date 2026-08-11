@@ -50,7 +50,7 @@ export function WhyIVL() {
           />
           <p className="font-display text-[clamp(1.25rem,1rem+1.2vw,1.75rem)] font-medium leading-snug tracking-tight text-ink-100">
             &ldquo;We administer all intravenous therapies and injections safely, in
-            accordance with the highest standards of care and protocols — using only
+            accordance with the highest standards of care and protocols, using only
             high-quality pharmaceuticals from U.S. pharmacies that adhere to strict FDA
             and USP guidelines.&rdquo;
           </p>

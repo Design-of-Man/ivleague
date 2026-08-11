@@ -11,7 +11,7 @@ import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Inside the Infusion Suite",
   description:
-    "Private and semi-private infusion suites in Midlothian, VA — heated massaging recliners, high-speed Wi-Fi, flat-screen TVs, room for a guest and free parking at the door.",
+    "Private and semi-private infusion suites in Midlothian, VA: heated massaging recliners, high-speed Wi-Fi, flat-screen TVs, room for a guest and free parking at the door.",
   path: "/suite",
 });
 
@@ -47,7 +47,7 @@ export default function SuitePage() {
             <span className="text-gradient">who&apos;ve sat in the chair.</span>
           </>
         }
-        lead="Infusion centers are usually designed around throughput. This one is designed around the four hours you spend in it — heat, quiet, good light, fast Wi-Fi, and a nurse within line of sight the entire time."
+        lead="Infusion centers are usually designed around throughput. This one is designed around the four hours you spend in it: heat, quiet, good light, fast Wi-Fi, and a nurse within line of sight the entire time."
         trail={[
           { name: "Home", href: "/" },
           { name: "The Suite", href: "/suite" },
@@ -84,7 +84,7 @@ export default function SuitePage() {
         <Reveal delay={0.1}>
           <p className="mt-6 text-[12.5px] leading-relaxed text-ink-500">
             Interior photography is scheduled. These panels are placeholders and will be
-            replaced with real images of the center — the layout and captions are final.
+            replaced with real images of the center. The layout and captions are final.
           </p>
         </Reveal>
       </Section>
@@ -119,7 +119,7 @@ export default function SuitePage() {
               ],
               [
                 "Emergency preparedness",
-                "Reaction protocols, emergency medications and trained staff on site for every infusion — including first doses, which is when reactions are most likely.",
+                "Reaction protocols, emergency medications and trained staff on site for every infusion, including first doses, which is when reactions are most likely.",
               ],
               [
                 "Closed-loop documentation",
@@ -148,7 +148,7 @@ export default function SuitePage() {
             <span className="text-gradient">before you commit.</span>
           </>
         }
-        body="We'll walk you through the suite, show you the chair you'd be in, and answer whatever you want to ask. No appointment required — call ahead and we'll make time."
+        body="We'll walk you through the suite, show you the chair you'd be in, and answer whatever you want to ask. No appointment required. Call ahead and we'll make time."
         primary={{ label: "Schedule a tour", href: "/contact" }}
       />
     </>

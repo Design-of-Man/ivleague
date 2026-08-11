@@ -15,7 +15,7 @@ export function LocationSection() {
             <span className="text-ink-400">Midlothian, Virginia.</span>
           </>
         }
-        lead="Minutes from Brandermill, Woodlake and Route 288 — with free parking at the door and no garage to circle."
+        lead="Minutes from Brandermill, Woodlake and Route 288, with free parking at the door and no garage to circle."
       />
 
       <div className="mt-14 grid gap-4 lg:grid-cols-[1.35fr_0.65fr]">

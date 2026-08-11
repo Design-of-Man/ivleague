@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { site } from "@/content/site";
+import { CONTENT_REVIEWED_ISO } from "@/content/reviewed";
 
 const BASE = site.url;
 
@@ -155,6 +156,46 @@ export function webSiteSchema() {
   };
 }
 
+/**
+ * MedicalWebPage wrapper for the clinical detail templates.
+ *
+ * This is the schema that matters most for YMYL health content: `lastReviewed`
+ * is an explicit freshness and accountability signal, and answer engines weight
+ * recency heavily when choosing between two sources that say the same thing.
+ * `speakable` marks the standalone answer paragraph as the passage to read
+ * aloud for a voice query.
+ *
+ * `reviewedBy` is deliberately absent. It is the single strongest E-E-A-T field
+ * available here and it needs a named clinician with credentials. Inventing one
+ * for a real medical practice is not a trade worth making for a ranking signal,
+ * so it stays out until the client supplies a name (see CONTENT-REVIEW.md).
+ */
+export function medicalWebPageSchema(opts: {
+  name: string;
+  description: string;
+  path: string;
+  specialty?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    name: opts.name,
+    description: opts.description,
+    url: `${BASE}${opts.path}`,
+    inLanguage: "en-US",
+    lastReviewed: CONTENT_REVIEWED_ISO,
+    dateModified: CONTENT_REVIEWED_ISO,
+    ...(opts.specialty ? { specialty: opts.specialty } : {}),
+    isPartOf: { "@id": `${BASE}/#website` },
+    publisher: { "@id": `${BASE}/#organization` },
+    about: { "@id": `${BASE}${opts.path}#subject` },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["[data-answer]"],
+    },
+  };
+}
+
 export function breadcrumbSchema(trail: { name: string; href: string }[]) {
   return {
     "@context": "https://schema.org",
@@ -180,6 +221,36 @@ export function faqSchema(items: { q: string; a: string }[]) {
   };
 }
 
+/**
+ * Directory pages as a structured set.
+ *
+ * A crawler can reach all 31 therapy pages through links, but an answer engine
+ * asked "what does IV League treat?" benefits from one object that says the
+ * formulary is 31 items and names them in order. Cheap, and it is the honest
+ * shape of the page.
+ */
+export function itemListSchema(opts: {
+  name: string;
+  path: string;
+  items: { name: string; path: string; description?: string }[];
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: opts.name,
+    url: `${BASE}${opts.path}`,
+    numberOfItems: opts.items.length,
+    itemListOrder: "https://schema.org/ItemListUnordered",
+    itemListElement: opts.items.map((it, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: it.name,
+      url: `${BASE}${it.path}`,
+      ...(it.description ? { description: it.description } : {}),
+    })),
+  };
+}
+
 export function medicalTherapySchema(t: {
   brand: string;
   generic: string;
@@ -190,6 +261,7 @@ export function medicalTherapySchema(t: {
   return {
     "@context": "https://schema.org",
     "@type": "MedicalTherapy",
+    "@id": `${BASE}/therapies/${t.slug}#subject`,
     name: t.brand,
     alternateName: t.generic,
     description: t.summary,
@@ -212,6 +284,7 @@ export function medicalConditionSchema(c: {
   return {
     "@context": "https://schema.org",
     "@type": "MedicalCondition",
+    "@id": `${BASE}/conditions/${c.slug}#subject`,
     name: c.name,
     description: c.summary,
     url: `${BASE}/conditions/${c.slug}`,

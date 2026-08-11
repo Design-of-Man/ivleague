@@ -9,7 +9,7 @@ import { faqs } from "@/content/practice";
 export const metadata = buildMetadata({
   title: "Patient FAQ",
   description:
-    "Answers about referrals, insurance, prior authorization, appointment length, what to bring, driving home and more — IV League Infusions, Midlothian VA.",
+    "Answers about referrals, insurance, prior authorization, appointment length, what to bring, driving home and more. IV League Infusions, Midlothian VA.",
   path: "/patients/faq",
 });
 
@@ -71,7 +71,7 @@ export default function FaqPage() {
             <span className="text-gradient">Ask a human.</span>
           </>
         }
-        body="Our phone is answered by the people who actually work here. Describe your situation and you'll get a straight answer — including if we're not the right place for you."
+        body="Our phone is answered by the people who actually work here. Describe your situation and you'll get a straight answer, including if we're not the right place for you."
         primary={{ label: "Contact us", href: "/contact" }}
       />
     </>

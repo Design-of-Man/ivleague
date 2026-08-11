@@ -34,7 +34,7 @@ export default function ContactPage() {
             <span className="text-gradient">and a diagnosis.</span>
           </>
         }
-        lead="That's genuinely all we need to begin. We'll contact your physician for orders, verify your benefits, pursue prior authorization and call you with a time that works."
+        lead="That's all we need to begin. We'll contact your physician for orders, verify your benefits, pursue prior authorization and call you with a time that works."
         trail={[
           { name: "Home", href: "/" },
           { name: "Contact", href: "/contact" },

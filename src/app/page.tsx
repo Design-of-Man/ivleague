@@ -20,7 +20,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Outpatient Infusion Center in Midlothian, VA",
   description:
-    "IV League Infusions is a locally owned outpatient infusion center in Midlothian, Virginia. Biologics, IVIG, IV antibiotics, iron and wellness infusions in private suites — with insurance and prior authorization handled for you.",
+    "IV League Infusions is a locally owned outpatient infusion center in Midlothian, Virginia. Biologics, IVIG, IV antibiotics, iron and wellness infusions in private suites, with insurance and prior authorization handled for you.",
   path: "/",
 });
 

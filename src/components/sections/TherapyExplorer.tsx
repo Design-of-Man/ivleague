@@ -206,7 +206,7 @@ export function TherapyExplorer() {
           </p>
           <p className="mx-auto mt-3 max-w-md text-[14px] leading-relaxed text-ink-400">
             Our formulary grows with what our referring physicians order. If
-            your medication isn&apos;t listed, call us — we can often bring it
+            your medication isn&apos;t listed, call us. We can often bring it
             on.
           </p>
           <Link

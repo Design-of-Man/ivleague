@@ -24,7 +24,7 @@ export function WellnessRail() {
             <span className="text-gradient">applied to feeling good.</span>
           </>
         }
-        lead="Hydration, vitamin and nutrient therapy administered by the same nurses, in the same suites, under the same protocols as our specialty care. Screened by a clinician — never a vending machine."
+        lead="Hydration, vitamin and nutrient therapy administered by the same nurses, in the same suites, under the same protocols as our specialty care. Screened by a clinician, never a vending machine."
         action={
           <ButtonLink href="/wellness" variant="secondary">
             Full drip menu

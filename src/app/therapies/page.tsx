@@ -4,13 +4,13 @@ import { Section } from "@/components/ui/Section";
 import { TherapyExplorer } from "@/components/sections/TherapyExplorer";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { JsonLd, MedicalDisclaimer, StatTile } from "@/components/ui/Bits";
-import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
+import { buildMetadata, breadcrumbSchema, itemListSchema } from "@/lib/seo";
 import { therapies, specialties } from "@/content/therapies";
 
 export const metadata = buildMetadata({
   title: "Infusion Therapies & Formulary",
   description:
-    "Browse the full IV League Infusions formulary — biologics, IVIG, IV iron, bone health, anti-infectives and more. Filter by specialty or search by brand or generic name.",
+    "Browse the full IV League Infusions formulary: biologics, IVIG, IV iron, bone health, anti-infectives and more. Filter by specialty or search by brand or generic name.",
   path: "/therapies",
   keywords: [
     "infusion therapy list Midlothian VA",
@@ -25,10 +25,21 @@ export default function TherapiesPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", href: "/" },
-          { name: "Therapies", href: "/therapies" },
-        ])}
+        data={[
+          breadcrumbSchema([
+            { name: "Home", href: "/" },
+            { name: "Therapies", href: "/therapies" },
+          ]),
+          itemListSchema({
+            name: "IV League Infusions formulary",
+            path: "/therapies",
+            items: therapies.map((t) => ({
+              name: `${t.brand} (${t.generic})`,
+              path: `/therapies/${t.slug}`,
+              description: t.summary,
+            })),
+          }),
+        ]}
       />
 
       <PageHeader
@@ -40,7 +51,7 @@ export default function TherapiesPage() {
             <span className="text-gradient">in one place.</span>
           </>
         }
-        lead="Specialty biologics, immune globulin, iron, bone health agents and IV anti-infectives — all ordered by your physician and sourced from U.S. pharmacies that adhere to strict FDA and USP guidelines."
+        lead="Specialty biologics, immune globulin, iron, bone health agents and IV anti-infectives, all ordered by your physician and sourced from U.S. pharmacies that adhere to strict FDA and USP guidelines."
         trail={[
           { name: "Home", href: "/" },
           { name: "Therapies", href: "/therapies" },

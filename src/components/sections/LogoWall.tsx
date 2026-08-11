@@ -36,7 +36,7 @@ export function LogoWall({
             <span className="text-gradient">and we chase all of them.</span>
           </>
         }
-        lead="Most major commercial plans, Medicare and Medicaid — plus HSA cards at the time of infusion and Cherry payment plans. We verify your benefits before anything is scheduled."
+        lead="Most major commercial plans, Medicare and Medicaid, plus HSA cards at the time of infusion and Cherry payment plans. We verify your benefits before anything is scheduled."
         action={
           <ButtonLink href="/insurance" variant="secondary">
             Insurance details

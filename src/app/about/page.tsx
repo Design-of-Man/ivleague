@@ -13,7 +13,7 @@ import { site } from "@/content/site";
 export const metadata = buildMetadata({
   title: "About IV League Infusions",
   description:
-    "A locally owned outpatient infusion center in Midlothian, Virginia, caring for adult patients with complex chronic conditions — plus wellness and regenerative infusions.",
+    "A locally owned outpatient infusion center in Midlothian, Virginia, caring for adult patients with complex chronic conditions, plus wellness and regenerative infusions.",
   path: "/about",
 });
 
@@ -36,7 +36,7 @@ export default function AboutPage() {
             <span className="text-gradient">on purpose.</span>
           </>
         }
-        lead="IV League Infusions cares for patients requiring initial or ongoing infusions or injections while relaxing in comfort during treatment. We treat adult patients with complex chronic conditions — Crohn's disease, rheumatoid arthritis, multiple sclerosis, immune system disorders and many others — and administer wellness and regenerative infusions to help promote a healthy lifestyle."
+        lead="IV League Infusions cares for patients requiring initial or ongoing infusions or injections while relaxing in comfort during treatment. We treat adult patients with complex chronic conditions: Crohn's disease, rheumatoid arthritis, multiple sclerosis, immune system disorders and many others, and administer wellness and regenerative infusions to help promote a healthy lifestyle."
         trail={[
           { name: "Home", href: "/" },
           { name: "About", href: "/about" },
@@ -71,7 +71,7 @@ export default function AboutPage() {
             </p>
             <p>
               Every one of those is a logistics problem wearing a clinical costume. IV
-              League was built to solve the logistics — so that the clinical part, the
+              League was built to solve the logistics, so that the clinical part, the
               part that actually works, gets to happen on schedule.
             </p>
             <p>
@@ -140,7 +140,7 @@ export default function AboutPage() {
               <span className="text-gradient">handful of people.</span>
             </>
           }
-          lead="Continuity is the whole point. Our nurses learn which arm works, which premedication you tolerate, and what your kids are named — and that knowledge stays in the building."
+          lead="Continuity is the whole point. Our nurses learn which arm works, which premedication you tolerate, and what your kids are named, and that knowledge stays in the building."
         />
 
         <Reveal className="mt-12">

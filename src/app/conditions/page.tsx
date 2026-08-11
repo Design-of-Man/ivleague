@@ -5,14 +5,14 @@ import { Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { Badge, JsonLd, MedicalDisclaimer, StatTile } from "@/components/ui/Bits";
-import { buildMetadata, breadcrumbSchema } from "@/lib/seo";
+import { buildMetadata, breadcrumbSchema, itemListSchema } from "@/lib/seo";
 import { conditions, therapiesForCondition } from "@/content/conditions";
 import { specialties } from "@/content/therapies";
 
 export const metadata = buildMetadata({
   title: "Conditions We Treat",
   description:
-    "Crohn's disease, ulcerative colitis, rheumatoid arthritis, multiple sclerosis, severe asthma, immune deficiency and more — chronic and complex conditions managed at IV League Infusions in Midlothian, VA.",
+    "Crohn's disease, ulcerative colitis, rheumatoid arthritis, multiple sclerosis, severe asthma, immune deficiency and more. Chronic and complex conditions managed at IV League Infusions in Midlothian, VA.",
   path: "/conditions",
 });
 
@@ -27,10 +27,21 @@ export default function ConditionsPage() {
   return (
     <>
       <JsonLd
-        data={breadcrumbSchema([
-          { name: "Home", href: "/" },
-          { name: "Conditions", href: "/conditions" },
-        ])}
+        data={[
+          breadcrumbSchema([
+            { name: "Home", href: "/" },
+            { name: "Conditions", href: "/conditions" },
+          ]),
+          itemListSchema({
+            name: "Conditions treated at IV League Infusions",
+            path: "/conditions",
+            items: conditions.map((c) => ({
+              name: c.name,
+              path: `/conditions/${c.slug}`,
+              description: c.summary,
+            })),
+          }),
+        ]}
       />
 
       <PageHeader
@@ -42,7 +53,7 @@ export default function ConditionsPage() {
             <span className="text-gradient">managed close to home.</span>
           </>
         }
-        lead="We care for adult patients with chronic and complex conditions — inflammatory bowel disease, inflammatory arthritis, multiple sclerosis, immune system disorders and more — alongside the physician who prescribed your therapy."
+        lead="We care for adult patients with chronic and complex conditions: inflammatory bowel disease, inflammatory arthritis, multiple sclerosis, immune system disorders and more, alongside the physician who prescribed your therapy."
         trail={[
           { name: "Home", href: "/" },
           { name: "Conditions", href: "/conditions" },
@@ -123,7 +134,7 @@ export default function ConditionsPage() {
           <p className="mx-auto mt-3 max-w-xl text-[14.5px] leading-relaxed text-ink-400">
             This page reflects what our referring physicians order most. It is not the
             limit of what we can administer. If your doctor has written for an infusion,
-            call us — the answer is usually yes.
+            call us. The answer is usually yes.
           </p>
           <Link
             href="/contact"

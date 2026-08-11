@@ -14,7 +14,7 @@ export const intakeSteps = [
   {
     n: "01",
     title: "Submit a new patient inquiry",
-    body: "Fill out the inquiry form on this site or call us directly. A member of our team gets back to you — usually the same business day — to confirm your diagnosis, your prescribing physician and your insurance.",
+    body: "Fill out the inquiry form on this site or call us directly. A member of our team gets back to you, usually the same business day, to confirm your diagnosis, your prescribing physician and your insurance.",
     detail:
       "You do not need paperwork in hand to start. A name, a diagnosis and a phone number is enough for us to begin.",
     duration: "5 minutes",
@@ -22,7 +22,7 @@ export const intakeSteps = [
   {
     n: "02",
     title: "We collect your orders",
-    body: "We contact your physician's office directly for medication orders, demographics, vitals, recent labs and the clinical documentation your plan will require. You don't chase records — we do.",
+    body: "We contact your physician's office directly for medication orders, demographics, vitals, recent labs and the clinical documentation your plan will require. You don't chase records. We do.",
     detail:
       "This is where most infusion referrals stall. We treat it as our job, not yours.",
     duration: "1–3 business days",
@@ -30,7 +30,7 @@ export const intakeSteps = [
   {
     n: "03",
     title: "Benefits check & prior authorization",
-    body: "Once your chart is complete, we verify your benefits and submit for prior authorization. You'll get a clear picture of your expected out-of-pocket cost before anything is scheduled — no surprises.",
+    body: "Once your chart is complete, we verify your benefits and submit for prior authorization. You'll get a clear picture of your expected out-of-pocket cost before anything is scheduled, so nothing about the cost arrives as a surprise.",
     detail:
       "If a copay assistance program or manufacturer foundation applies to your therapy, we enroll you.",
     duration: "Typically 48 hours to 2 weeks, plan-dependent",
@@ -40,13 +40,13 @@ export const intakeSteps = [
     title: "We order your medication",
     body: "With authorization in hand, your medication is ordered from a U.S. pharmacy that adheres to strict FDA and USP guidelines. Nothing is compounded off-label and nothing is sourced overseas.",
     detail:
-      "Specialty biologics are patient-specific — your drug is ordered for you by name.",
+      "Specialty biologics are patient-specific: your drug is ordered for you by name.",
     duration: "2–5 business days",
   },
   {
     n: "05",
     title: "Schedule at your convenience",
-    body: "We schedule your infusion for a time that actually works — early mornings, evenings until 6, and weekend mornings. Recurring appointments are locked in so you get the same slot and the same nurse.",
+    body: "We schedule your infusion for a time that actually works: early mornings, evenings until 6, and weekend mornings. Recurring appointments are locked in so you get the same slot and the same nurse.",
     detail:
       "Most patients are infusing within two to three weeks of first contact.",
     duration: "Your call",
@@ -70,7 +70,7 @@ export const amenities = [
   {
     icon: "armchair",
     title: "Electric lift recliners",
-    body: "Heated, massaging, fully reclining chairs — not hospital furniture. They lift to help you stand at the end of a long infusion.",
+    body: "Heated, massaging, fully reclining chairs, not hospital furniture. They lift to help you stand at the end of a long infusion.",
     span: "lg",
   },
   {
@@ -170,7 +170,7 @@ export const insurancePlans = [
 export const paymentOptions = [
   {
     title: "Commercial insurance",
-    body: "We accept most major commercial plans and handle prior authorization end to end. If we're out of network with your plan, we'll tell you before you schedule — not after you're billed.",
+    body: "We accept most major commercial plans and handle prior authorization end to end. If we're out of network with your plan, we'll tell you before you schedule, not after you're billed.",
     icon: "shield-check",
   },
   {
@@ -215,12 +215,12 @@ export const faqs: Faq[] = [
   {
     category: "Getting started",
     q: "Do I need a referral?",
-    a: "Yes. IV League Infusions requires a physician referral for every patient, regardless of treatment. If you don't have one yet, call us — we'll talk you through exactly what to ask your physician for, and in most cases we can request it on your behalf once you give us their name.",
+    a: "Yes. IV League Infusions requires a physician referral for every patient, regardless of treatment. If you don't have one yet, call us and we'll talk you through exactly what to ask your physician for, and in most cases we can request it on your behalf once you give us their name.",
   },
   {
     category: "Getting started",
     q: "How do I become a patient?",
-    a: "Start by filling out the New Patient Inquiry form on this site, or call (804) 397-6286. A member of our team will be in touch. We then contact your physician for medication orders, insurance details, and clinical information — demographics, vitals, labs — needed to authorize treatment. Once we have everything, we obtain prior authorization, order your medication, and schedule your infusion at a time convenient for you.",
+    a: "Start by filling out the New Patient Inquiry form on this site, or call (804) 397-6286. A member of our team will be in touch. We then contact your physician for medication orders, insurance details, and clinical information (demographics, vitals, labs) needed to authorize treatment. Once we have everything, we obtain prior authorization, order your medication, and schedule your infusion at a time convenient for you.",
   },
   {
     category: "Getting started",
@@ -235,7 +235,7 @@ export const faqs: Faq[] = [
   {
     category: "Insurance & cost",
     q: "What insurance do you accept?",
-    a: "We accept most major commercial insurances including Aetna, Anthem, BlueCross/BlueShield, Cigna, Coventry, Humana, Tricare, Multi-Plan and United Healthcare, as well as Medicare, Medicaid and self-pay. Contact us to confirm whether we accept your specific plan — network participation varies by product line.",
+    a: "We accept most major commercial insurances including Aetna, Anthem, BlueCross/BlueShield, Cigna, Coventry, Humana, Tricare, Multi-Plan and United Healthcare, as well as Medicare, Medicaid and self-pay. Contact us to confirm whether we accept your specific plan, since network participation varies by product line.",
   },
   {
     category: "Insurance & cost",
@@ -250,7 +250,7 @@ export const faqs: Faq[] = [
   {
     category: "Insurance & cost",
     q: "Why is an infusion center less expensive than a hospital?",
-    a: "Hospital outpatient departments bill a facility fee on top of the drug and administration. Freestanding infusion centers don't. For the same medication, administered by the same class of clinician, the total cost of care in a center like ours is frequently a fraction of the hospital equivalent — which shows up directly in your coinsurance.",
+    a: "Hospital outpatient departments bill a facility fee on top of the drug and administration. Freestanding infusion centers don't. For the same medication, administered by the same class of clinician, the total cost of care in a center like ours is frequently a fraction of the hospital equivalent, which shows up directly in your coinsurance.",
   },
   {
     category: "Your visit",
@@ -260,12 +260,12 @@ export const faqs: Faq[] = [
   {
     category: "Your visit",
     q: "What should I bring?",
-    a: "Your photo ID, insurance card, a current medication list, and anything that makes you comfortable — a laptop, headphones, a book, a snack. We provide blankets, pillows and Wi-Fi. Wear a short-sleeved or loose-sleeved top so we can access your arm easily.",
+    a: "Your photo ID, insurance card, a current medication list, and anything that makes you comfortable: a laptop, headphones, a book, a snack. We provide blankets, pillows and Wi-Fi. Wear a short-sleeved or loose-sleeved top so we can access your arm easily.",
   },
   {
     category: "Your visit",
     q: "Can someone come with me?",
-    a: "Absolutely. Every suite has room for a guest, and we encourage it — especially for your first visit.",
+    a: "Absolutely. Every suite has room for a guest, and we encourage it, especially for your first visit.",
   },
   {
     category: "Your visit",
@@ -275,7 +275,7 @@ export const faqs: Faq[] = [
   {
     category: "Your visit",
     q: "Can I drive myself home?",
-    a: "For most therapies, yes. Some premedications — particularly antihistamines given before rituximab or pegloticase — can make you drowsy. We'll tell you in advance if you should arrange a ride.",
+    a: "For most therapies, yes. Some premedications, particularly antihistamines given before rituximab or pegloticase, can make you drowsy. We'll tell you in advance if you should arrange a ride.",
   },
   {
     category: "Your visit",
@@ -300,12 +300,12 @@ export const faqs: Faq[] = [
   {
     category: "Clinical",
     q: "Will you communicate with my doctor?",
-    a: "Yes — after every visit. Your prescriber receives documentation of administration, vitals, tolerance and any issues. Your infusion care and your specialty care stay in sync.",
+    a: "Yes, after every visit. Your prescriber receives documentation of administration, vitals, tolerance and any issues. Your infusion care and your specialty care stay in sync.",
   },
   {
     category: "Clinical",
     q: "Do you offer wellness infusions too?",
-    a: "We do. Alongside our specialty and biologic therapies, we administer wellness and regenerative infusions — hydration, vitamin and nutrient therapy — to help promote a healthy lifestyle. Wellness services are screened by a clinician and are separate from your insurance-covered specialty care.",
+    a: "We do. Alongside our specialty and biologic therapies, we administer wellness and regenerative infusions (hydration, vitamin and nutrient therapy) to help promote a healthy lifestyle. Wellness services are screened by a clinician and are separate from your insurance-covered specialty care.",
   },
 ];
 
@@ -329,35 +329,35 @@ export const testimonials = [
   {
     quote:
       "I spent four years getting infusions in a hospital outpatient department. Same drug here, a fraction of the bill, and I actually look forward to going.",
-    name: "Placeholder — Crohn's patient",
+    name: "Placeholder, Crohn's patient",
     detail: "Entyvio, every 8 weeks",
     rating: 5,
   },
   {
     quote:
       "They handled the prior authorization completely. I got one call telling me it was approved and asking what time worked. That was it.",
-    name: "Placeholder — RA patient",
+    name: "Placeholder, RA patient",
     detail: "Orencia, monthly",
     rating: 5,
   },
   {
     quote:
       "My IVIG days used to wreck me. They slowed the rate down, pushed fluids, and I've been headache-free for a year.",
-    name: "Placeholder — immunodeficiency patient",
+    name: "Placeholder, immunodeficiency patient",
     detail: "IVIG, every 4 weeks",
     rating: 5,
   },
   {
     quote:
       "The nurses know me. They know I'm a hard stick, they know which arm works, and they know my daughter's name. That's not nothing.",
-    name: "Placeholder — MS patient",
+    name: "Placeholder, MS patient",
     detail: "Ocrevus, every 6 months",
     rating: 5,
   },
   {
     quote:
       "Weekend hours meant I never had to explain another absence at work. I don't know why more places don't do this.",
-    name: "Placeholder — psoriatic arthritis patient",
+    name: "Placeholder, psoriatic arthritis patient",
     detail: "Simponi Aria, every 8 weeks",
     rating: 5,
   },
@@ -386,7 +386,7 @@ export const providerValueProps = [
   },
   {
     title: "Broad formulary, one point of contact",
-    body: "GI, rheumatology, neurology, immunology, allergy, bone health and infectious disease under a single roof — with one phone number and one person who answers it.",
+    body: "GI, rheumatology, neurology, immunology, allergy, bone health and infectious disease under a single roof, with one phone number and one person who answers it.",
   },
   {
     title: "Copay and foundation navigation",
@@ -414,7 +414,7 @@ export const aboutPillars = [
   },
   {
     title: "Radical logistics",
-    body: "The hardest part of specialty infusion isn't the infusion — it's insurance, orders, authorization and scheduling. We treat that work as the actual product.",
+    body: "The hardest part of specialty infusion is the insurance, the orders, the authorization and the scheduling. We treat that work as the actual product.",
   },
   {
     title: "Human scale",

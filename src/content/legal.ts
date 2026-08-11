@@ -59,7 +59,7 @@ export const legalDocs: LegalDoc[] = [
       {
         heading: "Service providers",
         body: [
-          "We use third parties to operate this site — hosting, email delivery, and any analytics or social media embeds. These providers process information only as needed to provide their service. Where a provider may handle protected health information on our behalf, we require a business associate agreement.",
+          "We use third parties to operate this site: hosting, email delivery, and any analytics or social media embeds. These providers process information only as needed to provide their service. Where a provider may handle protected health information on our behalf, we require a business associate agreement.",
         ],
       },
       {
@@ -118,12 +118,12 @@ export const legalDocs: LegalDoc[] = [
           "We may use and disclose your protected health information without your written authorization for the following purposes:",
         ],
         list: [
-          "Treatment — to provide, coordinate or manage your care, including sharing information with your prescribing physician, referring providers, pharmacies and laboratories.",
-          "Payment — to obtain prior authorization, verify benefits, bill your health plan and collect payment for services.",
-          "Health care operations — for quality assessment, staff training, licensing, accreditation, business planning and administration.",
-          "As required by law — including public health reporting, reporting suspected abuse or neglect, health oversight activities, judicial and administrative proceedings, and law enforcement purposes as permitted by law.",
+          "Treatment: to provide, coordinate or manage your care, including sharing information with your prescribing physician, referring providers, pharmacies and laboratories.",
+          "Payment: to obtain prior authorization, verify benefits, bill your health plan and collect payment for services.",
+          "Health care operations: for quality assessment, staff training, licensing, accreditation, business planning and administration.",
+          "As required by law: including public health reporting, reporting suspected abuse or neglect, health oversight activities, judicial and administrative proceedings, and law enforcement purposes as permitted by law.",
           "To avert a serious threat to health or safety.",
-          "Appointment reminders and treatment alternatives — including calls, texts and emails about scheduled infusions.",
+          "Appointment reminders and treatment alternatives: including calls, texts and emails about scheduled infusions.",
         ],
       },
       {
@@ -136,12 +136,12 @@ export const legalDocs: LegalDoc[] = [
         heading: "Your rights",
         body: ["You have the following rights regarding your health information:"],
         list: [
-          "Right to inspect and copy — you may request access to your records, including an electronic copy where we maintain them electronically.",
-          "Right to amend — you may request a correction to information you believe is incorrect or incomplete.",
-          "Right to an accounting of disclosures — a list of certain disclosures we have made.",
-          "Right to request restrictions — you may ask us to limit certain uses or disclosures. We are required to agree to a request to restrict disclosure to a health plan for a service you paid for in full out of pocket.",
-          "Right to confidential communications — you may ask us to contact you at a specific number or address.",
-          "Right to a paper copy of this notice — available on request, even if you agreed to receive it electronically.",
+          "Right to inspect and copy: you may request access to your records, including an electronic copy where we maintain them electronically.",
+          "Right to amend: you may request a correction to information you believe is incorrect or incomplete.",
+          "Right to an accounting of disclosures: a list of certain disclosures we have made.",
+          "Right to request restrictions: you may ask us to limit certain uses or disclosures. We are required to agree to a request to restrict disclosure to a health plan for a service you paid for in full out of pocket.",
+          "Right to confidential communications: you may ask us to contact you at a specific number or address.",
+          "Right to a paper copy of this notice: available on request, even if you agreed to receive it electronically.",
           "Right to be notified of a breach of unsecured protected health information.",
         ],
       },
@@ -233,7 +233,7 @@ export const legalDocs: LegalDoc[] = [
       "Our commitment to making this website and our infusion center usable by everyone.",
     updated: EFFECTIVE,
     intro:
-      "IV League Infusions is committed to making both our physical center and this website accessible to people with disabilities. Accessibility is not a compliance exercise for us — a meaningful share of our patients live with mobility, vision, fatigue and cognitive challenges as part of the conditions we treat.",
+      "IV League Infusions is committed to making both our physical center and this website accessible to people with disabilities. Accessibility is not a compliance exercise for us. A meaningful share of our patients live with mobility, vision, fatigue and cognitive challenges as part of the conditions we treat.",
     sections: [
       {
         heading: "What we've done on this site",
@@ -242,7 +242,7 @@ export const legalDocs: LegalDoc[] = [
           "Semantic HTML structure with a logical heading hierarchy and landmark regions.",
           "Keyboard operability throughout, including a skip-to-content link and visible focus indicators.",
           "Color contrast targeting WCAG 2.1 Level AA for text and interactive elements.",
-          "Full support for the prefers-reduced-motion setting — all animation is suppressed when your system requests it.",
+          "Full support for the prefers-reduced-motion setting, so all animation is suppressed when your system requests it.",
           "Descriptive text alternatives for meaningful images, and decorative graphics hidden from assistive technology.",
           "Form fields with programmatically associated labels, hints and error messages.",
           "Text that reflows without horizontal scrolling at 320px width and remains readable when zoomed to 200%.",
@@ -252,7 +252,7 @@ export const legalDocs: LegalDoc[] = [
         heading: "In the center",
         body: [
           "Our entrance is step-free with free parking directly at the door. Suites accommodate wheelchairs and walkers, our recliners are electric lift chairs that assist you in standing, and every suite has seating for a companion or caregiver.",
-          "If you need an accommodation for your visit — an interpreter, extra time, a quiet or low-light suite, or assistance with mobility — tell us when you schedule and we will arrange it.",
+          "If you need an accommodation for your visit (an interpreter, extra time, a quiet or low-light suite, assistance with mobility), tell us when you schedule and we will arrange it.",
         ],
       },
       {
