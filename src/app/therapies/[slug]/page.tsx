@@ -13,6 +13,7 @@ import {
   TickList,
 } from "@/components/ui/Bits";
 import { SpotlightCard } from "@/components/ui/SpotlightCard";
+import { ChairTimeScale } from "@/components/sections/ChairTimeScale";
 import {
   therapies,
   therapyBySlug,
@@ -152,6 +153,10 @@ export default async function TherapyPage({
                   <TickList items={t.expect} className="mt-5" tone="muted" />
                 </div>
               </div>
+            </Reveal>
+
+            <Reveal className="mt-12">
+              <ChairTimeScale therapy={t} />
             </Reveal>
 
             <Reveal className="mt-12">

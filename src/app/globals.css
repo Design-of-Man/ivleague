@@ -764,15 +764,141 @@
   }
 }
 
-/* Print */
+/* ==========================================================================
+   PRINT
+   Patients print therapy and condition pages and bring them to appointments —
+   it is one of the few things people still print. So the printed page is a
+   designed artifact, not a screenshot of a dark website: white ground, black
+   text, no decoration, and the practice's contact details appended so the
+   sheet is useful once it leaves the browser.
+   ========================================================================== */
+
 @media print {
-  body {
-    background: #fff;
-    color: #000;
+  :root {
+    --color-ink-50: #000;
+    --color-ink-100: #111;
+    --color-ink-200: #222;
+    --color-ink-300: #333;
+    --color-ink-400: #444;
+    --color-ink-500: #555;
   }
+
+  html,
+  body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Chrome, ambience and anything that only makes sense on screen */
   nav,
   footer,
-  .no-print {
+  header[class*="fixed"],
+  .no-print,
+  canvas,
+  iframe,
+  [aria-hidden="true"] {
     display: none !important;
+  }
+
+  /* The page header reserves room for the fixed nav, which print removes. */
+  main,
+  main header {
+    padding-top: 0 !important;
+  }
+  main header {
+    padding-bottom: 14pt !important;
+  }
+
+  /* Flatten every surface treatment to ink on paper */
+  *,
+  *::before,
+  *::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    color: #000 !important;
+    border-color: #bbb !important;
+  }
+
+  .text-gradient {
+    -webkit-text-fill-color: #000 !important;
+    color: #000 !important;
+  }
+
+  /* Reveals never run without JS on the print pass */
+  .reveal,
+  .stagger > * {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  /* Spell out non-obvious destinations */
+  a[href^="/"]::after {
+    content: " (ivlinfusions.com" attr(href) ")";
+    font-size: 9pt;
+    color: #555 !important;
+  }
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 9pt;
+    color: #555 !important;
+  }
+  a[href^="tel:"]::after,
+  a[href^="mailto:"]::after,
+  nav a::after {
+    content: "";
+  }
+
+  h1 {
+    font-size: 22pt;
+  }
+  h2 {
+    font-size: 14pt;
+    margin-top: 18pt;
+  }
+  h3 {
+    font-size: 11.5pt;
+  }
+  body {
+    font-size: 10.5pt;
+    line-height: 1.5;
+  }
+
+  h1,
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+  li,
+  dl,
+  figure,
+  section {
+    break-inside: avoid;
+  }
+
+  section {
+    padding: 10pt 0 !important;
+  }
+
+  /* Practice details, appended to every printed sheet */
+  main::after {
+    content: "IV League Infusions · 2949 Fox Chase Lane, Midlothian, VA 23112 · (804) 397-6286 · info@IVLinfusions.com — Physician referral required for all therapies. This sheet is educational and is not medical advice.";
+    display: block;
+    margin-top: 24pt;
+    padding-top: 10pt;
+    border-top: 1pt solid #000;
+    font-size: 9pt;
+    line-height: 1.5;
+  }
+
+  @page {
+    margin: 16mm;
   }
 }

@@ -11,18 +11,10 @@ import {
   type SpecialtyId,
 } from "@/content/therapies";
 import { Badge } from "@/components/ui/Bits";
+import { parseChairTime } from "@/lib/duration";
 import { cn } from "@/lib/utils";
 
 type SortKey = "specialty" | "az" | "duration";
-
-/** Rough minutes-in-chair, parsed from the human-readable duration string. */
-function durationRank(d: string): number {
-  const hours = d.match(/(\d+(?:\.\d+)?)\s*(?:to\s*(\d+(?:\.\d+)?)\s*)?hour/i);
-  if (hours) return Number(hours[2] ?? hours[1]) * 60;
-  const mins = d.match(/(\d+)\s*minute/i);
-  if (mins) return Number(mins[1]);
-  return 45; // injections and short visits
-}
 
 export function TherapyExplorer() {
   const router = useRouter();
@@ -60,7 +52,8 @@ export function TherapyExplorer() {
 
     return [...list].sort((a, b) => {
       if (sort === "az") return a.brand.localeCompare(b.brand);
-      if (sort === "duration") return durationRank(a.duration) - durationRank(b.duration);
+      if (sort === "duration")
+        return parseChairTime(a.duration).typical - parseChairTime(b.duration).typical;
       const sa = specialties.findIndex((s) => s.id === a.specialty);
       const sb = specialties.findIndex((s) => s.id === b.specialty);
       return sa === sb ? a.brand.localeCompare(b.brand) : sa - sb;
