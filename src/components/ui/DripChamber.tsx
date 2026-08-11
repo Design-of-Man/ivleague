@@ -155,6 +155,7 @@ export function DripChamber({
                   strokeWidth="0.9"
                   style={{
                     transformOrigin: "100px 262px",
+                    willChange: "transform, opacity",
                     animation: `drop-ripple ${CYCLE} linear infinite`,
                     animationDelay: `${(set === 1 ? -2.3 : 0) + ring * 0.16}s`,
                     opacity: 0,
@@ -173,6 +174,11 @@ export function DripChamber({
                   : {
                       transformBox: "fill-box",
                       transformOrigin: "center top",
+                      // Browsers don't reliably hardware-accelerate CSS
+                      // animation on SVG children the way they do on a div.
+                      // The droplets have to live inside the SVG coordinate
+                      // system, so promote them explicitly instead.
+                      willChange: "transform, opacity",
                       animation: `drop-cycle ${CYCLE} linear infinite`,
                       animationDelay: i === 1 ? "-2.3s" : "0s",
                     }

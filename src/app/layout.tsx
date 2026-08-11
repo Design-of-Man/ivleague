@@ -65,11 +65,13 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image" },
   icons: {
+    // SVG first so modern browsers take the vector; the ICO is the fallback
+    // for older ones and for the crawlers that request /favicon.ico blind.
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", sizes: "32x32 16x16" },
     ],
-    apple: "/apple-icon.png",
+    apple: [{ url: "/apple-icon.png", sizes: "180x180", type: "image/png" }],
   },
   manifest: "/manifest.webmanifest",
 };

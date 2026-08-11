@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
 import { useState, type ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
@@ -34,7 +33,12 @@ export function Accordion({
     );
 
   return (
-    <div className={cn("divide-y divide-white/8 border-y border-white/8", className)}>
+    <div
+      className={cn(
+        "divide-y divide-white/8 border-y border-white/8",
+        className,
+      )}
+    >
       {items.map((item) => {
         const isOpen = open.includes(item.id);
         // ids arrive from content (category names, etc.) and can contain
@@ -54,7 +58,9 @@ export function Accordion({
                   <span
                     className={cn(
                       "text-[17px] font-medium leading-snug transition-colors duration-300 sm:text-lg",
-                      isOpen ? "text-teal-200" : "text-ink-50 group-hover:text-teal-100",
+                      isOpen
+                        ? "text-teal-200"
+                        : "text-ink-50 group-hover:text-teal-100",
                     )}
                   >
                     {item.title}
@@ -80,22 +86,21 @@ export function Accordion({
               </button>
             </h3>
 
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  id={panelId}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
-                  className="overflow-hidden"
-                >
-                  <div className="pb-7 pr-10 text-[15px] leading-relaxed text-ink-300">
-                    {item.content}
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Closed panels stay mounted so their text is still in the HTML
+                for crawlers — an FAQ answer nobody can index is a wasted
+                answer — and `inert` keeps them out of the tab order. */}
+            <div
+              id={panelId}
+              className="disclosure"
+              data-open={isOpen}
+              inert={!isOpen}
+            >
+              <div>
+                <div className="pb-7 pr-10 text-[15px] leading-relaxed text-ink-300">
+                  {item.content}
+                </div>
+              </div>
+            </div>
           </div>
         );
       })}

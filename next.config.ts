@@ -8,8 +8,7 @@ const nextConfig: NextConfig = {
      * Lighthouse points on mobile. Left off deliberately — don't re-add it
      * without re-measuring.
      */
-    /** Ship only the motion surface each route actually imports. */
-    optimizePackageImports: ["motion", "lucide-react"],
+    optimizePackageImports: ["lucide-react"],
   },
 
   images: {

@@ -1,7 +1,3 @@
-"use client";
-
-import { useRef } from "react";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
@@ -10,20 +6,12 @@ import { intakeSteps } from "@/content/practice";
 /**
  * Scroll-linked intake timeline. A teal rail fills as the section scrolls,
  * with each step's node lighting up when its row crosses the viewport middle.
+ *
+ * The rail is driven entirely by `animation-timeline: view()` (see `.rail-fill`
+ * in globals.css), which is why this is a server component with no client
+ * bundle at all.
  */
 export function IntakeProcess() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start 62%", "end 72%"],
-  });
-  const fill = useSpring(scrollYProgress, {
-    stiffness: 120,
-    damping: 30,
-    restDelta: 0.001,
-  });
-  const height = useTransform(fill, [0, 1], ["0%", "100%"]);
-
   return (
     <Section id="process" className="relative bg-ink-900/30">
       <div
@@ -43,22 +31,21 @@ export function IntakeProcess() {
           <>
             The hard part isn&apos;t the infusion.
             <br />
-            <span className="text-gradient">It&apos;s everything before it.</span>
+            <span className="text-gradient">
+              It&apos;s everything before it.
+            </span>
           </>
         }
         lead="Orders, benefits, prior authorization, drug procurement, scheduling. Six steps, and five of them are ours."
       />
 
-      <div ref={ref} className="relative mt-14 max-w-4xl">
+      <div className="relative mt-14 max-w-4xl">
         {/* Rail */}
         <div
           aria-hidden="true"
           className="absolute left-[19px] top-2 hidden h-[calc(100%-3rem)] w-px bg-white/8 md:block"
         >
-          <motion.div
-            style={{ height }}
-            className="w-px bg-gradient-to-b from-teal-300 via-teal-400 to-teal-600 shadow-[0_0_16px_rgba(31,205,192,0.7)]"
-          />
+          <div className="rail-fill w-px bg-gradient-to-b from-teal-300 via-teal-400 to-teal-600 shadow-[0_0_16px_rgba(31,205,192,0.7)]" />
         </div>
 
         <ol className="grid gap-3">

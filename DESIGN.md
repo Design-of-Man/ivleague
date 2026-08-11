@@ -314,10 +314,10 @@ Production build, Lighthouse, eight templates:
 | | Perf | A11y | Best practices | SEO | CLS |
 |---|---|---|---|---|---|
 | **Desktop** | 98–100 | **100** | 100 | 100 | 0 |
-| **Mobile** — interior templates | **93–96** | **100** | 100 | 100 | 0 |
-| **Mobile** — homepage | 87–92 | **100** | 100 | 100 | 0 |
+| **Mobile** — interior templates | **93–95** | **100** | 100 | 100 | 0 |
+| **Mobile** — homepage | **92** | **100** | 100 | 100 | 0 |
 
-The two things that actually moved the number, both counter-intuitive:
+The things that actually moved the number, most of them counter-intuitive:
 
 **1. Never put the LCP element inside a scroll reveal.** A reveal starts at
 `opacity: 0`, and an invisible element cannot be the Largest Contentful Paint — so LCP
@@ -330,16 +330,41 @@ from 4.6–5.0s to 2.7–3.0s. Nothing else came close to that.
 into every HTML document and delays the document itself. It's off, with a comment in
 `next.config.ts` saying not to re-add it blind.
 
-Also done: `motion` was removed from the shared shell — the nav, scroll progress bar,
-sticky CTA, back-to-top, scroll reveals, and the counter are now CSS transitions plus one
-shared IntersectionObserver. The 53 therapy and condition detail routes load no animation
-library at all. The progress bar uses `animation-timeline: scroll()` with an
-`@supports` guard, so it costs zero JS where supported and simply doesn't render where it
-isn't. Third font family dropped (JetBrains Mono → platform mono stack, −25KB), display
-face cut from four weights to two, Gaussian blur removed from the aurora layers, and the
-hero particle canvas skipped on coarse pointers.
+**3. One `getBoundingClientRect()` in a mount effect cost 107ms.** The scroll-reveal hook
+measured each element to see whether it was already on screen, so it could skip the
+observer. With dozens of reveals on a page, each of those reads lands between React's own
+DOM mutations and forces a synchronous layout — classic thrash. `IntersectionObserver`
+already fires for targets that are intersecting when observation begins, so the
+early-out bought nothing. Deleting it took homepage TBT from **242ms to 108ms** and the
+score from 89 to 92.
 
-The homepage stays a few points behind the rest because its hero is genuinely the
+**4. `motion` is gone entirely** — not just from the shared shell. It was still on four
+of the homepage's fourteen sections, so every visitor paid ~79KB transferred and ~330ms
+of script evaluation for what amounted to six fades, one height transition and one
+scroll-linked line. Each was replaced with the platform equivalent:
+
+| Was | Now |
+|---|---|
+| `AnimatePresence` crossfades (testimonials, form states, lightbox) | A changed React `key` plus a CSS entrance animation. No exit half — under `mode="wait"` the outgoing animation was pure latency before the content the user asked for appeared. |
+| `useScroll` + `useSpring` + `useTransform` on the intake rail | `animation-timeline: view()`. `IntakeProcess` is now a server component with no client bundle at all. |
+| `motion.div` height-auto accordion | `grid-template-rows: 0fr → 1fr`, the one height-to-content transition that works in every current browser. |
+| `layout` + `popLayout` FLIP on the therapy filter | Native View Transitions — `view-transition-name` per card and `flushSync` inside `startViewTransition`, so the browser does the same FLIP on the compositor. |
+
+The accordion change has a second benefit: closed panels stay in the DOM behind `inert`
+instead of unmounting, so every FAQ answer is in the HTML for crawlers while staying out
+of the tab order.
+
+Also done earlier: third font family dropped (JetBrains Mono → platform mono stack,
+−25KB), display face cut from four weights to two, Gaussian blur removed from the aurora
+layers, and the hero particle canvas skipped on coarse pointers.
+
+**And the embarrassing one:** the site was shipping `create-next-app`'s default
+`favicon.ico` — 25.9KB of Vercel triangle in the browser tab of a client's website — with
+`apple-touch-icon` pointing at a file that 404'd. Replaced with the IV League mark at
+1.7KB, a real 180px Apple touch icon, and 192/512 PNGs (plus a maskable variant) in the
+web manifest.
+
+The homepage stays a couple of points behind the rest because its hero is genuinely the
 heaviest thing on the site — a full-viewport composition with the drip chamber, aurora
 and a 5.5rem headline. That's a deliberate trade, not an oversight.
 

@@ -137,6 +137,18 @@ export async function GET(request: Request) {
         </div>
       </div>
     ),
-    { width: 1200, height: 630 },
+    {
+      width: 1200,
+      height: 630,
+      headers: {
+        /**
+         * The card is a pure function of the query string, so a given URL can
+         * never produce different bytes. Without this the CDN treats the route
+         * as dynamic and re-renders the PNG on every crawl — Satori layout plus
+         * a rasterise on each Slack unfurl, for an image that never changes.
+         */
+        "Cache-Control": "public, max-age=31536000, immutable, no-transform",
+      },
+    },
   );
 }

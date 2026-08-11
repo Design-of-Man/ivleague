@@ -627,6 +627,172 @@
   }
 }
 
+/* ==========================================================================
+   SCROLL-LINKED TIMELINE RAIL
+   The intake timeline's teal rail fills as the section passes through the
+   viewport. This used to be `useScroll` + `useSpring` + `useTransform`, which
+   is a scroll listener and a spring integrator running on the main thread for
+   one decorative line. `animation-timeline: view()` hands the whole thing to
+   the compositor.
+
+   Unsupported browsers get a fully-lit rail — a designed static rule, not a
+   half-drawn animation that never finishes.
+   ========================================================================== */
+
+.rail-fill {
+  height: 100%;
+  transform-origin: 50% 0;
+}
+
+@supports (animation-timeline: view()) {
+  .rail-fill {
+    animation: rail-fill linear both;
+    animation-timeline: view();
+    /* Starts once the rail is a fifth of the way up the viewport and completes
+       just before it leaves — so the line tracks reading position, not the
+       raw scrollbar. */
+    animation-range: cover 18% cover 76%;
+  }
+}
+
+@keyframes rail-fill {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+/* ==========================================================================
+   KEYED SWAP
+   Replaces AnimatePresence for the places that only ever crossfaded one child
+   out and the next one in — testimonial quotes, form states, filtered result
+   sets. React already remounts on a changed `key`, so the entrance animation
+   replays for free. There is no exit half, which is the point: under
+   `mode="wait"` the outgoing animation was pure added latency before the
+   content the user asked for appeared.
+   ========================================================================== */
+
+.swap-in {
+  animation: swap-in 380ms var(--ease-out-expo) both;
+}
+
+@keyframes swap-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   VIEW TRANSITIONS (therapy filtering)
+   Only the cards get names, and only while a transition is running, so this
+   costs nothing at rest. The default cross-fade is too slow and too soft for a
+   filter — it should feel like the grid re-settling, not a slide deck.
+   ========================================================================== */
+
+::view-transition-group(*) {
+  animation-duration: 300ms;
+  animation-timing-function: var(--ease-out-expo);
+}
+
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: 220ms;
+}
+
+/* ==========================================================================
+   LIGHTBOX
+   Entrance only. There is no exit animation because a dismissed dialog should
+   be gone the frame the user asks for it to be gone — holding it on screen for
+   another 400ms to look considered is the animation working against the user.
+   ========================================================================== */
+
+.lightbox {
+  animation: fade-in 240ms ease both;
+}
+
+.lightbox-panel {
+  animation: lightbox-in 400ms var(--ease-out-expo) both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.94) translate3d(0, 12px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   COLLAPSIBLE PANEL
+   `grid-template-rows: 0fr → 1fr` is the one height-to-content transition that
+   works in every current browser (`interpolate-size` is still Chromium-only).
+   The panel stays in the DOM when closed, so FAQ answers remain crawlable;
+   `inert` keeps the closed copy out of the tab order and the a11y tree.
+
+   Named `.disclosure`, not `.collapse`: Tailwind already owns `collapse` as a
+   utility (`visibility: collapse`). Source order happens to favour a custom
+   rule declared after `@import "tailwindcss"`, but a class whose behaviour
+   depends on which line of one file it sits below is not worth keeping.
+   ========================================================================== */
+
+.disclosure {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition:
+    grid-template-rows 450ms var(--ease-out-expo),
+    opacity 300ms ease;
+}
+
+.disclosure > * {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.disclosure[data-open="true"] {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   OFF-SCREEN SECTION SKIPPING
+   The homepage is fourteen sections and ~16,000px tall. `content-visibility:
+   auto` lets the browser skip layout and paint for sections still below the
+   fold. `contain-intrinsic-size: auto <n>` is the important half — the `auto`
+   keyword makes the browser remember each section's real height once it has
+   been rendered, so scrolling back up does not shift anything. A fixed
+   placeholder height would trade paint time for layout shift, which is a bad
+   trade on a site currently at CLS 0.
+
+   Skips the first two sections: the hero and the stat band are above the fold
+   on every viewport, so deferring them would only add work.
+   ========================================================================== */
+
+main > section:nth-of-type(n + 3),
+main > div > section:nth-of-type(n + 3) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 640px;
+}
+
 /* Film grain overlay */
 .grain::after {
   content: "";
@@ -761,6 +927,23 @@
     opacity: 1 !important;
     filter: none !important;
     transform: none !important;
+  }
+
+  /* Scroll-driven animations are progress-based, so the blanket
+     `animation-duration` override above does nothing to them — they have to be
+     switched off by name. The rail is decorative narrative motion, so it
+     freezes fully lit.
+
+     `.scroll-progress` is deliberately left running: it reports scroll
+     position the same way a scrollbar does, and a reader who asked for less
+     motion still wants to know where they are on a 16,000px page. */
+  .rail-fill {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .swap-in {
+    animation: none !important;
   }
 }
 

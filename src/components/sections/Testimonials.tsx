@@ -1,6 +1,5 @@
 "use client";
 
-import { AnimatePresence, motion } from "motion/react";
 import { useCallback, useEffect, useState } from "react";
 import { Section, Eyebrow } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
@@ -38,55 +37,54 @@ export function Testimonials() {
         className="relative mx-auto max-w-4xl"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
+        // Hover is not available to a keyboard user, and a quote that swaps
+        // itself out mid-read is worse with a focus ring sitting in it.
+        onFocusCapture={() => setPaused(true)}
+        onBlurCapture={() => setPaused(false)}
       >
         <Reveal direction="none">
           <Eyebrow align="center">In their words</Eyebrow>
         </Reveal>
 
         <div className="relative mt-10 min-h-[19rem] sm:min-h-[16rem]">
-          <AnimatePresence mode="wait">
-            <motion.figure
-              key={index}
-              initial={{ opacity: 0, y: 18, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -14, filter: "blur(6px)" }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col items-center text-center"
+          {/* The changed key remounts the figure, which replays `.swap-in`. */}
+          <figure
+            key={index}
+            className="swap-in flex flex-col items-center text-center"
+          >
+            <div
+              className="flex gap-1"
+              role="img"
+              aria-label={`${active.rating} out of 5 stars`}
             >
-              <div
-                className="flex gap-1"
-                role="img"
-                aria-label={`${active.rating} out of 5 stars`}
-              >
-                {Array.from({ length: active.rating }, (_, i) => (
-                  <svg
-                    key={i}
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    className="h-4 w-4 text-teal-400"
-                    aria-hidden="true"
-                  >
-                    <path d="M10 1.6l2.4 5.2 5.6.7-4.1 3.9 1.1 5.6L10 14.3l-5 2.7 1.1-5.6L2 7.5l5.6-.7L10 1.6Z" />
-                  </svg>
-                ))}
-              </div>
+              {Array.from({ length: active.rating }, (_, i) => (
+                <svg
+                  key={i}
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  className="h-4 w-4 text-teal-400"
+                  aria-hidden="true"
+                >
+                  <path d="M10 1.6l2.4 5.2 5.6.7-4.1 3.9 1.1 5.6L10 14.3l-5 2.7 1.1-5.6L2 7.5l5.6-.7L10 1.6Z" />
+                </svg>
+              ))}
+            </div>
 
-              <blockquote className="mt-7">
-                <p className="font-display text-[clamp(1.35rem,1rem+1.7vw,2.1rem)] font-medium leading-[1.32] tracking-[-0.03em] text-ink-50">
-                  &ldquo;{active.quote}&rdquo;
-                </p>
-              </blockquote>
+            <blockquote className="mt-7">
+              <p className="font-display text-[clamp(1.35rem,1rem+1.7vw,2.1rem)] font-medium leading-[1.32] tracking-[-0.03em] text-ink-50">
+                &ldquo;{active.quote}&rdquo;
+              </p>
+            </blockquote>
 
-              <figcaption className="mt-8 flex flex-col items-center gap-1">
-                <span className="text-[13.5px] font-medium text-teal-300">
-                  {active.name}
-                </span>
-                <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-500">
-                  {active.detail}
-                </span>
-              </figcaption>
-            </motion.figure>
-          </AnimatePresence>
+            <figcaption className="mt-8 flex flex-col items-center gap-1">
+              <span className="text-[13.5px] font-medium text-teal-300">
+                {active.name}
+              </span>
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-500">
+                {active.detail}
+              </span>
+            </figcaption>
+          </figure>
         </div>
 
         {/* Controls */}
@@ -97,7 +95,12 @@ export function Testimonials() {
             aria-label="Previous testimonial"
             className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink-300 transition-colors hover:border-teal-400/40 hover:text-teal-300"
           >
-            <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              className="h-3.5 w-3.5"
+              aria-hidden="true"
+            >
               <path
                 d="M13.5 8h-11m0 0L7 3.5M2.5 8 7 12.5"
                 stroke="currentColor"
@@ -108,14 +111,20 @@ export function Testimonials() {
             </svg>
           </button>
 
-          <div className="flex items-center gap-2" role="tablist" aria-label="Testimonials">
+          {/* Not a tablist: these buttons don't own labelled panels, and
+              claiming the role would promise a keyboard contract (arrow-key
+              roving focus) that isn't implemented. */}
+          <div
+            className="flex items-center gap-2"
+            role="group"
+            aria-label="Choose a testimonial"
+          >
             {testimonials.map((_, i) => (
               <button
                 key={i}
                 type="button"
-                role="tab"
-                aria-selected={i === index}
-                aria-label={`Testimonial ${i + 1}`}
+                aria-current={i === index}
+                aria-label={`Testimonial ${i + 1} of ${count}`}
                 onClick={() => setIndex(i)}
                 className="group relative grid h-6 min-w-6 place-items-center px-1"
               >
@@ -137,7 +146,12 @@ export function Testimonials() {
             aria-label="Next testimonial"
             className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink-300 transition-colors hover:border-teal-400/40 hover:text-teal-300"
           >
-            <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
+            <svg
+              viewBox="0 0 16 16"
+              fill="none"
+              className="h-3.5 w-3.5"
+              aria-hidden="true"
+            >
               <path
                 d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5"
                 stroke="currentColor"

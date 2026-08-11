@@ -1,15 +1,21 @@
 "use client";
 
-/* eslint-disable @next/next/no-img-element -- Instagram CDN hosts are dynamic
-   and short-lived; routing them through next/image would require a wildcard
-   remote pattern and buys nothing for square, lazy-loaded thumbnails. */
-
-import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import type { InstagramPost } from "@/lib/instagram";
 import { site } from "@/content/site";
 import { Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { cn } from "@/lib/utils";
+
+/**
+ * Instagram serves square crops at up to 1080px regardless of how small the
+ * tile is. Routing them through next/image transcodes to AVIF and cuts the
+ * request to the width actually painted — and the optimizer's own cache
+ * outlives the short-lived signature on the CDN URL, so a tile that would
+ * otherwise 403 between hourly revalidations keeps rendering.
+ */
+const GRID_SIZES = "(min-width: 1024px) 22vw, (min-width: 640px) 31vw, 46vw";
+const LIGHTBOX_SIZES = "(min-width: 768px) 640px, 100vw";
 
 export function InstagramGrid({
   posts,
@@ -23,7 +29,9 @@ export function InstagramGrid({
   const close = useCallback(() => setOpen(null), []);
   const step = useCallback(
     (dir: 1 | -1) =>
-      setOpen((i) => (i === null ? null : (i + dir + posts.length) % posts.length)),
+      setOpen((i) =>
+        i === null ? null : (i + dir + posts.length) % posts.length,
+      ),
     [posts.length],
   );
 
@@ -56,12 +64,16 @@ export function InstagramGrid({
               {post.placeholder ? (
                 <PlaceholderTile post={post} index={i} />
               ) : (
-                <img
+                <Image
                   src={post.thumbnailUrl ?? post.mediaUrl}
-                  alt={post.caption ? truncate(post.caption, 120) : "Instagram post"}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-full w-full object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.06]"
+                  alt={
+                    post.caption
+                      ? truncate(post.caption, 120)
+                      : "Instagram post"
+                  }
+                  fill
+                  sizes={GRID_SIZES}
+                  className="object-cover transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.06]"
                 />
               )}
 
@@ -103,122 +115,126 @@ export function InstagramGrid({
       )}
 
       {/* ------------------------------ Lightbox ----------------------------- */}
-      <AnimatePresence>
-        {open !== null && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.28 }}
-            className="fixed inset-0 z-90 flex items-center justify-center p-4 sm:p-8"
-            role="dialog"
-            aria-modal="true"
-            aria-label="Instagram post"
-          >
-            <div
-              className="absolute inset-0 bg-ink-950/94 backdrop-blur-xl"
-              onClick={close}
-            />
+      {open !== null && (
+        <div
+          className="lightbox fixed inset-0 z-90 flex items-center justify-center p-4 sm:p-8"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Instagram post"
+        >
+          <div
+            className="absolute inset-0 bg-ink-950/94 backdrop-blur-xl"
+            onClick={close}
+          />
 
-            <motion.div
-              initial={{ scale: 0.94, opacity: 0, y: 12 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.96, opacity: 0, y: 8 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="relative grid max-h-[86vh] w-full max-w-4xl overflow-hidden rounded-[0.625rem] border border-white/10 bg-ink-900 md:grid-cols-[1.15fr_0.85fr]"
-            >
-              <div className="relative aspect-square bg-ink-950">
-                {posts[open].placeholder ? (
-                  <PlaceholderTile post={posts[open]} index={open} />
-                ) : (
-                  <img
-                    src={posts[open].mediaUrl}
-                    alt={posts[open].caption || "Instagram post"}
-                    className="h-full w-full object-cover"
-                  />
-                )}
-              </div>
+          <div className="lightbox-panel relative grid max-h-[86vh] w-full max-w-4xl overflow-hidden rounded-[0.625rem] border border-white/10 bg-ink-900 md:grid-cols-[1.15fr_0.85fr]">
+            <div className="relative aspect-square bg-ink-950">
+              {posts[open].placeholder ? (
+                <PlaceholderTile post={posts[open]} index={open} />
+              ) : (
+                <Image
+                  src={posts[open].mediaUrl}
+                  alt={posts[open].caption || "Instagram post"}
+                  fill
+                  sizes={LIGHTBOX_SIZES}
+                  priority
+                  className="object-cover"
+                />
+              )}
+            </div>
 
-              <div className="flex max-h-[42vh] flex-col gap-5 overflow-y-auto p-6 md:max-h-none md:p-7">
-                <div className="flex items-center gap-3">
-                  <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-teal-300 to-teal-600 text-[13px] font-bold text-ink-950">
-                    IV
-                  </span>
-                  <div>
-                    <div className="text-[13.5px] font-medium text-ink-50">
-                      {site.social.instagramHandle}
-                    </div>
-                    <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-500">
-                      {new Date(posts[open].timestamp).toLocaleDateString("en-US", {
+            <div className="flex max-h-[42vh] flex-col gap-5 overflow-y-auto p-6 md:max-h-none md:p-7">
+              <div className="flex items-center gap-3">
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-teal-300 to-teal-600 text-[13px] font-bold text-ink-950">
+                  IV
+                </span>
+                <div>
+                  <div className="text-[13.5px] font-medium text-ink-50">
+                    {site.social.instagramHandle}
+                  </div>
+                  <div className="font-mono text-[10.5px] uppercase tracking-[0.14em] text-ink-500">
+                    {new Date(posts[open].timestamp).toLocaleDateString(
+                      "en-US",
+                      {
                         month: "short",
                         day: "numeric",
                         year: "numeric",
                         timeZone: "UTC",
-                      })}
-                    </div>
+                      },
+                    )}
                   </div>
                 </div>
-
-                <p className="flex-1 whitespace-pre-line text-[14px] leading-relaxed text-ink-300">
-                  {posts[open].caption}
-                </p>
-
-                <a
-                  href={posts[open].permalink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-teal-400 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-teal-300"
-                >
-                  View on Instagram
-                </a>
               </div>
 
-              <button
-                type="button"
-                onClick={close}
-                aria-label="Close"
-                className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-ink-950/70 text-ink-200 backdrop-blur-sm transition-colors hover:text-teal-300"
-              >
-                <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" aria-hidden="true">
-                  <path
-                    d="m4 4 8 8M12 4l-8 8"
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                  />
-                </svg>
-              </button>
-            </motion.div>
+              <p className="flex-1 whitespace-pre-line text-[14px] leading-relaxed text-ink-300">
+                {posts[open].caption}
+              </p>
 
-            {[-1, 1].map((dir) => (
-              <button
-                key={dir}
-                type="button"
-                onClick={() => step(dir as 1 | -1)}
-                aria-label={dir === 1 ? "Next post" : "Previous post"}
-                className={cn(
-                  "absolute top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-ink-950/70 text-ink-200 backdrop-blur-sm transition-colors hover:text-teal-300 lg:grid",
-                  dir === 1 ? "right-6" : "left-6",
-                )}
+              <a
+                href={posts[open].permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-teal-400 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-teal-300"
               >
-                <svg viewBox="0 0 16 16" fill="none" className="h-4 w-4" aria-hidden="true">
-                  <path
-                    d={
-                      dir === 1
-                        ? "M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5"
-                        : "M13.5 8h-11m0 0L7 3.5M2.5 8 7 12.5"
-                    }
-                    stroke="currentColor"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </button>
-            ))}
-          </motion.div>
-        )}
-      </AnimatePresence>
+                View on Instagram
+              </a>
+            </div>
+
+            <button
+              type="button"
+              onClick={close}
+              aria-label="Close"
+              className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-ink-950/70 text-ink-200 backdrop-blur-sm transition-colors hover:text-teal-300"
+            >
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path
+                  d="m4 4 8 8M12 4l-8 8"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {[-1, 1].map((dir) => (
+            <button
+              key={dir}
+              type="button"
+              onClick={() => step(dir as 1 | -1)}
+              aria-label={dir === 1 ? "Next post" : "Previous post"}
+              className={cn(
+                "absolute top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-ink-950/70 text-ink-200 backdrop-blur-sm transition-colors hover:text-teal-300 lg:grid",
+                dir === 1 ? "right-6" : "left-6",
+              )}
+            >
+              <svg
+                viewBox="0 0 16 16"
+                fill="none"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path
+                  d={
+                    dir === 1
+                      ? "M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5"
+                      : "M13.5 8h-11m0 0L7 3.5M2.5 8 7 12.5"
+                  }
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
+          ))}
+        </div>
+      )}
     </>
   );
 }
@@ -232,7 +248,13 @@ function truncate(s: string, n: number) {
  * the section reads as content on day one and swaps to photography the moment a
  * token is configured.
  */
-function PlaceholderTile({ post, index }: { post: InstagramPost; index: number }) {
+function PlaceholderTile({
+  post,
+  index,
+}: {
+  post: InstagramPost;
+  index: number;
+}) {
   const hue = 168 + ((index * 5) % 15);
   return (
     <div className="absolute inset-0 flex flex-col justify-between overflow-hidden bg-ink-950 p-5 transition-transform duration-700 ease-[var(--ease-out-expo)] group-hover:scale-[1.04]">
@@ -251,7 +273,8 @@ function PlaceholderTile({ post, index }: { post: InstagramPost; index: number }
             "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.11) 1px, transparent 0)",
           backgroundSize: "22px 22px",
           maskImage: "radial-gradient(70% 70% at 50% 50%, black, transparent)",
-          WebkitMaskImage: "radial-gradient(70% 70% at 50% 50%, black, transparent)",
+          WebkitMaskImage:
+            "radial-gradient(70% 70% at 50% 50%, black, transparent)",
         }}
       />
 
@@ -284,7 +307,12 @@ function PlaceholderTile({ post, index }: { post: InstagramPost; index: number }
 
 function PlayGlyph() {
   return (
-    <svg viewBox="0 0 16 16" fill="currentColor" className="h-3 w-3" aria-hidden="true">
+    <svg
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      className="h-3 w-3"
+      aria-hidden="true"
+    >
       <path d="M5 3.5v9l7.5-4.5L5 3.5Z" />
     </svg>
   );
@@ -292,9 +320,27 @@ function PlayGlyph() {
 
 function StackGlyph() {
   return (
-    <svg viewBox="0 0 16 16" fill="none" className="h-3.5 w-3.5" aria-hidden="true">
-      <rect x="2.5" y="2.5" width="8" height="8" rx="1.6" stroke="currentColor" strokeWidth="1.3" />
-      <path d="M5.5 13.5h6a2 2 0 0 0 2-2v-6" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      className="h-3.5 w-3.5"
+      aria-hidden="true"
+    >
+      <rect
+        x="2.5"
+        y="2.5"
+        width="8"
+        height="8"
+        rx="1.6"
+        stroke="currentColor"
+        strokeWidth="1.3"
+      />
+      <path
+        d="M5.5 13.5h6a2 2 0 0 0 2-2v-6"
+        stroke="currentColor"
+        strokeWidth="1.3"
+        strokeLinecap="round"
+      />
     </svg>
   );
 }

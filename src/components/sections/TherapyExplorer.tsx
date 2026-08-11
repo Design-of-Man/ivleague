@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AnimatePresence, motion } from "motion/react";
+import { flushSync } from "react-dom";
 import { useMemo, useState, useEffect, useCallback } from "react";
 import {
   therapies,
@@ -15,6 +15,30 @@ import { parseChairTime } from "@/lib/duration";
 import { cn } from "@/lib/utils";
 
 type SortKey = "specialty" | "az" | "duration";
+
+/**
+ * Filtering used to be a Framer `layout` animation — thirty-one cards measured
+ * and interpolated on the main thread. The browser can do the same FLIP itself
+ * for nothing: give each card a `view-transition-name` and run the state change
+ * inside a View Transition, and cards slide to their new positions on the
+ * compositor.
+ *
+ * `flushSync` is required, not incidental: `startViewTransition` snapshots the
+ * DOM when its callback returns, and React would otherwise still be holding the
+ * update in a queue at that point, so the "after" snapshot would equal the
+ * "before" one and nothing would move.
+ *
+ * Where View Transitions aren't supported — or the reader asked for less
+ * motion — the update simply applies. Instant is a fine outcome.
+ */
+function withViewTransition(update: () => void) {
+  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced || !document.startViewTransition) {
+    update();
+    return;
+  }
+  document.startViewTransition(() => flushSync(update));
+}
 
 export function TherapyExplorer() {
   const router = useRouter();
@@ -53,7 +77,10 @@ export function TherapyExplorer() {
     return [...list].sort((a, b) => {
       if (sort === "az") return a.brand.localeCompare(b.brand);
       if (sort === "duration")
-        return parseChairTime(a.duration).typical - parseChairTime(b.duration).typical;
+        return (
+          parseChairTime(a.duration).typical -
+          parseChairTime(b.duration).typical
+        );
       const sa = specialties.findIndex((s) => s.id === a.specialty);
       const sb = specialties.findIndex((s) => s.id === b.specialty);
       return sa === sb ? a.brand.localeCompare(b.brand) : sa - sb;
@@ -62,13 +89,16 @@ export function TherapyExplorer() {
 
   const counts = useMemo(() => {
     const m = new Map<string, number>();
-    for (const t of therapies) m.set(t.specialty, (m.get(t.specialty) ?? 0) + 1);
+    for (const t of therapies)
+      m.set(t.specialty, (m.get(t.specialty) ?? 0) + 1);
     return m;
   }, []);
 
   const reset = useCallback(() => {
-    setQuery("");
-    setActive("all");
+    withViewTransition(() => {
+      setQuery("");
+      setActive("all");
+    });
   }, []);
 
   return (
@@ -84,7 +114,13 @@ export function TherapyExplorer() {
                 className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-500"
                 aria-hidden="true"
               >
-                <circle cx="7" cy="7" r="4.6" stroke="currentColor" strokeWidth="1.4" />
+                <circle
+                  cx="7"
+                  cy="7"
+                  r="4.6"
+                  stroke="currentColor"
+                  strokeWidth="1.4"
+                />
                 <path
                   d="m10.5 10.5 3 3"
                   stroke="currentColor"
@@ -112,7 +148,9 @@ export function TherapyExplorer() {
               <select
                 id="sort"
                 value={sort}
-                onChange={(e) => setSort(e.target.value as SortKey)}
+                onChange={(e) =>
+                  withViewTransition(() => setSort(e.target.value as SortKey))
+                }
                 className="h-12 rounded-full border border-white/10 bg-white/[0.03] px-4 pr-8 text-[13.5px] text-ink-100 transition-colors focus:border-teal-400/50 focus:outline-none"
               >
                 <option value="specialty">Specialty</option>
@@ -125,7 +163,7 @@ export function TherapyExplorer() {
           <div className="no-scrollbar -mx-1 flex gap-2 overflow-x-auto px-1 pb-0.5">
             <FilterChip
               active={active === "all"}
-              onClick={() => setActive("all")}
+              onClick={() => withViewTransition(() => setActive("all"))}
               count={therapies.length}
             >
               All
@@ -134,7 +172,7 @@ export function TherapyExplorer() {
               <FilterChip
                 key={s.id}
                 active={active === s.id}
-                onClick={() => setActive(s.id)}
+                onClick={() => withViewTransition(() => setActive(s.id))}
                 count={counts.get(s.id) ?? 0}
               >
                 {s.label}
@@ -167,8 +205,9 @@ export function TherapyExplorer() {
             No therapy matches &ldquo;{query}&rdquo;
           </p>
           <p className="mx-auto mt-3 max-w-md text-[14px] leading-relaxed text-ink-400">
-            Our formulary grows with what our referring physicians order. If your
-            medication isn&apos;t listed, call us — we can often bring it on.
+            Our formulary grows with what our referring physicians order. If
+            your medication isn&apos;t listed, call us — we can often bring it
+            on.
           </p>
           <Link
             href="/contact"
@@ -178,69 +217,63 @@ export function TherapyExplorer() {
           </Link>
         </div>
       ) : (
-        <motion.ul layout className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {results.map((t) => {
-              const sp = specialtyById(t.specialty);
-              return (
-                <motion.li
-                  key={t.slug}
-                  layout
-                  initial={{ opacity: 0, scale: 0.96 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.96 }}
-                  transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+        <ul className="therapy-grid grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {results.map((t) => {
+            const sp = specialtyById(t.specialty);
+            return (
+              <li key={t.slug} style={{ viewTransitionName: `card-${t.slug}` }}>
+                <Link
+                  href={`/therapies/${t.slug}`}
+                  className="group card card-hover flex h-full flex-col justify-between gap-6 p-6"
                 >
-                  <Link
-                    href={`/therapies/${t.slug}`}
-                    className="group card card-hover flex h-full flex-col justify-between gap-6 p-6"
-                  >
-                    <div>
-                      <div className="flex items-start justify-between gap-3">
-                        <Badge tone="neutral" size="sm">
-                          {sp.short}
-                        </Badge>
-                        <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-600">
-                          {t.route.includes("Subcutaneous") && !t.route.includes("Intravenous")
-                            ? "Injection"
-                            : "Infusion"}
-                        </span>
-                      </div>
-
-                      <h2 className="mt-4 font-display text-xl font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
-                        {t.brand}
-                      </h2>
-                      <p className="mt-1 font-mono text-[11px] lowercase tracking-wide text-ink-500">
-                        {t.generic}
-                      </p>
-                      <p className="mt-3.5 text-[13.5px] leading-relaxed text-ink-400">
-                        {t.summary}
-                      </p>
+                  <div>
+                    <div className="flex items-start justify-between gap-3">
+                      <Badge tone="neutral" size="sm">
+                        {sp.short}
+                      </Badge>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-600">
+                        {t.route.includes("Subcutaneous") &&
+                        !t.route.includes("Intravenous")
+                          ? "Injection"
+                          : "Infusion"}
+                      </span>
                     </div>
 
-                    <div className="flex items-center justify-between gap-3 border-t border-white/6 pt-4">
-                      <span className="text-[12px] text-ink-500">{t.drugClass}</span>
-                      <svg
-                        viewBox="0 0 16 16"
-                        fill="none"
-                        className="h-3.5 w-3.5 shrink-0 text-teal-400 transition-transform duration-400 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
-                        aria-hidden="true"
-                      >
-                        <path
-                          d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5"
-                          stroke="currentColor"
-                          strokeWidth="1.6"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                  </Link>
-                </motion.li>
-              );
-            })}
-          </AnimatePresence>
-        </motion.ul>
+                    <h2 className="mt-4 font-display text-xl font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
+                      {t.brand}
+                    </h2>
+                    <p className="mt-1 font-mono text-[11px] lowercase tracking-wide text-ink-500">
+                      {t.generic}
+                    </p>
+                    <p className="mt-3.5 text-[13.5px] leading-relaxed text-ink-400">
+                      {t.summary}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-3 border-t border-white/6 pt-4">
+                    <span className="text-[12px] text-ink-500">
+                      {t.drugClass}
+                    </span>
+                    <svg
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      className="h-3.5 w-3.5 shrink-0 text-teal-400 transition-transform duration-400 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M2.5 8h11m0 0L9 3.5M13.5 8 9 12.5"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       )}
     </div>
   );
