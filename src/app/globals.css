@@ -1,0 +1,661 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   IV LEAGUE INFUSIONS — DESIGN SYSTEM
+   Obsidian black + signature teal. One source of truth.
+   ========================================================================== */
+
+@theme {
+  /* --- Brand teal scale ------------------------------------------------ */
+  --color-teal-50: #e8fdfa;
+  --color-teal-100: #c4f9f3;
+  --color-teal-200: #8ff1e8;
+  --color-teal-300: #4fe3d7;
+  --color-teal-400: #1fcdc0;
+  --color-teal-500: #0bb2a6;
+  --color-teal-600: #068e86;
+  --color-teal-700: #08716c;
+  --color-teal-800: #0a5a56;
+  --color-teal-900: #0b4a47;
+  --color-teal-950: #032a29;
+
+  /* --- Obsidian neutrals ----------------------------------------------- */
+  --color-ink-950: #04070a;
+  --color-ink-900: #070b0f;
+  --color-ink-850: #0a1015;
+  --color-ink-800: #0e161c;
+  --color-ink-700: #152128;
+  --color-ink-600: #1e2d36;
+  --color-ink-550: #33454f; /* non-text: hardware, strokes */
+  --color-ink-500: #6a7f89;
+  --color-ink-400: #7b8f99;
+  --color-ink-300: #93a6ae;
+  --color-ink-200: #adbcc2;
+  --color-ink-100: #d6e0e3;
+  --color-ink-50: #f1f6f7;
+
+  /* --- Semantic -------------------------------------------------------- */
+  --color-canvas: var(--color-ink-950);
+  --color-surface: var(--color-ink-900);
+  --color-elevated: var(--color-ink-850);
+  --color-hairline: rgb(255 255 255 / 0.08);
+  --color-accent: var(--color-teal-400);
+
+  /* --- Type ------------------------------------------------------------ */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", sans-serif;
+  --font-display: var(--font-display), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+  /* Utility face: platform mono. Not downloaded — at 9–11px uppercase
+     with wide tracking, the system face is indistinguishable from a webfont
+     and costs 0 bytes on the critical path. */
+  --font-mono: ui-monospace, "SF Mono", SFMono-Regular, "Cascadia Mono",
+    "Roboto Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* Fluid display sizes */
+  --text-hero: clamp(2.6rem, 1.5rem + 4.6vw, 5.5rem);
+  --text-display: clamp(2.1rem, 1.3rem + 3.2vw, 4.25rem);
+  --text-title: clamp(1.7rem, 1.15rem + 2.1vw, 3rem);
+  --text-lead: clamp(1.0625rem, 0.98rem + 0.42vw, 1.3125rem);
+
+  /* --- Motion ---------------------------------------------------------- */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quint: cubic-bezier(0.83, 0, 0.17, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Layout ---------------------------------------------------------- */
+  --shell: 78rem;
+  --nav-h: 4.5rem;
+
+  /* --- Animation keyframes -------------------------------------------- */
+  --animate-drift: drift 24s var(--ease-in-out-quint) infinite;
+  --animate-drift-slow: drift 38s var(--ease-in-out-quint) infinite reverse;
+  --animate-marquee: marquee 46s linear infinite;
+  --animate-marquee-rev: marquee-rev 46s linear infinite;
+  --animate-pulse-ring: pulse-ring 3.2s var(--ease-out-expo) infinite;
+  --animate-drip: drip 3.4s var(--ease-in-out-quint) infinite;
+  --animate-scan: scan 7s linear infinite;
+  --animate-shimmer: shimmer 2.4s linear infinite;
+  --animate-fade-up: fade-up 0.7s var(--ease-out-expo) both;
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  33% {
+    transform: translate3d(4%, -6%, 0) scale(1.12);
+  }
+  66% {
+    transform: translate3d(-5%, 4%, 0) scale(0.94);
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-rev {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.85);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.7);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   SIGNATURE: MACRO DRIP CHAMBER
+   One droplet, five phases, modelled on how a real drop behaves:
+   swell (slow) → hang at the neck as surface tension gives → snap →
+   accelerate under gravity → squash into the pool.
+   Two instances run half a cycle apart so the chamber never sits empty,
+   which is also what makes the loop seamless — there is no start or end
+   frame, only a steady rate.
+   ========================================================================== */
+
+@keyframes drop-cycle {
+  /* --- form: bead swells at the nozzle, decelerating as it fills --------- */
+  0% {
+    transform: translateY(0) scale(0.12, 0.08);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.22, 0.9, 0.35, 1);
+  }
+  5% {
+    opacity: 1;
+    animation-timing-function: cubic-bezier(0.22, 0.9, 0.35, 1);
+  }
+  30% {
+    transform: translateY(0) scale(1, 0.95);
+    opacity: 1;
+    /* --- hang: almost still. surface tension is winning, barely --------- */
+    animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+  }
+  40% {
+    transform: translateY(2px) scale(0.99, 1.16);
+    /* --- neck: tension loses, the waist thins fast --------------------- */
+    animation-timing-function: cubic-bezier(0.7, 0, 0.9, 0.3);
+  }
+  45% {
+    transform: translateY(6px) scale(0.82, 1.48);
+    /* --- snap: pinch-off, drop springs back toward a sphere ------------ */
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.3, 1);
+  }
+  48% {
+    transform: translateY(14px) scale(1.02, 0.96);
+    /* --- fall: y ≈ t², so the curve is a quadratic in disguise ---------- */
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  70% {
+    transform: translateY(188px) scale(0.82, 1.28);
+    animation-timing-function: cubic-bezier(0.6, 0, 0.9, 0.6);
+  }
+  /* --- impact: flattens against the meniscus and is absorbed ----------- */
+  74% {
+    transform: translateY(202px) scale(1.42, 0.42);
+    opacity: 0.85;
+    animation-timing-function: ease-out;
+  }
+  78% {
+    transform: translateY(205px) scale(1.7, 0.14);
+    opacity: 0;
+    animation-timing-function: linear;
+  }
+  100% {
+    transform: translateY(0) scale(0.12, 0.08);
+    opacity: 0;
+  }
+}
+
+/* Concentric ring on the fluid surface, timed to the impact at 74%. */
+@keyframes drop-ripple {
+  0%,
+  73% {
+    transform: scale(0.12);
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  76% {
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.9);
+    opacity: 0;
+  }
+}
+
+/* Fluid surface dips and recovers on impact. */
+@keyframes meniscus-bob {
+  0%,
+  72% {
+    transform: translateY(0) scaleY(1);
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  76% {
+    transform: translateY(1.6px) scaleY(0.88);
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  92%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+/* Legacy simple drip, still used for small decorative marks. */
+@keyframes drip {
+  0% {
+    transform: translateY(-6px) scaleY(0.7);
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(58px) scaleY(1.25);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(66px) scaleY(0.2);
+    opacity: 0;
+  }
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(1000%);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+
+@layer base {
+  * {
+    border-color: var(--color-hairline);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+    scroll-padding-top: calc(var(--nav-h) + 1.5rem);
+  }
+
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink-100);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background-color: var(--color-teal-400);
+    color: #02100f;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.035em;
+    text-wrap: balance;
+    color: var(--color-ink-50);
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-teal-400);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 11px;
+    height: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-700);
+    border-radius: 99px;
+    border: 3px solid var(--color-ink-950);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-teal-800);
+  }
+}
+
+/* ==========================================================================
+   UTILITIES
+   ========================================================================== */
+
+@utility shell {
+  width: 100%;
+  max-width: var(--shell);
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 80rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+@utility shell-wide {
+  width: 100%;
+  max-width: 96rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+}
+
+/* Teal gradient text */
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-ink-50) 8%,
+    var(--color-teal-200) 44%,
+    var(--color-teal-400) 68%,
+    var(--color-teal-600) 100%
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@utility text-glow {
+  text-shadow: 0 0 44px rgb(31 205 192 / 0.35);
+}
+
+/* Hairline card with inner light */
+@utility card {
+  position: relative;
+  border-radius: 0.625rem;
+  border: 1px solid var(--color-hairline);
+  background:
+    linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.045) 0%,
+      rgb(255 255 255 / 0.012) 42%,
+      rgb(255 255 255 / 0) 100%
+    ),
+    var(--color-ink-900);
+  box-shadow:
+    inset 0 1px 0 0 rgb(255 255 255 / 0.06),
+    0 1px 2px rgb(0 0 0 / 0.5),
+    0 18px 46px -22px rgb(0 0 0 / 0.9);
+}
+
+@utility card-hover {
+  transition:
+    transform 0.5s var(--ease-out-expo),
+    border-color 0.4s ease,
+    box-shadow 0.5s var(--ease-out-expo);
+
+  &:hover {
+    transform: translateY(-4px);
+    border-color: rgb(31 205 192 / 0.32);
+    box-shadow:
+      inset 0 1px 0 0 rgb(255 255 255 / 0.09),
+      0 0 0 1px rgb(31 205 192 / 0.08),
+      0 30px 70px -30px rgb(11 178 166 / 0.4);
+  }
+}
+
+/* Glass panel */
+@utility glass {
+  background: rgb(7 11 15 / 0.68);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  border: 1px solid var(--color-hairline);
+}
+
+/* Section eyebrow rule */
+@utility rule-teal {
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-teal-500),
+    transparent
+  );
+}
+
+/* Fine grid backdrop */
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, rgb(255 255 255 / 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(255 255 255 / 0.035) 1px, transparent 1px);
+  background-size: 68px 68px;
+}
+
+@utility dot-grid {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgb(255 255 255 / 0.09) 1px,
+    transparent 0
+  );
+  background-size: 26px 26px;
+}
+
+/* Masked fade for edges */
+@utility mask-fade-x {
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    black 8%,
+    black 92%,
+    transparent
+  );
+}
+
+@utility mask-fade-b {
+  mask-image: linear-gradient(180deg, black 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(180deg, black 55%, transparent 100%);
+}
+
+/* Animated hairline separator */
+@utility hairline {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.12) 22%,
+    rgb(31 205 192 / 0.42) 50%,
+    rgb(255 255 255 / 0.12) 78%,
+    transparent
+  );
+}
+
+@utility shimmer-text {
+  background: linear-gradient(
+    90deg,
+    var(--color-ink-400) 0%,
+    var(--color-teal-200) 50%,
+    var(--color-ink-400) 100%
+  );
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: var(--animate-shimmer);
+}
+
+/* Hide scrollbar but keep scroll */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   COMPONENT-ISH PRIMITIVES
+   ========================================================================== */
+
+/* Film grain overlay */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Radial vignette applied to hero-ish blocks */
+.vignette::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    120% 80% at 50% 0%,
+    transparent 40%,
+    rgb(4 7 10 / 0.85) 100%
+  );
+}
+
+/* Pointer-tracked spotlight (fed by --mx/--my from JS) */
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    340px circle at var(--mx, 50%) var(--my, 50%),
+    rgb(31 205 192 / 0.14),
+    transparent 62%
+  );
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+/* Underline-on-hover link */
+.link-underline {
+  position: relative;
+}
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s var(--ease-out-expo);
+}
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Prose defaults for long-form pages */
+.prose-iv {
+  color: var(--color-ink-200);
+  line-height: 1.75;
+}
+.prose-iv h2 {
+  font-size: 1.75rem;
+  margin-top: 2.75rem;
+  margin-bottom: 0.875rem;
+  letter-spacing: -0.03em;
+}
+.prose-iv h3 {
+  font-size: 1.25rem;
+  margin-top: 2rem;
+  margin-bottom: 0.625rem;
+  color: var(--color-teal-100);
+}
+.prose-iv p {
+  margin-bottom: 1.125rem;
+}
+.prose-iv ul {
+  margin-bottom: 1.25rem;
+  display: grid;
+  gap: 0.625rem;
+}
+.prose-iv li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.prose-iv li::before {
+  content: "";
+  position: absolute;
+  left: 0.125rem;
+  top: 0.6875rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--color-teal-400);
+  box-shadow: 0 0 12px rgb(31 205 192 / 0.7);
+}
+.prose-iv a {
+  color: var(--color-teal-300);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-iv strong {
+  color: var(--color-ink-50);
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  nav,
+  footer,
+  .no-print {
+    display: none !important;
+  }
+}

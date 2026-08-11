@@ -1,0 +1,12 @@
+{
+  "name": "IV League Infusions",
+  "short_name": "IV League",
+  "description": "Outpatient infusion center in Midlothian, Virginia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04070a",
+  "theme_color": "#04070a",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
