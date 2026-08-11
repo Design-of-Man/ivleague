@@ -1,11 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import { useReducedMotion } from "@/lib/hooks";
 import { site } from "@/content/site";
-import { specialties } from "@/content/therapies";
 
 const SRC = "/media/hero-infusion.mp4";
 const SRC_WEBM = "/media/hero-infusion.webm";
@@ -155,9 +153,11 @@ export function ScrollHero() {
   return (
     <section
       ref={sectionRef}
-      // The runway. Roughly two extra screens of scroll to play five seconds of
-      // film, which lands at a pace that reads as deliberate rather than twitchy.
-      className="relative h-[260svh] lg:h-[280svh]"
+      // The runway only exists where the film actually scrubs. The media query
+      // is the same one that picks the mode, so a touch device gets a single
+      // screen with a looping clip rather than two extra screens of scrolling
+      // past a video that is not responding to the scroll.
+      className="relative h-svh [@media(hover:hover)_and_(pointer:fine)]:h-[264svh]"
     >
       <div className="sticky top-0 flex h-svh flex-col justify-center overflow-hidden">
         {/* ------------------------------ Footage ----------------------------- */}
@@ -209,40 +209,68 @@ export function ScrollHero() {
             the copy sits, and stays light on the right so the splash is still
             visible rather than fogged out.
           */}
-          {/* Horizontal: opaque under the type, clearing to almost nothing over
-              the splash. Stacked Tailwind gradients were compounding to near
-              black and hiding the shot, so the stops are explicit. */}
+          {/*
+            No tint over the footage. The plate stays the white it was shot on,
+            which means the type has to be dark rather than light — an untinted
+            white film with white text on it is unreadable, and dimming the film
+            to fix that is the thing being avoided.
+
+            The only overlay is a white lift on the left third. It raises the
+            grey caustics under the headline to near-paper so dark type holds
+            contrast wherever the splash happens to be in the frame, and it
+            fades out entirely before it reaches the bag.
+          */}
+          {/* Narrow: the copy spans the full width, so a left-weighted veil
+              leaves body text sitting on the bag. Lifted top to bottom instead,
+              clearing toward the base where the splash still reads. */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 lg:hidden"
             style={{
               background:
-                "linear-gradient(100deg, #04070a 0%, rgba(4,7,10,0.96) 30%, rgba(4,7,10,0.72) 46%, rgba(4,7,10,0.28) 64%, rgba(4,7,10,0.06) 82%, rgba(4,7,10,0.02) 100%)",
+                "linear-gradient(to bottom, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.9) 52%, rgba(255,255,255,0.62) 78%, rgba(255,255,255,0.3) 100%)",
             }}
           />
-          {/* Vertical: just enough top and bottom to seat the nav and hand off
-              to the next section. */}
+          {/* Wide: the copy occupies the left half, so the lift can too, and
+              the bag stays untouched. */}
           <div
-            className="absolute inset-0"
+            className="absolute inset-0 hidden lg:block"
             style={{
               background:
-                "linear-gradient(to bottom, rgba(4,7,10,0.72) 0%, rgba(4,7,10,0) 22%, rgba(4,7,10,0) 68%, #04070a 100%)",
+                "linear-gradient(96deg, rgba(255,255,255,0.94) 0%, rgba(255,255,255,0.86) 26%, rgba(255,255,255,0.5) 44%, rgba(255,255,255,0.12) 60%, rgba(255,255,255,0) 74%)",
+            }}
+          />
+          {/* Hand-off to the black page underneath. Confined to the bottom
+              tenth so it reads as a transition, not a scrim. */}
+          <div
+            className="absolute inset-x-0 bottom-0 h-[9%]"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(4,7,10,0) 0%, rgba(4,7,10,0.35) 45%, #04070a 100%)",
             }}
           />
         </div>
 
         {/* -------------------------------- Copy ------------------------------ */}
-        <div className="shell-wide relative w-full py-20">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2.5 rounded-full border border-teal-400/25 bg-teal-400/[0.07] py-1.5 pl-2 pr-4 backdrop-blur-sm">
-              <span className="relative flex h-5 w-5 items-center justify-center">
-                <span className="absolute inline-flex h-2 w-2 rounded-full bg-teal-400 opacity-75 animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]" />
-                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-teal-300" />
+        {/*
+          Dark type on the light plate. Hierarchy is carried by size and weight,
+          with colour used only to separate the three levels — headline near
+          black, lead a mid slate, utility text lighter still. Spacing steps on
+          the 8/16/32/48 scale, and the gap between groups is always larger than
+          the gap inside one, so the eyebrow belongs to the headline and the
+          headline does not belong to the buttons.
+        */}
+        <div className="shell-wide relative w-full">
+          <div className="max-w-[46rem]">
+            <div className="inline-flex items-center gap-2 rounded-full bg-white/70 py-1.5 pl-2 pr-4 ring-1 ring-inset ring-ink-950/10 backdrop-blur-sm">
+              <span className="relative flex h-4 w-4 items-center justify-center">
+                <span className="absolute inline-flex h-2 w-2 rounded-full bg-teal-500 opacity-70 animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]" />
+                <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-teal-700" />
               </span>
-              <span className="text-[12px] font-medium tracking-[0.02em] text-teal-100">
+              <span className="text-[12px] font-medium tracking-[0.01em] text-ink-950">
                 Now accepting new patients
               </span>
-              <span className="h-3 w-px bg-teal-400/25" />
-              <span className="text-[12px] text-teal-300/80">
+              <span className="h-3 w-px bg-ink-950/15" />
+              <span className="text-[12px] text-ink-550">
                 {site.address.city}, {site.address.region}
               </span>
             </div>
@@ -250,31 +278,32 @@ export function ScrollHero() {
             {/*
               The LCP element. No entrance animation, no starting opacity of 0,
               no dependency on hydration: it is in the server HTML and paints on
-              the first frame, above the film in both senses.
+              the first frame.
             */}
-            <h1 className="mt-8 text-hero font-semibold leading-[0.92] tracking-[-0.045em]">
+            <h1 className="mt-6 text-hero font-semibold leading-[0.94] tracking-[-0.045em] text-ink-950 text-balance sm:mt-8 sm:leading-[0.92]">
               Infusion care
               <br />
-              <span className="text-gradient text-glow">without the hospital.</span>
+              <span className="text-teal-700">without the hospital.</span>
             </h1>
 
-            <p className="mt-8 max-w-xl text-lead leading-relaxed text-ink-200">
+            {/* ~58 characters a line: inside the 45-75 the eye tracks best. */}
+            <p className="mt-6 max-w-[34rem] text-[17px] leading-[1.6] text-ink-550 sm:mt-8 sm:text-[19px] sm:leading-[1.62]">
               Biologics, IVIG and IV therapy in private suites, administered by
               nurses who know your name, with the insurance work finished before
               you ever sit down.
             </p>
 
-            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <ButtonLink href="/contact#inquiry" size="xl">
+            <div className="mt-8 flex flex-col gap-3 sm:mt-12 sm:flex-row sm:items-center sm:gap-4">
+              <ButtonLink href="/contact#inquiry" variant="dark" size="xl">
                 Become a patient
                 <ArrowGlyph />
               </ButtonLink>
-              <ButtonLink href="/therapies" variant="secondary" size="xl">
+              <ButtonLink href="/therapies" variant="onLight" size="xl">
                 Explore therapies
               </ButtonLink>
             </div>
 
-            <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3">
+            <ul className="mt-8 flex flex-wrap gap-x-8 gap-y-2.5 sm:mt-12 sm:gap-y-3">
               {[
                 "Physician referral required",
                 "Most major plans accepted",
@@ -282,12 +311,12 @@ export function ScrollHero() {
               ].map((t) => (
                 <li
                   key={t}
-                  className="flex items-center gap-2 text-[13.5px] text-ink-300"
+                  className="flex items-center gap-2 text-[13.5px] text-ink-550"
                 >
                   <svg
                     viewBox="0 0 16 16"
                     fill="none"
-                    className="h-3.5 w-3.5 shrink-0 text-teal-400"
+                    className="h-3.5 w-3.5 shrink-0 text-teal-700"
                     aria-hidden="true"
                   >
                     <path
@@ -303,35 +332,17 @@ export function ScrollHero() {
               ))}
             </ul>
           </div>
-
-          {/* Specialty rail, pinned to the bottom of the frame */}
-          <div className="mt-14 hidden border-t border-white/10 pt-6 lg:block">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="mr-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-ink-400">
-                On formulary
-              </span>
-              {specialties.map((s) => (
-                <Link
-                  key={s.id}
-                  href={`/therapies?specialty=${s.id}`}
-                  className="rounded-full border border-white/10 bg-ink-950/40 px-4 py-2 text-[13px] text-ink-200 backdrop-blur-sm transition-all duration-400 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-teal-400/35 hover:bg-teal-400/[0.1] hover:text-teal-100"
-                >
-                  {s.label}
-                </Link>
-              ))}
-            </div>
-          </div>
         </div>
 
         {/* Scroll affordance: the shot only happens if you scroll. */}
         {mode === "scrub" && (
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-7 flex justify-center"
+            className="pointer-events-none absolute inset-x-0 bottom-[13%] hidden justify-center lg:flex"
           >
-            <span className="flex items-center gap-2.5 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-400">
-              <span className="h-6 w-px animate-[drip_2.6s_var(--ease-in-out-quint)_infinite] bg-gradient-to-b from-teal-400 to-transparent" />
+            <span className="flex flex-col items-center gap-2 font-mono text-[10px] uppercase tracking-[0.2em] text-ink-550/70">
               Scroll
+              <span className="h-6 w-px animate-[drip_2.6s_var(--ease-in-out-quint)_infinite] bg-gradient-to-b from-teal-600 to-transparent" />
             </span>
           </div>
         )}

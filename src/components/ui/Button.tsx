@@ -14,7 +14,10 @@ const variants = {
     "text-ink-200 hover:text-teal-300 hover:bg-white/[0.04]",
   outline:
     "text-teal-300 ring-1 ring-inset ring-teal-400/35 hover:bg-teal-400/10 hover:ring-teal-400/70 hover:-translate-y-0.5",
-  dark: "bg-ink-950 text-ink-50 ring-1 ring-inset ring-white/10 hover:ring-white/25",
+  dark: "bg-ink-950 text-ink-50 ring-1 ring-inset ring-white/10 hover:ring-white/25 hover:-translate-y-0.5",
+  // For the white hero plate. Everything above assumes a dark ground.
+  onLight:
+    "text-ink-950 ring-1 ring-inset ring-ink-950/25 hover:bg-ink-950/[0.06] hover:ring-ink-950/45 hover:-translate-y-0.5",
 } as const;
 
 const sizes = {
