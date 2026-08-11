@@ -1,4 +1,4 @@
-import { Hero } from "@/components/sections/Hero";
+import { ScrollHero } from "@/components/sections/ScrollHero";
 import { Stats } from "@/components/sections/Stats";
 import { SpecialtyGrid } from "@/components/sections/SpecialtyGrid";
 import { TherapyRail } from "@/components/sections/TherapyRail";
@@ -28,7 +28,7 @@ export default function HomePage() {
   return (
     <>
       <JsonLd data={faqSchema(faqs.slice(0, 8))} />
-      <Hero />
+      <ScrollHero />
       <Stats />
       <SpecialtyGrid />
       <TherapyRail />
