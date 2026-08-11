@@ -86,7 +86,9 @@ export function LogoMarquee({
       {payers.map((p) => (
         <span
           key={p.id}
-          className="group/wall inline-flex shrink-0 items-center px-7 opacity-70 transition-opacity duration-500 hover:opacity-100"
+          // No wrapper opacity: the mark is already muted by its own grayscale
+          // filter, and dimming the whole lockup dropped the wordmark to 4.3:1.
+          className="group/wall inline-flex shrink-0 items-center px-7"
         >
           <PayerLogo payer={p} />
         </span>

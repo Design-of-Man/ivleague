@@ -6,6 +6,7 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Logo } from "@/components/ui/Logo";
 import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import { navigation, site, getOpenState } from "@/content/site";
+import { SearchHost, SearchButton } from "@/components/search/SearchTrigger";
 import { useScrolledPast } from "@/lib/hooks";
 import { cn } from "@/lib/utils";
 
@@ -72,6 +73,7 @@ export function Nav() {
         Skip to content
       </a>
 
+      <SearchHost />
       <TopBar />
 
       <header
@@ -149,6 +151,7 @@ export function Nav() {
           </ul>
 
           <div className="hidden items-center gap-2.5 lg:flex">
+            <SearchButton />
             <ButtonLink href={site.contact.phoneHref} variant="ghost" size="sm">
               <PhoneGlyph />
               {site.contact.phone}
@@ -160,10 +163,12 @@ export function Nav() {
           </div>
 
           {/* ----------------------------- Mobile ---------------------------- */}
-          <button
+          <div className="flex items-center gap-2 lg:hidden">
+            <SearchButton iconOnly />
+            <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="relative grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.04] lg:hidden"
+            className="relative grid h-11 w-11 place-items-center rounded-full border border-white/10 bg-white/[0.04]"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -181,7 +186,8 @@ export function Nav() {
                 )}
               />
             </span>
-          </button>
+            </button>
+          </div>
         </nav>
 
         {/* -------------------------- Mega menu ---------------------------- */}
