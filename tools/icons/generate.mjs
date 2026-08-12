@@ -5,10 +5,12 @@ const OUT = "/home/user/ivleague/public";
 
 // Kept byte-identical to the paths in src/components/ui/Logo.tsx. If one
 // changes, change both — there is no build step sharing them.
-const SHIELD = "M13.8 8.7C17 7.2 20.4 6.5 24 6.5c3.6 0 7 .7 10.2 2.2V24.7c0 8.6-4.6 14.7-10.2 17.9C18.4 39.4 13.8 33.3 13.8 24.7Z";
-const SHIELD_IN = "M16.6 10.6C18.9 9.6 21.4 9.1 24 9.1c2.6 0 5.1.5 7.4 1.5V24.6c0 6.9-3.4 11.8-7.4 14.4-4-2.6-7.4-7.5-7.4-14.4Z";
-const DROP = "M24 12.6c-2.7 3.9-5.4 7.6-5.4 10.9a5.4 5.4 0 0 0 10.8 0c0-3.3-2.7-7-5.4-10.9Z";
-const SWIRL = "M23 16.8c-1.8 2.7-3.2 5-3.2 6.9 0 1.5.8 2.8 2 3.5-.7-1.1-.9-2.2-.6-3.5.4-1.9 1.1-4 1.8-6.9Z";
+const SHIELD =
+  "M24 6.2c3.6 0 7.4.7 10.6 2.1V24.6c0 8.6-4.4 14.6-10.6 18C17.8 39.2 13.4 33.2 13.4 24.6V8.3C16.6 6.9 20.4 6.2 24 6.2Z";
+const DROP =
+  "M22.4 12.6c0 0 7 7.6 7 13a5.6 5.6 0 0 1-11.2 0c0-4.2 2.4-8.6 4.2-13Z";
+const SWIRL =
+  "M22.7 16.4c-1.4 3-2.7 5.3-2.7 7.2 0 1.4.8 2.6 1.9 3.2-.7-1.2-.9-2.3-.5-3.7.4-1.8 1-3.8 1.3-6.7Z";
 
 const GRAD = `
   <linearGradient id="d" x1="19" y1="29" x2="29" y2="12.6" gradientUnits="userSpaceOnUse">
@@ -18,8 +20,7 @@ const GRAD = `
 
 /** `rule` is the shield colour: navy on white, lightened on the dark tile. */
 const glyph = (rule) => `
-  <path d="${SHIELD}" fill="none" stroke="${rule}" stroke-width="3.2" stroke-linejoin="round"/>
-  <path d="${SHIELD_IN}" fill="none" stroke="${rule}" stroke-width="0.6" stroke-linejoin="round" opacity="0.5"/>
+  <path d="${SHIELD}" fill="none" stroke="${rule}" stroke-width="3.4" stroke-linejoin="round"/>
   <path d="${DROP}" fill="url(#d)"/>
   <path d="${SWIRL}" fill="#ffffff" opacity="0.42"/>`;
 
@@ -40,7 +41,11 @@ const targets = [
   { file: "apple-icon.png", size: 180, svg: svg({ radius: 0, inset: 3 }) },
   { file: "icon-192.png", size: 192, svg: svg({ radius: 10 }) },
   { file: "icon-512.png", size: 512, svg: svg({ radius: 10 }) },
-  { file: "icon-maskable-512.png", size: 512, svg: svg({ radius: 0, inset: 6 }) },
+  {
+    file: "icon-maskable-512.png",
+    size: 512,
+    svg: svg({ radius: 0, inset: 6 }),
+  },
   { file: "_fav32.png", size: 32, svg: svg({ radius: 8 }) },
   { file: "_fav16.png", size: 16, svg: svg({ radius: 6 }) },
 ];
@@ -48,7 +53,10 @@ const targets = [
 // The standalone icon.svg is what modern browsers take for the tab. No tile
 // behind it — a transparent glyph sits correctly on a light or dark tab strip,
 // so the rule uses the navy that reads on both.
-writeFileSync(`${OUT}/icon.svg`, svg({ radius: 0, bg: "none", rule: "#1D2E7C" }));
+writeFileSync(
+  `${OUT}/icon.svg`,
+  svg({ radius: 0, bg: "none", rule: "#1D2E7C" }),
+);
 console.log("icon.svg");
 
 const browser = await chromium.launch({
@@ -83,12 +91,12 @@ function ico(entries) {
   let offset = 6 + 16 * entries.length;
   entries.forEach((e, i) => {
     const o = 16 * i;
-    dir.writeUInt8(e.size, o);      // width  (0 would mean 256)
-    dir.writeUInt8(e.size, o + 1);  // height
-    dir.writeUInt8(0, o + 2);       // palette size
-    dir.writeUInt8(0, o + 3);       // reserved
-    dir.writeUInt16LE(1, o + 4);    // colour planes
-    dir.writeUInt16LE(32, o + 6);   // bits per pixel
+    dir.writeUInt8(e.size, o); // width  (0 would mean 256)
+    dir.writeUInt8(e.size, o + 1); // height
+    dir.writeUInt8(0, o + 2); // palette size
+    dir.writeUInt8(0, o + 3); // reserved
+    dir.writeUInt16LE(1, o + 4); // colour planes
+    dir.writeUInt16LE(32, o + 6); // bits per pixel
     dir.writeUInt32LE(e.buf.length, o + 8);
     dir.writeUInt32LE(offset, o + 12);
     offset += e.buf.length;

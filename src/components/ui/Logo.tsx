@@ -35,10 +35,12 @@ export const BRAND = {
   onDark: "#5C8FE0",
 } as const;
 
-const SHIELD = "M13.8 8.7C17 7.2 20.4 6.5 24 6.5c3.6 0 7 .7 10.2 2.2V24.7c0 8.6-4.6 14.7-10.2 17.9C18.4 39.4 13.8 33.3 13.8 24.7Z";
-const SHIELD_IN = "M16.6 10.6C18.9 9.6 21.4 9.1 24 9.1c2.6 0 5.1.5 7.4 1.5V24.6c0 6.9-3.4 11.8-7.4 14.4-4-2.6-7.4-7.5-7.4-14.4Z";
-const DROP = "M24 12.6c-2.7 3.9-5.4 7.6-5.4 10.9a5.4 5.4 0 0 0 10.8 0c0-3.3-2.7-7-5.4-10.9Z";
-const SWIRL = "M23 16.8c-1.8 2.7-3.2 5-3.2 6.9 0 1.5.8 2.8 2 3.5-.7-1.1-.9-2.2-.6-3.5.4-1.9 1.1-4 1.8-6.9Z";
+const SHIELD =
+  "M24 6.2c3.6 0 7.4.7 10.6 2.1V24.6c0 8.6-4.4 14.6-10.6 18C17.8 39.2 13.4 33.2 13.4 24.6V8.3C16.6 6.9 20.4 6.2 24 6.2Z";
+const DROP =
+  "M22.4 12.6c0 0 7 7.6 7 13a5.6 5.6 0 0 1-11.2 0c0-4.2 2.4-8.6 4.2-13Z";
+const SWIRL =
+  "M22.7 16.4c-1.4 3-2.7 5.3-2.7 7.2 0 1.4.8 2.6 1.9 3.2-.7-1.2-.9-2.3-.5-3.7.4-1.8 1-3.8 1.3-6.7Z";
 
 export function LogoMark({
   className,
@@ -79,15 +81,7 @@ export function LogoMark({
 
       {/* A thick band, not a hairline rule — the shield in the original reads
           as a solid navy frame with the interior knocked out. */}
-      <path d={SHIELD} stroke={rule} strokeWidth="3.2" strokeLinejoin="round" />
-      <path
-        d={SHIELD_IN}
-        stroke={rule}
-        strokeWidth="0.6"
-        strokeLinejoin="round"
-        opacity="0.5"
-      />
-
+      <path d={SHIELD} stroke={rule} strokeWidth="3.4" strokeLinejoin="round" />
       <path d={DROP} fill={`url(#${gid})`} />
       {/* The lighter comma inside the drop, and the specular edge on its left. */}
       <path d={SWIRL} fill="#ffffff" opacity="0.42" />
@@ -141,8 +135,8 @@ export function Logo({
           className={cn(
             "bg-clip-text font-display font-bold uppercase tracking-[0.02em] text-transparent",
             onLight
-              ? "bg-gradient-to-r from-[#1B3F94] to-[#2E9BD6]"
-              : "bg-gradient-to-r from-white to-[#79C2EC]",
+              ? "bg-gradient-to-r from-[#1C6FB4] to-[#2A8FCB]"
+              : "bg-gradient-to-r from-white to-[#CFE8F8]",
             compact ? "text-[15px]" : "text-[17px]",
           )}
         >
