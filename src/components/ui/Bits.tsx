@@ -67,7 +67,7 @@ export function Breadcrumbs({
                 </Link>
               )}
               {!last && (
-                <span aria-hidden="true" className="text-ink-600">
+                <span aria-hidden="true" className="text-ink-550">
                   /
                 </span>
               )}

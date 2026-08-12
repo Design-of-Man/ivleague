@@ -231,7 +231,7 @@ export function TherapyExplorer() {
                       <Badge tone="neutral" size="sm">
                         {sp.short}
                       </Badge>
-                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-600">
+                      <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">
                         {t.route.includes("Subcutaneous") &&
                         !t.route.includes("Intravenous")
                           ? "Injection"
@@ -305,7 +305,7 @@ function FilterChip({
       <span
         className={cn(
           "font-mono text-[10px] transition-colors",
-          active ? "text-brand-400/70" : "text-ink-600",
+          active ? "text-brand-300" : "text-ink-400",
         )}
       >
         {count}

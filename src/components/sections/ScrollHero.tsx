@@ -58,13 +58,11 @@ const noIntroOnServer = () => false;
  * Sources are ordered widest first: a browser takes the first one whose
  * `media` query matches and whose codec it can decode.
  *
- * Two encoding notes worth keeping. There is no tier above 1600x900: the crop
- * is 1024px wide, so anything larger is spending bits on interpolated pixels,
- * and a 1440p stream with a deep reference buffer is exactly what drops out of
- * a hardware decoder's fast path and into software. And CRF is high (28) with
- * no sharpening, because this plate is wall-to-wall moving caustics — at the
- * settings the previous, mostly-flat plate wanted, it encoded to 12MB and was
- * indistinguishable at 1:1 from the 3.5MB version.
+ * It is also cut. Between 4.2s and 5.4s of the source a sheet of water crosses
+ * the label and the wordmark scrambles; those frames are dropped and the join
+ * is dissolved. That is the part that read as "blurry" and no encoder setting
+ * would have rescued it — see public/media/README.md, which carries the
+ * measurements the whole encode ladder was chosen from.
  *
  * The film stays off the critical path. The poster is a plain `<img>` that
  * paints on the first frame, and the `<video>` is not mounted until the page
@@ -285,16 +283,29 @@ export function ScrollHero() {
               e.currentTarget.setAttribute("data-ready", "true")
             }
           >
+            {/* Widest first. The rungs exist because this is a full-bleed
+                background: a 1512x982 laptop at 2x paints it across 3491
+                device pixels, and whatever the file does not supply, the GPU
+                invents with a bilinear filter — which is the softest resampler
+                anywhere in the chain. Shipping close to the paint size moves
+                that work offline to lanczos, and it is worth more than any
+                encoder setting. `min-resolution` rather than a width alone,
+                because a retina 1280 needs more pixels than a 1440 at 1x. */}
             <source
-              src="/media/hero-infusion-desktop.mp4"
+              src="/media/hero-infusion-2560.mp4"
+              type="video/mp4"
+              media="(min-width: 1500px), (min-resolution: 1.5dppx)"
+            />
+            <source
+              src="/media/hero-infusion-1920.mp4"
               type="video/mp4"
               media="(min-width: 1024px)"
             />
-            <source src="/media/hero-infusion.mp4" type="video/mp4" />
+            <source src="/media/hero-infusion-1280.mp4" type="video/mp4" />
             {/* For Chromium builds without proprietary codecs, which includes
                 Playwright's — without it every automated check of this hero
                 reports a broken video that is fine in production. */}
-            <source src="/media/hero-infusion.webm" type="video/webm" />
+            <source src="/media/hero-infusion-1920.webm" type="video/webm" />
           </video>
         )}
 

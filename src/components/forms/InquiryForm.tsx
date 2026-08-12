@@ -286,7 +286,7 @@ export function InquiryForm() {
 /* -------------------------------------------------------------------------- */
 
 const inputBase =
-  "h-12 w-full rounded-[0.5rem] border bg-white/[0.03] px-4 text-[14.5px] text-ink-50 placeholder:text-ink-600 transition-colors focus:outline-none disabled:opacity-50";
+  "h-12 w-full rounded-[0.5rem] border bg-white/[0.03] px-4 text-[14.5px] text-ink-50 placeholder:text-ink-500 transition-colors focus:outline-none disabled:opacity-50";
 
 function Field({
   label,

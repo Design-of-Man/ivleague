@@ -14,6 +14,12 @@ the same idea, kept because they are good at different things.
 The shipped hero is the Higgsfield overhead take. Cycles is the fallback and the
 way to get a frame with a perfectly sharp label.
 
+**To rebuild the shipped assets from the archived plate, run `./build-hero.sh`
+in this directory.** It does the cut, the loop, the whole encode ladder, the
+poster rungs and the phone intro, and it verifies the master before going on.
+The reasoning behind every setting in it — including the four approaches that
+were tried and rejected — is in `public/media/README.md`.
+
 ---
 
 ## 1. Higgsfield — the shot we shipped

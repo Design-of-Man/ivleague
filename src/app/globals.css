@@ -33,6 +33,10 @@
   --color-ink-800: #0e161c;
   --color-ink-700: #152128;
   --color-ink-600: #1e2d36;
+  /* 700 and 600 are SURFACES. As text on this page's ground they run at 1.2
+     and 1.4 to 1 — not dim, invisible. They were used for five labels and a
+     form placeholder before anyone noticed. 550 is the lightest rung that is
+     still not text; 400 is the darkest one that clears AA at 10px. */
   --color-ink-550: #33454f; /* non-text: hardware, strokes */
   --color-ink-500: #6a7f89;
   --color-ink-400: #7b8f99;

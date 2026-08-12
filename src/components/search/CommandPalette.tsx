@@ -321,7 +321,7 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
               open
             </span>
           </div>
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-600">
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">
             {flat.length} {flat.length === 1 ? "result" : "results"}
           </span>
         </div>
