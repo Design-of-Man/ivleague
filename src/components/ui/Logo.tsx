@@ -36,11 +36,11 @@ export const BRAND = {
 } as const;
 
 const SHIELD =
-  "M24 6.2c3.6 0 7.4.7 10.6 2.1V24.6c0 8.6-4.4 14.6-10.6 18C17.8 39.2 13.4 33.2 13.4 24.6V8.3C16.6 6.9 20.4 6.2 24 6.2Z";
+  "M7.2 7C12.5 5.4 18.2 4.6 24 4.6c5.8 0 11.5.8 16.8 2.4V25c0 9.8-7 16.4-16.8 19.8C14.2 41.4 7.2 34.8 7.2 25Z";
 const DROP =
-  "M22.4 12.6c0 0 7 7.6 7 13a5.6 5.6 0 0 1-11.2 0c0-4.2 2.4-8.6 4.2-13Z";
+  "M22.8 11.6c0 0 8.4 10 8.4 15.8a8.2 8.2 0 0 1-16.4 0c0-4.8 4.4-10.2 8-15.8Z";
 const SWIRL =
-  "M22.7 16.4c-1.4 3-2.7 5.3-2.7 7.2 0 1.4.8 2.6 1.9 3.2-.7-1.2-.9-2.3-.5-3.7.4-1.8 1-3.8 1.3-6.7Z";
+  "M22.9 16c-2 3.6-3.8 6.6-3.8 8.9 0 1.8 1 3.3 2.5 4.1-.9-1.5-1.2-2.9-.7-4.6.5-2.3 1.4-4.8 2-8.4Z";
 
 export function LogoMark({
   className,
@@ -81,8 +81,14 @@ export function LogoMark({
 
       {/* A thick band, not a hairline rule — the shield in the original reads
           as a solid navy frame with the interior knocked out. */}
-      <path d={SHIELD} stroke={rule} strokeWidth="3.4" strokeLinejoin="round" />
-      <path d={DROP} fill={`url(#${gid})`} />
+      <path d={SHIELD} stroke={rule} strokeWidth="3" strokeLinejoin="round" />
+      <path
+        d={DROP}
+        fill={`url(#${gid})`}
+        stroke={rule}
+        strokeWidth="0.9"
+        strokeLinejoin="round"
+      />
       {/* The lighter comma inside the drop, and the specular edge on its left. */}
       <path d={SWIRL} fill="#ffffff" opacity="0.42" />
 
