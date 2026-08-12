@@ -91,26 +91,35 @@ Related: `src/content/reviewed.ts` holds the review date as a hand-edited
 constant, deliberately not a build timestamp. Bump it when someone has actually
 re-read the content, not on every deploy.
 
-### 3. The logo, and the business name — `src/components/ui/Logo.tsx`, `src/content/site.ts`
+### 3. The logo — redrawn, still needs the vector
 
-**The mark is traced from a screenshot, not from your artwork.** This build
-environment's egress policy blocks ivlinfusions.com, so the real vector could
-not be downloaded. The droplet in `LogoMark` was drawn by hand from a ~250px
-screenshot of the site header: navy outer shell, teal body, white droplet
-outlined inside. Proportions will be close but not exact. **Send the original
-SVG or EPS and it drops straight into that one component** — the header, the
-footer, the favicon set, the PWA icons and the Open Graph card all render from
-it.
+**Fixed:** the mark is now IV League's real crest — a double-ruled shield with a
+blue-to-cyan droplet — and it replaces the bare teal droplet that was there,
+which had been traced off a screenshot of the website and was simply the wrong
+mark. It is applied to the header, the footer, `icon.svg`, `favicon.ico`
+(16 + 32, multi-resolution), the Apple touch icon, both PWA icons and the
+maskable icon.
 
-Also regenerate `public/favicon.ico`, `apple-icon.png`, `icon-192.png`,
-`icon-512.png` and `icon-maskable-512.png` from the real file when it arrives.
+**Still needed:** it is redrawn in SVG from the raster you sent, so the curve of
+the shield, the exact gradient stops and the wordmark tracking are close but not
+exact. Send the original **AI / EPS / SVG** and it drops straight into
+`LogoMark` — one definition feeds every size. Regenerate the raster icons with
+`tools/icons/generate.mjs` afterwards.
+
+🟡 **Worth a decision: the brand is blue, the site is teal.** The original brief
+asked for "their logo colour of their teal", but their actual mark is blue
+(`#1B4C9B` → `#3FBDEA`), not teal. The site's entire accent scale is teal
+(`#1fcdc0`). Right now the lockup renders in its true blue and everything around
+it stays teal — adjacent hues, so it reads as deliberate rather than broken, but
+it is two accents. The options are to leave it, or to retune the accent scale to
+the brand blue, which is a contained change (one block of CSS custom properties
+in `globals.css`). Say which and it is done.
 
 **Separately: which name is correct?** Your logo lockup and your homepage copy
-both say "IV League Infusion Services". The domain and the Instagram handle say
-"IV League Infusions". The site now uses the full form everywhere, including in
-schema.org. **Check it against the Google Business Profile listing** — the
-schema `name` should match GBP exactly, and a mismatch costs local-pack
-visibility.
+both say "IV League Infusion Services", and Sunbiz has the LLC under that name,
+so that is what the site and the schema use. The short form survives in the
+domain (ivlinfusions.com) and nothing else. Worth confirming it matches the
+Google Business Profile exactly — a mismatch there costs local-pack visibility.
 
 ### 4. Wellness and injection pricing — `src/content/wellness.ts`
 Every `price` is `null` and renders as "Pricing on request". Set the numbers in that one

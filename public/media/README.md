@@ -1,15 +1,15 @@
 # Hero media
 
 The homepage hero is a film of the IV bag floating on rippling water, shot from
-above. It plays once and holds. Driven by `src/components/sections/ScrollHero.tsx`.
+above. It loops, seamlessly. Driven by `src/components/sections/ScrollHero.tsx`.
 
 | File | Size | Serves |
 |---|---|---|
-| `hero-infusion-desktop.mp4` | 3.5 MB | 1600x900, `min-width: 1024px` |
-| `hero-infusion.mp4` | 2.8 MB | 1280x720, everything else and the h264 default |
-| `hero-infusion.webm` | 2.3 MB | VP9 fallback. See the codec note below. |
-| `hero-intro-portrait.mp4` | 1.7 MB | 720x1280, the phone intro. 5.6s. |
-| `hero-intro-portrait.webm` | 1.2 MB | VP9 fallback for the same. |
+| `hero-infusion-desktop.mp4` | 3.8 MB | 1600x900, `min-width: 1024px` |
+| `hero-infusion.mp4` | 3.0 MB | 1280x720, everything else and the h264 default |
+| `hero-infusion.webm` | 2.4 MB | VP9 fallback. See the codec note below. |
+| `hero-intro-portrait.mp4` | 1.5 MB | 720x1280, the phone intro. 5.6s. |
+| `hero-intro-portrait.webm` | 992 KB | VP9 fallback for the same. |
 | `hero-infusion-{640,960,1280,1920,2560}.jpg` | 20–132 KB | Poster ladder, via `srcset`. |
 | `hero-infusion.jpg` | 52 KB | Copy of the 1280 rung, for a bare `src`. |
 
@@ -49,7 +49,7 @@ SWS="flags=lanczos+accurate_rnd+full_chroma_int+full_chroma_inp"
 X264="aq-mode=3:aq-strength=1.0:psy-rd=1.00,0.15:deblock=-1,-1:\
 ref=3:bframes=3:me=umh:subme=9:trellis=2"
 
-ffmpeg -i master.mp4 -an -t 8.0 \
+ffmpeg -i loop_master.mp4 -an \
   -vf "${CROP},scale=1600:900:${SWS},format=yuv420p" \
   -c:v libx264 -crf 28 -preset slow -profile:v high \
   -x264-params "$X264" -pix_fmt yuv420p -movflags +faststart \
@@ -81,6 +81,41 @@ Other things that are load-bearing:
   encodes, but stamps a level the stream exceeds, and the result plays in
   software and fails on a hardware decoder.
 
+## The loop
+
+The film runs forever instead of freezing on a last frame, which is what an
+earlier play-once cut did and what read as it stopping abruptly.
+
+```bash
+X=0.8                      # crossfade length
+T=10.04                    # source length
+OFF=$(python3 -c "print(f'{$T-2*$X:.3f}')")
+
+ffmpeg -i master.mp4 -an -filter_complex "\
+[0:v]split[a][b];\
+[a]trim=start=${X},setpts=PTS-STARTPTS,fps=24[main];\
+[b]trim=end=${X},setpts=PTS-STARTPTS,fps=24[head];\
+[main][head]xfade=transition=fade:duration=${X}:offset=${OFF}[v]" \
+  -map "[v]" -c:v libx264 -crf 12 -preset medium -pix_fmt yuv420p loop_master.mp4
+```
+
+Take the clip from X onward, then crossfade its own first X seconds over the
+tail. The result is `T - X` long (9.24s) and its last frame blends into its own
+first frame. All 10.04s of source contributes; X of it is spent on the join.
+
+Two things to know:
+
+- **`fps=24` on each branch is required.** `trim`+`setpts` drops the
+  constant-frame-rate flag and `xfade` refuses a variable-rate input with
+  "current rate of 1/0 is invalid".
+- **This only works because the plate is ambient.** It begins and ends on the
+  same thing — a floating bag and moving ripples — so the blend is invisible.
+  The earlier drop-and-splash plate opened on still water and closed on a
+  settled bag, and no crossfade could have hidden that.
+
+The poster is the loop's **first** frame, not its last, so the hand-off from
+still to film is invisible.
+
 ## The phone intro
 
 On a phone's first visit of a session the film plays full-screen over the hero
@@ -89,15 +124,14 @@ and the copy phases in when it ends. A separate portrait cut, because
 the middle quarter of its width.
 
 ```bash
-ffmpeg -ss 2.4 -i master.mp4 -an -t 5.6 \
+ffmpeg -ss 3.64 -i loop_master.mp4 -an -t 5.6 \
   -vf "${CROP_P},scale=720:1280:${SWS},format=yuv420p" \
   -c:v libx264 -crf 28 -preset slow -profile:v high \
   -x264-params "$X264" -pix_fmt yuv420p -movflags +faststart \
   hero-intro-portrait.mp4
 ```
 
-It is the **last** 5.6s of the eight-second window, so its final frame is the
-poster frame. The dissolve into the resting band is then the same moment in the
+It is the **last** 5.6s of the loop, so its final frame is the poster frame. The dissolve into the resting band is then the same moment in the
 film at a different crop, rather than a jump backwards in time.
 
 This file *replaces* the 16:9 one on a phone rather than adding to it — the band
@@ -133,7 +167,7 @@ production — which cost an hour of debugging once already. Keep it, and keep i
 last in the `<source>` list.
 
 ```bash
-ffmpeg -i master.mp4 -an -t 8.0 \
+ffmpeg -i loop_master.mp4 -an \
   -vf "${CROP},scale=1280:720:${SWS},format=yuv420p" \
   -c:v libvpx-vp9 -crf 38 -b:v 0 -row-mt 1 -deadline good -cpu-used 3 -g 240 \
   hero-infusion.webm

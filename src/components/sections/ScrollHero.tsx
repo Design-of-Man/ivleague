@@ -47,9 +47,13 @@ const noIntroOnServer = () => false;
  * camera drifts — so nothing here is slowed down or interpolated. It is the
  * source at native speed, trimmed to eight seconds.
  *
- * It plays once and holds rather than looping, and the held last frame is the
- * poster, byte for byte, so the film comes to rest on exactly the image that
- * was there before it started and a loop can never cut on a seam.
+ * It loops. The file is built as a seamless loop — the last 0.8s is crossfaded
+ * into its own first 0.8s — so the bag keeps floating indefinitely instead of
+ * stopping dead on a frozen frame, which is what an earlier play-once cut did
+ * and which read as the film breaking. The plate can take that treatment
+ * because it begins and ends on the same thing; the previous drop-and-splash
+ * plate could not. The poster is the loop's first frame, so the hand-off from
+ * still to film is invisible.
  *
  * Sources are ordered widest first: a browser takes the first one whose
  * `media` query matches and whose codec it can decode.
@@ -204,9 +208,11 @@ export function ScrollHero() {
 
     let onScreen = true;
     const settle = () => {
-      // `play()` on a finished video seeks back to zero and starts again. That
-      // is what made the film restart every time the hero scrolled back into
-      // view — it read as the video jumping. Once it has played, it is done.
+      // `play()` on a finished video seeks back to zero and starts again, which
+      // is what made a non-looping cut restart every time the hero scrolled
+      // back into view. A looping video never reports `ended`, so this is inert
+      // today — it stays because removing `loop` would bring the bug straight
+      // back.
       if (v.ended) return;
       if (onScreen && !document.hidden) v.play().catch(() => {});
       else v.pause();
@@ -265,6 +271,7 @@ export function ScrollHero() {
           <video
             ref={videoRef}
             muted
+            loop
             playsInline
             preload="auto"
             tabIndex={-1}
