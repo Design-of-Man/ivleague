@@ -91,43 +91,45 @@ Related: `src/content/reviewed.ts` holds the review date as a hand-edited
 constant, deliberately not a build timestamp. Bump it when someone has actually
 re-read the content, not on every deploy.
 
-### 3. 🔴 THE LOGO IS STILL NOT RIGHT — send the artwork file
+### 3. The logo — now the real artwork, one file short of finished
 
-The mark on the site is **drawn by hand from a picture of your logo**, and it
-has been wrong twice. It is now on its third attempt and it is closer — the
-shield is a thick navy band rather than a hairline rule, the droplet is slim
-with an inner highlight, and both tiers of the wordmark run as a left-to-right
-gradient the way the original does — but it is still an approximation and it
-should not go live.
+**Fixed.** The site no longer draws the mark. It uses the artwork the client
+uploaded (`public/brand/ivl-logo-source.png`, 266x66), with exactly two things
+done to it and no recolouring:
 
-**This cannot be fixed by trying again.** Reproducing a logo by eye is the wrong
-method: the shield curve, the exact gradient stops and the letterforms of the
-wordmark are all judgement calls, and each pass gets a different set of them
-slightly wrong. Three sources were tried and none is usable:
+1. The opaque white ground was knocked out to alpha, with a soft matte between
+   luminance 200 and 240 so the silver hairline around the shield keeps its
+   anti-aliasing.
+2. It was trimmed to the ink and cut into two assets — the full lockup
+   (`ivl-logo.png`, 249x59) and the shield alone (`ivl-mark.png`, 53x59).
 
-- The logo pasted into chat arrives as an inline image, not a file, so its
-  pixels cannot be read — only looked at.
-- The logo printed on the bag in the hero footage is real artwork, but it is
-  warped by the bag's surface and colour-shifted by the water. Sampling it gives
-  `#25548A` for the navy, which is visibly far too light.
-- ivlinfusions.com is not on this environment's egress allowlist, so the asset
-  cannot be downloaded from the site.
+Knocking the white out rather than sitting the logo on a white chip is what
+lets it work here: the shield's interior takes the page's black and the mark
+reads cleanly, while the same file still sits correctly on white. Verified on
+both grounds. Contrast on the black header: wordmark 5.54:1, droplet 7.12:1,
+silver rule 13.35:1 — all comfortably past AA. Accessibility stayed at 100.
 
-**What is needed:** the logo **attached as a file** — `.svg`, `.ai`, `.eps` or a
-large transparent `.png`. Vector is best; it drops into `LogoMark` and one
-definition then feeds the header, the footer, `icon.svg`, `favicon.ico`, the
-Apple touch icon and both PWA icons. A large PNG also works — it gets embedded
-as the real artwork with no tracing at all.
+Colours, sampled from the artwork rather than estimated:
+`#2B3991` shield · `#3EA4CE` droplet · `#D1D2D4` silver rule · `#1F8FC2` wordmark.
 
-Regenerate the raster icons with `node tools/icons/generate.mjs` after any
-change. Its paths are duplicated from `Logo.tsx`; keep the two in step.
+Five hand-drawn versions preceded this and every one was wrong. **Do not
+reintroduce one.** The paths are gone from `Logo.tsx`.
 
-🟡 **And a decision either way: the brand is blue, the site is teal.** The brief
-asked for "their logo colour of their teal", but the mark is blue
-(`#1D2E7C` → `#29ABE2`), not teal, and the site's accent scale is teal
-(`#1fcdc0`). Right now the lockup renders blue and everything around it stays
-teal. Leave it, or retune the accent to the brand blue — one block of custom
-properties in `globals.css`.
+🟡 **One file would finish it.** The source is a 266px raster, which is enough
+for the header at 1x and 2x and for the favicon, but the shield is only 53px
+wide, so the **512px PWA icon is an ~10x upscale and is visibly soft**. An
+`.svg` or `.eps` fixes that one file and nothing else. Everything else is
+already correct. Regenerate afterwards with `node tools/icons/generate.mjs`.
+
+🟡 **A reverse lockup would help too.** The artwork is drawn for a white ground.
+It works on black because of the knockout, but if IV League has a white/reverse
+version, the header would be crisper still.
+
+🟡 **And a decision: the brand is blue, the site is teal.** The brief asked for
+"their logo colour of their teal", but the mark is blue (`#2B3991` → `#3EA4CE`)
+and the site's accent scale is teal (`#1fcdc0`). The lockup now renders in its
+true blue and everything around it stays teal. Leave it, or retune the accent
+to the brand blue — one block of custom properties in `globals.css`.
 
 **Separately: which name is correct?** The logo lockup, the homepage copy and
 the Sunbiz LLC all say "IV League Infusion Services", so that is what the site

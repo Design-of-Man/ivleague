@@ -1,167 +1,129 @@
 import { cn } from "@/lib/utils";
 
 /**
- * IV League Infusion Services' mark: a double-ruled heraldic shield with a
- * water droplet inside it, the droplet running from cyan at the base to deep
- * blue at the tip.
+ * IV League Infusion Services' lockup — **their actual artwork**, not a redraw.
  *
- * ⚠️ Redrawn from the raster the client supplied, not from their artwork. The
- * proportions and colours are read off that image and are close, not exact.
- * Drop in the original SVG/EPS/AI and delete this note — it is listed in
- * CONTENT-REVIEW.md. (It replaces an earlier version traced off a screenshot
- * of their website, which had the wrong mark entirely: a bare teal droplet
- * with no shield.)
+ * Source: `public/brand/ivl-logo-source.png`, supplied by the client (266x66,
+ * opaque white ground). Two things were done to it and nothing else:
  *
- * Drawn as SVG rather than a raster so one definition serves a 16px favicon
- * and a 400px footer lockup, and so the shield rule can change weight on a
- * dark ground — their navy reads as authoritative on white and disappears
- * completely on black.
+ *  1. The white ground was knocked out to alpha, with a soft matte between
+ *     luminance 200 and 240 so the silver rule around the shield keeps its
+ *     anti-aliasing. Nothing was recoloured.
+ *  2. It was trimmed to the ink (x 11-259, y 3-61) and cut into two assets: the
+ *     full lockup and the shield on its own for the icons.
+ *
+ * Knocking the white out rather than sitting the logo on a white chip is what
+ * lets it work on this site: the shield's interior goes to the page's black and
+ * the mark reads cleanly, while the same file still sits correctly on white.
+ * Checked on both grounds before shipping.
+ *
+ * ⚠️ It is a 266px-wide raster. That is enough for the header at 1x and 2x, and
+ * for a favicon, but the 512px PWA icon is upscaled ~10x from a 53px mark and is
+ * visibly soft. An SVG/EPS would fix that one file and nothing else — see
+ * CONTENT-REVIEW.md. Five hand-redrawn versions preceded this and all of them
+ * were wrong; do not reintroduce one.
  */
 
-/** Brand colours, sampled from the supplied lockup. */
+/** Sampled from the supplied artwork, not estimated. */
 export const BRAND = {
-  /** The shield band. A deep indigo-navy, not a mid blue. */
-  navy: "#1D2E7C",
-  /** Bottom of the droplet. */
-  cyan: "#29ABE2",
-  /** Top of the droplet, where it deepens. */
-  deep: "#1B60AE",
-  /** The wordmark runs as a gradient, dark on the left to light on the right. */
-  wordFrom: "#1B3F94",
-  wordTo: "#2E9BD6",
-  subFrom: "#3E86C4",
-  subTo: "#5FB4DE",
-  /** The band again, lifted enough to survive on near-black. */
-  onDark: "#5C8FE0",
+  /** Shield band. Darkest 1% of the lockup. */
+  navy: "#2B3991",
+  /** The droplet. */
+  cyan: "#3EA4CE",
+  /** The hairline around the shield. */
+  silver: "#D1D2D4",
+  /** The wordmark, which is near-uniform rather than a gradient. */
+  word: "#1F8FC2",
 } as const;
 
-const SHIELD =
-  "M7.2 7C12.5 5.4 18.2 4.6 24 4.6c5.8 0 11.5.8 16.8 2.4V25c0 9.8-7 16.4-16.8 19.8C14.2 41.4 7.2 34.8 7.2 25Z";
-const DROP =
-  "M22.8 11.6c0 0 8.4 10 8.4 15.8a8.2 8.2 0 0 1-16.4 0c0-4.8 4.4-10.2 8-15.8Z";
-const SWIRL =
-  "M22.9 16c-2 3.6-3.8 6.6-3.8 8.9 0 1.8 1 3.3 2.5 4.1-.9-1.5-1.2-2.9-.7-4.6.5-2.3 1.4-4.8 2-8.4Z";
+const LOCKUP = "/brand/ivl-logo.png";
+const LOCKUP_2X = "/brand/ivl-logo@2x.png";
+const MARK = "/brand/ivl-mark.png";
+const MARK_4X = "/brand/ivl-mark@4x.png";
 
+/** Intrinsic sizes of the trimmed assets, for aspect-ratio and CLS. */
+const LOCKUP_W = 249;
+const LOCKUP_H = 59;
+const MARK_W = 53;
+const MARK_H = 59;
+
+/**
+ * The shield on its own. Used where the full lockup would be too wide.
+ */
 export function LogoMark({
   className,
   animated = false,
-  /** `onLight` uses the navy rule from the original. Default is the dark-ground treatment. */
-  onLight = false,
-  /** Unique per instance — SVG gradient ids are global to the document. */
-  idSuffix = "",
 }: {
   className?: string;
   animated?: boolean;
+  /** Accepted for call-site compatibility; the artwork suits both grounds. */
   onLight?: boolean;
-  idSuffix?: string;
 }) {
-  const gid = `ivl-drop${idSuffix}`;
-  const rule = onLight ? BRAND.navy : BRAND.onDark;
-
   return (
-    <svg
-      viewBox="0 0 48 48"
-      fill="none"
-      className={cn("h-9 w-9", className)}
-      aria-hidden="true"
-    >
-      <defs>
-        <linearGradient
-          id={gid}
-          x1="19"
-          y1="29"
-          x2="29"
-          y2="12.6"
-          gradientUnits="userSpaceOnUse"
-        >
-          <stop offset="0%" stopColor={BRAND.cyan} />
-          <stop offset="100%" stopColor={BRAND.deep} />
-        </linearGradient>
-      </defs>
-
-      {/* A thick band, not a hairline rule — the shield in the original reads
-          as a solid navy frame with the interior knocked out. */}
-      <path d={SHIELD} stroke={rule} strokeWidth="3" strokeLinejoin="round" />
-      <path
-        d={DROP}
-        fill={`url(#${gid})`}
-        stroke={rule}
-        strokeWidth="0.9"
-        strokeLinejoin="round"
+    <span className={cn("relative inline-block", className)}>
+      {/* eslint-disable-next-line @next/next/no-img-element -- the brand assets
+          are fixed-size and already optimised; running them through the image
+          optimiser costs a round trip for no saving. */}
+      <img
+        src={MARK}
+        srcSet={`${MARK} 1x, ${MARK_4X} 4x`}
+        width={MARK_W}
+        height={MARK_H}
+        alt=""
+        decoding="async"
+        className="h-full w-auto"
       />
-      {/* The lighter comma inside the drop, and the specular edge on its left. */}
-      <path d={SWIRL} fill="#ffffff" opacity="0.42" />
-
       {animated && (
-        <circle
-          cx="24"
-          cy="24"
-          r="19"
-          stroke={BRAND.cyan}
-          strokeWidth="1"
-          fill="none"
-          opacity="0.4"
-          className="origin-center animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]"
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 -m-1 rounded-full ring-1 ring-[#3EA4CE]/40 animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]"
         />
       )}
-    </svg>
+    </span>
   );
 }
 
 /**
- * The full lockup: the shield, then "IV LEAGUE" over "INFUSION SERVICES"
- * tracked out to sit under it. On their artwork both tiers are blue; on this
- * site's black ground the top tier goes white so it carries, and the tracked
- * line keeps the brand cyan.
+ * The full lockup: shield, "IV LEAGUE", and "INFUSION SERVICES" beneath it.
+ *
+ * One image rather than a mark plus live type, because the wordmark's letter
+ * spacing and weight are part of the artwork and setting them in Sora was one
+ * of the things that made the earlier redraws read as not-quite-right.
  */
 export function Logo({
   className,
   compact = false,
   animated = false,
-  onLight = false,
 }: {
   className?: string;
   compact?: boolean;
   animated?: boolean;
   onLight?: boolean;
 }) {
+  const h = compact ? 30 : 34;
   return (
-    <span className={cn("inline-flex items-center gap-2.5", className)}>
-      <LogoMark
-        animated={animated}
-        onLight={onLight}
-        idSuffix={compact ? "-c" : ""}
-        className={compact ? "h-8 w-8" : "h-9 w-9"}
+    <span
+      className={cn("relative inline-flex items-center", className)}
+      style={{ height: h }}
+    >
+      {/* eslint-disable-next-line @next/next/no-img-element -- see LogoMark. */}
+      <img
+        src={LOCKUP}
+        srcSet={`${LOCKUP} 1x, ${LOCKUP_2X} 2x`}
+        width={LOCKUP_W}
+        height={LOCKUP_H}
+        alt="IV League Infusion Services"
+        decoding="async"
+        fetchPriority="high"
+        style={{ height: h, width: (h * LOCKUP_W) / LOCKUP_H }}
+        className="block"
       />
-      <span className="flex flex-col leading-none">
-        {/* Both tiers run as a horizontal gradient, dark left to light right,
-            which is how the original is drawn. On the black ground the top tier
-            starts at white instead of navy so it still carries. */}
+      {animated && (
         <span
-          className={cn(
-            "bg-clip-text font-display font-bold uppercase tracking-[0.02em] text-transparent",
-            onLight
-              ? "bg-gradient-to-r from-[#1C6FB4] to-[#2A8FCB]"
-              : "bg-gradient-to-r from-white to-[#CFE8F8]",
-            compact ? "text-[15px]" : "text-[17px]",
-          )}
-        >
-          IV League
-        </span>
-        <span
-          className={cn(
-            "bg-clip-text font-medium uppercase text-transparent",
-            onLight
-              ? "bg-gradient-to-r from-[#3E86C4] to-[#5FB4DE]"
-              : "bg-gradient-to-r from-[#5C8FE0] to-[#7FD0F0]",
-            compact
-              ? "mt-1 text-[6.5px] tracking-[0.2em]"
-              : "mt-1.5 text-[7.5px] tracking-[0.223em]",
-          )}
-        >
-          Infusion Services
-        </span>
-      </span>
+          aria-hidden="true"
+          className="pointer-events-none absolute left-0 top-1/2 h-8 w-8 -translate-y-1/2 rounded-full ring-1 ring-[#3EA4CE]/35 animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]"
+        />
+      )}
     </span>
   );
 }
