@@ -6,11 +6,24 @@ import { cn } from "@/lib/utils";
  * Source: `public/brand/ivl-logo-source.png`, supplied by the client (266x66,
  * opaque white ground). Two things were done to it and nothing else:
  *
- *  1. The white ground was knocked out to alpha, with a soft matte between
- *     luminance 200 and 240 so the silver rule around the shield keeps its
- *     anti-aliasing. Nothing was recoloured.
+ *  1. The white ground was knocked out to alpha by un-premultiplying against
+ *     white: alpha comes from how far a pixel is from the ground
+ *     (`1 - min(r,g,b)/255`), and the ink's true colour is recovered with
+ *     `(observed - 255*(1-a)) / a`. Solid ink keeps its original colour at full
+ *     opacity; only the anti-aliased fringe uses the recovered value, blended
+ *     across a smoothstep.
+ *
+ *     A plain luminance matte was tried first and was wrong. It left 1,050
+ *     light-grey semi-transparent edge pixels, which composite invisibly on
+ *     white but glow on black — a halo around every letter, and the chrome rule
+ *     around the shield reading as a grey smudge. Un-premultiplying turns those
+ *     into dark ink at low alpha, which is what they actually are, so they
+ *     recede on a dark ground and reappear on a light one. Verified: recomposited
+ *     over white it matches the supplied artwork to a mean error of 0.28/255.
  *  2. It was trimmed to the ink (x 11-259, y 3-61) and cut into two assets: the
  *     full lockup and the shield on its own for the icons.
+ *
+ * Nothing is recoloured and no shape is altered.
  *
  * Knocking the white out rather than sitting the logo on a white chip is what
  * lets it work on this site: the shield's interior goes to the page's black and

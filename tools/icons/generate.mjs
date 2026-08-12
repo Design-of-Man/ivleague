@@ -30,11 +30,14 @@ const markData = `data:image/png;base64,${readFileSync(MARK).toString("base64")}
  * cropped to a circle on Android, so their art needs more room than the rest.
  */
 function html({ size, radius, pad, bg = "#ffffff" }) {
+  // Sized by HEIGHT, not width. The mark is 53x59 — taller than it is wide — so
+  // fitting it by width leaves it floating in a square tile with air above and
+  // below, which at 16px is most of the icon.
   return `<style>
     html,body{margin:0;padding:0}
     .tile{width:${size}px;height:${size}px;border-radius:${radius}px;background:${bg};
           display:grid;place-items:center;overflow:hidden}
-    img{width:${Math.round(size * (1 - pad * 2) * 0.9)}px;height:auto;
+    img{height:${Math.round(size * (1 - pad * 2))}px;width:auto;
         image-rendering:auto;display:block}
   </style><div class="tile"><img src="${markData}"></div>`;
 }
@@ -44,8 +47,8 @@ const targets = [
   { file: "icon-192.png", size: 192, radius: 40, pad: 0.1 },
   { file: "icon-512.png", size: 512, radius: 106, pad: 0.1 },
   { file: "icon-maskable-512.png", size: 512, radius: 0, pad: 0.2 },
-  { file: "_fav32.png", size: 32, radius: 6, pad: 0.06 },
-  { file: "_fav16.png", size: 16, radius: 3, pad: 0.04 },
+  { file: "_fav32.png", size: 32, radius: 5, pad: 0.02 },
+  { file: "_fav16.png", size: 16, radius: 2, pad: 0.0 },
 ];
 
 const browser = await chromium.launch({
