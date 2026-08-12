@@ -5,32 +5,29 @@ const OUT = "/home/user/ivleague/public";
 
 // Kept byte-identical to the paths in src/components/ui/Logo.tsx. If one
 // changes, change both — there is no build step sharing them.
-const SHIELD_OUTER =
-  "M8.8 8A2 2 0 0 1 10.8 6h26.4A2 2 0 0 1 39.2 8v17.2c0 8.2-6 14.4-15.2 18.4-9.2-4-15.2-10.2-15.2-18.4Z";
-const SHIELD_INNER =
-  "M11 9.6A1.4 1.4 0 0 1 12.4 8.2h23.2A1.4 1.4 0 0 1 37 9.6V25c0 7.2-5.2 12.6-13 16.2-7.8-3.6-13-9-13-16.2Z";
-const DROP =
-  "M24 12.8c0 0 7.4 9 7.4 14.4a7.4 7.4 0 0 1-14.8 0c0-5.4 7.4-14.4 7.4-14.4Z";
+const SHIELD = "M13.8 8.7C17 7.2 20.4 6.5 24 6.5c3.6 0 7 .7 10.2 2.2V24.7c0 8.6-4.6 14.7-10.2 17.9C18.4 39.4 13.8 33.3 13.8 24.7Z";
+const SHIELD_IN = "M16.6 10.6C18.9 9.6 21.4 9.1 24 9.1c2.6 0 5.1.5 7.4 1.5V24.6c0 6.9-3.4 11.8-7.4 14.4-4-2.6-7.4-7.5-7.4-14.4Z";
+const DROP = "M24 12.6c-2.7 3.9-5.4 7.6-5.4 10.9a5.4 5.4 0 0 0 10.8 0c0-3.3-2.7-7-5.4-10.9Z";
+const SWIRL = "M23 16.8c-1.8 2.7-3.2 5-3.2 6.9 0 1.5.8 2.8 2 3.5-.7-1.1-.9-2.2-.6-3.5.4-1.9 1.1-4 1.8-6.9Z";
 
 const GRAD = `
-  <linearGradient id="d" x1="17" y1="34" x2="31" y2="12.8" gradientUnits="userSpaceOnUse">
-    <stop offset="0%" stop-color="#3FBDEA"/>
-    <stop offset="52%" stop-color="#1E7FC4"/>
-    <stop offset="100%" stop-color="#1B4C9B"/>
+  <linearGradient id="d" x1="19" y1="29" x2="29" y2="12.6" gradientUnits="userSpaceOnUse">
+    <stop offset="0%" stop-color="#29ABE2"/>
+    <stop offset="100%" stop-color="#1B60AE"/>
   </linearGradient>`;
 
 /** `rule` is the shield colour: navy on white, lightened on the dark tile. */
 const glyph = (rule) => `
-  <path d="${SHIELD_OUTER}" fill="none" stroke="${rule}" stroke-width="2.4" stroke-linejoin="round"/>
-  <path d="${SHIELD_INNER}" fill="none" stroke="${rule}" stroke-width="0.9" stroke-linejoin="round" opacity="0.62"/>
+  <path d="${SHIELD}" fill="none" stroke="${rule}" stroke-width="3.2" stroke-linejoin="round"/>
+  <path d="${SHIELD_IN}" fill="none" stroke="${rule}" stroke-width="0.6" stroke-linejoin="round" opacity="0.5"/>
   <path d="${DROP}" fill="url(#d)"/>
-  <path d="M19.4 30.2a5.4 5.4 0 0 0 3 4" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>`;
+  <path d="${SWIRL}" fill="#ffffff" opacity="0.42"/>`;
 
 /**
  * `inset` shrinks the glyph toward the middle. Maskable icons get cropped to a
  * circle on Android, so their art has to sit inside the central 80%.
  */
-function svg({ radius, inset = 0, bg = "#04070a", rule = "#63ACE2" }) {
+function svg({ radius, inset = 0, bg = "#04070a", rule = "#5C8FE0" }) {
   const s = (48 - inset * 2) / 48;
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
   <defs>${GRAD}</defs>
@@ -51,7 +48,7 @@ const targets = [
 // The standalone icon.svg is what modern browsers take for the tab. No tile
 // behind it — a transparent glyph sits correctly on a light or dark tab strip,
 // so the rule uses the navy that reads on both.
-writeFileSync(`${OUT}/icon.svg`, svg({ radius: 0, bg: "none", rule: "#1F5FA8" }));
+writeFileSync(`${OUT}/icon.svg`, svg({ radius: 0, bg: "none", rule: "#1D2E7C" }));
 console.log("icon.svg");
 
 const browser = await chromium.launch({

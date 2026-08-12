@@ -20,21 +20,25 @@ import { cn } from "@/lib/utils";
 
 /** Brand colours, sampled from the supplied lockup. */
 export const BRAND = {
-  navy: "#1B4C9B",
-  blue: "#1E7FC4",
-  cyan: "#3FBDEA",
-  /** The shield rule and wordmark on a white ground. */
-  ink: "#1F5FA8",
-  /** The same rule, lightened enough to survive on near-black. */
-  onDark: "#63ACE2",
+  /** The shield band. A deep indigo-navy, not a mid blue. */
+  navy: "#1D2E7C",
+  /** Bottom of the droplet. */
+  cyan: "#29ABE2",
+  /** Top of the droplet, where it deepens. */
+  deep: "#1B60AE",
+  /** The wordmark runs as a gradient, dark on the left to light on the right. */
+  wordFrom: "#1B3F94",
+  wordTo: "#2E9BD6",
+  subFrom: "#3E86C4",
+  subTo: "#5FB4DE",
+  /** The band again, lifted enough to survive on near-black. */
+  onDark: "#5C8FE0",
 } as const;
 
-const SHIELD_OUTER =
-  "M8.8 8A2 2 0 0 1 10.8 6h26.4A2 2 0 0 1 39.2 8v17.2c0 8.2-6 14.4-15.2 18.4-9.2-4-15.2-10.2-15.2-18.4Z";
-const SHIELD_INNER =
-  "M11 9.6A1.4 1.4 0 0 1 12.4 8.2h23.2A1.4 1.4 0 0 1 37 9.6V25c0 7.2-5.2 12.6-13 16.2-7.8-3.6-13-9-13-16.2Z";
-const DROP =
-  "M24 12.8c0 0 7.4 9 7.4 14.4a7.4 7.4 0 0 1-14.8 0c0-5.4 7.4-14.4 7.4-14.4Z";
+const SHIELD = "M13.8 8.7C17 7.2 20.4 6.5 24 6.5c3.6 0 7 .7 10.2 2.2V24.7c0 8.6-4.6 14.7-10.2 17.9C18.4 39.4 13.8 33.3 13.8 24.7Z";
+const SHIELD_IN = "M16.6 10.6C18.9 9.6 21.4 9.1 24 9.1c2.6 0 5.1.5 7.4 1.5V24.6c0 6.9-3.4 11.8-7.4 14.4-4-2.6-7.4-7.5-7.4-14.4Z";
+const DROP = "M24 12.6c-2.7 3.9-5.4 7.6-5.4 10.9a5.4 5.4 0 0 0 10.8 0c0-3.3-2.7-7-5.4-10.9Z";
+const SWIRL = "M23 16.8c-1.8 2.7-3.2 5-3.2 6.9 0 1.5.8 2.8 2 3.5-.7-1.1-.9-2.2-.6-3.5.4-1.9 1.1-4 1.8-6.9Z";
 
 export function LogoMark({
   className,
@@ -50,7 +54,7 @@ export function LogoMark({
   idSuffix?: string;
 }) {
   const gid = `ivl-drop${idSuffix}`;
-  const rule = onLight ? BRAND.ink : BRAND.onDark;
+  const rule = onLight ? BRAND.navy : BRAND.onDark;
 
   return (
     <svg
@@ -62,47 +66,37 @@ export function LogoMark({
       <defs>
         <linearGradient
           id={gid}
-          x1="17"
-          y1="34"
-          x2="31"
-          y2="12.8"
+          x1="19"
+          y1="29"
+          x2="29"
+          y2="12.6"
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0%" stopColor={BRAND.cyan} />
-          <stop offset="52%" stopColor={BRAND.blue} />
-          <stop offset="100%" stopColor={BRAND.navy} />
+          <stop offset="100%" stopColor={BRAND.deep} />
         </linearGradient>
       </defs>
 
+      {/* A thick band, not a hairline rule — the shield in the original reads
+          as a solid navy frame with the interior knocked out. */}
+      <path d={SHIELD} stroke={rule} strokeWidth="3.2" strokeLinejoin="round" />
       <path
-        d={SHIELD_OUTER}
+        d={SHIELD_IN}
         stroke={rule}
-        strokeWidth="2.4"
+        strokeWidth="0.6"
         strokeLinejoin="round"
-      />
-      <path
-        d={SHIELD_INNER}
-        stroke={rule}
-        strokeWidth="0.9"
-        strokeLinejoin="round"
-        opacity={onLight ? 0.9 : 0.62}
+        opacity="0.5"
       />
 
       <path d={DROP} fill={`url(#${gid})`} />
-      {/* Specular sliver on the low-left of the drop, as in the original. */}
-      <path
-        d="M19.4 30.2a5.4 5.4 0 0 0 3 4"
-        stroke="#ffffff"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        opacity="0.6"
-      />
+      {/* The lighter comma inside the drop, and the specular edge on its left. */}
+      <path d={SWIRL} fill="#ffffff" opacity="0.42" />
 
       {animated && (
         <circle
           cx="24"
           cy="24"
-          r="18"
+          r="19"
           stroke={BRAND.cyan}
           strokeWidth="1"
           fill="none"
@@ -140,10 +134,15 @@ export function Logo({
         className={compact ? "h-8 w-8" : "h-9 w-9"}
       />
       <span className="flex flex-col leading-none">
+        {/* Both tiers run as a horizontal gradient, dark left to light right,
+            which is how the original is drawn. On the black ground the top tier
+            starts at white instead of navy so it still carries. */}
         <span
           className={cn(
-            "font-display font-bold uppercase tracking-[0.02em]",
-            onLight ? "text-[#1F5FA8]" : "text-ink-50",
+            "bg-clip-text font-display font-bold uppercase tracking-[0.02em] text-transparent",
+            onLight
+              ? "bg-gradient-to-r from-[#1B3F94] to-[#2E9BD6]"
+              : "bg-gradient-to-r from-white to-[#79C2EC]",
             compact ? "text-[15px]" : "text-[17px]",
           )}
         >
@@ -151,8 +150,10 @@ export function Logo({
         </span>
         <span
           className={cn(
-            "font-medium uppercase",
-            onLight ? "text-[#4E9CD3]" : "text-[#63ACE2]",
+            "bg-clip-text font-medium uppercase text-transparent",
+            onLight
+              ? "bg-gradient-to-r from-[#3E86C4] to-[#5FB4DE]"
+              : "bg-gradient-to-r from-[#5C8FE0] to-[#7FD0F0]",
             compact
               ? "mt-1 text-[6.5px] tracking-[0.2em]"
               : "mt-1.5 text-[7.5px] tracking-[0.223em]",
