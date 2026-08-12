@@ -25,13 +25,13 @@ export function AnswerBlock({
     <div
       data-answer
       className={cn(
-        "relative rounded-[0.625rem] border border-teal-400/20 bg-teal-400/[0.045] p-6 sm:p-7",
+        "relative rounded-[0.625rem] border border-brand-400/20 bg-brand-400/[0.045] p-6 sm:p-7",
         className,
       )}
     >
       <span
         aria-hidden="true"
-        className="absolute left-0 top-6 h-10 w-px bg-gradient-to-b from-teal-300 to-transparent"
+        className="absolute left-0 top-6 h-10 w-px bg-gradient-to-b from-brand-300 to-transparent"
       />
       <p className="text-[15.5px] leading-relaxed text-ink-100">{children}</p>
     </div>

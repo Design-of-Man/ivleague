@@ -76,7 +76,7 @@ export default function InsurancePage() {
 
         <div className="mt-14 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
           <Reveal className="card p-8">
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
               What we handle
             </h3>
             <TickList items={WE_DO} className="mt-6" />
@@ -131,7 +131,7 @@ export default function InsurancePage() {
           ].map((c) => (
             <StaggerItem key={c.n}>
               <div className="card h-full p-8">
-                <span className="font-mono text-[11px] text-teal-400">
+                <span className="font-mono text-[11px] text-brand-400">
                   {c.n}
                 </span>
                 <h3 className="mt-4 text-[19px] font-semibold tracking-tight text-ink-50">

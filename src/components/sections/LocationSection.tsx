@@ -65,7 +65,7 @@ export function LocationSection() {
         {/* Details */}
         <div className="grid gap-4">
           <Reveal delay={0.08} className="card p-7">
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-400">
               Hours
             </h3>
             {!site.hoursConfirmed && (
@@ -73,7 +73,7 @@ export function LocationSection() {
                 Weekend appointments are available. Call{" "}
                 <a
                   href={site.contact.phoneHref}
-                  className="text-teal-300 underline-offset-4 hover:underline"
+                  className="text-brand-300 underline-offset-4 hover:underline"
                 >
                   {site.contact.phone}
                 </a>{" "}
@@ -100,7 +100,7 @@ export function LocationSection() {
           </Reveal>
 
           <Reveal delay={0.14} className="card p-7">
-            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
+            <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-400">
               Contact
             </h3>
             <div className="mt-5 grid gap-4">
@@ -109,7 +109,7 @@ export function LocationSection() {
                 className="group flex items-center justify-between gap-4"
               >
                 <span className="text-[13px] text-ink-400">Phone</span>
-                <span className="text-[15px] font-medium text-ink-50 transition-colors group-hover:text-teal-300">
+                <span className="text-[15px] font-medium text-ink-50 transition-colors group-hover:text-brand-300">
                   {site.contact.phone}
                 </span>
               </a>
@@ -118,7 +118,7 @@ export function LocationSection() {
                 className="group flex items-center justify-between gap-4 border-t border-white/6 pt-4"
               >
                 <span className="text-[13px] text-ink-400">Email</span>
-                <span className="text-[13.5px] font-medium text-ink-50 transition-colors group-hover:text-teal-300">
+                <span className="text-[13.5px] font-medium text-ink-50 transition-colors group-hover:text-brand-300">
                   {site.contact.email}
                 </span>
               </a>
@@ -162,7 +162,7 @@ function MapFallback() {
         </g>
         <circle cx="420" cy="330" r="42" fill="rgba(31,205,192,0.10)" />
         <circle cx="420" cy="330" r="22" fill="rgba(31,205,192,0.18)" />
-        <circle cx="420" cy="330" r="7" fill="#1fcdc0" />
+        <circle cx="420" cy="330" r="7" fill="#35abdd" />
       </svg>
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_60%_at_52%_63%,transparent,rgba(4,7,10,0.72))]" />
     </div>

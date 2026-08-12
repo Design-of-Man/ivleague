@@ -20,7 +20,7 @@ export function ScrollProgress() {
   return (
     <div
       aria-hidden="true"
-      className="scroll-progress fixed inset-x-0 top-0 z-100 h-[2px] bg-gradient-to-r from-teal-500 via-teal-300 to-teal-500 shadow-[0_0_14px_rgba(31,205,192,0.8)]"
+      className="scroll-progress fixed inset-x-0 top-0 z-100 h-[2px] bg-gradient-to-r from-brand-500 via-brand-300 to-brand-500 shadow-[0_0_14px_rgba(31,205,192,0.8)]"
     />
   );
 }
@@ -55,7 +55,7 @@ export function StickyCta() {
         <a
           href="/contact#inquiry"
           tabIndex={show ? 0 : -1}
-          className="group/btn flex h-12 items-center justify-center gap-2 rounded-[0.5rem] bg-teal-400 text-[14px] font-semibold text-ink-950"
+          className="group/btn flex h-12 items-center justify-center gap-2 rounded-[0.5rem] bg-brand-400 text-[14px] font-semibold text-ink-950"
         >
           Get started
           <ArrowGlyph />
@@ -77,7 +77,7 @@ export function BackToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
       className={cn(
-        "no-print fixed bottom-24 right-4 z-45 hidden h-11 w-11 place-items-center rounded-full border border-white/10 bg-ink-900/96 text-ink-300 transition-[opacity,transform,color,border-color] duration-400 ease-[var(--ease-out-expo)] hover:border-teal-400/40 hover:text-teal-300 lg:grid lg:bottom-8",
+        "no-print fixed bottom-24 right-4 z-45 hidden h-11 w-11 place-items-center rounded-full border border-white/10 bg-ink-900/96 text-ink-300 transition-[opacity,transform,color,border-color] duration-400 ease-[var(--ease-out-expo)] hover:border-brand-400/40 hover:text-brand-300 lg:grid lg:bottom-8",
         show
           ? "scale-100 opacity-100"
           : "pointer-events-none scale-90 opacity-0",

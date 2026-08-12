@@ -49,13 +49,13 @@ export function TherapyRail() {
                       {sp.label}
                     </Badge>
                     {t.onCurrentSite && (
-                      <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-teal-500/70">
+                      <span className="font-mono text-[9.5px] uppercase tracking-[0.16em] text-brand-500/70">
                         On formulary
                       </span>
                     )}
                   </div>
 
-                  <h3 className="mt-5 font-display text-2xl font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
+                  <h3 className="mt-5 font-display text-2xl font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-brand-100">
                     {t.brand}
                   </h3>
                   <p className="mt-1 font-mono text-[11.5px] lowercase tracking-wide text-ink-500">
@@ -84,7 +84,7 @@ export function TherapyRail() {
                       </dd>
                     </div>
                   </dl>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-teal-300">
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-[13px] font-medium text-brand-300">
                     Therapy detail
                     <svg
                       viewBox="0 0 16 16"
@@ -109,15 +109,15 @@ export function TherapyRail() {
           {/* Tail card */}
           <Link
             href="/therapies"
-            className="group flex w-[16rem] shrink-0 snap-start flex-col items-start justify-center gap-4 rounded-[0.625rem] border border-dashed border-white/12 p-7 transition-colors duration-400 hover:border-teal-400/40 hover:bg-teal-400/[0.04]"
+            className="group flex w-[16rem] shrink-0 snap-start flex-col items-start justify-center gap-4 rounded-[0.625rem] border border-dashed border-white/12 p-7 transition-colors duration-400 hover:border-brand-400/40 hover:bg-brand-400/[0.04]"
           >
-            <span className="font-display text-2xl font-semibold tracking-tight text-ink-200 transition-colors group-hover:text-teal-100">
+            <span className="font-display text-2xl font-semibold tracking-tight text-ink-200 transition-colors group-hover:text-brand-100">
               See all 30+
             </span>
             <span className="text-[13.5px] leading-relaxed text-ink-500">
               Filter by specialty, search by brand or generic name.
             </span>
-            <ArrowGlyph className="text-teal-400" />
+            <ArrowGlyph className="text-brand-400" />
           </Link>
         </div>
       </Reveal>

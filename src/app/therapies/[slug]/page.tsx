@@ -111,7 +111,7 @@ export default async function TherapyPage({
         size="md"
         aside={
           <div className="card w-full min-w-[17rem] p-6 lg:w-[19rem]">
-            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-teal-400">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-400">
               At a glance
             </p>
             <dl className="mt-4 grid gap-3.5">
@@ -185,13 +185,13 @@ export default async function TherapyPage({
               </h2>
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 <div className="card p-6">
-                  <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+                  <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                     Before you come
                   </h3>
                   <TickList items={t.prep} className="mt-5" tone="muted" />
                 </div>
                 <div className="card p-6">
-                  <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+                  <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                     In the chair
                   </h3>
                   <TickList items={t.expect} className="mt-5" tone="muted" />
@@ -223,7 +223,7 @@ export default async function TherapyPage({
                       Most major commercial plans, Medicare and Medicaid.{" "}
                       <Link
                         href="/insurance"
-                        className="text-teal-300 underline underline-offset-4"
+                        className="text-brand-300 underline underline-offset-4"
                       >
                         See insurance details
                       </Link>
@@ -248,7 +248,7 @@ export default async function TherapyPage({
           <aside className="flex flex-col gap-4 lg:sticky lg:top-32 lg:self-start">
             {linkedConditions.length > 0 && (
               <Reveal className="card p-6">
-                <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+                <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                   Conditions treated
                 </h3>
                 <ul className="mt-4 grid gap-1">
@@ -256,7 +256,7 @@ export default async function TherapyPage({
                     <li key={c.slug}>
                       <Link
                         href={`/conditions/${c.slug}`}
-                        className="group flex items-center justify-between gap-3 rounded-lg px-2.5 py-2.5 text-[13.5px] text-ink-300 transition-colors hover:bg-white/[0.04] hover:text-teal-200"
+                        className="group flex items-center justify-between gap-3 rounded-lg px-2.5 py-2.5 text-[13.5px] text-ink-300 transition-colors hover:bg-white/[0.04] hover:text-brand-200"
                       >
                         {c.shortName ?? c.name}
                         <svg
@@ -282,7 +282,7 @@ export default async function TherapyPage({
 
             <Reveal delay={0.08} className="card overflow-hidden">
               <div className="border-b border-white/8 p-6">
-                <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+                <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                   Getting started
                 </h3>
                 <p className="mt-3 text-[13.5px] leading-relaxed text-ink-400">
@@ -295,21 +295,21 @@ export default async function TherapyPage({
               <div className="grid divide-y divide-white/6">
                 <Link
                   href="/contact#inquiry"
-                  className="group flex items-center justify-between gap-3 px-6 py-4 text-[13.5px] font-medium text-ink-100 transition-colors hover:bg-white/[0.03] hover:text-teal-200"
+                  className="group flex items-center justify-between gap-3 px-6 py-4 text-[13.5px] font-medium text-ink-100 transition-colors hover:bg-white/[0.03] hover:text-brand-200"
                 >
                   New patient inquiry
                   <ArrowGlyph />
                 </Link>
                 <Link
                   href="/patients"
-                  className="group flex items-center justify-between gap-3 px-6 py-4 text-[13.5px] font-medium text-ink-100 transition-colors hover:bg-white/[0.03] hover:text-teal-200"
+                  className="group flex items-center justify-between gap-3 px-6 py-4 text-[13.5px] font-medium text-ink-100 transition-colors hover:bg-white/[0.03] hover:text-brand-200"
                 >
                   What to expect
                   <ArrowGlyph />
                 </Link>
                 <Link
                   href="/providers#refer"
-                  className="group flex items-center justify-between gap-3 px-6 py-4 text-[13.5px] font-medium text-ink-100 transition-colors hover:bg-white/[0.03] hover:text-teal-200"
+                  className="group flex items-center justify-between gap-3 px-6 py-4 text-[13.5px] font-medium text-ink-100 transition-colors hover:bg-white/[0.03] hover:text-brand-200"
                 >
                   Refer a patient
                   <ArrowGlyph />
@@ -335,7 +335,7 @@ export default async function TherapyPage({
                   href={`/therapies/${r.slug}`}
                   className="group flex h-full flex-col gap-3 p-6"
                 >
-                  <h3 className="font-display text-lg font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
+                  <h3 className="font-display text-lg font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-brand-100">
                     {r.brand}
                   </h3>
                   <p className="font-mono text-[10.5px] lowercase tracking-wide text-ink-500">

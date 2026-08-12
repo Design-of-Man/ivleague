@@ -114,7 +114,9 @@ export function Logo({
         height={LOCKUP_H}
         alt="IV League Infusion Services"
         decoding="async"
-        fetchPriority="high"
+        /* Deliberately not fetchPriority="high". It is 13KB in the header and
+           marking it high cost every interior page ~360ms of LCP by competing
+           with the fonts and the CSS for the first connections. Measured. */
         style={{ height: h, width: (h * LOCKUP_W) / LOCKUP_H }}
         className="block"
       />

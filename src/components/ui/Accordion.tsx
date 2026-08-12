@@ -59,8 +59,8 @@ export function Accordion({
                     className={cn(
                       "text-[17px] font-medium leading-snug transition-colors duration-300 sm:text-lg",
                       isOpen
-                        ? "text-teal-200"
-                        : "text-ink-50 group-hover:text-teal-100",
+                        ? "text-brand-200"
+                        : "text-ink-50 group-hover:text-brand-100",
                     )}
                   >
                     {item.title}
@@ -75,13 +75,13 @@ export function Accordion({
                   className={cn(
                     "relative mt-1 grid h-7 w-7 shrink-0 place-items-center rounded-full border transition-all duration-500 ease-[var(--ease-out-expo)]",
                     isOpen
-                      ? "rotate-45 border-teal-400/60 bg-teal-400/12"
-                      : "border-white/12 group-hover:border-teal-400/40",
+                      ? "rotate-45 border-brand-400/60 bg-brand-400/12"
+                      : "border-white/12 group-hover:border-brand-400/40",
                   )}
                   aria-hidden="true"
                 >
-                  <span className="absolute h-[1.5px] w-3 rounded-full bg-current text-teal-300" />
-                  <span className="absolute h-3 w-[1.5px] rounded-full bg-current text-teal-300" />
+                  <span className="absolute h-[1.5px] w-3 rounded-full bg-current text-brand-300" />
+                  <span className="absolute h-3 w-[1.5px] rounded-full bg-current text-brand-300" />
                 </span>
               </button>
             </h3>

@@ -114,7 +114,7 @@ export function FaqSection({
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search questions…"
                     aria-label="Search frequently asked questions"
-                    className="h-12 w-full rounded-full border border-white/10 bg-white/[0.03] pl-11 pr-4 text-[14px] text-ink-50 placeholder:text-ink-500 transition-colors focus:border-teal-400/50 focus:outline-none"
+                    className="h-12 w-full rounded-full border border-white/10 bg-white/[0.03] pl-11 pr-4 text-[14px] text-ink-50 placeholder:text-ink-500 transition-colors focus:border-brand-400/50 focus:outline-none"
                   />
                 </div>
               )}
@@ -129,7 +129,7 @@ export function FaqSection({
                       className={cn(
                         "rounded-full border px-4 py-2 text-[13px] font-medium transition-all duration-300",
                         category === c
-                          ? "border-teal-400/45 bg-teal-400/10 text-teal-200"
+                          ? "border-brand-400/45 bg-brand-400/10 text-brand-200"
                           : "border-white/8 bg-white/[0.02] text-ink-400 hover:border-white/16 hover:text-ink-100",
                       )}
                     >
@@ -157,7 +157,7 @@ export function FaqSection({
               No questions match that search. Try a different term, or just{" "}
               <a
                 href="/contact"
-                className="text-teal-300 underline underline-offset-4"
+                className="text-brand-300 underline underline-offset-4"
               >
                 ask us directly
               </a>

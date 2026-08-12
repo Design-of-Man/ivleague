@@ -97,7 +97,7 @@ export default function ConditionsPage() {
                               Treated here
                             </Badge>
                           )}
-                          <h3 className="font-display text-[19px] font-semibold leading-snug tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
+                          <h3 className="font-display text-[19px] font-semibold leading-snug tracking-tight text-ink-50 transition-colors group-hover:text-brand-100">
                             {c.name}
                           </h3>
                           <p className="mt-3 text-[13.5px] leading-relaxed text-ink-400">
@@ -111,7 +111,7 @@ export default function ConditionsPage() {
                           <svg
                             viewBox="0 0 16 16"
                             fill="none"
-                            className="h-3.5 w-3.5 text-teal-400 transition-transform duration-400 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
+                            className="h-3.5 w-3.5 text-brand-400 transition-transform duration-400 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
                             aria-hidden="true"
                           >
                             <path
@@ -143,7 +143,7 @@ export default function ConditionsPage() {
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-flex h-11 items-center rounded-full bg-teal-400 px-6 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-teal-300"
+            className="mt-6 inline-flex h-11 items-center rounded-full bg-brand-400 px-6 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-brand-300"
           >
             Ask about your diagnosis
           </Link>

@@ -147,7 +147,7 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
       >
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal-400/50 to-transparent"
+          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/50 to-transparent"
         />
 
         {/* Input */}
@@ -155,7 +155,7 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
           <svg
             viewBox="0 0 16 16"
             fill="none"
-            className="h-4 w-4 shrink-0 text-teal-400"
+            className="h-4 w-4 shrink-0 text-brand-400"
             aria-hidden="true"
           >
             <circle
@@ -212,7 +212,7 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
               </p>
               <a
                 href={site.contact.phoneHref}
-                className="mt-5 inline-flex h-10 items-center rounded-full bg-teal-400 px-5 text-[13.5px] font-semibold text-ink-950 transition-colors hover:bg-teal-300"
+                className="mt-5 inline-flex h-10 items-center rounded-full bg-brand-400 px-5 text-[13.5px] font-semibold text-ink-950 transition-colors hover:bg-brand-300"
               >
                 {site.contact.phone}
               </a>
@@ -245,28 +245,30 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
                         onClick={() => go(item)}
                         className={cn(
                           "mx-2 flex cursor-pointer items-center gap-3 rounded-[0.5rem] px-3 py-2.5 transition-colors",
-                          isActive ? "bg-teal-400/12" : "hover:bg-white/[0.04]",
+                          isActive
+                            ? "bg-brand-400/12"
+                            : "hover:bg-white/[0.04]",
                         )}
                       >
                         <span
                           aria-hidden="true"
                           className={cn(
                             "h-1.5 w-1.5 shrink-0 rounded-full transition-colors",
-                            isActive ? "bg-teal-400" : "bg-white/15",
+                            isActive ? "bg-brand-400" : "bg-white/15",
                           )}
                         />
                         <span className="min-w-0 flex-1">
                           <span
                             className={cn(
                               "block truncate text-[14.5px] font-medium",
-                              isActive ? "text-teal-100" : "text-ink-100",
+                              isActive ? "text-brand-100" : "text-ink-100",
                             )}
                           >
                             {highlight(item.title, query).map(([run, on], i) =>
                               on ? (
                                 <mark
                                   key={i}
-                                  className="bg-transparent font-semibold text-teal-300"
+                                  className="bg-transparent font-semibold text-brand-300"
                                 >
                                   {run}
                                 </mark>
@@ -285,7 +287,7 @@ export function CommandPalette({ onClose }: { onClose: () => void }) {
                           <svg
                             viewBox="0 0 16 16"
                             fill="none"
-                            className="h-3.5 w-3.5 shrink-0 text-teal-400"
+                            className="h-3.5 w-3.5 shrink-0 text-brand-400"
                             aria-hidden="true"
                           >
                             <path

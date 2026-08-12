@@ -114,7 +114,7 @@ export default function PatientsPage() {
           {DAY.map((d, i) => (
             <Reveal key={d.title} delay={i * 0.05}>
               <div className="grid gap-4 rounded-[0.625rem] border border-white/8 bg-white/[0.02] p-6 sm:grid-cols-[9rem_1fr] sm:gap-8 sm:p-7">
-                <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-teal-400 sm:pt-1">
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.16em] text-brand-400 sm:pt-1">
                   {d.time}
                 </span>
                 <div>
@@ -213,14 +213,14 @@ export default function PatientsPage() {
                 className="group card card-hover flex h-full flex-col justify-between gap-6 p-7"
               >
                 <div>
-                  <h3 className="font-display text-lg font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
+                  <h3 className="font-display text-lg font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-brand-100">
                     {c.title}
                   </h3>
                   <p className="mt-3 text-[13.5px] leading-relaxed text-ink-400">
                     {c.body}
                   </p>
                 </div>
-                <ArrowGlyph className="text-teal-400" />
+                <ArrowGlyph className="text-brand-400" />
               </Link>
             </StaggerItem>
           ))}

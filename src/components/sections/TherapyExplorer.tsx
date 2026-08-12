@@ -134,7 +134,7 @@ export function TherapyExplorer() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search by brand, generic name or condition…"
                 aria-label="Search therapies"
-                className="h-12 w-full rounded-full border border-white/10 bg-white/[0.03] pl-11 pr-4 text-[14px] text-ink-50 placeholder:text-ink-500 transition-colors focus:border-teal-400/50 focus:bg-white/[0.05] focus:outline-none"
+                className="h-12 w-full rounded-full border border-white/10 bg-white/[0.03] pl-11 pr-4 text-[14px] text-ink-50 placeholder:text-ink-500 transition-colors focus:border-brand-400/50 focus:bg-white/[0.05] focus:outline-none"
               />
             </div>
 
@@ -151,7 +151,7 @@ export function TherapyExplorer() {
                 onChange={(e) =>
                   withViewTransition(() => setSort(e.target.value as SortKey))
                 }
-                className="h-12 rounded-full border border-white/10 bg-white/[0.03] px-4 pr-8 text-[13.5px] text-ink-100 transition-colors focus:border-teal-400/50 focus:outline-none"
+                className="h-12 rounded-full border border-white/10 bg-white/[0.03] px-4 pr-8 text-[13.5px] text-ink-100 transition-colors focus:border-brand-400/50 focus:outline-none"
               >
                 <option value="specialty">Specialty</option>
                 <option value="az">A–Z</option>
@@ -192,7 +192,7 @@ export function TherapyExplorer() {
           <button
             type="button"
             onClick={reset}
-            className="text-[13px] font-medium text-teal-300 transition-colors hover:text-teal-200"
+            className="text-[13px] font-medium text-brand-300 transition-colors hover:text-brand-200"
           >
             Clear filters
           </button>
@@ -211,7 +211,7 @@ export function TherapyExplorer() {
           </p>
           <Link
             href="/contact"
-            className="mt-6 inline-flex h-11 items-center rounded-full bg-teal-400 px-6 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-teal-300"
+            className="mt-6 inline-flex h-11 items-center rounded-full bg-brand-400 px-6 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-brand-300"
           >
             Ask about a medication
           </Link>
@@ -239,7 +239,7 @@ export function TherapyExplorer() {
                       </span>
                     </div>
 
-                    <h2 className="mt-4 font-display text-xl font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
+                    <h2 className="mt-4 font-display text-xl font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-brand-100">
                       {t.brand}
                     </h2>
                     <p className="mt-1 font-mono text-[11px] lowercase tracking-wide text-ink-500">
@@ -257,7 +257,7 @@ export function TherapyExplorer() {
                     <svg
                       viewBox="0 0 16 16"
                       fill="none"
-                      className="h-3.5 w-3.5 shrink-0 text-teal-400 transition-transform duration-400 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
+                      className="h-3.5 w-3.5 shrink-0 text-brand-400 transition-transform duration-400 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
                       aria-hidden="true"
                     >
                       <path
@@ -297,7 +297,7 @@ function FilterChip({
       className={cn(
         "group flex shrink-0 items-center gap-2 rounded-full border px-4 py-2 text-[13px] font-medium transition-all duration-300",
         active
-          ? "border-teal-400/45 bg-teal-400/10 text-teal-200"
+          ? "border-brand-400/45 bg-brand-400/10 text-brand-200"
           : "border-white/8 bg-white/[0.02] text-ink-400 hover:border-white/16 hover:text-ink-100",
       )}
     >
@@ -305,7 +305,7 @@ function FilterChip({
       <span
         className={cn(
           "font-mono text-[10px] transition-colors",
-          active ? "text-teal-400/70" : "text-ink-600",
+          active ? "text-brand-400/70" : "text-ink-600",
         )}
       >
         {count}

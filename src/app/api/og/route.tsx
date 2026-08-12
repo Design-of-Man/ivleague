@@ -3,7 +3,7 @@ import { ImageResponse } from "next/og";
 export const alt = "IV League Infusions";
 export const contentType = "image/png";
 
-const TEAL = "#1fcdc0";
+const TEAL = "#35abdd";
 const INK = "#04070a";
 
 /**

@@ -69,7 +69,7 @@ export default async function LegalPage({
             aria-label="On this page"
             className="lg:sticky lg:top-32 lg:self-start"
           >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
               On this page
             </p>
             <ul className="mt-5 grid gap-2 border-l border-white/8 pl-4">
@@ -77,7 +77,7 @@ export default async function LegalPage({
                 <li key={s.heading}>
                   <a
                     href={`#${slugId(s.heading)}`}
-                    className="block text-[13px] leading-snug text-ink-400 transition-colors hover:text-teal-300"
+                    className="block text-[13px] leading-snug text-ink-400 transition-colors hover:text-brand-300"
                   >
                     {s.heading}
                   </a>
@@ -96,7 +96,7 @@ export default async function LegalPage({
                     <li key={d.slug}>
                       <Link
                         href={`/legal/${d.slug}`}
-                        className="text-[13px] text-ink-400 transition-colors hover:text-teal-300"
+                        className="text-[13px] text-ink-400 transition-colors hover:text-brand-300"
                       >
                         {d.title}
                       </Link>

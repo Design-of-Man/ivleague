@@ -153,8 +153,8 @@ deep navy or racing green, varsity striping — earn its place?
   is one glance away and it's fatal for a medical service.
 - **Navy and racing green are the two most common "we're serious" colours in
   healthcare.** Choosing them to be distinctive lands you in the middle of the pack.
-- **The client already has a teal logo.** Bolting collegiate iconography onto an existing
-  teal mark produces a brand at war with itself.
+- **The client already has a logo.** Bolting collegiate iconography onto an existing
+  shield-and-droplet mark produces a brand at war with itself.
 - **A crest hides the actual proof.** The differentiators here are boring and enormous:
   no facility fee, 48-hour benefits checks, weekend hours, the same nurse every visit.
   Heraldry cannot say any of that. Data can.
@@ -189,21 +189,30 @@ read by someone on their fourth infusion.
 
 | Token | Hex | Role |
 |---|---|---|
-| `ink-950` | `#04070A` | Page ground. Near-black with a blue cast, never `#000` — pure black kills the sense of depth and makes teal look radioactive. |
+| `ink-950` | `#04070A` | Page ground. Near-black with a blue cast, never `#000` — pure black kills the sense of depth and makes the accent look radioactive. |
 | `ink-900` | `#070B0F` | Raised surfaces, alternating section bands |
 | `ink-700` | `#152128` | Hardware, chart furniture, inactive strokes |
 | `ink-300` | `#7D919A` | Body copy on dark. Passes AA at body sizes. |
 | `ink-50` | `#F1F6F7` | Headings and primary text |
-| **`teal-400`** | **`#1FCDC0`** | **The only accent.** |
+| **`brand-400`** | **`#35ABDD`** | **The only accent.** |
 
-The teal ships as a full 50→950 scale so tints stay in-family, but exactly one value is
+The accent ships as a full 50→950 scale so tints stay in-family, but exactly one value is
 the accent, and it's rationed: the pulse dot in an eyebrow, one primary button per
 viewport, the droplet, the active nav pill, the rule under a heading. Everything else is
-grey. When teal appears, it means *this is the thing*.
+grey. When the accent appears, it means *this is the thing*.
 
-Black-and-teal was the client's directive. The discipline applied to it — near-black
-rather than black, one accent value rather than a teal palette, grey doing 95% of the
-work — is what keeps it from becoming the neon-aqua category look the brief warns about.
+**The accent changed once, on evidence.** The brief asked for black plus "their logo
+colour of their teal", and the site was built on a green-teal (`#1fcdc0`). When the real
+artwork finally arrived it turned out the mark is *blue*, not teal — so the accent was
+retuned to the logo itself: `brand-500` is the wordmark blue exactly, `brand-400` sits on
+the droplet's brightest cyan. Contrast improved rather than suffered (7.71:1 on the page
+ground). Tailwind's stock teal is free again and the wellness drip palette uses it as one
+of six distinct hues.
+
+Black-and-one-accent was the client's directive and it stands. The discipline applied to
+it — near-black rather than black, one accent value rather than a full palette in play,
+grey doing 95% of the work — is what keeps it from becoming the neon category look the
+brief warns about.
 
 ### Type — three faces, stated scale
 

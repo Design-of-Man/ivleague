@@ -117,7 +117,7 @@ export default function AboutPage() {
           {milestones.map((m, i) => (
             <Reveal key={m.year} delay={i * 0.06} as="li">
               <div className="group grid gap-4 border-t border-white/8 py-8 sm:grid-cols-[8rem_1fr] sm:gap-10 last:border-b">
-                <span className="font-mono text-[13px] font-medium text-teal-400">
+                <span className="font-mono text-[13px] font-medium text-brand-400">
                   {m.year}
                 </span>
                 <div>

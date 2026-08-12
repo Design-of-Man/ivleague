@@ -93,7 +93,7 @@ export function InstagramGrid({
                 </span>
               )}
 
-              <span className="absolute left-3 top-3 h-1.5 w-1.5 rounded-full bg-teal-400 opacity-0 shadow-[0_0_10px_rgba(31,205,192,0.9)] transition-opacity duration-500 group-hover:opacity-100" />
+              <span className="absolute left-3 top-3 h-1.5 w-1.5 rounded-full bg-brand-400 opacity-0 shadow-[0_0_10px_rgba(31,205,192,0.9)] transition-opacity duration-500 group-hover:opacity-100" />
             </button>
           </StaggerItem>
         ))}
@@ -106,7 +106,7 @@ export function InstagramGrid({
             href={site.social.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            className="link-underline text-teal-400"
+            className="link-underline text-brand-400"
           >
             See the live feed on Instagram
           </a>
@@ -145,7 +145,7 @@ export function InstagramGrid({
 
             <div className="flex max-h-[42vh] flex-col gap-5 overflow-y-auto p-6 md:max-h-none md:p-7">
               <div className="flex items-center gap-3">
-                <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-teal-300 to-teal-600 text-[13px] font-bold text-ink-950">
+                <span className="grid h-9 w-9 place-items-center rounded-full bg-gradient-to-br from-brand-300 to-brand-600 text-[13px] font-bold text-ink-950">
                   IV
                 </span>
                 <div>
@@ -174,7 +174,7 @@ export function InstagramGrid({
                 href={posts[open].permalink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-teal-400 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-teal-300"
+                className="inline-flex h-11 items-center justify-center gap-2 rounded-full bg-brand-400 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-brand-300"
               >
                 View on Instagram
               </a>
@@ -184,7 +184,7 @@ export function InstagramGrid({
               type="button"
               onClick={close}
               aria-label="Close"
-              className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-ink-950/88 text-ink-200 transition-colors hover:text-teal-300"
+              className="absolute right-3 top-3 grid h-9 w-9 place-items-center rounded-full bg-ink-950/88 text-ink-200 transition-colors hover:text-brand-300"
             >
               <svg
                 viewBox="0 0 16 16"
@@ -209,7 +209,7 @@ export function InstagramGrid({
               onClick={() => step(dir as 1 | -1)}
               aria-label={dir === 1 ? "Next post" : "Previous post"}
               className={cn(
-                "absolute top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-ink-950/88 text-ink-200 transition-colors hover:text-teal-300 lg:grid",
+                "absolute top-1/2 hidden h-11 w-11 -translate-y-1/2 place-items-center rounded-full border border-white/10 bg-ink-950/88 text-ink-200 transition-colors hover:text-brand-300 lg:grid",
                 dir === 1 ? "right-6" : "left-6",
               )}
             >
@@ -279,10 +279,10 @@ function PlaceholderTile({
       />
 
       <div className="relative flex items-center gap-2">
-        <span className="grid h-6 w-6 place-items-center rounded-full bg-teal-400 text-[9px] font-bold text-ink-950">
+        <span className="grid h-6 w-6 place-items-center rounded-full bg-brand-400 text-[9px] font-bold text-ink-950">
           IV
         </span>
-        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-teal-200/70">
+        <span className="font-mono text-[9px] uppercase tracking-[0.16em] text-brand-200/70">
           ivleagueinfusions
         </span>
       </div>
@@ -292,7 +292,7 @@ function PlaceholderTile({
       </p>
 
       <div className="relative flex items-center justify-between">
-        <span className="h-px w-8 bg-teal-400/70" />
+        <span className="h-px w-8 bg-brand-400/70" />
         <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-ink-400">
           {new Date(post.timestamp).toLocaleDateString("en-US", {
             month: "short",

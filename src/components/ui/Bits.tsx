@@ -16,7 +16,7 @@ export function Badge({
   size?: "sm" | "md";
 }) {
   const tones = {
-    teal: "bg-teal-400/10 text-teal-300 ring-teal-400/25",
+    teal: "bg-brand-400/10 text-brand-300 ring-brand-400/25",
     neutral: "bg-white/[0.05] text-ink-200 ring-white/10",
     outline: "bg-transparent text-ink-300 ring-white/12",
   };
@@ -61,7 +61,7 @@ export function Breadcrumbs({
               ) : (
                 <Link
                   href={t.href}
-                  className="link-underline transition-colors hover:text-teal-300"
+                  className="link-underline transition-colors hover:text-brand-300"
                 >
                   {t.name}
                 </Link>
@@ -160,7 +160,7 @@ export function TickList({
             fill="none"
             className={cn(
               "mt-[3px] h-4 w-4 shrink-0",
-              tone === "teal" ? "text-teal-400" : "text-ink-500",
+              tone === "teal" ? "text-brand-400" : "text-ink-500",
             )}
             aria-hidden="true"
           >
@@ -223,7 +223,7 @@ export function TextLink({
   );
 
   const cls = cn(
-    "group/link inline-flex items-center gap-1.5 text-[14px] font-medium text-teal-300 transition-colors hover:text-teal-200",
+    "group/link inline-flex items-center gap-1.5 text-[14px] font-medium text-brand-300 transition-colors hover:text-brand-200",
     className,
   );
 

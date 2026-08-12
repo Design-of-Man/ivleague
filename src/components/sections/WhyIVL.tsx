@@ -29,7 +29,7 @@ export function WhyIVL() {
                 className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_0%,rgba(31,205,192,0.1),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
               />
               <div className="relative">
-                <span className="font-mono text-[10.5px] font-medium uppercase tracking-[0.2em] text-teal-400">
+                <span className="font-mono text-[10.5px] font-medium uppercase tracking-[0.2em] text-brand-400">
                   {d.stat}
                 </span>
                 <h3 className="mt-4 text-[18px] font-semibold leading-snug tracking-tight text-ink-50">
@@ -48,7 +48,7 @@ export function WhyIVL() {
         <blockquote className="relative mx-auto max-w-3xl text-center">
           <div
             aria-hidden="true"
-            className="mx-auto mb-6 h-px w-24 rule-teal"
+            className="mx-auto mb-6 h-px w-24 rule-accent"
           />
           <p className="font-display text-[clamp(1.25rem,1rem+1.2vw,1.75rem)] font-medium leading-snug tracking-tight text-ink-100">
             &ldquo;We administer all intravenous therapies and injections

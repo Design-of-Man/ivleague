@@ -351,8 +351,8 @@ export function ScrollHero() {
         <div className="max-w-[46rem]">
           <div className="inline-flex items-center gap-2 rounded-full bg-white/85 py-1.5 pl-2 pr-4 ring-1 ring-inset ring-ink-950/10">
             <span className="relative flex h-4 w-4 items-center justify-center">
-              <span className="absolute inline-flex h-2 w-2 rounded-full bg-teal-500 opacity-70 animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]" />
-              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-teal-700" />
+              <span className="absolute inline-flex h-2 w-2 rounded-full bg-brand-500 opacity-70 animate-[pulse-ring_3.2s_var(--ease-out-expo)_infinite]" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-brand-700" />
             </span>
             <span className="text-[12px] font-medium tracking-[0.01em] text-ink-950">
               Now accepting new patients
@@ -371,7 +371,7 @@ export function ScrollHero() {
           <h1 className="mt-6 text-hero font-semibold leading-[0.94] tracking-[-0.045em] text-ink-950 text-balance sm:mt-8 sm:leading-[0.92]">
             Infusion care
             <br />
-            <span className="text-teal-700">without the hospital.</span>
+            <span className="text-brand-700">without the hospital.</span>
           </h1>
 
           {/* ~58 characters a line: inside the 45-75 the eye tracks best. */}
@@ -404,7 +404,7 @@ export function ScrollHero() {
                 <svg
                   viewBox="0 0 16 16"
                   fill="none"
-                  className="h-3.5 w-3.5 shrink-0 text-teal-700"
+                  className="h-3.5 w-3.5 shrink-0 text-brand-700"
                   aria-hidden="true"
                 >
                   <path

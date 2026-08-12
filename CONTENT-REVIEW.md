@@ -125,11 +125,14 @@ already correct. Regenerate afterwards with `node tools/icons/generate.mjs`.
 It works on black because of the knockout, but if IV League has a white/reverse
 version, the header would be crisper still.
 
-🟡 **And a decision: the brand is blue, the site is teal.** The brief asked for
-"their logo colour of their teal", but the mark is blue (`#2B3991` → `#3EA4CE`)
-and the site's accent scale is teal (`#1fcdc0`). The lockup now renders in its
-true blue and everything around it stays teal. Leave it, or retune the accent
-to the brand blue — one block of custom properties in `globals.css`.
+✅ **Resolved: the site now runs on the brand blue.** The brief asked for
+"their logo colour of their teal", but the mark is blue, not teal, and the site
+had been built on a green-teal (`#1fcdc0`) that made the header lockup look
+borrowed from another company. The accent scale is retuned to the artwork —
+`brand-500` is the wordmark blue exactly (`#1F8FC2`) and `brand-400` sits on the
+droplet's brightest cyan. Contrast went up, not down: 7.71:1 on the page ground
+where the old teal managed less. Tailwind's stock teal is free again and the
+wellness drip palette uses it as one of six distinct accents.
 
 **Separately: which name is correct?** The logo lockup, the homepage copy and
 the Sunbiz LLC all say "IV League Infusion Services", so that is what the site

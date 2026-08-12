@@ -62,7 +62,7 @@ export function Testimonials() {
                   key={i}
                   viewBox="0 0 20 20"
                   fill="currentColor"
-                  className="h-4 w-4 text-teal-400"
+                  className="h-4 w-4 text-brand-400"
                   aria-hidden="true"
                 >
                   <path d="M10 1.6l2.4 5.2 5.6.7-4.1 3.9 1.1 5.6L10 14.3l-5 2.7 1.1-5.6L2 7.5l5.6-.7L10 1.6Z" />
@@ -77,7 +77,7 @@ export function Testimonials() {
             </blockquote>
 
             <figcaption className="mt-8 flex flex-col items-center gap-1">
-              <span className="text-[13.5px] font-medium text-teal-300">
+              <span className="text-[13.5px] font-medium text-brand-300">
                 {active.name}
               </span>
               <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-500">
@@ -93,7 +93,7 @@ export function Testimonials() {
             type="button"
             onClick={() => go(-1)}
             aria-label="Previous testimonial"
-            className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink-300 transition-colors hover:border-teal-400/40 hover:text-teal-300"
+            className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink-300 transition-colors hover:border-brand-400/40 hover:text-brand-300"
           >
             <svg
               viewBox="0 0 16 16"
@@ -132,7 +132,7 @@ export function Testimonials() {
                   className={cn(
                     "block h-1 rounded-full transition-all duration-500 ease-[var(--ease-out-expo)]",
                     i === index
-                      ? "w-8 bg-teal-400"
+                      ? "w-8 bg-brand-400"
                       : "w-1.5 bg-white/18 group-hover:bg-white/35",
                   )}
                 />
@@ -144,7 +144,7 @@ export function Testimonials() {
             type="button"
             onClick={() => go(1)}
             aria-label="Next testimonial"
-            className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink-300 transition-colors hover:border-teal-400/40 hover:text-teal-300"
+            className="grid h-9 w-9 place-items-center rounded-full border border-white/10 text-ink-300 transition-colors hover:border-brand-400/40 hover:text-brand-300"
           >
             <svg
               viewBox="0 0 16 16"

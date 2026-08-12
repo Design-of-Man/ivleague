@@ -66,7 +66,7 @@ export function InsuranceStrip() {
           return (
             <StaggerItem key={o.title}>
               <div className="group card card-hover flex h-full gap-4 p-6">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-teal-400/20 bg-teal-400/[0.07] text-teal-300 transition-colors duration-500 group-hover:border-teal-400/45">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg border border-brand-400/20 bg-brand-400/[0.07] text-brand-300 transition-colors duration-500 group-hover:border-brand-400/45">
                   <Icon
                     className="h-4.5 w-4.5"
                     strokeWidth={1.5}

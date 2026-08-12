@@ -98,7 +98,7 @@ export function DripLine({
           style={{ left: `${(100 / (count + 1)) * (i + 1)}%` }}
         >
           <div
-            className="absolute h-16 w-px bg-gradient-to-b from-transparent via-teal-400/80 to-transparent blur-[0.5px] animate-[scan_7s_linear_infinite]"
+            className="absolute h-16 w-px bg-gradient-to-b from-transparent via-brand-400/80 to-transparent blur-[0.5px] animate-[scan_7s_linear_infinite]"
             style={{ animationDelay: `${i * 2.3}s` }}
           />
         </div>
@@ -234,7 +234,7 @@ export function EdgeGlow({ className }: { className?: string }) {
     <div
       aria-hidden="true"
       className={cn(
-        "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-teal-400/45 to-transparent",
+        "pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-400/45 to-transparent",
         className,
       )}
     />

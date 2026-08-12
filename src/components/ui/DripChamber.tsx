@@ -60,56 +60,56 @@ export function DripChamber({
           <linearGradient id="dc-glass" x1="0" y1="0" x2="1" y2="0">
             <stop
               offset="0%"
-              stopColor="var(--color-teal-300)"
+              stopColor="var(--color-brand-300)"
               stopOpacity="0.30"
             />
             <stop
               offset="18%"
-              stopColor="var(--color-teal-50)"
+              stopColor="var(--color-brand-50)"
               stopOpacity="0.10"
             />
             <stop
               offset="50%"
-              stopColor="var(--color-teal-500)"
+              stopColor="var(--color-brand-500)"
               stopOpacity="0.05"
             />
             <stop
               offset="86%"
-              stopColor="var(--color-teal-200)"
+              stopColor="var(--color-brand-200)"
               stopOpacity="0.16"
             />
             <stop
               offset="100%"
-              stopColor="var(--color-teal-600)"
+              stopColor="var(--color-brand-600)"
               stopOpacity="0.30"
             />
           </linearGradient>
           <linearGradient id="dc-wall" x1="0" y1="0" x2="1" y2="0">
             <stop
               offset="0%"
-              stopColor="var(--color-teal-200)"
+              stopColor="var(--color-brand-200)"
               stopOpacity="0.62"
             />
             <stop
               offset="42%"
-              stopColor="var(--color-teal-400)"
+              stopColor="var(--color-brand-400)"
               stopOpacity="0.16"
             />
             <stop
               offset="100%"
-              stopColor="var(--color-teal-300)"
+              stopColor="var(--color-brand-300)"
               stopOpacity="0.55"
             />
           </linearGradient>
           <linearGradient id="dc-fluid" x1="0" y1="0" x2="0" y2="1">
             <stop
               offset="0%"
-              stopColor="var(--color-teal-300)"
+              stopColor="var(--color-brand-300)"
               stopOpacity="0.55"
             />
             <stop
               offset="100%"
-              stopColor="var(--color-teal-600)"
+              stopColor="var(--color-brand-600)"
               stopOpacity="0.30"
             />
           </linearGradient>
@@ -119,8 +119,8 @@ export function DripChamber({
               stopColor="var(--color-ink-50)"
               stopOpacity="0.95"
             />
-            <stop offset="34%" stopColor="var(--color-teal-200)" />
-            <stop offset="100%" stopColor="var(--color-teal-500)" />
+            <stop offset="34%" stopColor="var(--color-brand-200)" />
+            <stop offset="100%" stopColor="var(--color-brand-500)" />
           </radialGradient>
           <filter id="dc-soft" x="-70%" y="-70%" width="240%" height="240%">
             <feGaussianBlur stdDeviation="6" />
@@ -175,7 +175,7 @@ export function DripChamber({
           width="4"
           height="222"
           rx="2"
-          fill="var(--color-teal-50)"
+          fill="var(--color-brand-50)"
           opacity="0.13"
         />
         <rect
@@ -184,7 +184,7 @@ export function DripChamber({
           width="2.5"
           height="190"
           rx="1.25"
-          fill="var(--color-teal-50)"
+          fill="var(--color-brand-50)"
           opacity="0.09"
         />
 
@@ -206,7 +206,7 @@ export function DripChamber({
               cy="262"
               rx="48"
               ry="5"
-              fill="var(--color-teal-200)"
+              fill="var(--color-brand-200)"
               opacity="0.5"
             />
             <ellipse
@@ -215,7 +215,7 @@ export function DripChamber({
               rx="48"
               ry="5"
               fill="none"
-              stroke="var(--color-teal-50)"
+              stroke="var(--color-brand-50)"
               strokeWidth="0.8"
               opacity="0.4"
             />
@@ -232,7 +232,7 @@ export function DripChamber({
                   rx="16"
                   ry="3"
                   fill="none"
-                  stroke="var(--color-teal-100)"
+                  stroke="var(--color-brand-100)"
                   strokeWidth="0.9"
                   style={{
                     transformOrigin: "100px 262px",
@@ -307,7 +307,7 @@ export function DripChamber({
           cy="272"
           rx="52"
           ry="26"
-          fill="var(--color-teal-400)"
+          fill="var(--color-brand-400)"
           opacity="0.14"
           filter="url(#dc-soft)"
         />

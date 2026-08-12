@@ -108,7 +108,7 @@ export default async function ConditionPage({
         aside={
           therapyOptions.length > 0 ? (
             <div className="card w-full min-w-[17rem] p-6 lg:w-[19rem]">
-              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-teal-400">
+              <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-400">
                 Therapies we administer
               </p>
               <ul className="mt-4 grid gap-1">
@@ -116,7 +116,7 @@ export default async function ConditionPage({
                   <li key={t.slug}>
                     <Link
                       href={`/therapies/${t.slug}`}
-                      className="group flex items-center justify-between gap-3 rounded-lg px-2.5 py-2 text-[13.5px] text-ink-200 transition-colors hover:bg-white/[0.04] hover:text-teal-200"
+                      className="group flex items-center justify-between gap-3 rounded-lg px-2.5 py-2 text-[13.5px] text-ink-200 transition-colors hover:bg-white/[0.04] hover:text-brand-200"
                     >
                       <span>
                         {t.brand}
@@ -209,7 +209,7 @@ export default async function ConditionPage({
                     key={tip}
                     className="flex gap-5 rounded-[0.5rem] border border-white/8 bg-white/[0.02] p-5"
                   >
-                    <span className="font-mono text-[11px] text-teal-400">
+                    <span className="font-mono text-[11px] text-brand-400">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <p className="text-[14.5px] leading-relaxed text-ink-200">
@@ -232,7 +232,7 @@ export default async function ConditionPage({
 
           <aside className="flex flex-col gap-4 lg:sticky lg:top-32 lg:self-start">
             <Reveal className="card p-6">
-              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                 What to expect from us
               </h3>
               <ul className="mt-5 grid gap-4">
@@ -262,7 +262,7 @@ export default async function ConditionPage({
 
             {siblings.length > 0 && (
               <Reveal delay={0.08} className="card p-6">
-                <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+                <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                   Related conditions
                 </h3>
                 <ul className="mt-4 grid gap-1">
@@ -270,7 +270,7 @@ export default async function ConditionPage({
                     <li key={s.slug}>
                       <Link
                         href={`/conditions/${s.slug}`}
-                        className="block rounded-lg px-2.5 py-2 text-[13.5px] text-ink-300 transition-colors hover:bg-white/[0.04] hover:text-teal-200"
+                        className="block rounded-lg px-2.5 py-2 text-[13.5px] text-ink-300 transition-colors hover:bg-white/[0.04] hover:text-brand-200"
                       >
                         {s.name}
                       </Link>
@@ -299,7 +299,7 @@ export default async function ConditionPage({
                   className="group flex h-full flex-col justify-between gap-5 p-6"
                 >
                   <div>
-                    <h3 className="font-display text-lg font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
+                    <h3 className="font-display text-lg font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-brand-100">
                       {t.brand}
                     </h3>
                     <p className="mt-1 font-mono text-[10.5px] lowercase tracking-wide text-ink-500">

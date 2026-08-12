@@ -1,4 +1,5 @@
 import { ScrollHero } from "@/components/sections/ScrollHero";
+import { Band } from "@/components/ui/Section";
 import { Stats } from "@/components/sections/Stats";
 import { SpecialtyGrid } from "@/components/sections/SpecialtyGrid";
 import { TherapyRail } from "@/components/sections/TherapyRail";
@@ -30,15 +31,25 @@ export default function HomePage() {
       <JsonLd data={faqSchema(faqs.slice(0, 8))} />
       <ScrollHero />
       <Stats />
-      <SpecialtyGrid />
+      <Band>
+        <SpecialtyGrid />
+      </Band>
       <TherapyRail />
-      <IntakeProcess />
+      <Band>
+        <IntakeProcess />
+      </Band>
       <AmenitiesBento />
-      <WhyIVL />
+      <Band>
+        <WhyIVL />
+      </Band>
       <InsuranceStrip />
-      <WellnessRail />
+      <Band>
+        <WellnessRail />
+      </Band>
       <Testimonials />
-      <InstagramFeed />
+      <Band>
+        <InstagramFeed />
+      </Band>
       <FaqSection items={faqs.slice(0, 9)} showFilters={false} />
       <LocationSection />
       <CtaBand

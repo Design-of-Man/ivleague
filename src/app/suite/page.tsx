@@ -148,7 +148,7 @@ export default function SuitePage() {
               ],
             ].map(([h, b]) => (
               <Reveal key={h}>
-                <div className="border-l-2 border-teal-400/35 pl-5">
+                <div className="border-l-2 border-brand-400/35 pl-5">
                   <h3 className="text-[16px] font-semibold text-ink-50">{h}</h3>
                   <p className="mt-2 text-[14px] leading-relaxed text-ink-400">
                     {b}

@@ -45,7 +45,7 @@ export function IntakeProcess() {
           aria-hidden="true"
           className="absolute left-[19px] top-2 hidden h-[calc(100%-3rem)] w-px bg-white/8 md:block"
         >
-          <div className="rail-fill w-px bg-gradient-to-b from-teal-300 via-teal-400 to-teal-600 shadow-[0_0_16px_rgba(31,205,192,0.7)]" />
+          <div className="rail-fill w-px bg-gradient-to-b from-brand-300 via-brand-400 to-brand-600 shadow-[0_0_16px_rgba(31,205,192,0.7)]" />
         </div>
 
         <ol className="grid gap-3">
@@ -54,7 +54,7 @@ export function IntakeProcess() {
               <div className="group relative grid gap-5 md:grid-cols-[40px_1fr] md:gap-8">
                 {/* Node */}
                 <div className="relative hidden md:block">
-                  <span className="sticky top-32 grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-ink-950 font-mono text-[11px] font-medium text-ink-400 transition-all duration-500 group-hover:border-teal-400/60 group-hover:bg-teal-400/10 group-hover:text-teal-300">
+                  <span className="sticky top-32 grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-ink-950 font-mono text-[11px] font-medium text-ink-400 transition-all duration-500 group-hover:border-brand-400/60 group-hover:bg-brand-400/10 group-hover:text-brand-300">
                     {step.n}
                   </span>
                 </div>
@@ -63,7 +63,7 @@ export function IntakeProcess() {
                   <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-3">
                     <div className="max-w-2xl">
                       <div className="flex items-center gap-3 md:hidden">
-                        <span className="font-mono text-[11px] text-teal-400">
+                        <span className="font-mono text-[11px] text-brand-400">
                           {step.n}
                         </span>
                         <span className="h-px flex-1 bg-white/8" />
@@ -74,7 +74,7 @@ export function IntakeProcess() {
                       <p className="mt-3 text-[15px] leading-relaxed text-ink-300">
                         {step.body}
                       </p>
-                      <p className="mt-3 border-l-2 border-teal-400/35 pl-4 text-[13.5px] italic leading-relaxed text-ink-400">
+                      <p className="mt-3 border-l-2 border-brand-400/35 pl-4 text-[13.5px] italic leading-relaxed text-ink-400">
                         {step.detail}
                       </p>
                     </div>
@@ -91,7 +91,7 @@ export function IntakeProcess() {
       </div>
 
       <Reveal delay={0.1} className="mt-12">
-        <div className="flex flex-col items-start gap-4 rounded-[0.625rem] border border-teal-400/20 bg-teal-400/[0.05] p-7 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col items-start gap-4 rounded-[0.625rem] border border-brand-400/20 bg-brand-400/[0.05] p-7 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="text-[16px] font-semibold text-ink-50">
               Most patients are infusing within two to three weeks.

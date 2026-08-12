@@ -81,13 +81,13 @@ export default function ContactPage() {
 
           <aside className="flex flex-col gap-4 lg:sticky lg:top-32 lg:self-start">
             <Reveal className="card p-6">
-              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                 What happens next
               </h3>
               <ol className="mt-5 grid gap-4">
                 {intakeSteps.slice(0, 4).map((s) => (
                   <li key={s.n} className="flex gap-4">
-                    <span className="mt-0.5 font-mono text-[11px] text-teal-500">
+                    <span className="mt-0.5 font-mono text-[11px] text-brand-500">
                       {s.n}
                     </span>
                     <div>
@@ -103,7 +103,7 @@ export default function ContactPage() {
               </ol>
               <a
                 href="/patients"
-                className="mt-6 inline-flex text-[13px] font-medium text-teal-300 transition-colors hover:text-teal-200"
+                className="mt-6 inline-flex text-[13px] font-medium text-brand-300 transition-colors hover:text-brand-200"
               >
                 See the full process →
               </a>
@@ -134,7 +134,7 @@ export default function ContactPage() {
             </Reveal>
 
             <Reveal delay={0.14} className="card p-6">
-              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                 For referring providers
               </h3>
               <p className="mt-3 text-[13.5px] leading-relaxed text-ink-400">
@@ -147,7 +147,7 @@ export default function ContactPage() {
               </p>
               <a
                 href="/providers#refer"
-                className="mt-4 inline-flex text-[13px] font-medium text-teal-300 transition-colors hover:text-teal-200"
+                className="mt-4 inline-flex text-[13px] font-medium text-brand-300 transition-colors hover:text-brand-200"
               >
                 Referral requirements →
               </a>
@@ -180,10 +180,10 @@ function ContactCard({
       {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       className="group card card-hover flex flex-col gap-1 p-5"
     >
-      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-teal-400">
+      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-brand-400">
         {label}
       </span>
-      <span className="text-[15px] font-medium text-ink-50 transition-colors group-hover:text-teal-200">
+      <span className="text-[15px] font-medium text-ink-50 transition-colors group-hover:text-brand-200">
         {value}
       </span>
       <span className="text-[12px] text-ink-500">{detail}</span>

@@ -65,7 +65,7 @@ export function CornerTicks({ className }: { className?: string }) {
         <span
           key={pos}
           className={cn(
-            "absolute h-2.5 w-2.5 border-teal-400/30 transition-colors duration-500 group-hover:border-teal-400/70",
+            "absolute h-2.5 w-2.5 border-brand-400/30 transition-colors duration-500 group-hover:border-brand-400/70",
             pos,
           )}
         />

@@ -71,7 +71,7 @@ export function Footer() {
                 href={site.address.directionsUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block py-0.5 transition-colors hover:text-teal-300"
+                className="block py-0.5 transition-colors hover:text-brand-300"
               >
                 {site.address.street}
                 <br />
@@ -80,13 +80,13 @@ export function Footer() {
               </a>
               <a
                 href={site.contact.phoneHref}
-                className="mt-3 block py-0.5 font-medium text-ink-100 transition-colors hover:text-teal-300"
+                className="mt-3 block py-0.5 font-medium text-ink-100 transition-colors hover:text-brand-300"
               >
                 {site.contact.phone}
               </a>
               <a
                 href={site.contact.emailHref}
-                className="block py-0.5 transition-colors hover:text-teal-300"
+                className="block py-0.5 transition-colors hover:text-brand-300"
               >
                 {site.contact.email}
               </a>
@@ -105,7 +105,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4">
             {footerNav.map((col) => (
               <div key={col.heading}>
-                <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
+                <h3 className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-400">
                   {col.heading}
                 </h3>
                 <ul className="mt-5 grid gap-2.5">
@@ -113,7 +113,7 @@ export function Footer() {
                     <li key={l.href}>
                       <Link
                         href={l.href}
-                        className="text-[13.5px] text-ink-400 transition-colors duration-300 hover:text-teal-200"
+                        className="text-[13.5px] text-ink-400 transition-colors duration-300 hover:text-brand-200"
                       >
                         {l.label}
                       </Link>
@@ -169,7 +169,7 @@ function SocialLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-ink-300 transition-all duration-400 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-teal-400/40 hover:bg-teal-400/10 hover:text-teal-300"
+      className="grid h-10 w-10 place-items-center rounded-full border border-white/10 bg-white/[0.03] text-ink-300 transition-all duration-400 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-brand-400/40 hover:bg-brand-400/10 hover:text-brand-300"
     >
       <svg
         viewBox="0 0 24 24"

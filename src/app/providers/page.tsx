@@ -74,7 +74,7 @@ export default function ProvidersPage() {
           {providerValueProps.map((v, i) => (
             <StaggerItem key={v.title}>
               <div className="group h-full bg-ink-950 p-7 transition-colors duration-500 hover:bg-ink-900 sm:p-8">
-                <span className="font-mono text-[11px] text-teal-500">
+                <span className="font-mono text-[11px] text-brand-500">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-4 text-[17.5px] font-semibold leading-snug tracking-tight text-ink-50">
@@ -124,7 +124,7 @@ export default function ProvidersPage() {
               ].map((m) => (
                 <Reveal key={m.n}>
                   <div className="flex gap-6 rounded-[0.625rem] border border-white/8 bg-white/[0.02] p-6">
-                    <span className="font-mono text-[11px] text-teal-400">
+                    <span className="font-mono text-[11px] text-brand-400">
                       {m.n}
                     </span>
                     <div>
@@ -143,7 +143,7 @@ export default function ProvidersPage() {
 
           <Reveal delay={0.1} className="lg:pt-16">
             <div className="card p-8">
-              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                 What to include
               </h3>
               <TickList items={referralRequirements} className="mt-6" />

@@ -78,7 +78,7 @@ export function InquiryForm() {
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(31,205,192,0.16),transparent_60%)]"
           />
           <div className="relative">
-            <span className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-teal-400/35 bg-teal-400/12 text-teal-300">
+            <span className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-brand-400/35 bg-brand-400/12 text-brand-300">
               <svg
                 viewBox="0 0 24 24"
                 fill="none"
@@ -104,14 +104,14 @@ export function InquiryForm() {
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
                 href={site.contact.phoneHref}
-                className="inline-flex h-11 items-center rounded-full bg-teal-400 px-6 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-teal-300"
+                className="inline-flex h-11 items-center rounded-full bg-brand-400 px-6 text-[14px] font-semibold text-ink-950 transition-colors hover:bg-brand-300"
               >
                 {site.contact.phone}
               </a>
               <button
                 type="button"
                 onClick={() => setStatus("idle")}
-                className="text-[13.5px] font-medium text-ink-400 transition-colors hover:text-teal-300"
+                className="text-[13.5px] font-medium text-ink-400 transition-colors hover:text-brand-300"
               >
                 Submit another inquiry
               </button>
@@ -231,7 +231,7 @@ export function InquiryForm() {
                 type="checkbox"
                 name="consent"
                 required
-                className="mt-0.5 h-4 w-4 shrink-0 accent-teal-400"
+                className="mt-0.5 h-4 w-4 shrink-0 accent-brand-400"
               />
               <span className="text-[12.5px] leading-relaxed text-ink-400">
                 I consent to being contacted by IV League Infusions about my
@@ -270,7 +270,7 @@ export function InquiryForm() {
                 Prefer to talk? Call{" "}
                 <a
                   href={site.contact.phoneHref}
-                  className="font-medium text-teal-300 hover:text-teal-200"
+                  className="font-medium text-brand-300 hover:text-brand-200"
                 >
                   {site.contact.phone}
                 </a>
@@ -311,7 +311,7 @@ function Field({
     <div className="flex flex-col gap-2">
       <label htmlFor={name} className="text-[12px] font-medium text-ink-300">
         {label}
-        {required && <span className="ml-1 text-teal-400">*</span>}
+        {required && <span className="ml-1 text-brand-400">*</span>}
       </label>
       <input
         id={name}
@@ -328,7 +328,7 @@ function Field({
           inputBase,
           error
             ? "border-red-400/50 focus:border-red-400"
-            : "border-white/10 focus:border-teal-400/55 focus:bg-white/[0.05]",
+            : "border-white/10 focus:border-brand-400/55 focus:bg-white/[0.05]",
         )}
       />
       {error ? (
@@ -370,7 +370,7 @@ function SelectField({
           "pr-10",
           error
             ? "border-red-400/50"
-            : "border-white/10 focus:border-teal-400/55 focus:bg-white/[0.05]",
+            : "border-white/10 focus:border-brand-400/55 focus:bg-white/[0.05]",
         )}
       >
         <option value="" disabled>
@@ -414,7 +414,7 @@ function TextareaField({
           "h-auto resize-y py-3.5 leading-relaxed",
           error
             ? "border-red-400/50"
-            : "border-white/10 focus:border-teal-400/55 focus:bg-white/[0.05]",
+            : "border-white/10 focus:border-brand-400/55 focus:bg-white/[0.05]",
         )}
       />
       {error && <p className="text-[11.5px] text-red-300">{error}</p>}

@@ -65,7 +65,7 @@ export function SpecialtyGrid() {
                 href={`/therapies?specialty=${s.id}`}
                 className="group flex h-full flex-col gap-5 p-6"
               >
-                <span className="grid h-11 w-11 place-items-center rounded-[0.5rem] border border-teal-400/20 bg-teal-400/[0.08] text-teal-300 transition-all duration-500 group-hover:border-teal-400/45 group-hover:bg-teal-400/15">
+                <span className="grid h-11 w-11 place-items-center rounded-[0.5rem] border border-brand-400/20 bg-brand-400/[0.08] text-brand-300 transition-all duration-500 group-hover:border-brand-400/45 group-hover:bg-brand-400/15">
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -81,7 +81,7 @@ export function SpecialtyGrid() {
                 </span>
 
                 <div className="flex-1">
-                  <h3 className="text-[17px] font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-teal-100">
+                  <h3 className="text-[17px] font-semibold tracking-tight text-ink-50 transition-colors group-hover:text-brand-100">
                     {s.label}
                   </h3>
                   <p className="mt-2 text-[13.5px] leading-relaxed text-ink-400">
@@ -96,7 +96,7 @@ export function SpecialtyGrid() {
                   <svg
                     viewBox="0 0 16 16"
                     fill="none"
-                    className="h-3.5 w-3.5 text-teal-400 transition-transform duration-400 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
+                    className="h-3.5 w-3.5 text-brand-400 transition-transform duration-400 ease-[var(--ease-out-expo)] group-hover:translate-x-1"
                     aria-hidden="true"
                   >
                     <path
@@ -118,14 +118,14 @@ export function SpecialtyGrid() {
         <span>Don&apos;t see your diagnosis?</span>
         <Link
           href="/conditions"
-          className="link-underline font-medium text-teal-300 transition-colors hover:text-teal-200"
+          className="link-underline font-medium text-brand-300 transition-colors hover:text-brand-200"
         >
           Browse conditions we treat
         </Link>
         <span className="text-ink-700">·</span>
         <Link
           href="/contact#inquiry"
-          className="link-underline font-medium text-teal-300 transition-colors hover:text-teal-200"
+          className="link-underline font-medium text-brand-300 transition-colors hover:text-brand-200"
         >
           or just ask us
         </Link>

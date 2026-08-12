@@ -68,7 +68,7 @@ export function Nav() {
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-full focus:bg-teal-400 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-ink-950"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-100 focus:rounded-full focus:bg-brand-400 focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-ink-950"
       >
         Skip to content
       </a>
@@ -123,7 +123,7 @@ export function Nav() {
                     className={cn(
                       "relative flex items-center gap-1.5 rounded-full px-3.5 py-3 text-[14px] font-medium transition-colors duration-300",
                       active
-                        ? "text-teal-300"
+                        ? "text-brand-300"
                         : "text-ink-200 hover:text-ink-50",
                     )}
                     aria-expanded={
@@ -155,7 +155,7 @@ export function Nav() {
                       className={cn(
                         "absolute inset-0 -z-10 rounded-full ring-1 ring-inset transition-all duration-400 ease-[var(--ease-out-expo)]",
                         active
-                          ? "bg-teal-400/10 opacity-100 ring-teal-400/20"
+                          ? "bg-brand-400/10 opacity-100 ring-brand-400/20"
                           : "bg-transparent opacity-0 ring-transparent",
                       )}
                     />
@@ -255,7 +255,7 @@ export function Nav() {
                   href={item.href}
                   className={cn(
                     "block border-b border-white/6 py-3.5 font-display text-[22px] font-medium tracking-tight transition-colors",
-                    isActive(item.href) ? "text-teal-300" : "text-ink-50",
+                    isActive(item.href) ? "text-brand-300" : "text-ink-50",
                   )}
                 >
                   {item.label}
@@ -266,7 +266,7 @@ export function Nav() {
                       <Link
                         key={c.href}
                         href={c.href}
-                        className="py-1.5 text-[14px] text-ink-400 transition-colors hover:text-teal-300"
+                        className="py-1.5 text-[14px] text-ink-400 transition-colors hover:text-brand-300"
                       >
                         {c.label}
                       </Link>
@@ -323,7 +323,7 @@ function MegaPanel({ label }: { label: string }) {
           >
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(31,205,192,0.14),transparent_58%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
             <div className="relative">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-400">
                 {item.label}
               </p>
               <p className="mt-3 font-display text-xl font-semibold tracking-tight text-ink-50">
@@ -333,14 +333,14 @@ function MegaPanel({ label }: { label: string }) {
                 {item.featured.blurb}
               </p>
             </div>
-            <span className="relative inline-flex items-center gap-1.5 text-[13px] font-medium text-teal-300">
+            <span className="relative inline-flex items-center gap-1.5 text-[13px] font-medium text-brand-300">
               Explore
               <ArrowGlyph />
             </span>
           </Link>
         ) : (
           <div className="bg-ink-900 p-7">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-teal-400">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-brand-400">
               {item.label}
             </p>
           </div>
@@ -353,7 +353,7 @@ function MegaPanel({ label }: { label: string }) {
               href={c.href}
               className="group bg-ink-900 px-6 py-5 transition-colors hover:bg-ink-850"
             >
-              <span className="flex items-center gap-2 text-[14.5px] font-medium text-ink-50 transition-colors group-hover:text-teal-200">
+              <span className="flex items-center gap-2 text-[14.5px] font-medium text-ink-50 transition-colors group-hover:text-brand-200">
                 {c.label}
                 <svg
                   viewBox="0 0 16 16"
@@ -427,7 +427,7 @@ function TopBar() {
             <span
               className={cn(
                 "relative flex h-1.5 w-1.5",
-                state?.open ? "text-teal-400" : "text-ink-500",
+                state?.open ? "text-brand-400" : "text-ink-500",
               )}
             >
               {state?.open && (
@@ -435,7 +435,7 @@ function TopBar() {
               )}
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-current" />
             </span>
-            <span className={state?.open ? "text-teal-300" : "text-ink-400"}>
+            <span className={state?.open ? "text-brand-300" : "text-ink-400"}>
               {state ? state.label : "Hours"}
             </span>
             {state?.detail && (
@@ -450,7 +450,7 @@ function TopBar() {
           <span>Physician referral required for all therapies</span>
           <a
             href={site.contact.emailHref}
-            className="link-underline transition-colors hover:text-teal-300"
+            className="link-underline transition-colors hover:text-brand-300"
           >
             {site.contact.email}
           </a>

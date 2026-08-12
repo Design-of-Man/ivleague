@@ -174,7 +174,7 @@ export default function WellnessPage() {
                   <h3 className="text-[16px] font-semibold tracking-tight text-ink-50">
                     {inj.name}
                   </h3>
-                  <span className="shrink-0 font-mono text-[10.5px] uppercase tracking-[0.14em] text-teal-400">
+                  <span className="shrink-0 font-mono text-[10.5px] uppercase tracking-[0.14em] text-brand-400">
                     {inj.duration}
                   </span>
                 </div>
@@ -218,7 +218,7 @@ export default function WellnessPage() {
                   "Reactions to IV nutrients are rare and almost always minor. We're still equipped and trained for them.",
                 ],
               ].map(([h, b]) => (
-                <div key={h} className="border-l-2 border-teal-400/35 pl-5">
+                <div key={h} className="border-l-2 border-brand-400/35 pl-5">
                   <h3 className="text-[15.5px] font-semibold text-ink-50">
                     {h}
                   </h3>
@@ -232,7 +232,7 @@ export default function WellnessPage() {
 
           <div className="lg:pt-4">
             <Reveal className="card p-8">
-              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400">
+              <h3 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400">
                 Good to know
               </h3>
               <dl className="mt-6 grid gap-5">

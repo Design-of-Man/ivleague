@@ -22,7 +22,7 @@ export function CtaBand({
     <section className={cn("relative py-20 sm:py-28", className)}>
       <div className="shell">
         <Reveal>
-          <div className="relative isolate overflow-hidden rounded-[0.875rem] border border-teal-400/20 bg-gradient-to-br from-teal-500/[0.14] via-ink-900 to-ink-950 px-7 py-14 sm:px-14 sm:py-20">
+          <div className="relative isolate overflow-hidden rounded-[0.875rem] border border-brand-400/20 bg-gradient-to-br from-brand-500/[0.14] via-ink-900 to-ink-950 px-7 py-14 sm:px-14 sm:py-20">
             {/* Ambient */}
             <div
               aria-hidden="true"
@@ -44,7 +44,7 @@ export function CtaBand({
             />
 
             <div className="relative mx-auto max-w-3xl text-center">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-teal-400">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-brand-400">
                 {eyebrow}
               </p>
               <h2 className="mt-5 text-[clamp(1.85rem,1.2rem+2.8vw,3.25rem)] font-semibold leading-[1.05]">

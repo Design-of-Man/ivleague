@@ -25,7 +25,7 @@ export default function NotFound() {
 
       <div className="shell relative">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-teal-400">
+          <p className="font-mono text-[11px] uppercase tracking-[0.24em] text-brand-400">
             404 · No line here
           </p>
           <h1 className="mt-6 text-display font-semibold leading-[1.02]">
@@ -61,7 +61,7 @@ export default function NotFound() {
                 <Link
                   key={l.href}
                   href={l.href}
-                  className="rounded-full border border-white/8 bg-white/[0.025] px-4 py-2 text-[13px] text-ink-300 transition-all duration-400 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-teal-400/35 hover:text-teal-200"
+                  className="rounded-full border border-white/8 bg-white/[0.025] px-4 py-2 text-[13px] text-ink-300 transition-all duration-400 ease-[var(--ease-out-expo)] hover:-translate-y-0.5 hover:border-brand-400/35 hover:text-brand-200"
                 >
                   {l.label}
                 </Link>

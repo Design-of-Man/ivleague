@@ -36,7 +36,7 @@ export function ChairTimeScale({ therapy }: { therapy: Therapy }) {
       <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
         <h2
           id="chair-time-heading"
-          className="text-[11px] font-semibold uppercase tracking-[0.18em] text-teal-400"
+          className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-400"
         >
           How long does {therapyArticle(therapy)} {therapy.brand} infusion take?
         </h2>
@@ -83,7 +83,7 @@ export function ChairTimeScale({ therapy }: { therapy: Therapy }) {
                 key={d.slug}
                 className={
                   d.slug === therapy.slug
-                    ? "absolute top-0 h-6 w-[2.5px] -translate-x-1/2 rounded-full bg-teal-400 shadow-[0_0_10px_rgba(31,205,192,0.85)]"
+                    ? "absolute top-0 h-6 w-[2.5px] -translate-x-1/2 rounded-full bg-brand-400 shadow-[0_0_10px_rgba(31,205,192,0.85)]"
                     : "absolute top-1.5 h-3 w-px -translate-x-1/2 rounded-full bg-white/20"
                 }
                 style={{ left: `${pct(d.typical)}%` }}
@@ -95,7 +95,7 @@ export function ChairTimeScale({ therapy }: { therapy: Therapy }) {
           {isRange && (
             <div
               aria-hidden="true"
-              className="absolute top-[1.19rem] h-2.5 rounded-full bg-teal-400/25 ring-1 ring-inset ring-teal-400/40"
+              className="absolute top-[1.19rem] h-2.5 rounded-full bg-brand-400/25 ring-1 ring-inset ring-brand-400/40"
               style={{
                 left: `${pct(ct.min)}%`,
                 width: `${Math.max(pct(ct.max) - pct(ct.min), 0.8)}%`,
@@ -127,7 +127,7 @@ export function ChairTimeScale({ therapy }: { therapy: Therapy }) {
 
         <p className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-white/6 pt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-500">
           <span className="flex items-center gap-2">
-            <span className="h-3 w-[2.5px] rounded-full bg-teal-400" />
+            <span className="h-3 w-[2.5px] rounded-full bg-brand-400" />
             {therapy.brand}
           </span>
           <span className="flex items-center gap-2">

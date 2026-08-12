@@ -110,7 +110,7 @@ export function SearchButton({
       aria-label="Search the site"
       aria-keyshortcuts="Meta+K Control+K"
       className={cn(
-        "group flex items-center rounded-full border border-white/10 bg-white/[0.03] text-ink-400 transition-colors duration-300 hover:border-teal-400/35 hover:text-ink-100",
+        "group flex items-center rounded-full border border-white/10 bg-white/[0.03] text-ink-400 transition-colors duration-300 hover:border-brand-400/35 hover:text-ink-100",
         iconOnly
           ? "h-11 w-11 justify-center"
           : "gap-2.5 py-2 pl-3.5 pr-2.5 text-[13px]",
@@ -134,7 +134,7 @@ export function SearchButton({
       {!iconOnly && (
         <>
           <span className="hidden xl:inline">Search</span>
-          <kbd className="hidden rounded border border-white/12 px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink-500 transition-colors group-hover:border-teal-400/30 xl:block">
+          <kbd className="hidden rounded border border-white/12 px-1.5 py-0.5 font-mono text-[10px] leading-none text-ink-500 transition-colors group-hover:border-brand-400/30 xl:block">
             {mac ? "⌘" : "Ctrl "}K
           </kbd>
         </>
