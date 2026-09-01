@@ -12,9 +12,9 @@ import { ButtonLink, ArrowGlyph } from "@/components/ui/Button";
 import { useReducedMotion } from "@/lib/hooks";
 import { site } from "@/content/site";
 
-const POSTER = "/media/hero-infusion.jpg"; // = the 1280 rung, for the `poster` attribute
+const POSTER = "/media/hero-juno.jpg"; // = the 1280 rung, for the `poster` attribute
 const POSTER_SET = [640, 960, 1280, 1920, 2560]
-  .map((w) => `/media/hero-infusion-${w}.jpg ${w}w`)
+  .map((w) => `/media/hero-juno-${w}.jpg ${w}w`)
   .join(", ");
 
 /** How long to wait for the intro to start before giving up on it. */
@@ -39,30 +39,17 @@ const readIntroFlag = () =>
 const noIntroOnServer = () => false;
 
 /**
- * Hero: an IV bag meeting still water, in slow motion. Full-bleed behind the
- * headline on a wide screen, a band beneath it on a phone.
+ * Hero: an aerial pass over the Juno Beach Pier, client-supplied footage.
+ * Full-bleed behind the headline on a wide screen, a band beneath it on a
+ * phone.
  *
- * The plate is the client's own render, with their real shield lockup printed
- * on the bag. There is no drop and no impact in it — the bag floats and the
- * camera drifts — so nothing here is slowed down or interpolated. It is the
- * source at native speed, trimmed to eight seconds.
- *
- * It loops. The file is built as a seamless loop — the last 0.8s is crossfaded
- * into its own first 0.8s — so the bag keeps floating indefinitely instead of
- * stopping dead on a frozen frame, which is what an earlier play-once cut did
- * and which read as the film breaking. The plate can take that treatment
- * because it begins and ends on the same thing; the previous drop-and-splash
- * plate could not. The poster is the loop's first frame, so the hand-off from
- * still to film is invisible.
+ * It loops. The file is a 7s span crossfaded into its own start, so the drone
+ * keeps drifting indefinitely instead of jump-cutting on the wrap. See
+ * tools/hero-render/build-hero-juno.sh for how it's built and why that 7s
+ * span was chosen over the rest of the source clip.
  *
  * Sources are ordered widest first: a browser takes the first one whose
  * `media` query matches and whose codec it can decode.
- *
- * It is also cut. Between 4.2s and 5.4s of the source a sheet of water crosses
- * the label and the wordmark scrambles; those frames are dropped and the join
- * is dissolved. That is the part that read as "blurry" and no encoder setting
- * would have rescued it — see public/media/README.md, which carries the
- * measurements the whole encode ladder was chosen from.
  *
  * The film stays off the critical path. The poster is a plain `<img>` that
  * paints on the first frame, and the `<video>` is not mounted until the page
@@ -76,7 +63,7 @@ export function ScrollHero() {
   // parser to reach the <img> near the bottom of the document. It is the LCP
   // element; the same srcset and sizes go here so the browser preloads the
   // rung it will actually use rather than a second file.
-  ReactDOM.preload("/media/hero-infusion.jpg", {
+  ReactDOM.preload("/media/hero-juno.jpg", {
     as: "image",
     fetchPriority: "high",
     imageSrcSet: POSTER_SET,
@@ -292,27 +279,28 @@ export function ScrollHero() {
                 encoder setting. `min-resolution` rather than a width alone,
                 because a retina 1280 needs more pixels than a 1440 at 1x. */}
             <source
-              src="/media/hero-infusion-2560.mp4"
+              src="/media/hero-juno-2560.mp4"
               type="video/mp4"
               media="(min-width: 1500px), (min-resolution: 1.5dppx)"
             />
             <source
-              src="/media/hero-infusion-1920.mp4"
+              src="/media/hero-juno-1920.mp4"
               type="video/mp4"
               media="(min-width: 1024px)"
             />
-            <source src="/media/hero-infusion-1280.mp4" type="video/mp4" />
+            <source src="/media/hero-juno-1280.mp4" type="video/mp4" />
             {/* For Chromium builds without proprietary codecs, which includes
                 Playwright's — without it every automated check of this hero
                 reports a broken video that is fine in production. */}
-            <source src="/media/hero-infusion-1920.webm" type="video/webm" />
+            <source src="/media/hero-juno-1920.webm" type="video/webm" />
           </video>
         )}
 
         {/*
-          No tint. The plate stays the white it was shot on, which is why the
-          type is dark rather than light. The only overlay is a WHITE lift, and
-          it needs two gradients because one does not work at both widths.
+          A WHITE lift, not a tint: it washes the footage toward white under
+          the copy so dark type stays legible over open ocean and sky, while
+          leaving the far side of the frame — pier, water, sand — uncovered.
+          Two gradients because one does not work at both widths.
         */}
         {/* Phone: nothing sits on the film, so the only job is dissolving its
             top edge into the white the copy is set on. Without this the band
@@ -325,7 +313,7 @@ export function ScrollHero() {
           }}
         />
         {/* Desktop: the lift runs across instead of down, clearing by 74% so
-            the bag at 55% sits in open plate. */}
+            the pier and open water sit unwashed on the right side of frame. */}
         <div
           className="absolute inset-0 hidden lg:block"
           style={{
@@ -437,8 +425,8 @@ export function ScrollHero() {
       {/*
         Plays over the hero on a phone's first visit of the session, then
         dissolves as the copy phases in. A separate portrait cut, because a
-        16:9 plate scaled to fill a 9:19.5 screen shows only the middle quarter
-        of its width — the bag with the whole splash ring cropped away.
+        16:9 plate scaled to fill a 9:19.5 screen shows only the middle
+        quarter of its width — the pier cropped down to open water.
 
         It sits under the nav rather than over it, and only covers the hero, so
         scrolling past it works normally at any point.
@@ -457,8 +445,8 @@ export function ScrollHero() {
             tabIndex={-1}
             className="h-full w-full object-cover opacity-0 transition-opacity duration-500 [&[data-ready='true']]:opacity-100"
           >
-            <source src="/media/hero-intro-portrait.mp4" type="video/mp4" />
-            <source src="/media/hero-intro-portrait.webm" type="video/webm" />
+            <source src="/media/hero-juno-intro-portrait.mp4" type="video/mp4" />
+            <source src="/media/hero-juno-intro-portrait.webm" type="video/webm" />
           </video>
         </div>
       )}
