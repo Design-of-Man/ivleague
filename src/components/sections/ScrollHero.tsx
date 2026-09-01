@@ -304,12 +304,19 @@ export function ScrollHero() {
         */}
         {/* Phone: nothing sits on the film, so the only job is dissolving its
             top edge into the white the copy is set on. Without this the band
-            starts on a hard horizontal rule. */}
+            starts on a hard horizontal rule.
+
+            Short on purpose — under 25% of the band's height. The old plate's
+            top was already white, studio-shot, so a wide fade cost nothing.
+            This footage has open sky and the pier right at the top of frame,
+            and the old 54%-deep fade hazed over most of both, reading as fog
+            rather than a seam. The band is short enough (aspect-[2/1]) that
+            a tight fade still fully hides the hard edge. */}
         <div
           className="absolute inset-0 lg:hidden"
           style={{
             background:
-              "linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0.82) 12%, rgba(255,255,255,0.44) 26%, rgba(255,255,255,0.14) 40%, rgba(255,255,255,0) 54%)",
+              "linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0.75) 6%, rgba(255,255,255,0.32) 13%, rgba(255,255,255,0.08) 20%, rgba(255,255,255,0) 26%)",
           }}
         />
         {/* Desktop: the lift runs across instead of down, clearing by 74% so
