@@ -83,13 +83,15 @@ export function Nav() {
           // to be transparent until you scrolled, which was fine over a black
           // hero and invisible over a light one — the homepage hero is now a
           // white film plate, and white nav links on it disappeared entirely.
-          // Opaque at rest, blurred once scrolled. The blur is the expensive
-          // half: running it from first paint on every page cost ~7 Lighthouse
-          // points on the interior templates, and at the top of the page there
-          // is nothing behind the bar worth blurring anyway.
+          // Opaque in both states — the scrolled variant used to be
+          // `bg-ink-950/95` (a leftover from when it also carried a
+          // backdrop-blur), which let the fixed TopBar underneath bleed
+          // through as a faint ghost of its text along the header's top edge
+          // once the blur was dropped for performance. Fully opaque removes
+          // the ghosting without paying for blur.
           "top-0 border-b",
           scrolled
-            ? "border-white/8 bg-ink-950/95 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.9)]"
+            ? "border-white/8 bg-ink-950 shadow-[0_10px_40px_-24px_rgba(0,0,0,0.9)]"
             : "border-white/[0.04] bg-ink-950 lg:top-9",
         )}
         onMouseLeave={hoverClose}
